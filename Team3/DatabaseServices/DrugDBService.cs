@@ -5,12 +5,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team3.Entities;
+using Team3.DBServices;
+using Team3.Models;
 
 
-namespace Team3.Models
+namespace Team3.DBServices
 {
-    public class DrugDBService
+    public class DrugDBService : IDrugDBService
     {
         private static DrugDBService? _instance;
         private static readonly object _lock = new object();

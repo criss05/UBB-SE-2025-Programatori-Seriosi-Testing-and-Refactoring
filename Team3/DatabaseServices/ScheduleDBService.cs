@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Team3.Entities;
+using Team3.DBServices;
+using Team3.Models;
 
-namespace Team3.Models
+namespace Team3.DBServices
 {
-    public class ScheduleDBService
+    public class ScheduleDBService : IScheduleDBService
     {
         private static ScheduleDBService? _instance;
         private readonly Config _config;
