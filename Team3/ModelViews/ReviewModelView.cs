@@ -4,16 +4,16 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team3.DBServices;
 using Team3.Models;
-using Team3.Entities;
 using System.Diagnostics;
 using System.Collections;
 
 namespace Team3.ModelViews
 {
-    public class ReviewModelView
+    public class ReviewModelView : IReviewModelView
     {
-        private readonly ReviewService _reviewModel;
+        private readonly IReviewService _reviewModel;
 
         public ReviewModelView()
         {

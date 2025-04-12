@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Team3.ModelViews
 {
 
 
-    public class NotificationModelView
+    public class NotificationModelView : INotificationModelView
     {
 
         private readonly NotificationDatabaseService _notificationModel;

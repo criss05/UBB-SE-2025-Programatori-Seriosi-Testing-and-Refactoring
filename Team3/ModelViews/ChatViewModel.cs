@@ -9,11 +9,12 @@ namespace Team3.ModelViews
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
-    using Team3.Entities;
     using Team3.Models;
-    internal class ChatViewModel
+    using Team3.DBServices;
+    internal class ChatViewModel: IChatModelView
     {
         public int userID { get; set; }
+        private readonly ChatDBService chatModel;
         public ObservableCollection<Chat> Chats { get; private set; }
 
         public ChatViewModel()

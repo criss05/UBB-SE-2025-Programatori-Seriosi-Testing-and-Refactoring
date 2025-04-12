@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 
 namespace Team3.ModelViews
 {
-    public class MedicalRecordModelView
+    public class MedicalRecordModelView : IMedicalRecordModelView
     {
         private readonly MedicalRecordDatabaseService _medicalRecordModel;
 

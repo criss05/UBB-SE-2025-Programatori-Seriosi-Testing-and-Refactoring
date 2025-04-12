@@ -13,7 +13,7 @@ namespace Team3.Views
 {
     public partial class TreatmentView : Page
     {
-        private readonly TreatmentModelView _treatmentModelView;
+        private readonly ITreatmentModelView _treatmentModelView;
         public TreatmentView()
         {
             InitializeComponent();

@@ -7,14 +7,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 using Windows.Services.Maps;
 using Team3.DTOs;
 
 namespace Team3.ModelViews
 {
-    public class MessageModelView
+    public class MessageModelView : IMessageModelView
     {
         private readonly MessageDatabaseService messageModel;
         private readonly UserModelView userModelView;

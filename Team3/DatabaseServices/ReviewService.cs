@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
-using Team3.Entities;
+using Team3.DBServices;
+using Team3.Models;
 
-namespace Team3.Models
+namespace Team3.DBServices
 {
-    public class ReviewService
+    public class ReviewService : IReviewService
     {
         private static ReviewService? _instance;
         private static readonly object _lock = new object();

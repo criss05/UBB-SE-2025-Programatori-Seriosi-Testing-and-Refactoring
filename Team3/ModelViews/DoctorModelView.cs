@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 
 namespace Team3.ModelViews
 {
-    public class DoctorModelView
+    public class DoctorModelView : IDoctorModelView
     {
         // Observable collections for doctors' information
         public ObservableCollection<Doctor> DoctorsInfo { get; set; }
@@ -23,6 +23,9 @@ namespace Team3.ModelViews
 
             // Initialize collections
             DoctorsInfo = new ObservableCollection<Doctor>();
+            MedicalRecordModelView = new MedicalRecordModelView();
+            ScheduleModelView = new ScheduleViewModel();
+            UserModelView = new UserModelView();
 
             // Load doctors from database
             //LoadDoctors();

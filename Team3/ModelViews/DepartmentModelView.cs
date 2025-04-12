@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 
 namespace Team3.ModelViews
 {
-    public class DepartmentModelView
+    public class DepartmentModelView : IDepartmentModelView
     {
         // Attributes
         public ObservableCollection<Department> DepartmentsInfo { get; private set; }

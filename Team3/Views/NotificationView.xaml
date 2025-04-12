@@ -3,7 +3,7 @@
     x:Class="Team3.Views.NotificationView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:models="using:Team3.Entities"
+    xmlns:models="using:Team3.Models"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid Padding="20">
         <Grid.RowDefinitions>

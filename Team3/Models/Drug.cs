@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Team3.Entities
+namespace Team3.Models
 {
     public class Drug
     {

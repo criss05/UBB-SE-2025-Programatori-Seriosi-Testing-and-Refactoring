@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using Team3.Entities;
+using Team3.Models;
 using Team3.ModelViews;
 
 namespace Team3.Views
@@ -11,7 +11,7 @@ namespace Team3.Views
     public sealed partial class NotificationView : Page
     {
         public int UserId { get; set; }
-        public NotificationModelView ModelView { get; } = new NotificationModelView();
+        public INotificationModelView ModelView { get; } = new NotificationModelView();
 
         public NotificationView()
         {
