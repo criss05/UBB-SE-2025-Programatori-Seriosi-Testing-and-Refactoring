@@ -7,11 +7,11 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Team3.Models;
 using System.Diagnostics;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 
-namespace Team3.DBServices
+namespace Team3.DatabaseServices
 {
-    public class MessageDatabaseService
+    public class MessageDatabaseService : IMessageDBService
     {
         private static MessageDatabaseService? _instance;
         private readonly Config _config;

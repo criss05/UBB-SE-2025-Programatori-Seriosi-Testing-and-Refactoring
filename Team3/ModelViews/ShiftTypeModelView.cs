@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 
 namespace Team3.ModelViews
 {
     public class ShiftTypeModelView : IShiftTypeModelView
     {
-        private readonly ShiftTypeDatabaseService _shiftTypeModel;
+
+        private readonly IShiftTypeDBService _shiftTypeModel;
+
         public ObservableCollection<ShiftType> ShiftTypes { get; private set; }
 
         public ShiftTypeModelView()

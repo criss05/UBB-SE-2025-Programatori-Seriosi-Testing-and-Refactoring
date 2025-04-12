@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Team3.Models;
 
-namespace Team3.DBServices
+namespace Team3.DatabaseServices
 {
     public interface IScheduleDBService
     {

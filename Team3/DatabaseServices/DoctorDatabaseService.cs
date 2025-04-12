@@ -6,12 +6,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 using Team3.Models;
 
-namespace Team3.DBServices
+namespace Team3.DatabaseServices
 {
-    public class DoctorDatabaseService
+    public class DoctorDatabaseService : IDoctorDBService
     {
         private static DoctorDatabaseService? _instance;
 

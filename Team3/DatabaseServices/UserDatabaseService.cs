@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 using Team3.Models;
 
-namespace Team3.DBServices
+namespace Team3.DatabaseServices
 {
-    public class UserDatabaseService
+    public class UserDatabaseService : IUserDBService
     {
 
         private static UserDatabaseService? _instance;

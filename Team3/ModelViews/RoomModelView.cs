@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 //Mi a trebuit mie clasa si am creato eu cu gpt dar nu e taskul meu sherdy
 
 namespace Team3.ModelViews
@@ -15,7 +15,9 @@ namespace Team3.ModelViews
         // Attributes
         public ObservableCollection<Room> Rooms { get; private set; }
         public ObservableCollection<Room> RoomsInfo { get; private set; }
-        private readonly RoomDatabaseService _roomModel;
+
+        private readonly IRoomDBService _roomModel;
+
 
         // Constructor
         public RoomModelView()

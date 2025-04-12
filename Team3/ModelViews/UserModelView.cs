@@ -7,11 +7,13 @@ namespace Team3.ModelViews
     using System.Diagnostics;
     using System.Linq;
     using Team3.Models;
-    using Team3.DBServices;
+    using Team3.DatabaseServices;
 
     public class UserModelView : IUserModelView
     {
-        private readonly UserDatabaseService _userModel;
+
+        private readonly IUserDBService _userModel;
+
         public ObservableCollection<User> Users { get; private set; }
         public UserModelView()
         {

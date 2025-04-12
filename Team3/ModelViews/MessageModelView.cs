@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 using Windows.Services.Maps;
 using Team3.DTOs;
 
@@ -16,8 +16,10 @@ namespace Team3.ModelViews
 {
     public class MessageModelView : IMessageModelView
     {
-        private readonly MessageDatabaseService messageModel;
-        private readonly UserModelView userModelView;
+
+        private readonly IMessageDBService messageModel;
+        private readonly IUserModelView userModelView;
+
         public ObservableCollection<MessageChatDTO> Messages { get; set; }
         public MessageModelView()
         {

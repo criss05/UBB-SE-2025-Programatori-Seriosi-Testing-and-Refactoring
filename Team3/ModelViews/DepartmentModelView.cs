@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 
 namespace Team3.ModelViews
 {
@@ -11,7 +11,9 @@ namespace Team3.ModelViews
     {
         // Attributes
         public ObservableCollection<Department> DepartmentsInfo { get; private set; }
-        private readonly DepartmentDatabaseService _departmentModel;
+
+        private readonly IDepartmentDBService _departmentModel;
+
         public Action? OnBackNavigation { get; set; } // Delegate for back navigation handling
 
         // Constructor

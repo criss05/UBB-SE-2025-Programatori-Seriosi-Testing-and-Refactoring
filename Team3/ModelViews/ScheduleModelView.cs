@@ -4,13 +4,15 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 
 namespace Team3.ModelViews
 {
     public class ScheduleViewModel : IScheduleViewModel
     {
-        private readonly ScheduleDatabaseService _scheduleModel;
+
+        private readonly IScheduleDBService _scheduleModel;
+
         public ObservableCollection<Schedule> Schedules { get; private set; }
 
         public ScheduleViewModel()

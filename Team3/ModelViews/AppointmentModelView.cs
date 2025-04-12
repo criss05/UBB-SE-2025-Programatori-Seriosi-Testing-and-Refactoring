@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 
 namespace Team3.ModelViews
 {
     class AppointmentModelView : IAppointmentModelView
     {
-        private readonly AppointmentDatabaseService appointmentModel;
+
+        private readonly IAppointmentDBService appointmentModel;
+
         public AppointmentModelView()
         {
             this.appointmentModel = AppointmentDatabaseService.Instance;

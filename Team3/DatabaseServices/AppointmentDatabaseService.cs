@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data.SqlClient;
-using Team3.Entities;
+using Team3.Models;
 //refactored the function names and also the database connection if it says connection you dont know it connects to what so changed it into DATABASE_CONNECTION_STRING
- 
 
-namespace Team3.Models
+
+namespace Team3.DatabaseServices
 {
-    public class AppointmentDatabaseService
+    public class AppointmentDatabaseService :IAppointmentDBService
     {
         private static AppointmentDatabaseService? _instance;
         private static readonly object _lock = new object();

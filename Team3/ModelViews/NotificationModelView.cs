@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Team3.ModelViews
@@ -14,16 +14,16 @@ namespace Team3.ModelViews
     public class NotificationModelView : INotificationModelView
     {
 
-        private readonly NotificationDatabaseService _notificationModel;
-        private readonly AppointmentModelView _appointmentModelView;
-        private readonly DoctorModelView _doctorModelView;
-        private readonly UserModelView _userModelView;
-        private readonly PatientModelView _patientModelView;
-        private readonly MedicalRecordModelView _medicalRecordModelView;
-        private readonly TreatmentModelView _treatmentModelView;
-        private readonly TreatmentDrugModelView treatmentDrugModelView;
-        private readonly DrugModelView drugModelView;
-        private readonly ReviewModelView reviewModelView;
+        private readonly INotificationDBService _notificationModel;
+        private readonly IAppointmentModelView _appointmentModelView;
+        private readonly IDoctorModelView _doctorModelView;
+        private readonly IUserModelView _userModelView;
+        private readonly IPatientModelView _patientModelView;
+        private readonly IMedicalRecordModelView _medicalRecordModelView;
+        private readonly ITreatmentModelView _treatmentModelView;
+        private readonly ITreatmentDrugModelView treatmentDrugModelView;
+        private readonly IDrugModelView drugModelView;
+        private readonly IReviewModelView reviewModelView;
 
         private readonly static string UPCOMING_APPOINTMENT_NOTIFICATION_TEMPLATE = "Tomorrow @datetime, you have an appointment with Dr. @doctor at location @location";
         private readonly static string APPOINTMENT_CANCEL_NOTIFICATION_TEMPLATE = "Patient: @patient has canceled their upcoming appointment, scheduled for @datetime at @location.";

@@ -1,11 +1,11 @@
 using System;
 using System.Data.SqlClient;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 using Team3.Models;
 
-namespace Team3.DBServices
+namespace Team3.DatabaseServices
 {
-    public class PatientDatabaseService
+    public class PatientDatabaseService : IPatientDBService
     {
         private static PatientDatabaseService? _instance;
         private static readonly object _lock = new object();

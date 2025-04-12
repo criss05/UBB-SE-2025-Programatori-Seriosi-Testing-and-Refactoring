@@ -5,11 +5,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team3.Entities;
+using Team3.Models;
 
-namespace Team3.Models
+
+namespace Team3.DatabaseServices
 {
-    public class ChatDatabaseService
+    public class ChatDatabaseService : IChatDBService
     {
         private static ChatDatabaseService? _instance;
         private readonly Config _config;

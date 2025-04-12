@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 using Team3.Models;
 
-namespace Team3.DBServices
+namespace Team3.DatabaseServices
 {
-    public class MedicalRecordDatabaseService
+    public class MedicalRecordDatabaseService : IMedicalRecordDBService
     {
         private static MedicalRecordDatabaseService? _instance;
         private readonly Config _config;

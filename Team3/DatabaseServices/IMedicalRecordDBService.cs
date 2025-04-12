@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Team3.DBServices
+namespace Team3.DatabaseServices
 {
     public interface IMedicalRecordDBService
     {

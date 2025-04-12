@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 
 namespace Team3.ModelViews
 {
@@ -12,7 +12,8 @@ namespace Team3.ModelViews
     class PatientModelView : IPatientModelView
     {
 
-        private readonly PatientDatabaseService patientModel;
+        private readonly IPatientDBService patientModel;
+
         public PatientModelView()
         {
             this.patientModel = PatientDatabaseService.Instance;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Team3.Models;
-using Team3.DBServices;
+using Team3.DatabaseServices;
 
 namespace Team3.ModelViews
 {
@@ -11,10 +11,12 @@ namespace Team3.ModelViews
         public ObservableCollection<Doctor> DoctorsInfo { get; set; }
 
         // Dependencies
-        private readonly DoctorDatabaseService doctorModel;
-        public MedicalRecordModelView MedicalRecordModelView { get; set; }
-        public ScheduleViewModel ScheduleModelView { get; set; }
-        public UserModelView UserModelView { get; set; }
+
+        private readonly IDoctorDBService doctorModel;
+        public IMedicalRecordModelView MedicalRecordModelView { get; set; }
+        public IScheduleViewModel ScheduleModelView { get; set; }
+        public IUserModelView UserModelView { get; set; }
+
 
         public DoctorModelView()
         {
