@@ -6,19 +6,16 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class MedicalRecordDBService
+    public class MedicalRecordDatabaseService
     {
-        private static MedicalRecordDBService? _instance;
+        private static MedicalRecordDatabaseService? _instance;
         private readonly Config _config;
-
         private static readonly object _lock = new object();
-
-        private MedicalRecordDBService()
+        private MedicalRecordDatabaseService()
         {
             _config = Config.Instance;
         }
-
-        public static MedicalRecordDBService Instance
+        public static MedicalRecordDatabaseService Instance
         {
             get
             {
@@ -27,25 +24,20 @@ namespace Team3.Models
                 {
                     if (_instance == null)
                     {
-                        _instance = new MedicalRecordDBService();
+                        _instance = new MedicalRecordDatabaseService();
                     }
                     return _instance;
                 }
             }
         }
-
-
-
-
-        // maybe we don't need this
-        
-        public MedicalRecord GetMedicalRecord(int id)
+        // maybe we don't need this   
+        public MedicalRecord GetMedicalRecordById(int id)
         {
             const string query = "SELECT * FROM medicalrecords WHERE id = @id;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -61,10 +53,8 @@ namespace Team3.Models
             }
             catch (Exception e)
             {
-
                 throw new Exception("Error retrieving medical record", e);
             }
-
         }
     }
 }

@@ -9,17 +9,17 @@ namespace Team3.ModelViews
 {
     public class MedicalRecordModelView
     {
-        private readonly MedicalRecordDBService _medicalRecordModel;
+        private readonly MedicalRecordDatabaseService _medicalRecordModel;
 
         public MedicalRecordModelView()
         {
-            _medicalRecordModel = MedicalRecordDBService.Instance;
+            _medicalRecordModel = MedicalRecordDatabaseService.Instance;
         }
 
 
-        public MedicalRecord GetMedicalRecord(int id)
+        public MedicalRecord GetMedicalRecordById(int id)
         {
-            return this._medicalRecordModel.GetMedicalRecord(id);
+            return this._medicalRecordModel.GetMedicalRecordById(id);
         }
 
         // Metodă pentru obținerea fișelor medicale pe baza doctorului și intervalului de timp

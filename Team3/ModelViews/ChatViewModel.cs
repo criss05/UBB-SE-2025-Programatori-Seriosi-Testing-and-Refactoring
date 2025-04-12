@@ -19,14 +19,14 @@ namespace Team3.ModelViews
         public ChatViewModel()
         {
             Chats = new ObservableCollection<Chat>();
-            LoadChats();
+            LoadAllChats();
         }
 
-        public void LoadChats()
+        public void LoadAllChats()
         {
             try
             {
-                var chatList = ChatDBService.Instance.getChats(userID);
+                var chatList = ChatDatabaseService.Instance.getChatsByUserId(userID);
                 if (chatList != null && chatList.Any())
                 {
                     foreach (var chat in chatList)
@@ -46,9 +46,9 @@ namespace Team3.ModelViews
             }
         }
 
-        public Dictionary<Chat, string> GetChats(int id)
+        public Dictionary<Chat, string> GetChatsById(int id)
         {
-            List<Chat> chats = ChatDBService.Instance.getChats(id);
+            List<Chat> chats = ChatDatabaseService.Instance.getChatsByUserId(id);
             Dictionary<Chat, string> chatDict = new Dictionary<Chat, string>();
             foreach (Chat chat in chats)
             {
@@ -57,9 +57,9 @@ namespace Team3.ModelViews
             return chatDict;
         }
 
-        public void AddChat(Chat chat)
+        public void AddNewChat(Chat chat)
         {
-            ChatDBService.Instance.addChat(chat.user1, chat.user2);
+            ChatDatabaseService.Instance.addNewChat(chat.user1, chat.user2);
             Chats.Add(chat);
         }
 
@@ -70,7 +70,7 @@ namespace Team3.ModelViews
 
         public List<Chat> GetChatsByName(string name)
         {
-            List<Chat> chats = ChatDBService.Instance.getChats(userID);
+            List<Chat> chats = ChatDatabaseService.Instance.getChatsByUserId(userID);
             return chats.Where(chat => chat.user1.ToString().Contains(name) || chat.user2.ToString().Contains(name)).ToList();
         }
 

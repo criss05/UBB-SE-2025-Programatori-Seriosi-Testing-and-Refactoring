@@ -10,12 +10,12 @@ namespace Team3.ModelViews
 {
     public class ScheduleViewModel
     {
-        private readonly ScheduleDBService _scheduleModel;
+        private readonly ScheduleDatabaseService _scheduleModel;
         public ObservableCollection<Schedule> Schedules { get; private set; }
 
         public ScheduleViewModel()
         {
-            _scheduleModel = ScheduleDBService.Instance;
+            _scheduleModel = ScheduleDatabaseService.Instance;
             Schedules = new ObservableCollection<Schedule>();
         }
 
@@ -23,7 +23,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var schedules = _scheduleModel.GetSchedules();
+                var schedules = _scheduleModel.GetAllSchedules();
                 var filteredSchedules = new List<Schedule>();
 
                 foreach (var schedule in schedules)

@@ -5,18 +5,16 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class NotificationDBService
+    public class NotificationDatabaseService
     {
-        private static NotificationDBService? _instance;
+        private static NotificationDatabaseService? _instance;
         private readonly Config _config;
         private static readonly object _lock = new object();
-
-        private NotificationDBService()
+        private NotificationDatabaseService()
         {
             _config = Config.Instance;
         }
-
-        public static NotificationDBService Instance
+        public static NotificationDatabaseService Instance
         {
             get
             {
@@ -24,7 +22,7 @@ namespace Team3.Models
                 {
                     if (_instance == null)
                     {
-                        _instance = new NotificationDBService();
+                        _instance = new NotificationDatabaseService();
                     }
                     return _instance;
                 }
@@ -38,7 +36,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -74,7 +72,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -111,7 +109,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -142,7 +140,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -166,7 +164,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -190,7 +188,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -211,7 +209,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

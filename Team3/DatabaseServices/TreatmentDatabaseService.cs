@@ -9,18 +9,18 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class TreatmentDBService
+    public class TreatmentDatabaseService
     {
-        private static TreatmentDBService? _instance;
+        private static TreatmentDatabaseService? _instance;
         private static readonly object _lock = new object();
         private readonly Config _config;
 
-        private TreatmentDBService()
+        private TreatmentDatabaseService()
         {
             _config = Config.Instance;
         }
 
-        public static TreatmentDBService Instance
+        public static TreatmentDatabaseService Instance
         {
             get
             {
@@ -28,19 +28,19 @@ namespace Team3.Models
                 {
                     if (_instance == null)
                     {
-                        _instance = new TreatmentDBService();
+                        _instance = new TreatmentDatabaseService();
                     }
                 }
                 return _instance;
             }
         }
 
-        public void AddTreatment(Treatment treatment)
+        public void AddNewTreatment(Treatment treatment)
         {
             const string query = "INSERT INTO treatments(id, memdicalrecord_id) values (@id , @memdicalrecord_id)";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.CONNECTION);
+                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
 
@@ -63,7 +63,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
 

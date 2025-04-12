@@ -44,7 +44,7 @@ namespace Team3.Views
             {
                 UserId = userId;
                 ChatId = chatId;
-                ViewModel.LoadMessages(userId);
+                ViewModel.LoadAllMessages(userId);
                 // In a real app, you might filter notifications by user
                 Debug.WriteLine($"Loading notifications for user: ID={userId}");
             }

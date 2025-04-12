@@ -10,18 +10,15 @@ namespace Team3.Entities
     {
         public int Id { get; set; }
         public int MedicalRecordId { get; set; }
-
         public Treatment(int id, int medicalRecordId)
         {
             this.Id = id;
             this.MedicalRecordId = medicalRecordId;
         }
-
         override
         public string ToString()
         {
             return $"Id: {Id}, MedicalRecordId: {MedicalRecordId}";
-
         }
     }
 }

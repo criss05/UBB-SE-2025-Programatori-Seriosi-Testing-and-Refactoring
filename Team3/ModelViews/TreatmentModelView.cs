@@ -12,13 +12,12 @@ namespace Team3.ModelViews
 {
     public class TreatmentModelView
     {
-        private readonly TreatmentDBService _treatmentModel;
+        private readonly TreatmentDatabaseService _treatmentModel;
 
         public TreatmentModelView()
         {
-            _treatmentModel = TreatmentDBService.Instance;
+            _treatmentModel = TreatmentDatabaseService.Instance;
         }
-
         public Treatment GetTreatmentByMedicalRecordId(int mrId)
         {
             return this._treatmentModel.GetTreatmentByMedicalRecordId(mrId);

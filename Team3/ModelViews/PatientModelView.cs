@@ -12,19 +12,14 @@ namespace Team3.ModelViews
     class PatientModelView
     {
 
-        private readonly PatientDBService patientModel;
-
-
+        private readonly PatientDatabaseService patientModel;
         public PatientModelView()
         {
-            this.patientModel = PatientDBService.Instance;
-
+            this.patientModel = PatientDatabaseService.Instance;
         }
-
-
-        public Patient GetPatient(int id)
+        public Patient GetPatientById(int id)
         {
-            return this.patientModel.GetPatient(id);
+            return this.patientModel.GetPatientById(id);
         }
     }
 }

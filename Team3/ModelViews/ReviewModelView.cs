@@ -19,16 +19,14 @@ namespace Team3.ModelViews
         {
             _reviewModel = ReviewService.Instance;
         }
-
         public void addReview(Review review)
         {
-            _reviewModel.addReview(review);
+            _reviewModel.addNewReview(review);
         }
-        public Review getReview(int mrId)
+        public Review getReviewByMedicalRecordId(int mrId)
         {
-            return _reviewModel.getReview(mrId);
+            return _reviewModel.GetReviewByMedicalRecordId(mrId);
         }
-
         public void addReviewButtonHandler(int id,int medicalrecordId, string message, int stars)
         {
             Debug.WriteLine("Add button clicked");

@@ -16,7 +16,6 @@ namespace Team3.Entities
         public TimeOnly EndTime { get; set; }
         public DateOnly StartDate { get; set; }
         public int NrDays {  get; set; }
-
         public TreatmentDrug(int id,int treatmentId,int drugId, double quantity, TimeOnly startTime, TimeOnly endTime, DateOnly startDate, int nrDays)
         {
             this.Id = id;
@@ -28,8 +27,6 @@ namespace Team3.Entities
             this.StartDate = startDate;
             this.NrDays = nrDays;
         }
-
-
         override
         public string ToString()
         {

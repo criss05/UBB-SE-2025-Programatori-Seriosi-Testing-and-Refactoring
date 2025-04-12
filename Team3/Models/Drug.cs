@@ -18,8 +18,6 @@ namespace Team3.Entities
             this.Name = name;
             this.Administration = administration;
         }
-
-
         override
         public string ToString()
         {

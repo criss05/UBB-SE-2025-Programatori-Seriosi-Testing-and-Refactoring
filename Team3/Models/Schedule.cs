@@ -10,11 +10,8 @@ namespace Team3.Entities
     {
         public int ScheduleId { get; set; }
         public DateOnly ScheduleWorkDay { get; set; }
-
         public int DoctorId { get; set; }
-
         public int ShiftTypeId { get; set; }
-
         public Schedule(int scheduleId, DateOnly scheduleWorkDay, int doctorId, int shifTypeId)
         {
             ScheduleId = scheduleId;
@@ -22,8 +19,5 @@ namespace Team3.Entities
             DoctorId = doctorId;
             ShiftTypeId = shifTypeId;
         }
-
     }
-
-
 }

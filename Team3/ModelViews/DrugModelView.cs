@@ -10,16 +10,16 @@ namespace Team3.ModelViews
 {
     public class DrugModelView
     {
-        private readonly DrugDBService _drugModel;
+        private readonly DrugDatabaseService _drugModel;
 
         public DrugModelView()
         {
-            _drugModel = DrugDBService.Instance;
+            _drugModel = DrugDatabaseService.Instance;
         }
 
-        public Drug getDrug(int mrId)
+        public Drug getDrugById(int mrId)
         {
-            return _drugModel.getDrug(mrId);
+            return _drugModel.getDrugById(mrId);
         }
     }
 }

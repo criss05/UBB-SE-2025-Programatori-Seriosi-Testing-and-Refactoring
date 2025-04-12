@@ -10,18 +10,18 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class DrugDBService
+    public class DrugDatabaseService
     {
-        private static DrugDBService? _instance;
+        private static DrugDatabaseService? _instance;
         private static readonly object _lock = new object();
         private readonly Config _config;
 
-        private DrugDBService()
+        private DrugDatabaseService()
         {
             _config = Config.Instance;
         }
 
-        public static DrugDBService Instance
+        public static DrugDatabaseService Instance
         {
             get
             {
@@ -29,20 +29,20 @@ namespace Team3.Models
                 {
                     if (_instance == null)
                     {
-                        _instance = new DrugDBService();
+                        _instance = new DrugDatabaseService();
                     }
                 }
                 return _instance;
             }   
         }
 
-        public Drug getDrug(int Id)
+        public Drug getDrugById(int Id)
         {
             const string query = "SELECT * FROM drugs WHERE id = @id;";
 
             try
             {
-                SqlConnection connection = new SqlConnection(Config.CONNECTION);
+                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
 
 
                 connection.Open();

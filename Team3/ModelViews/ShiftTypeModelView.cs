@@ -9,12 +9,12 @@ namespace Team3.ModelViews
 {
     public class ShiftTypeModelView
     {
-        private readonly ShiftTypeDBService _shiftTypeModel;
+        private readonly ShiftTypeDatabaseService _shiftTypeModel;
         public ObservableCollection<ShiftType> ShiftTypes { get; private set; }
 
         public ShiftTypeModelView()
         {
-            _shiftTypeModel = ShiftTypeDBService.Instance;
+            _shiftTypeModel = ShiftTypeDatabaseService.Instance;
             ShiftTypes = new ObservableCollection<ShiftType>();
             LoadShiftTypes();
         }
@@ -23,7 +23,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var shiftTypeList = _shiftTypeModel.GetShiftTypes();
+                var shiftTypeList = _shiftTypeModel.GetAllShiftTypes();
                 if (shiftTypeList != null && shiftTypeList.Count > 0)
                 {
                     foreach (var shiftType in shiftTypeList)
@@ -47,7 +47,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var shiftTypeList = _shiftTypeModel.GetShiftTypes();
+                var shiftTypeList = _shiftTypeModel.GetAllShiftTypes();
                 var filteredShiftTypes = new List<ShiftType>();
 
                 foreach (var shiftType in shiftTypeList)

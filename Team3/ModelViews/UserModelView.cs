@@ -11,29 +11,24 @@ namespace Team3.ModelViews
 
     public class UserModelView
     {
-        private readonly UserDBService _userModel;
+        private readonly UserDatabaseService _userModel;
         public ObservableCollection<User> Users { get; private set; }
-
-
         public UserModelView()
         {
-            _userModel = UserDBService.Instance;
+            _userModel = UserDatabaseService.Instance;
             Users = new ObservableCollection<User>();
-            LoadUsers();
+            LoadAllUsers();
         }
-
-
-        private void LoadUsers()
+        private void LoadAllUsers()
         {
             try
             {
-                var userList = _userModel.GetUsers();
+                var userList = _userModel.GetAllUsers();
                 if (userList != null && userList.Any())
                 {
                     foreach (var user in userList)
                     {
                         Debug.WriteLine(user.ToString());
-
                         Users.Add(user);
                     }
                 }
@@ -48,17 +43,13 @@ namespace Team3.ModelViews
             }
 
         }
-
-
-        public List<User> GetUsers()
+        public List<User> GetAllUsers()
         {
-            return this._userModel.GetUsers();
+            return this._userModel.GetAllUsers();
         }
-
-
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
-            return _userModel.GetUser(id);
+            return _userModel.GetUserById(id);
         }
     }
 

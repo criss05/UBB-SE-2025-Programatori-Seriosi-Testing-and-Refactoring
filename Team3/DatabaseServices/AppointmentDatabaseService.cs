@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Team3.Entities;
+//refactored the function names and also the database connection if it says connection you dont know it connects to what so changed it into DATABASE_CONNECTION_STRING
+ 
 
 namespace Team3.Models
 {
-    public class AppointmentDBService
+    public class AppointmentDatabaseService
     {
-        private static AppointmentDBService? _instance;
+        private static AppointmentDatabaseService? _instance;
         private static readonly object _lock = new object();
         private readonly Config _config;
 
-        private AppointmentDBService() {
+        private AppointmentDatabaseService() {
             _config = Config.Instance;
         }
 
-        public static AppointmentDBService Instance
+        public static AppointmentDatabaseService Instance
         {
             get
             {
@@ -24,7 +26,7 @@ namespace Team3.Models
                     {
                         if (_instance == null)
                         {
-                            _instance = new AppointmentDBService();
+                            _instance = new AppointmentDatabaseService();
                         }
                     }
                 }
@@ -32,14 +34,13 @@ namespace Team3.Models
             }
         }
 
-        public void AddAppointment(Appointment appointment)
+        public void AddNewAppointment(Appointment appointment)
         {
             const string query = "INSERT INTO appointments (id, doctor_id, patient_id, appointment_datetime, location) " +
                                  "VALUES (@id, @doctor_id, @patient_id, @appointment_datetime, @location)";
-
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -59,14 +60,12 @@ namespace Team3.Models
                 throw new Exception("Error adding appointment", e);
             }
         }
-
-        public Appointment GetAppointment(int id)
+        public Appointment GetAppointmentById(int id)
         {
             const string query = "SELECT id, doctor_id, patient_id, appointment_datetime, location FROM Appointments WHERE id = @id";
-
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -81,16 +80,14 @@ namespace Team3.Models
                                 (int)reader[2],
                                 (DateTime)reader[3], 
                                 reader[4].ToString());
-  
                         }
                     }
                 }
-
                 throw new Exception("Appointment not found");
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error retrieving appointment", e);
+                throw new Exception("Error retrieving appointment", exception);
             }
         }
     }

@@ -14,8 +14,6 @@ namespace Team3.Entities
         public int MedicalRecordId {  get; set; }
         public string Message { get; set; }
         public int NrStars { get; set; }
-
-
         public Review(int id,int medicalRecordId, string message, int nrStars)
         {
             this.Id = id;
@@ -23,8 +21,6 @@ namespace Team3.Entities
             this.Message = message;
             this.NrStars = nrStars;
         }
-
-
         override
         public string ToString()
         {

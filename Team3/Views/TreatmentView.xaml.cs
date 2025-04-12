@@ -19,17 +19,13 @@ namespace Team3.Views
             InitializeComponent();
             _treatmentModelView = new TreatmentModelView();
         }
-
         private async void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 int id = int.Parse(txtId.Text);
                 int medicarecordId = int.Parse(txtMedicalrecordId.Text);
-             
-
                 //_treatmentModelView.addTreatmentButtonHandler(id, medicarecordId);
-
                 await ShowDialog("Treatment added successfully!", "Success");
             }
             catch (Exception ex)

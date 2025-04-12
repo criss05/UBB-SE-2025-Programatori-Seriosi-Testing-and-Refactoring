@@ -9,8 +9,6 @@ namespace Team3.Entities
     public class Equipment
     {
         public int EquipmentId { get; set; }
-
-
         public Equipment(int equipmentId)
         {
             this.EquipmentId = equipmentId;

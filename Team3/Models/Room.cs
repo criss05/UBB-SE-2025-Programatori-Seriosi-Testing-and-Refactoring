@@ -10,13 +10,10 @@ namespace Team3.Entities
     {
         public int Id { get; set; }
         public int DepartmentId { get; set; }
-
         public Room(int id, int departmentId)
         {
             Id = id;
             DepartmentId = departmentId;
         }
     }
-
-
 }

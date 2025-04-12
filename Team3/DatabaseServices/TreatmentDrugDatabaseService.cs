@@ -8,18 +8,18 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class TreatmentDrugDBService
+    public class TreatmentDrugDatabaseService
     {
-        private static TreatmentDrugDBService? _instance;
+        private static TreatmentDrugDatabaseService? _instance;
         private static readonly object _lock = new object();
         private readonly Config _config;
 
-        private TreatmentDrugDBService()
+        private TreatmentDrugDatabaseService()
         {
             _config = Config.Instance;
         }
 
-        public static TreatmentDrugDBService Instance
+        public static TreatmentDrugDatabaseService Instance
         {
             get
             {
@@ -27,24 +27,20 @@ namespace Team3.Models
                 {
                     if (_instance == null)
                     {
-                        _instance = new TreatmentDrugDBService();
+                        _instance = new TreatmentDrugDatabaseService();
                     }
                 }
                 return _instance;
             }
         }
-
-        public void addTreatmentDrug(TreatmentDrug treatmentDrug)
+        public void addNewTreatmentDrug(TreatmentDrug treatmentDrug)
         {
             const string query = "INSERT INTO treatments_drugs(id,treatment_id,drug_id,quantity,starttime,endtime,startdate,nrdays) VALUES (@id,@treatment_id,@drug_id,@quantity,@starttime,@endtime,@startdate,@nrdays)";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.CONNECTION);
-
+                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
                 connection.Open();
-
                 SqlCommand command = new SqlCommand(query, connection);
-
                 command.Parameters.AddWithValue("@id", treatmentDrug.Id);
                 command.Parameters.AddWithValue("@treatment_id", treatmentDrug.TreatmentId);
                 command.Parameters.AddWithValue("@drug_id", treatmentDrug.DrugId);
@@ -53,7 +49,6 @@ namespace Team3.Models
                 command.Parameters.AddWithValue("@endtime", treatmentDrug.EndTime);
                 command.Parameters.AddWithValue("@startdate", treatmentDrug.StartDate);
                 command.Parameters.AddWithValue("@nrdays", treatmentDrug.NrDays);
-
                 command.ExecuteNonQuery();
                 connection.Close();
             }
@@ -62,14 +57,12 @@ namespace Team3.Models
                 throw new Exception("Error adding treatmentdrug", e);
             }
         }
-
-        public List<TreatmentDrug> getTreatmentDrugs(int treatmentId)
+        public List<TreatmentDrug> getTreatmentDrugsById(int treatmentId)
         {
             const string query = "SELECT * FROM treatments_drugs WHERE treatment_id = @treatment_id";
-
             try
             {
-                SqlConnection connection = new SqlConnection(Config.CONNECTION);
+                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
 
                 connection.Open();
 

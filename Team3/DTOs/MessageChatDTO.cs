@@ -9,7 +9,7 @@ namespace Team3.DTOs
     public class MessageChatDTO
     {
         public int Id { get; set; }
-        public string Content { get; set; }
+        public string Message { get; set; }
         public int UserId { get; set; }
         public int ChatId { get; set; }
 
@@ -17,10 +17,10 @@ namespace Team3.DTOs
 
         public string UserName { get; set; }
 
-        public MessageChatDTO(int id, string content, int userId, int chatId, DateTime sentDateTime, string userName)
+        public MessageChatDTO(int id, string message, int userId, int chatId, DateTime sentDateTime, string userName)
         {
             this.Id = id;
-            this.Content = content;
+            this.Message = message;
             this.UserId = userId;
             this.ChatId = chatId;
             this.sentDateTime = sentDateTime;

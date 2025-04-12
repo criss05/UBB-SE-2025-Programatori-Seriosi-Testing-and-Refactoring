@@ -12,9 +12,7 @@ namespace Team3.Entities
         public string Content { get; set; }
         public int UserId { get; set; }
         public int ChatId { get; set; }
-
         public DateTime sentDateTime { get; set; }
-
         public Message(int id, string content, int userId, int chatId, DateTime sentDateTime)
         {
             this.Id = id;
@@ -23,7 +21,6 @@ namespace Team3.Entities
             this.ChatId = chatId;
             this.sentDateTime = sentDateTime;
         }
-
         public Message(string content, int userId, int chatId, DateTime sentDateTime)
         {
             this.Content = content;

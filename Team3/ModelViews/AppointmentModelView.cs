@@ -10,24 +10,20 @@ namespace Team3.ModelViews
 {
     class AppointmentModelView
     {
-
-        private readonly AppointmentDBService appointmentModel;
-
+        private readonly AppointmentDatabaseService appointmentModel;
         public AppointmentModelView()
         {
-            this.appointmentModel = AppointmentDBService.Instance;
+            this.appointmentModel = AppointmentDatabaseService.Instance;
+        }
+        public void AddNewAppointment(Appointment appointment)
+        {
+            this.appointmentModel.AddNewAppointment(appointment);
         }
 
 
-        public void AddAppointment(Appointment appointment)
+        public Appointment GetAppointmentById(int id)
         {
-            this.appointmentModel.AddAppointment(appointment);
-        }
-
-
-        public Appointment GetAppointment(int id)
-        {
-            return this.appointmentModel.GetAppointment(id);
+            return this.appointmentModel.GetAppointmentById(id);
         }
     }
 }

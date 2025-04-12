@@ -5,35 +5,35 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class ScheduleDBService
+    public class ScheduleDatabaseService
     {
-        private static ScheduleDBService? _instance;
+        private static ScheduleDatabaseService? _instance;
         private readonly Config _config;
 
-        private ScheduleDBService()
+        private ScheduleDatabaseService()
         {
             _config = Config.Instance;
         }
 
-        public static ScheduleDBService Instance
+        public static ScheduleDatabaseService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ScheduleDBService();
+                    _instance = new ScheduleDatabaseService();
                 }
                 return _instance;
             }
         }
 
-        public List<Schedule> GetSchedules()
+        public List<Schedule> GetAllSchedules()
         {
             const string query = "SELECT ScheduleId, ScheduleWorkDay, DoctorId, ShiftTypeId FROM Schedule;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

@@ -10,19 +10,19 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class DoctorDBService
+    public class DoctorDatabaseService
     {
-        private static DoctorDBService? _instance;
+        private static DoctorDatabaseService? _instance;
 
         private static readonly object _lock = new object();
         private readonly Config _config;
 
-        private DoctorDBService() {
+        private DoctorDatabaseService() {
             _config = Config.Instance;
         }
 
 
-        public static DoctorDBService Instance
+        public static DoctorDatabaseService Instance
         {
             get
             {
@@ -33,22 +33,19 @@ namespace Team3.Models
                     {
                         if (_instance == null)
                         {
-                            _instance = new DoctorDBService();
+                            _instance = new DoctorDatabaseService();
                         }
                     }
                 }
                 return _instance;
             }
         }
-
-
-        public Doctor GetDoctor(int id)
+        public Doctor GetDoctorById(int id)
         {
             const string query = "SELECT * FROM doctors WHERE id = @id";
-
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
 
@@ -65,7 +62,6 @@ namespace Team3.Models
                         }
                     }
                 }
-
                 throw new Exception("Doctor not found");
             }
             catch (Exception e)

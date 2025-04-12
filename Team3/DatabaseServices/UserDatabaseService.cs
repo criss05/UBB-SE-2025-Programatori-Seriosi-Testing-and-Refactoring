@@ -6,18 +6,17 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class UserDBService
+    public class UserDatabaseService
     {
 
-        private static UserDBService? _instance;
+        private static UserDatabaseService? _instance;
         private readonly Config _config;
         private static readonly object _lock = new object();
-        private UserDBService()
+        private UserDatabaseService()
         {
             _config = Config.Instance;
         }
-
-        public static UserDBService Instance
+        public static UserDatabaseService Instance
         {
             get
             {
@@ -25,22 +24,19 @@ namespace Team3.Models
                 {
                     if (_instance == null)
                     {
-                        _instance = new UserDBService();
+                        _instance = new UserDatabaseService();
                     }   
                 }
                 return _instance;
             }   
         }
-
-
-        public List<User> GetUsers()
+        public List<User> GetAllUsers()
         {
             const string query = "SELECT * FROM users;";
             List<User> notifications = new List<User>();
-
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -67,13 +63,13 @@ namespace Team3.Models
         }
 
 
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
             const string query = "SELECT * FROM users WHERE id = @id";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))

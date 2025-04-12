@@ -5,57 +5,58 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class DepartmentDBService
+    public class RoomDatabaseService
     {
-        private static DepartmentDBService? _instance;
+        private static RoomDatabaseService? _instance;
         private readonly Config _config;
 
-        private DepartmentDBService()
+        private RoomDatabaseService()
         {
             _config = Config.Instance;
         }
 
-        public static DepartmentDBService Instance
+        public static RoomDatabaseService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new DepartmentDBService();
+                    _instance = new RoomDatabaseService();
                 }
                 return _instance;
             }
         }
 
-        public List<Department> GetDepartments()
+        public List<Room> GetRooms()
         {
-            const string query = "SELECT * FROM departments;";
+            const string query = "SELECT RoomId, DepartmentId FROM Room;";
+            List<Room> rooms = new List<Room>();
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
-                    List<Department> departments = new List<Department>();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            departments.Add(new Department(
-                                reader.GetInt32(0),
-                                reader.GetString(1)
+                            rooms.Add(new Room(
+                                reader.GetInt32(0), // RoomId
+                                reader.GetInt32(1)  // DepartmentId
                             ));
                         }
                     }
-                    return departments;
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Error getting departments", e);
+                throw new Exception("Error getting rooms", e);
             }
+
+            return rooms;
         }
     }
 }

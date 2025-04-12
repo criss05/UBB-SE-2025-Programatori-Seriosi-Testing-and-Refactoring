@@ -15,8 +15,5 @@ namespace Team3.Entities
             DepartmentId = departmentId;
             DepartmentName = departmentName;
         }
-
     }
-
-
 }

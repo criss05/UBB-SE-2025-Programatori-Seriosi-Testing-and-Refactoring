@@ -11,7 +11,7 @@ namespace Team3.ModelViews
         public ObservableCollection<Doctor> DoctorsInfo { get; set; }
 
         // Dependencies
-        private readonly DoctorDBService doctorModel;
+        private readonly DoctorDatabaseService doctorModel;
         public MedicalRecordModelView MedicalRecordModelView { get; set; }
         public ScheduleViewModel ScheduleModelView { get; set; }
         public UserModelView UserModelView { get; set; }
@@ -19,7 +19,7 @@ namespace Team3.ModelViews
         public DoctorModelView()
         {
             // Initialize the DoctorModel instance
-            doctorModel = DoctorDBService.Instance;
+            doctorModel = DoctorDatabaseService.Instance;
 
             // Initialize collections
             DoctorsInfo = new ObservableCollection<Doctor>();
@@ -27,11 +27,9 @@ namespace Team3.ModelViews
             // Load doctors from database
             //LoadDoctors();
         }
-
-
-        public Doctor GetDoctor(int doctorId)
+        public Doctor GetDoctorById(int doctorId)
         {
-            return this.doctorModel.GetDoctor(doctorId);
+            return this.doctorModel.GetDoctorById(doctorId);
         }
 
     }

@@ -8,15 +8,11 @@ namespace Team3.Entities
 {
     public class Appointment
     {
-
-
         public int Id { get; set; }
         public int DoctorId { get; set; }
         public int PatientId { get; set; }
         public DateTime AppointmentDateTime { get; set; }
         public string Location { get; set; }
-
-
         public Appointment(int id, int doctorId, int patientId, DateTime appointmentDateTime, string location)
         {
             Id = id;
@@ -25,13 +21,9 @@ namespace Team3.Entities
             AppointmentDateTime = appointmentDateTime;
             Location = location;
         }
-
-
-
         override public string ToString()
         {
             return $"Appointment(Id: {Id}, DoctorId: {DoctorId}, PatientId: {PatientId}, AppointmentDate: {AppointmentDateTime}, Location: {Location})";
         }
-
     }
 }

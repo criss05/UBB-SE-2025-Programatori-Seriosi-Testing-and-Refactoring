@@ -11,15 +11,11 @@ namespace Team3.Entities
         public int ShiftTypeId { get; set; }
         public TimeOnly ShiftTypeStartTime { get; set; }
         public TimeOnly ShiftTypeEndTime { get; set; }
-
         public ShiftType(int shiftTypeId, TimeOnly shiftTypeStartTime, TimeOnly shiftTypeEndTime)
         {
             ShiftTypeId = shiftTypeId;
             ShiftTypeStartTime = shiftTypeStartTime;
             ShiftTypeEndTime = shiftTypeEndTime;
         }
-
     }
-
-
 }

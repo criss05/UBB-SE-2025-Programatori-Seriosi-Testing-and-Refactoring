@@ -9,19 +9,19 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class ChatDBService
+    public class ChatDatabaseService
     {
-        private static ChatDBService? _instance;
+        private static ChatDatabaseService? _instance;
         private readonly Config _config;
         private Task<List<Chat>> _chats;
         private static readonly object _lock = new object();
 
-        private ChatDBService()
+        private ChatDatabaseService()
         {
             _config = Config.Instance;
         }
 
-        public static ChatDBService Instance
+        public static ChatDatabaseService Instance
         {
             get
             {
@@ -29,20 +29,20 @@ namespace Team3.Models
                 {
                     if (_instance == null)
                     {
-                        _instance = new ChatDBService();
+                        _instance = new ChatDatabaseService();
                     }
                 }
                 return _instance;
             }
         }
 
-        public List<Chat> getChats(int user)
+        public List<Chat> getChatsByUserId(int user)
         {
             const string query = "SELECT * FROM chats WHERE user1 = @user OR user2 = @user";
 
             try
             {
-                SqlConnection connection = new SqlConnection(Config.CONNECTION);
+                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
 
                 connection.Open();
 
@@ -68,12 +68,12 @@ namespace Team3.Models
             }
         }
 
-        public void addChat(int user1, int user2)
+        public void addNewChat(int user1, int user2)
         {
             const string query = "INSERT INTO chats (user1, user2) VALUES (@user1, @user2)";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.CONNECTION);
+                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@user1", user1);

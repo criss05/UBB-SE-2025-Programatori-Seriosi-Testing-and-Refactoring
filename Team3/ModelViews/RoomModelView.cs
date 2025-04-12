@@ -15,19 +15,19 @@ namespace Team3.ModelViews
         // Attributes
         public ObservableCollection<Room> Rooms { get; private set; }
         public ObservableCollection<Room> RoomsInfo { get; private set; }
-        private readonly RoomDBService _roomModel;
+        private readonly RoomDatabaseService _roomModel;
 
         // Constructor
         public RoomModelView()
         {
-            _roomModel = RoomDBService.Instance;
+            _roomModel = RoomDatabaseService.Instance;
             Rooms = new ObservableCollection<Room>();
             RoomsInfo = new ObservableCollection<Room>();
-            LoadRooms();
+            LoadAllRooms();
         }
 
         // Load all rooms
-        private void LoadRooms()
+        private void LoadAllRooms()
         {
             try
             {

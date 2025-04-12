@@ -12,17 +12,14 @@ namespace Team3.ModelViews
 {
     public class TreatmentDrugModelView
     {
-        private readonly TreatmentDrugDBService _treatmentdrugModel;
-
+        private readonly TreatmentDrugDatabaseService _treatmentdrugModel;
         public TreatmentDrugModelView()
         {
-            _treatmentdrugModel = TreatmentDrugDBService.Instance;
+            _treatmentdrugModel = TreatmentDrugDatabaseService.Instance;
         }
-
         public List<TreatmentDrug> getTreatmentDrugsByTreatmentId(int treatmentId)
         {
-            return _treatmentdrugModel.getTreatmentDrugs(treatmentId);
+            return _treatmentdrugModel.getTreatmentDrugsById(treatmentId);
         }
     }
 }
-

@@ -5,36 +5,36 @@ using Team3.Entities;
 
 namespace Team3.Models
 {
-    public class ShiftTypeDBService
+    public class ShiftTypeDatabaseService
     {
-        private static ShiftTypeDBService? _instance;
+        private static ShiftTypeDatabaseService? _instance;
         private readonly Config _config;
 
-        private ShiftTypeDBService()
+        private ShiftTypeDatabaseService()
         {
             _config = Config.Instance;
         }
 
-        public static ShiftTypeDBService Instance
+        public static ShiftTypeDatabaseService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ShiftTypeDBService();
+                    _instance = new ShiftTypeDatabaseService();
                 }
                 return _instance;
             }
         }
 
         // Get all shift types
-        public List<ShiftType> GetShiftTypes()
+        public List<ShiftType> GetAllShiftTypes()
         {
             const string query = "SELECT ShiftTypeId, ShiftTypeStartTime, ShiftTypeEndTime FROM ShiftType;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -67,7 +67,7 @@ namespace Team3.Models
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.CONNECTION))
+                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
