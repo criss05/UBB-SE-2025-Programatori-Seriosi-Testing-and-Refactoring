@@ -13,7 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Team3.ModelViews;
-using Team3.Entities;
+using Team3.Models;
 using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -26,7 +26,7 @@ namespace Team3.Views
     /// </summary>
     public sealed partial class UserView : Page
     {
-        public UserModelView ViewModel { get; } = new UserModelView();
+        public IUserModelView ViewModel { get; } = new UserModelView();
 
         public UserView()
         {

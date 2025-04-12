@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Team3.Entities;
+using Team3.DBServices;
+using Team3.Models;
 
-namespace Team3.Models
+namespace Team3.DBServices
 {
-    public class ShiftTypeDBService
+    public class ShiftTypeDBService : IShiftTypeDBService
     {
         private static ShiftTypeDBService? _instance;
         private readonly Config _config;

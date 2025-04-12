@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Team3.Entities
+namespace Team3.Models
 {
     public class Review
     {

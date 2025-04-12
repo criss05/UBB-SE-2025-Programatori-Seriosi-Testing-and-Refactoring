@@ -13,7 +13,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Team3.ModelViews;
-using Team3.Entities;
+using Team3.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -22,7 +22,7 @@ namespace Team3.Views
 {
     public partial class ReviewView : Page
     {
-        private readonly ReviewModelView _reviewModelView;
+        private readonly IReviewModelView _reviewModelView;
 
         public ReviewView()
         {

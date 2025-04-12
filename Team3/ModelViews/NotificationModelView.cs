@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Team3.ModelViews
 {
 
 
-    public class NotificationModelView
+    public class NotificationModelView : INotificationModelView
     {
 
-        private readonly NotificationDBService _notificationModel;
-        private readonly AppointmentModelView _appointmentModelView;
-        private readonly DoctorModelView _doctorModelView;
-        private readonly UserModelView _userModelView;
-        private readonly PatientModelView _patientModelView;
-        private readonly MedicalRecordModelView _medicalRecordModelView;
-        private readonly TreatmentModelView _treatmentModelView;
-        private readonly TreatmentDrugModelView treatmentDrugModelView;
-        private readonly DrugModelView drugModelView;
-        private readonly ReviewModelView reviewModelView;
+        private readonly INotificationDBService _notificationModel;
+        private readonly IAppointmentModelView _appointmentModelView;
+        private readonly IDoctorModelView _doctorModelView;
+        private readonly IUserModelView _userModelView;
+        private readonly IPatientModelView _patientModelView;
+        private readonly IMedicalRecordModelView _medicalRecordModelView;
+        private readonly ITreatmentModelView _treatmentModelView;
+        private readonly ITreatmentDrugModelView treatmentDrugModelView;
+        private readonly IDrugModelView drugModelView;
+        private readonly IReviewModelView reviewModelView;
 
 
 

@@ -25,7 +25,7 @@ namespace Team3.Views
     /// </summary>
     public sealed partial class MessageView : Page
     {
-        public MessageModelView ViewModel { get; } = new MessageModelView();
+        public IMessageModelView ViewModel { get; } = new MessageModelView();
         public int UserId { get; set; }
         public int ChatId { get; set; }
 

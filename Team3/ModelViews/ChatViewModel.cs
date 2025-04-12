@@ -9,16 +9,18 @@ namespace Team3.ModelViews
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
-    using Team3.Entities;
     using Team3.Models;
-    internal class ChatViewModel
+    using Team3.DBServices;
+    internal class ChatViewModel: IChatModelView
     {
         public int userID { get; set; }
+        private readonly ChatDBService chatModel;
         public ObservableCollection<Chat> Chats { get; private set; }
 
         public ChatViewModel()
         {
             Chats = new ObservableCollection<Chat>();
+            chatModel = ChatDBService.Instance; 
             LoadChats();
         }
 
@@ -26,7 +28,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var chatList = ChatDBService.Instance.getChats(userID);
+                var chatList = chatModel.getChats(userID);
                 if (chatList != null && chatList.Any())
                 {
                     foreach (var chat in chatList)
@@ -48,7 +50,7 @@ namespace Team3.ModelViews
 
         public Dictionary<Chat, string> GetChats(int id)
         {
-            List<Chat> chats = ChatDBService.Instance.getChats(id);
+            List<Chat> chats = chatModel.getChats(id);
             Dictionary<Chat, string> chatDict = new Dictionary<Chat, string>();
             foreach (Chat chat in chats)
             {
@@ -59,7 +61,7 @@ namespace Team3.ModelViews
 
         public void AddChat(Chat chat)
         {
-            ChatDBService.Instance.addChat(chat.user1, chat.user2);
+            chatModel.addChat(chat.user1, chat.user2);
             Chats.Add(chat);
         }
 
@@ -70,7 +72,7 @@ namespace Team3.ModelViews
 
         public List<Chat> GetChatsByName(string name)
         {
-            List<Chat> chats = ChatDBService.Instance.getChats(userID);
+            List<Chat> chats = chatModel.getChats(userID);
             return chats.Where(chat => chat.user1.ToString().Contains(name) || chat.user2.ToString().Contains(name)).ToList();
         }
 
