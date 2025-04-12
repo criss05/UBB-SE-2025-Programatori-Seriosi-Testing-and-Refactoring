@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 //Mi a trebuit mie clasa si am creato eu cu gpt dar nu e taskul meu sherdy
 
 namespace Team3.ModelViews
 {
 
-    public class RoomModelView
+    public class RoomModelView : IRoomModelView
     {
         // Attributes
         public ObservableCollection<Room> Rooms { get; private set; }
         public ObservableCollection<Room> RoomsInfo { get; private set; }
-        private readonly RoomDBService _roomModel;
+        private readonly IRoomDBService _roomModel;
 
         // Constructor
         public RoomModelView()

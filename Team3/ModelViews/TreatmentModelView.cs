@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team3.DBServices;
 using Team3.Models;
-using Team3.Entities;
 using System.Diagnostics;
 using System.Collections;
 
 namespace Team3.ModelViews
 {
-    public class TreatmentModelView
+    public class TreatmentModelView : ITreatmentModelView
     {
-        private readonly TreatmentDBService _treatmentModel;
+        private readonly ITreatmentDBService _treatmentModel;
 
         public TreatmentModelView()
         {

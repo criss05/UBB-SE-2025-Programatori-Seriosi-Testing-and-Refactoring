@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Team3.Entities;
 using Team3.Models;
+using Team3.DBServices;
 
 namespace Team3.ModelViews
 {
-    public class ScheduleViewModel
+    public class ScheduleViewModel : IScheduleViewModel
     {
-        private readonly ScheduleDBService _scheduleModel;
+        private readonly IScheduleDBService _scheduleModel;
         public ObservableCollection<Schedule> Schedules { get; private set; }
 
         public ScheduleViewModel()
