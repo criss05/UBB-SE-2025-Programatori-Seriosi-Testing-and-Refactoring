@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Team3.Views.NotificationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:Team3.Entities"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- Back Button at top left -->
+        <Button x:Name="BackButton" 
+                Content="Back" 
+                Click="BackButton_Click"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="0,0,0,20"/>
+        <!-- Notifications List -->
+        <ListView x:Name="NotificationsListView" 
+                  Grid.Row="2"
+                  ItemsSource="{Binding Notifications}" 
+                  SelectionMode="Single"
+                  IsItemClickEnabled="True"
+                  ItemClick="NotificationsListView_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Notification">
+                    <Grid Margin="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Message}" 
+                                   Grid.Row="0" 
+                                   Grid.Column="1"
+                                   TextTrimming="CharacterEllipsis"
+                                   MaxLines="1"/>
+                        <TextBlock Text="{Binding DeliveryDateTime}" 
+                                   Grid.Row="1" 
+                                   Grid.Column="1"
+                                   FontSize="12"
+                                   Opacity="0.7"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Bottom Buttons Row -->
+        <Grid Grid.Row="3" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="AddAppointmentButton" 
+                    Content="Add Appointment" 
+                    Click="AddAppointmentButton_Click"
+                    Grid.Column="0"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,0,5,0"/>
+
+            <Button x:Name="AddTreatmentButton" 
+                    Content="Add Treatment" 
+                    Click="AddTreatmentButton_Click"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    Margin="5,0,5,0"/>
+
+            <Button x:Name="AddReviewButton" 
+                    Content="Add Review" 
+                    Click="AddReviewButton_Click"
+                    Grid.Column="3"
+                    HorizontalAlignment="Stretch"
+                    Margin="5,0,0,0"/>
+
+            <Button x:Name="DeleteAppointmentButton" 
+                    Content="Delete Appointment" 
+                    Click="DeleteAppointmentButton_Click"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    Margin="5,0,5,0"/>
+        </Grid>
+    </Grid>
+</Page>

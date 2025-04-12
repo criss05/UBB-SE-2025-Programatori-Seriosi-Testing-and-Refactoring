@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Page x:Class="Team3.Views.ReviewView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="ID:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtId" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+        <TextBlock Text="Medical Record ID:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtMedicalrecordId" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+        <TextBlock Text="Review Message:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtMessage" Grid.Row="2" Grid.Column="1" Margin="5" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+        <TextBlock Text="Stars (1-5):" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+        <ComboBox x:Name="cmbStars" Grid.Row="3" Grid.Column="1" Margin="5">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+        </ComboBox>
+
+        <Button Content="Add Review" Grid.Row="4" Grid.ColumnSpan="2" Margin="5" Height="30" Click="AddReviewButton_Click"/>
+        <Button Grid.Row="5" Content="Go to MainPage"
+        Click="NavigateToMainPage_Click"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Bottom"/>
+    </Grid>
+    
+</Page>

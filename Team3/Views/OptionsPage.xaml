@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Team3.Views.OptionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Back Button at top left -->
+        <Button x:Name="BackButton" 
+                Content="Back" 
+                Click="BackButton_Click"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="0,0,0,20"/>
+
+
+
+        <!-- Navigation Buttons in the middle -->
+        <StackPanel Grid.Row="1" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Spacing="20">
+
+            <Button x:Name="ChatButton" 
+                    Content="Chat" 
+                    Click="ChatButton_Click"
+                    HorizontalAlignment="Stretch"
+                    Width="200"
+                    Height="60"
+                    FontSize="16"/>
+
+            <Button x:Name="NotificationsButton" 
+                    Content="Notifications" 
+                    Click="NotificationsButton_Click"
+                    HorizontalAlignment="Stretch"
+                    Width="200"
+                    Height="60"
+                    FontSize="16"/>
+
+        </StackPanel>
+    </Grid>
+</Page>
