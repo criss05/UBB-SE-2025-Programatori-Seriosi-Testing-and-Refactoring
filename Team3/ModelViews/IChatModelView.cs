@@ -13,20 +13,20 @@ namespace Team3.ModelViews
         /// <summary>
         /// get all chats
         /// </summary>
-        public void LoadChats();
+        public void LoadAllChats();
 
         /// <summary>
         /// get chat from a user by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Dictionary<Chat, string> GetChats(int id);
+        public Dictionary<Chat, string> GetChatsById(int id);
 
         /// <summary>
-        /// add a chat between 2 users
+        /// add a new chat between two usersr
         /// </summary>
         /// <param name="chat"></param>
-        public void AddChat(Chat chat);
+        public void AddNewChat(Chat chat);
 
         /// <summary>
         /// update the user's id

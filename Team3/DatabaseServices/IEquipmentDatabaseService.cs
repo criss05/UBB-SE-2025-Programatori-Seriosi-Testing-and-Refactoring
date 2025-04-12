@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Team3.DatabaseServices
 {
-    public interface IMedicalRecordDBService
+    interface IEquipmentDatabaseService
     {
-        public MedicalRecord GetMedicalRecord(int id);
-
 
     }
 }

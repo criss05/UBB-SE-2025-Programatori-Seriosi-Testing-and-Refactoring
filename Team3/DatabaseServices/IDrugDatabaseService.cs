@@ -7,15 +7,13 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IDepartmentDBService
+    public interface IDrugDatabaseService
     {
-
         /// <summary>
-        /// Get all departements
+        /// get drug by id
         /// </summary>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        public List<Department> GetDepartments();
-
-
+        public Drug getDrugById(int Id);
     }
 }

@@ -9,17 +9,28 @@ using Team3.DatabaseServices;
 
 namespace Team3.ModelViews
 {
-
     public class RoomModelView : IRoomModelView
     {
-        // Attributes
+        /// <summary>
+        /// attribute for Rooms
+        /// </summary>
         public ObservableCollection<Room> Rooms { get; private set; }
+
+        /// <summary>
+        /// attributes for the roms info
+        /// </summary>
         public ObservableCollection<Room> RoomsInfo { get; private set; }
+        
+        /// <summary>
+        /// attribute for the room model
+        /// </summary>
+        private readonly IRoomDatabaseService _roomModel;
 
-        private readonly IRoomDBService _roomModel;
 
-
-        // Constructor
+        /// <summary>
+        /// Constructor for RoomModelView
+        /// </summary>
+        /// 
         public RoomModelView()
         {
             _roomModel = RoomDatabaseService.Instance;
@@ -27,8 +38,9 @@ namespace Team3.ModelViews
             RoomsInfo = new ObservableCollection<Room>();
             LoadAllRooms();
         }
-
-        // Load all rooms
+        /// <summary>
+        /// Load all the rooms
+        /// </summary>
         private void LoadAllRooms()
         {
             try
@@ -54,8 +66,11 @@ namespace Team3.ModelViews
             }
         }
 
-        // Filter rooms by department ID
-       
+        /// <summary>
+        /// Filter rooms by department ID
+        /// </summary>
+        /// <param name="departmentId"></param>
+        /// <returns></returns>
         public ObservableCollection<Room> GetRoomsByDepartmentId(int departmentId)
         {
             try

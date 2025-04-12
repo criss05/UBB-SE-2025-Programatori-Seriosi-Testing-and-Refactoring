@@ -11,12 +11,16 @@ namespace Team3.ModelViews
     class AppointmentModelView : IAppointmentModelView
     {
 
-        private readonly IAppointmentDBService appointmentModel;
+        private readonly IAppointmentDatabaseService appointmentModel;
 
         public AppointmentModelView()
         {
-            this.appointmentModel = AppointmentDatabaseService.Instance;
+            this.appointmentModel = (IAppointmentDatabaseService?)AppointmentDatabaseService.Instance;
         }
+        /// <summary>
+        /// hello
+        /// </summary>
+        /// <param name="appointment"></param>
         public void AddNewAppointment(Appointment appointment)
         {
             this.appointmentModel.AddNewAppointment(appointment);

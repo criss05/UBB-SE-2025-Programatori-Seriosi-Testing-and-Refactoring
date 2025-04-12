@@ -6,7 +6,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class ShiftTypeDatabaseService : IShiftTypeDBService
+    public class ShiftTypeDatabaseService : IShiftTypeDatabaseService
     {
         private static ShiftTypeDatabaseService? _instance;
         private readonly Config _config;

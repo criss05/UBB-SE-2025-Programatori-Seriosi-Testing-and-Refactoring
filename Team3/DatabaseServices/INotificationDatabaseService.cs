@@ -7,7 +7,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface INotificationDBService
+    public interface INotificationDatabaseService
     {
         /// <summary>
         /// get all notifications

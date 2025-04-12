@@ -14,7 +14,7 @@ namespace Team3.ModelViews
     internal class ChatViewModel: IChatModelView
     {
         public int userID { get; set; }
-        private readonly ChatDBService chatModel;
+        private readonly ChatDatabaseService chatModel;
         public ObservableCollection<Chat> Chats { get; private set; }
 
         public ChatViewModel()
@@ -22,7 +22,7 @@ namespace Team3.ModelViews
             Chats = new ObservableCollection<Chat>();
 
             LoadAllChats();
-            chatModel = ChatDBService.Instance; 
+            chatModel = ChatDatabaseService.Instance; 
 
         }
 
@@ -30,11 +30,7 @@ namespace Team3.ModelViews
         {
             try
             {
-<<<<<<< HEAD
-                var chatList = ChatDatabaseService.Instance.getChatsByUserId(userID);
-=======
-                var chatList = chatModel.getChats(userID);
->>>>>>> main
+                var chatList = chatModel.getChatsByUserId(userID);
                 if (chatList != null && chatList.Any())
                 {
                     foreach (var chat in chatList)
@@ -56,11 +52,9 @@ namespace Team3.ModelViews
 
         public Dictionary<Chat, string> GetChatsById(int id)
         {
-<<<<<<< HEAD
-            List<Chat> chats = ChatDatabaseService.Instance.getChatsByUserId(id);
-=======
-            List<Chat> chats = chatModel.getChats(id);
->>>>>>> main
+
+            List<Chat> chats = chatModel.getChatsByUserId(id);
+
             Dictionary<Chat, string> chatDict = new Dictionary<Chat, string>();
             foreach (Chat chat in chats)
             {
@@ -68,37 +62,44 @@ namespace Team3.ModelViews
             }
             return chatDict;
         }
-
+        /// <summary>
+        /// Adds a new chat
+        /// </summary>
+        /// <param name="chat"></param>
         public void AddNewChat(Chat chat)
         {
-<<<<<<< HEAD
-            ChatDatabaseService.Instance.addNewChat(chat.user1, chat.user2);
-=======
-            chatModel.addChat(chat.user1, chat.user2);
->>>>>>> main
+            ChatDatabaseService.Instance.AddNewChat(chat.user1, chat.user2);
+            chatModel.AddNewChat(chat.user1, chat.user2);
             Chats.Add(chat);
         }
-
+        /// <summary>
+        /// sets the user id
+        /// </summary>
+        /// <param name="id"></param>
         public void setUserId(int id)
         {
             userID = id;
         }
-
+        /// <summary>
+        /// get the chats by the name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public List<Chat> GetChatsByName(string name)
         {
-<<<<<<< HEAD
-            List<Chat> chats = ChatDatabaseService.Instance.getChatsByUserId(userID);
-=======
-            List<Chat> chats = chatModel.getChats(userID);
->>>>>>> main
+            List<Chat> chats = chatModel.getChatsByUserId(userID);
             return chats.Where(chat => chat.user1.ToString().Contains(name) || chat.user2.ToString().Contains(name)).ToList();
         }
-
+        /// <summary>
+        /// back button handler
+        /// </summary>
         public void BackButtonHandler()
         {
             Debug.WriteLine("Back button clicked in Chats");
         }
-
+        /// <summary>
+        /// search button handler
+        /// </summary>
         public void SearchButtonHandler(string SearchQuery)
         {
             Debug.WriteLine("Search button clicked in Chats");

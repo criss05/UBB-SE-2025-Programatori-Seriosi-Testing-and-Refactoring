@@ -17,7 +17,7 @@ namespace Team3.ModelViews
     public class MessageModelView : IMessageModelView
     {
 
-        private readonly IMessageDBService messageModel;
+        private readonly IMessageDatabaseService messageModel;
         private readonly IUserModelView userModelView;
 
         public ObservableCollection<MessageChatDTO> Messages { get; set; }

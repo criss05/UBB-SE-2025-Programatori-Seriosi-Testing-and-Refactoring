@@ -5,21 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Team3.Models;
 
-namespace Team3.ModelViews
+namespace Team3.DatabaseServices
 {
-    public interface IUserModelView
+    public interface IShiftTypeDatabaseService
     {
         /// <summary>
-        /// Gets the user.
+        /// get all shift types
         /// </summary>
         /// <returns></returns>
-        public List<User> GetAllUsers();
+        public List<ShiftType> GetAllShiftTypes();
 
         /// <summary>
-        /// Gets the user.
+        /// get the shift by it's type
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="shiftTypeId"></param>
         /// <returns></returns>
-        public User GetUserById(int id);
+        public ShiftType? GetShiftType(int shiftTypeId);
     }
 }

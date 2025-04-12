@@ -12,7 +12,7 @@ namespace Team3.ModelViews
         // Attributes
         public ObservableCollection<Department> DepartmentsInfo { get; private set; }
 
-        private readonly IDepartmentDBService _departmentModel;
+        private readonly IDepartmentDatabaseService _departmentModel;
 
         public Action? OnBackNavigation { get; set; } // Delegate for back navigation handling
 
@@ -87,7 +87,9 @@ namespace Team3.ModelViews
                 throw;
             }
         }
-        // Handles the Back Button press
+        /// <summary>
+        /// handles the back button
+        /// </summary>
         public void BackButtonHandler()
         {
             try

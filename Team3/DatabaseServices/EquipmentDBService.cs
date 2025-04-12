@@ -7,6 +7,6 @@ using Team3.DatabaseServices;
 
 namespace Team3.DatabaseServices
 {
-    class EquipmentDatabaseService : IEquipmentDBService
+    class EquipmentDatabaseService : IEquipmentDatabaseService
     {}
 }

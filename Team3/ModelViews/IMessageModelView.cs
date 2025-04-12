@@ -12,7 +12,7 @@ namespace Team3.ModelViews
         /// Loads the messages for a specific chat.
         /// </summary>
         /// <param name="chatId"></param>
-        public void LoadMessages(int chatId);
+        public void LoadAllMessages(int chatId);
 
         /// <summary>
         /// Handles the send button click event.

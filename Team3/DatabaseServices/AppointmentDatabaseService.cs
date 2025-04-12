@@ -6,9 +6,18 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class AppointmentDatabaseService :IAppointmentDBService
+    /// <summary>
+    /// hello
+    /// </summary>
+    public class AppointmentDatabaseService :IAppointmentDatabaseService
     {
+        /// <summary>
+        /// Singleton instance of the AppointmentDatabaseService
+        /// </summary>
         private static AppointmentDatabaseService? _instance;
+        /// <summary>
+        /// Thread-safe lock object for singleton instance creation
+        /// </summary>
         private static readonly object _lock = new object();
         private readonly Config _config;
 
@@ -33,6 +42,11 @@ namespace Team3.DatabaseServices
                 return _instance;
             }
         }
+        /// <summary>
+        /// Adds a new appointment to the database.
+        /// </summary>
+        /// <param name="appointment">The appointment object containing details to be added.</param>
+        /// <exception cref="Exception">Thrown when an error occurs while adding the appointment.</exception>
 
         public void AddNewAppointment(Appointment appointment)
         {
@@ -60,6 +74,13 @@ namespace Team3.DatabaseServices
                 throw new Exception("Error adding appointment", e);
             }
         }
+        /// <summary>
+        /// Retrieves an appointment from the database by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the appointment to retrieve.</param>
+        /// <returns>The appointment object corresponding to the specified ID.</returns>
+        /// <exception cref="Exception">Thrown when an error occurs while retrieving the appointment or if the appointment is not found.</exception>
+
         public Appointment GetAppointmentById(int id)
         {
             const string query = "SELECT id, doctor_id, patient_id, appointment_datetime, location FROM Appointments WHERE id = @id";

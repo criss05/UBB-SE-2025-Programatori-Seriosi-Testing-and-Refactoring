@@ -7,19 +7,15 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IUserDBService
+    public interface IDoctorDatabaseService
     {
         /// <summary>
-        /// get all users
-        /// </summary>
-        /// <returns></returns>
-        public List<User> GetUsers();
-
-        /// <summary>
-        /// get user by id
+        /// get the doctor by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public User GetUser(int id);
+        public Doctor GetDoctorById(int id);
+
+
     }
 }

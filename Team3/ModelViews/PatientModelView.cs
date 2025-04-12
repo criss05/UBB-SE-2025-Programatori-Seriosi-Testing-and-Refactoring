@@ -12,7 +12,7 @@ namespace Team3.ModelViews
     class PatientModelView : IPatientModelView
     {
 
-        private readonly IPatientDBService patientModel;
+        private readonly IPatientDatabaseService patientModel;
 
         public PatientModelView()
         {

@@ -20,7 +20,7 @@ namespace Team3.ModelViews
         /// </summary>
         /// <param name="mrId"></param>
         /// <returns></returns>
-        public Review getReview(int mrId);
+        public Review getReviewByMedicalRecordId(int mrId);
 
         /// <summary>
         /// handle the add review button click event

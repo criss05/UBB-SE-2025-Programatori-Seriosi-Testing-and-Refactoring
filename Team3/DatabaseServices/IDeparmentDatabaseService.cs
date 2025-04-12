@@ -7,12 +7,15 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IScheduleDBService
+    public interface IDepartmentDatabaseService
     {
+
         /// <summary>
-        /// get all schedules
+        /// Get all departements
         /// </summary>
         /// <returns></returns>
-        public List<Schedule> GetSchedules();
+        public List<Department> GetDepartments();
+
+
     }
 }

@@ -14,6 +14,6 @@ namespace Team3.ModelViews
         /// </summary>
         /// <param name="mrId"></param>
         /// <returns></returns>
-        public Drug getDrug(int mrId);
+        public Drug getDrugById(int mrId);
     }
 }

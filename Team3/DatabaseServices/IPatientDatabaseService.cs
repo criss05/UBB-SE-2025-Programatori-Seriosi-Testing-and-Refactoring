@@ -7,13 +7,13 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IPatientDBService
+    public interface IPatientDatabaseService
     {
         /// <summary>
         /// get a patient by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Patient GetPatient(int id);
+        public Patient GetPatientById(int id);
     }
 }

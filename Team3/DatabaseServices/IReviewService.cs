@@ -13,13 +13,13 @@ namespace Team3.DatabaseServices
         /// add a review 
         /// </summary>
         /// <param name="review"></param>
-        public void addReview(Review review);
+        public void addNewReview(Review review);
 
         /// <summary>
         /// get a review for a specific medical record
         /// </summary>
         /// <param name="medicalRecordId"></param>
         /// <returns></returns>
-        public Review getReview(int medicalRecordId);
+        public Review GetReviewByMedicalRecordId(int medicalRecordId);
     }
 }

@@ -7,15 +7,12 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IDoctorDBService
+    public interface IScheduleDatabaseService
     {
         /// <summary>
-        /// get the doctor by id
+        /// get all schedules
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
-        public Doctor GetDoctor(int id);
-
-
+        public List<Schedule> GetAllSchedules();
     }
 }

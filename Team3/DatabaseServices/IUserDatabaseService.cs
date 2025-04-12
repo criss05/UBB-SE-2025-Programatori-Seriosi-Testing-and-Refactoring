@@ -7,19 +7,19 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IShiftTypeDBService
+    public interface IUserDatabaseService
     {
         /// <summary>
-        /// get all shift types
+        /// get all users
         /// </summary>
         /// <returns></returns>
-        public List<ShiftType> GetShiftTypes();
+        public List<User> GetAllUsers();
 
         /// <summary>
-        /// get the shift by it's type
+        /// get user by id
         /// </summary>
-        /// <param name="shiftTypeId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public ShiftType? GetShiftType(int shiftTypeId);
+        public User GetUserById(int id);
     }
 }

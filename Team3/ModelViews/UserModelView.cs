@@ -12,7 +12,7 @@ namespace Team3.ModelViews
     public class UserModelView : IUserModelView
     {
 
-        private readonly IUserDBService _userModel;
+        private readonly IUserDatabaseService _userModel;
 
         public ObservableCollection<User> Users { get; private set; }
         public UserModelView()

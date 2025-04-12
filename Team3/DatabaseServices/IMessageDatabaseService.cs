@@ -7,7 +7,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IMessageDBService
+    public interface IMessageDatabaseService
     {
 
         /// <summary>

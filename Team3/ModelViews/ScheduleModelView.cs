@@ -11,7 +11,7 @@ namespace Team3.ModelViews
     public class ScheduleViewModel : IScheduleViewModel
     {
 
-        private readonly IScheduleDBService _scheduleModel;
+        private readonly IScheduleDatabaseService _scheduleModel;
 
         public ObservableCollection<Schedule> Schedules { get; private set; }
 

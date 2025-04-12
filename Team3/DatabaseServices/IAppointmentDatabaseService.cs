@@ -8,19 +8,19 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IAppointmentDBService
+    public interface IAppointmentDatabaseService
     {
         /// <summary>
         /// Add an appointment to the database
         /// </summary>
         /// <param name="appointment"></param>
-        public void AddAppointment(Appointment appointment);
+        public void AddNewAppointment(Appointment appointment);
 
         /// <summary>
         /// Get an appointment from the database based to id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Appointment GetAppointment(int id);
+        public Appointment GetAppointmentById(int id);
     }
 }

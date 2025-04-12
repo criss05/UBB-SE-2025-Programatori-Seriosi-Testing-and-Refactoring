@@ -13,7 +13,7 @@ namespace Team3.ModelViews
     public class TreatmentModelView : ITreatmentModelView
     {
 
-        private readonly ITreatmentDBService _treatmentModel;
+        private readonly ITreatmentDatabaseService _treatmentModel;
 
 
         public TreatmentModelView()

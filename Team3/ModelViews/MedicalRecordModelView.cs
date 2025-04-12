@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Team3.Models;
-using Team3.DatabaseServices;
-
-namespace Team3.ModelViews
+﻿namespace Team3.ModelViews
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using Team3.DatabaseServices;
+    using Team3.Models;
+
     public class MedicalRecordModelView : IMedicalRecordModelView
     {
-
-        private readonly IMedicalRecordDBService _medicalRecordModel;
-
+        private readonly MedicalRecordDatabaseService _medicalRecordModel;
 
         public MedicalRecordModelView()
         {

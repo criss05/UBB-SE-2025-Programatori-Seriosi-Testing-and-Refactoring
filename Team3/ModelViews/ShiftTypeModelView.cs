@@ -10,13 +10,13 @@ namespace Team3.ModelViews
     public class ShiftTypeModelView : IShiftTypeModelView
     {
 
-        private readonly IShiftTypeDBService _shiftTypeModel;
+        private readonly IShiftTypeDatabaseService _shiftTypeModel;
 
         public ObservableCollection<ShiftType> ShiftTypes { get; private set; }
 
         public ShiftTypeModelView()
         {
-            _shiftTypeModel = ShiftTypeDatabaseService.Instance;
+            _shiftTypeModel = (IShiftTypeDatabaseService?)ShiftTypeDatabaseService.Instance;
             ShiftTypes = new ObservableCollection<ShiftType>();
             LoadShiftTypes();
         }

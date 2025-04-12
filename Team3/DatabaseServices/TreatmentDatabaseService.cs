@@ -10,7 +10,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class TreatmentDatabaseService : ITreatmentDBService
+    public class TreatmentDatabaseService : ITreatmentDatabaseService
     {
         private static TreatmentDatabaseService? _instance;
         private static readonly object _lock = new object();

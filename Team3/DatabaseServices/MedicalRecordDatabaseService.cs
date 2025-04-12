@@ -6,7 +6,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class MedicalRecordDatabaseService : IMedicalRecordDBService
+    public class MedicalRecordDatabaseService : IMedicalRecordDatabaseService
     {
         private static MedicalRecordDatabaseService? _instance;
         private readonly Config _config;

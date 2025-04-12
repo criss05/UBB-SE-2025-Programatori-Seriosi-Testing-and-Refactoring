@@ -10,11 +10,18 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class ChatDatabaseService : IChatDBService
+    public class ChatDatabaseService : IChatDatabaseService
     {
+        /// <summary>
+        ///  Singleton instance of the ChatDatabase class.
+        /// </summary>
         private static ChatDatabaseService? _instance;
+        
         private readonly Config _config;
         private Task<List<Chat>> _chats;
+        /// <summary>
+        /// Lock object used to ensure thread safety when accessing the singleton instance.
+        /// </summary>
         private static readonly object _lock = new object();
 
         private ChatDatabaseService()
@@ -37,6 +44,11 @@ namespace Team3.DatabaseServices
             }
         }
 
+        /// <summary>
+        /// Retrieves a list of chats for a specific user from the database.
+        /// </summary>
+        /// <param name="user">The ID of the user whose chats are to be retrieved.</param>
+        /// <returns>A list of Chat objects associated with the user.</returns>
         public List<Chat> getChatsByUserId(int user)
         {
             const string query = "SELECT * FROM chats WHERE user1 = @user OR user2 = @user";
@@ -68,8 +80,13 @@ namespace Team3.DatabaseServices
                 throw new Exception("Error getting chats", e);
             }
         }
+        /// <summary>
+        /// Adds a new chat between two users to the database.
+        /// </summary>
+        /// <param name="user1">The ID of the first user.</param>
+        /// <param name="user2">The ID of the second user.</param>
 
-        public void addNewChat(int user1, int user2)
+        public void AddNewChat(int user1, int user2)
         {
             const string query = "INSERT INTO chats (user1, user2) VALUES (@user1, @user2)";
             try

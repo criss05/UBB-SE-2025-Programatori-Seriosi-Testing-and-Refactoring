@@ -5,7 +5,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class PatientDatabaseService : IPatientDBService
+    public class PatientDatabaseService : IPatientDatabaseService
     {
         private static PatientDatabaseService? _instance;
         private static readonly object _lock = new object();

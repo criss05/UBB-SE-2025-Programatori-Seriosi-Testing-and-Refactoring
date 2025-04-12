@@ -9,7 +9,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class TreatmentDrugDatabaseService : ITreatmentDrugDBService
+    public class TreatmentDrugDatabaseService : ITreatmentDrugService
     {
         private static TreatmentDrugDatabaseService? _instance;
         private static readonly object _lock = new object();
@@ -34,7 +34,7 @@ namespace Team3.DatabaseServices
                 return _instance;
             }
         }
-        public void addNewTreatmentDrug(TreatmentDrug treatmentDrug)
+        public void AddNewTreatmentDrug(TreatmentDrug treatmentDrug)
         {
             const string query = "INSERT INTO treatments_drugs(id,treatment_id,drug_id,quantity,starttime,endtime,startdate,nrdays) VALUES (@id,@treatment_id,@drug_id,@quantity,@starttime,@endtime,@startdate,@nrdays)";
             try

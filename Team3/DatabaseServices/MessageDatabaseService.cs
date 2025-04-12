@@ -11,10 +11,18 @@ using Team3.DatabaseServices;
 
 namespace Team3.DatabaseServices
 {
-    public class MessageDatabaseService : IMessageDBService
+    public class MessageDatabaseService : IMessageDatabaseService
     {
+        /// <summary>
+        /// Singleton instance of the ChatDatabaseService class.
+        /// </summary>
+
         private static MessageDatabaseService? _instance;
         private readonly Config _config;
+        /// <summary>
+        /// Lock object used to ensure thread safety when accessing the singleton instance.
+        /// </summary>
+
         private static readonly object _lock = new object();
         private MessageDatabaseService()
         {

@@ -24,7 +24,7 @@ namespace Team3.ModelViews
         /// <summary>
         /// add an appointment
         /// </summary>
-        public void AddAppointment();
+        public void AddNewAppointment();
 
         /// <summary>
         /// add an upcoming appointment 
@@ -59,7 +59,7 @@ namespace Team3.ModelViews
         /// <summary>
         /// add a treatment
         /// </summary>
-        public void AddTreatment();
+        public void AddNewTreatment();
 
         /// <summary>
         /// add a review results notification
@@ -70,6 +70,6 @@ namespace Team3.ModelViews
         /// <summary>
         /// add a review
         /// </summary>
-        public void AddReview();
+        public void AddNewReview();
     }
 }

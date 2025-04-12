@@ -6,7 +6,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class UserDatabaseService : IUserDBService
+    public class UserDatabaseService : IUserDatabaseService
     {
 
         private static UserDatabaseService? _instance;
@@ -62,7 +62,12 @@ namespace Team3.DatabaseServices
             return notifications;
         }
 
-
+        /// <summary>
+        /// gets the user by the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public User GetUserById(int id)
         {
             const string query = "SELECT * FROM users WHERE id = @id";

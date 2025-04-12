@@ -6,7 +6,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class ScheduleDatabaseService : IScheduleDBService
+    public class ScheduleDatabaseService : IScheduleDatabaseService
     {
         private static ScheduleDatabaseService? _instance;
         private readonly Config _config;

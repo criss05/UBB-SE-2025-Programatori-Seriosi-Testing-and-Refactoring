@@ -11,7 +11,7 @@ namespace Team3.ModelViews
     public class DrugModelView : IDrugModelView
     {
 
-        private readonly IDrugDBService _drugModel;
+        private readonly IDrugDatabaseService _drugModel;
 
 
         public DrugModelView()

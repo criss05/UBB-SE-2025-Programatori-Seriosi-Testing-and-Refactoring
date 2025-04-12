@@ -7,20 +7,20 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IChatDBService
+    public interface IChatDatabaseService
     {
         /// <summary>
         /// Get the user's chats from the DB by user
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public List<Chat> getChats(int user);
+        public List<Chat> getChatsByUserId(int user);
 
         /// <summary>
         /// Add a chat between user 1 and user 2
         /// </summary>
         /// <param name="user1"></param>
         /// <param name="user2"></param>
-        public void addChat(int user1, int user2);
+        public void AddNewChat(int user1, int user2);
     }
 }

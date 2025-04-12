@@ -13,13 +13,13 @@ namespace Team3.ModelViews
         /// add an appointment
         /// </summary>
         /// <param name="appointment"></param>
-        public void AddAppointment(Appointment appointment);
+        public void AddNewAppointment(Appointment appointment);
 
         /// <summary>
         /// get an appointment by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Appointment GetAppointment(int id);
+        public Appointment GetAppointmentById(int id);
     }
 }

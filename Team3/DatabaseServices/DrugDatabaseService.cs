@@ -11,7 +11,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class DrugDatabaseService : IDrugDBService
+    public class DrugDatabaseService :IDrugDatabaseService
     {
         private static DrugDatabaseService? _instance;
         private static readonly object _lock = new object();

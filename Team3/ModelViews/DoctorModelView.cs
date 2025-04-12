@@ -12,7 +12,7 @@ namespace Team3.ModelViews
 
         // Dependencies
 
-        private readonly IDoctorDBService doctorModel;
+        private readonly IDoctorDatabaseService doctorModel;
         public IMedicalRecordModelView MedicalRecordModelView { get; set; }
         public IScheduleViewModel ScheduleModelView { get; set; }
         public IUserModelView UserModelView { get; set; }

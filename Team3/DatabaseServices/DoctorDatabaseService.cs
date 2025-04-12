@@ -11,9 +11,16 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class DoctorDatabaseService : IDoctorDBService
+    public class DoctorDatabaseService : IDoctorDatabaseService
     {
+        /// <summary>
+        /// Singleton instance of the ChatDatabaseService class.
+        /// </summary>
+
         private static DoctorDatabaseService? _instance;
+        /// <summary>
+        /// Lock object used to ensure thread safety when accessing the singleton instance.
+        /// </summary>
 
         private static readonly object _lock = new object();
         private readonly Config _config;
@@ -41,6 +48,12 @@ namespace Team3.DatabaseServices
                 return _instance;
             }
         }
+        /// <summary>
+        /// Get all doctors from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public Doctor GetDoctorById(int id)
         {
             const string query = "SELECT * FROM doctors WHERE id = @id";

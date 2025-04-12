@@ -14,7 +14,7 @@ namespace Team3.ModelViews
     public class NotificationModelView : INotificationModelView
     {
 
-        private readonly INotificationDBService _notificationModel;
+        private readonly INotificationDatabaseService _notificationModel;
         private readonly IAppointmentModelView _appointmentModelView;
         private readonly IDoctorModelView _doctorModelView;
         private readonly IUserModelView _userModelView;
@@ -191,7 +191,7 @@ namespace Team3.ModelViews
             Patient patient = this._patientModelView.GetPatientById(medicalRecord.PatientId);
 
             Treatment treatment = this._treatmentModelView.GetTreatmentByMedicalRecordId(medicalRecordId);
-            List<TreatmentDrug> treatmentDrugs = this.treatmentDrugModelView.getTreatmentDrugsByTreatmentId(treatment.Id);
+            List<TreatmentDrug> treatmentDrugs = this.treatmentDrugModelView.getTreatmentDrugsById(treatment.Id);
 
 
             foreach(TreatmentDrug treatmentDrug in treatmentDrugs){
