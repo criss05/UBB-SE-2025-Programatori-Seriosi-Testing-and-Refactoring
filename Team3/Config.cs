@@ -10,7 +10,7 @@ namespace Team3
     public class Config
     {
 
-        public static readonly string DATABASE_CONNECTION_STRING = "Server=vm;Database=team3;Integrated Security=True;";
+        public static readonly string DATABASE_CONNECTION_STRING = "Server=localhost\\SQLEXPRESS;Database=Team3;Trusted_Connection=True;TrustServerCertificate=True;";
         public static readonly TimeZoneInfo ROMANIA_TIMEZONE;
 
         private static Config? instance;
