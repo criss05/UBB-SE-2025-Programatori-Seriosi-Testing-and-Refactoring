@@ -9,11 +9,9 @@ namespace Team3.DatabaseServices
     public class NotificationDatabaseService : INotificationDatabaseService
     {
         private static NotificationDatabaseService? instance;
-        private readonly Config config;
         private static readonly object LockObject = new object();
         private NotificationDatabaseService()
         {
-            config = Config.Instance;
         }
         public static NotificationDatabaseService Instance
         {
@@ -37,7 +35,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -73,7 +71,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -110,7 +108,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -141,7 +139,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -165,7 +163,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -189,7 +187,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -210,7 +208,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

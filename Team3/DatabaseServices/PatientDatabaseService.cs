@@ -9,9 +9,8 @@ namespace Team3.DatabaseServices
     {
         private static PatientDatabaseService? instance;
         private static readonly object LockObject = new object();
-        private readonly Config config;
         private PatientDatabaseService() {
-            config = Config.Instance;
+
         }
         public static PatientDatabaseService Instance
         {
@@ -71,7 +70,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))

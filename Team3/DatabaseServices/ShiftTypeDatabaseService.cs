@@ -9,11 +9,10 @@ namespace Team3.DatabaseServices
     public class ShiftTypeDatabaseService : IShiftTypeDatabaseService
     {
         private static ShiftTypeDatabaseService? instance;
-        private readonly Config config;
 
         private ShiftTypeDatabaseService()
         {
-            config = Config.Instance;
+
         }
 
         public static ShiftTypeDatabaseService Instance
@@ -35,7 +34,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -68,7 +67,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))

@@ -14,10 +14,8 @@ namespace Team3.DatabaseServices
     {
         private static ReviewService? instance;
         private static readonly object LockObject = new object();
-        private readonly Config config;
         private ReviewService()
         {
-            config = Config.Instance;
         }
         public static ReviewService Instance
         {
@@ -39,7 +37,7 @@ namespace Team3.DatabaseServices
             const string query = "INSERT INTO Reviews (id, medicalrecord_id, message, nr_stars) VALUES (@id, @medicalrecord_id, @message, @nr_stars)";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@id", review.Id);
@@ -60,7 +58,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
 
                 connection.Open();
 

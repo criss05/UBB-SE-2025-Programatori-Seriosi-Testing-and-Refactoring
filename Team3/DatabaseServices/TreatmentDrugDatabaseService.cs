@@ -13,11 +13,10 @@ namespace Team3.DatabaseServices
     {
         private static TreatmentDrugDatabaseService? instance;
         private static readonly object LockObject = new object();
-        private readonly Config config;
 
         private TreatmentDrugDatabaseService()
         {
-            config = Config.Instance;
+
         }
 
         public static TreatmentDrugDatabaseService Instance
@@ -39,7 +38,7 @@ namespace Team3.DatabaseServices
             const string query = "INSERT INTO treatments_drugs(id,treatment_id,drug_id,quantity,starttime,endtime,startdate,nrdays) VALUES (@id,@treatment_id,@drug_id,@quantity,@starttime,@endtime,@startdate,@nrdays)";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@id", treatmentDrug.Id);
@@ -63,7 +62,7 @@ namespace Team3.DatabaseServices
             const string query = "SELECT * FROM treatments_drugs WHERE treatment_id = @treatment_id";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
 
                 connection.Open();
 

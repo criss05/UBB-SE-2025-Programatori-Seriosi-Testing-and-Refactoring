@@ -68,7 +68,7 @@ namespace Team3.ModelViews
         public void SendButtonHandler(int userId, int chatId, string message)
         {
             Debug.WriteLine("Send button clicked");
-            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Config.ROMANIA_TIMEZONE);
+            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
 
             // Message newMessage = new Message(message, userId, chatId, currentDateTime);
             // MessageChatDTO messageChatDTO = new MessageChatDTO(newMessage.Id ,message, userId, chatId, currentDateTime, userModelView.GetUser(userId).ToString());

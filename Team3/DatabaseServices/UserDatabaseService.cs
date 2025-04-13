@@ -10,11 +10,9 @@ namespace Team3.DatabaseServices
     {
 
         private static UserDatabaseService? instance;
-        private readonly Config config;
         private static readonly object LockObject = new object();
         private UserDatabaseService()
         {
-            config = Config.Instance;
         }
         public static UserDatabaseService Instance
         {
@@ -36,7 +34,7 @@ namespace Team3.DatabaseServices
             List<User> notifications = new List<User>();
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -74,7 +72,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))

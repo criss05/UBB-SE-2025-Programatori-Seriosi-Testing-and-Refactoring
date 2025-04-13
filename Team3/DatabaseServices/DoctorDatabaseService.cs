@@ -21,11 +21,10 @@ namespace Team3.DatabaseServices
     {
         private static readonly object LockObject = new object();
         private static DoctorDatabaseService? instance;
-        private readonly Config config;
 
         private DoctorDatabaseService()
         {
-            this.config = Config.Instance;
+
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace Team3.DatabaseServices
             const string query = "SELECT * FROM doctors WHERE id = @id";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
 

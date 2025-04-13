@@ -16,11 +16,10 @@ namespace Team3.DatabaseServices
     public class DepartmentDatabaseService : IDepartmentDatabaseService
     {
         private static DepartmentDatabaseService? instance;
-        private readonly Config config;
 
         private DepartmentDatabaseService()
         {
-            this.config = Config.Instance;
+
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

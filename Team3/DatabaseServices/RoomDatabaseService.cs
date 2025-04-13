@@ -9,11 +9,9 @@ namespace Team3.DatabaseServices
     public class RoomDatabaseService : IRoomDatabaseService
     {
         private static RoomDatabaseService? instance;
-        private readonly Config config;
 
         private RoomDatabaseService()
         {
-            config = Config.Instance;
         }
 
         public static RoomDatabaseService Instance
@@ -35,7 +33,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

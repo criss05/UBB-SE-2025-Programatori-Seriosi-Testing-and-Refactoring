@@ -14,11 +14,10 @@ namespace Team3.DatabaseServices
     public class MessageDatabaseService : IMessageDatabaseService
     {
         private static MessageDatabaseService? instance;
-        private readonly Config config;
         private static readonly object LockObject = new object();
         private MessageDatabaseService()
         {
-            config = Config.Instance;
+
         }
         public static MessageDatabaseService Instance
         {
@@ -36,11 +35,11 @@ namespace Team3.DatabaseServices
         }
         public List<Message> GetMessagesByChatId(int chatId)
         {
-            Console.WriteLine($"Attempting to connect to: {Config.DATABASE_CONNECTION_STRING}");
+            Console.WriteLine($"Attempting to connect to: {Config.DbConnectionString}");
             const string query = "SELECT id, content, user_id, chat_id, sent_datetime FROM messages WHERE chat_id = @chat_id";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@chat_id", chatId);
@@ -77,7 +76,7 @@ namespace Team3.DatabaseServices
             const string query = "INSERT INTO messages (content, use_iId, chat_id, sent_datetime) VALUES (@content, @user_id, @chat_id, @sent_datetime)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@content", message.Content);

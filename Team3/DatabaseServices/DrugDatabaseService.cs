@@ -21,11 +21,9 @@ namespace Team3.DatabaseServices
     {
         private static readonly object LockObject = new object();
         private static DrugDatabaseService? instance;
-        private readonly Config config;
 
         private DrugDatabaseService()
         {
-            this.config = Config.Instance;
         }
 
         /// <summary>
@@ -59,7 +57,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
 
                 connection.Open();
 

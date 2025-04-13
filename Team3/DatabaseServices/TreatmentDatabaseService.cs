@@ -14,11 +14,9 @@ namespace Team3.DatabaseServices
     {
         private static TreatmentDatabaseService? instance;
         private static readonly object LockObject = new object();
-        private readonly Config config;
 
         private TreatmentDatabaseService()
         {
-            config = Config.Instance;
         }
 
         public static TreatmentDatabaseService Instance
@@ -41,7 +39,7 @@ namespace Team3.DatabaseServices
             const string query = "INSERT INTO treatments(id, memdicalrecord_id) values (@id , @memdicalrecord_id)";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
 
@@ -64,7 +62,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
 

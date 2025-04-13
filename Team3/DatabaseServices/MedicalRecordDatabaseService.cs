@@ -9,11 +9,10 @@ namespace Team3.DatabaseServices
     public class MedicalRecordDatabaseService : IMedicalRecordDatabaseService
     {
         private static MedicalRecordDatabaseService? instance;
-        private readonly Config config;
         private static readonly object LockObject = new object();
         private MedicalRecordDatabaseService()
         {
-            config = Config.Instance;
+
         }
         public static MedicalRecordDatabaseService Instance
         {
@@ -37,7 +36,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

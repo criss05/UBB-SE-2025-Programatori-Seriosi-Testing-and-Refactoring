@@ -9,11 +9,9 @@ namespace Team3.DatabaseServices
     public class ScheduleDatabaseService : IScheduleDatabaseService
     {
         private static ScheduleDatabaseService? instance;
-        private readonly Config config;
 
         private ScheduleDatabaseService()
         {
-            config = Config.Instance;
         }
 
         public static ScheduleDatabaseService Instance
@@ -34,7 +32,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
