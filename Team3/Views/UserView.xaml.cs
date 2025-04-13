@@ -1,55 +1,55 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Team3.ModelViews;
-using Team3.Models;
-using System.Diagnostics;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+// <copyright file="UserView.xaml.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Views
 {
+    using System.Diagnostics;
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Team3.Models;
+    using Team3.ModelViews;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class UserView : Page
     {
-        public IUserModelView ViewModel { get; } = new UserModelView();
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserView"/> class.
+        /// </summary>
         public UserView()
         {
             this.InitializeComponent();
-            this.UsersListView.DataContext = ViewModel;
+            this.UsersListView.DataContext = this.ViewModel;
         }
 
+        /// <summary>
+        /// Gets the view model for the user view.
+        /// </summary>
+        public IUserModelView ViewModel { get; } = new UserModelView();
+
+        /// <summary>
+        /// Handles the item click event for the users list view.
+        /// </summary>
+        /// <param name="sender">The semder.</param>
+        /// <param name="e">The event.</param>
         private void UsersListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is User selectedUser)
             {
                 Debug.WriteLine($"Selected User: ID={selectedUser.Id}, Name={selectedUser.Name}, Role={selectedUser.Role}");
-                //var optionsPage = new OptionsPage();
-                // Navigate to the options page
-                Frame.Navigate(typeof(OptionsPage), selectedUser.Id);
 
+                // var optionsPage = new OptionsPage();
+                // Navigate to the options page
+                this.Frame.Navigate(typeof(OptionsPage), selectedUser.Id);
             }
         }
 
         private void AuditButton_Click(object sender, RoutedEventArgs e)
         {
             // Navigate to AuditPage and pass the selected user
-            //Frame.Navigate(typeof(AuditView), SelectedUser);
+            // Frame.Navigate(typeof(AuditView), SelectedUser);
         }
     }
 }

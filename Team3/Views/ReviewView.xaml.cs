@@ -1,54 +1,64 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Team3.ModelViews;
-using Team3.Models;
-using System.Diagnostics;
-using System.Threading.Tasks;
-
+// <copyright file="ReviewView.xaml.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Views
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.InteropServices.WindowsRuntime;
+    using System.Threading.Tasks;
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Controls.Primitives;
+    using Microsoft.UI.Xaml.Data;
+    using Microsoft.UI.Xaml.Input;
+    using Microsoft.UI.Xaml.Media;
+    using Microsoft.UI.Xaml.Navigation;
+    using Team3.Models;
+    using Team3.ModelViews;
+    using Windows.Foundation;
+    using Windows.Foundation.Collections;
+
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
     public partial class ReviewView : Page
     {
-        private readonly IReviewModelView _reviewModelView;
+        private readonly IReviewModelView reviewModelView;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReviewView"/> class.
+        /// </summary>
         public ReviewView()
         {
-            InitializeComponent();
-            _reviewModelView = new ReviewModelView();
+            this.InitializeComponent();
+            this.reviewModelView = new ReviewModelView();
         }
 
         private async void AddReviewButton_Click(object sender, RoutedEventArgs e)
         {
             try
-            {   
-                int id = int.Parse(txtId.Text);
-                int medicarecordId = int.Parse(txtMedicalrecordId.Text);
-                string message = txtMessage.Text;
-                int stars = int.Parse(((ComboBoxItem)cmbStars.SelectedItem).Content.ToString());
+            {
+                int id = int.Parse(this.textId.Text);
+                int medicarecordId = int.Parse(this.textMedicalrecordId.Text);
+                string message = this.textMessage.Text;
+                int stars = int.Parse(((ComboBoxItem)this.comboBoxStars.SelectedItem).Content.ToString());
 
-                _reviewModelView.addReviewButtonHandler(id,medicarecordId, message, stars);
+                this.reviewModelView.AddReviewButtonHandler(id, medicarecordId, message, stars);
 
-                await ShowDialog("Review added successfully!", "Success");
+                await this.ShowDialog("Review added successfully!", "Success");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error adding review: {ex.Message}");
-                await ShowDialog("Invalid input. Please check your entries.", "Error");
+                await this.ShowDialog("Invalid input. Please check your entries.", "Error");
             }
         }
+
         private async Task ShowDialog(string message, string title)
         {
             ContentDialog dialog = new ContentDialog
@@ -56,15 +66,15 @@ namespace Team3.Views
                 Title = title,
                 Content = message,
                 CloseButtonText = "OK",
-                XamlRoot = this.XamlRoot // Required in WinUI 3
+                XamlRoot = this.XamlRoot, // Required in WinUI 3
             };
 
             await dialog.ShowAsync();
         }
+
         private void NavigateToMainPage_Click(object sender, RoutedEventArgs e)
         {
-            //this.Frame.Navigate(typeof(MainPage)); // Navigate to ReviewView
+            // this.Frame.Navigate(typeof(MainPage)); // Navigate to ReviewView
         }
     }
 }
-

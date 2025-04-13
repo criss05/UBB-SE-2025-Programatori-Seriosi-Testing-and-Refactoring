@@ -1,40 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using Team3.Models;
-using Team3.DBServices;
+﻿// <copyright file="DepartmentModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.ModelViews
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using Team3.DatabaseServices;
+    using Team3.Models;
+
+    /// <summary>
+    /// This class is responsible for managing the department information in the application.
+    /// </summary>
     public class DepartmentModelView : IDepartmentModelView
     {
-        // Attributes
-        public ObservableCollection<Department> DepartmentsInfo { get; private set; }
-        private readonly IDepartmentDBService _departmentModel;
-        public Action? OnBackNavigation { get; set; } // Delegate for back navigation handling
+        private readonly IDepartmentDatabaseService departmentModel;
 
-        // Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DepartmentModelView"/> class.
+        /// </summary>
         public DepartmentModelView()
         {
-            _departmentModel = DepartmentDBService.Instance;
-            DepartmentsInfo = new ObservableCollection<Department>();
-            LoadDepartmentsInfo();
+            this.departmentModel = DepartmentDatabaseService.Instance;
+            this.DepartmentsInfo = new ObservableCollection<Department>();
+            this.LoadDepartmentsInfo();
         }
 
-        // Load detailed department information
+        /// <summary>
+        /// Gets the observable collection of departments.
+        /// </summary>
+        public ObservableCollection<Department> DepartmentsInfo { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the action to be executed when the back button is pressed.
+        /// </summary>
+        public Action? OnBackNavigation { get; set; }
+
+        /// <summary>
+        /// Loads detailed department information from the database.
+        /// </summary>
         public void LoadDepartmentsInfo()
         {
             try
             {
-                var departmentList = _departmentModel.GetDepartments();
+                var departmentList = this.departmentModel.GetDepartments();
 
                 if (departmentList != null && departmentList.Count > 0)
                 {
-                    DepartmentsInfo.Clear(); // Clear old data
-                    foreach (var department in departmentList)
+                   this.DepartmentsInfo.Clear(); // Clear old data
+                   foreach (var department in departmentList)
                     {
-                        DepartmentsInfo.Add(department);
+                        this.DepartmentsInfo.Add(department);
                         Debug.WriteLine($"Loaded Department: ID = {department.DepartmentId}, Name = {department.DepartmentName}");
                     }
                 }
@@ -49,14 +67,18 @@ namespace Team3.ModelViews
             }
         }
 
-        // Method to handle date selection in ComboBox
+        /// <summary>
+        /// Handles the date selection in the ComboBox.
+        /// </summary>
+        /// <param name="selectedDate">The selected date.</param>
         public void DateSelectedComboBoxHandler(DateOnly selectedDate)
         {
             try
             {
                 Debug.WriteLine($"Date selected: {selectedDate}");
+
                 // Refresh department information based on the selected date
-                LoadDepartmentsInfo();
+                this.LoadDepartmentsInfo();
             }
             catch (Exception ex)
             {
@@ -64,12 +86,16 @@ namespace Team3.ModelViews
             }
         }
 
-        // Get departments by name
+        /// <summary>
+        /// Gets a list of departments by name.
+        /// </summary>
+        /// <param name="name">The name of the department.</param>
+        /// <returns>The list of departemts with the given name.</returns>
         public List<Department> GetDepartmentsByName(string name)
         {
             try
             {
-                var departmentList = _departmentModel.GetDepartments();
+                var departmentList = this.departmentModel.GetDepartments();
                 var filteredDepartments = departmentList.FindAll(d => d.DepartmentName.Contains(name, StringComparison.OrdinalIgnoreCase));
 
                 if (filteredDepartments.Count == 0)
@@ -86,13 +112,15 @@ namespace Team3.ModelViews
             }
         }
 
-        // Handles the Back Button press
+        /// <summary>
+        /// handles the back button.
+        /// </summary>
         public void BackButtonHandler()
         {
             try
             {
                 Debug.WriteLine("Back button pressed. Navigating to the previous screen...");
-                OnBackNavigation?.Invoke(); // Calls the delegate if assigned
+                this.OnBackNavigation?.Invoke(); // Calls the delegate if assigned
             }
             catch (Exception ex)
             {
