@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="IDrugModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.ModelViews
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for the DrugModelView.
+    /// </summary>
     public interface IDrugModelView
     {
         /// <summary>
-        /// Get the drug information by mrId
+        /// Get the drug information by DrugId.
         /// </summary>
-        /// <param name="mrId"></param>
-        /// <returns></returns>
-        public Drug getDrugById(int mrId);
+        /// <param name="drugId">The id of the drug.</param>
+        /// <returns>The drug with the  given id.</returns>
+        public Drug GetDrugById(int drugId);
     }
 }

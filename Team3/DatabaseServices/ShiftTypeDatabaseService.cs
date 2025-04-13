@@ -8,23 +8,23 @@ namespace Team3.DatabaseServices
 {
     public class ShiftTypeDatabaseService : IShiftTypeDatabaseService
     {
-        private static ShiftTypeDatabaseService? _instance;
-        private readonly Config _config;
+        private static ShiftTypeDatabaseService? instance;
+        private readonly Config config;
 
         private ShiftTypeDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
 
         public static ShiftTypeDatabaseService Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new ShiftTypeDatabaseService();
+                    instance = new ShiftTypeDatabaseService();
                 }
-                return _instance;
+                return instance;
             }
         }
 

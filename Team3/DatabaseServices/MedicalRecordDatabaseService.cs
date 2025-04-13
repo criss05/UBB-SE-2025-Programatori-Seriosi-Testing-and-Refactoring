@@ -8,25 +8,25 @@ namespace Team3.DatabaseServices
 {
     public class MedicalRecordDatabaseService : IMedicalRecordDatabaseService
     {
-        private static MedicalRecordDatabaseService? _instance;
-        private readonly Config _config;
-        private static readonly object _lock = new object();
+        private static MedicalRecordDatabaseService? instance;
+        private readonly Config config;
+        private static readonly object LockObject = new object();
         private MedicalRecordDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
         public static MedicalRecordDatabaseService Instance
         {
             get
             {
 
-                lock (_lock)
+                lock (LockObject)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = new MedicalRecordDatabaseService();
+                        instance = new MedicalRecordDatabaseService();
                     }
-                    return _instance;
+                    return instance;
                 }
             }
         }

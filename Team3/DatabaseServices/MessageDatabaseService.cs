@@ -13,33 +13,25 @@ namespace Team3.DatabaseServices
 {
     public class MessageDatabaseService : IMessageDatabaseService
     {
-        /// <summary>
-        /// Singleton instance of the ChatDatabaseService class.
-        /// </summary>
-
-        private static MessageDatabaseService? _instance;
-        private readonly Config _config;
-        /// <summary>
-        /// Lock object used to ensure thread safety when accessing the singleton instance.
-        /// </summary>
-
-        private static readonly object _lock = new object();
+        private static MessageDatabaseService? instance;
+        private readonly Config config;
+        private static readonly object LockObject = new object();
         private MessageDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
         public static MessageDatabaseService Instance
         {
             get
             {
-                lock (_lock)
+                lock (LockObject)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = new MessageDatabaseService();
+                        instance = new MessageDatabaseService();
                     }   
                 }
-                return _instance;
+                return instance;
             }
         }
         public List<Message> GetMessagesByChatId(int chatId)
@@ -91,7 +83,7 @@ namespace Team3.DatabaseServices
                     command.Parameters.AddWithValue("@content", message.Content);
                     command.Parameters.AddWithValue("@user_id", message.UserId);
                     command.Parameters.AddWithValue("@chat_id", message.ChatId);
-                    command.Parameters.AddWithValue("@sent_datetime", message.sentDateTime);
+                    command.Parameters.AddWithValue("@sent_datetime", message.SentDateTime);
                     connection.Open();
                     return Convert.ToInt32(command.ExecuteScalar());
                 }

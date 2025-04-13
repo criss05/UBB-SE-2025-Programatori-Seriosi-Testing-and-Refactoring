@@ -12,27 +12,27 @@ namespace Team3.DatabaseServices
 {
     public class TreatmentDatabaseService : ITreatmentDatabaseService
     {
-        private static TreatmentDatabaseService? _instance;
-        private static readonly object _lock = new object();
-        private readonly Config _config;
+        private static TreatmentDatabaseService? instance;
+        private static readonly object LockObject = new object();
+        private readonly Config config;
 
         private TreatmentDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
 
         public static TreatmentDatabaseService Instance
         {
             get
             {
-                lock (_lock)
+                lock (LockObject)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = new TreatmentDatabaseService();
+                        instance = new TreatmentDatabaseService();
                     }
                 }
-                return _instance;
+                return instance;
             }
         }
 

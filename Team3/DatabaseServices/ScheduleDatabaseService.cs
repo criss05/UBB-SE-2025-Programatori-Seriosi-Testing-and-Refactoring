@@ -8,23 +8,23 @@ namespace Team3.DatabaseServices
 {
     public class ScheduleDatabaseService : IScheduleDatabaseService
     {
-        private static ScheduleDatabaseService? _instance;
-        private readonly Config _config;
+        private static ScheduleDatabaseService? instance;
+        private readonly Config config;
 
         private ScheduleDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
 
         public static ScheduleDatabaseService Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new ScheduleDatabaseService();
+                    instance = new ScheduleDatabaseService();
                 }
-                return _instance;
+                return instance;
             }
         }
 

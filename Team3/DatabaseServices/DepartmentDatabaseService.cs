@@ -1,33 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using Team3.DatabaseServices;
-using Team3.Models;
+﻿// <copyright file="DepartmentDatabaseService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices
 {
-   public class DepartmentDatabaseService : IDepartmentDatabaseService
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using Team3.DatabaseServices;
+    using Team3.Models;
+
+    /// <summary>
+    /// Service for interacting with the department database.
+    /// </summary>
+    public class DepartmentDatabaseService : IDepartmentDatabaseService
     {
-        private static DepartmentDatabaseService? _instance;
-        private readonly Config _config;
+        private static DepartmentDatabaseService? instance;
+        private readonly Config config;
 
         private DepartmentDatabaseService()
         {
-            _config = Config.Instance;
+            this.config = Config.Instance;
         }
 
+        /// <summary>
+        /// Gets singleton instance of the DepartmentDatabaseService.
+        /// </summary>
         public static DepartmentDatabaseService Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new DepartmentDatabaseService();
+                    instance = new DepartmentDatabaseService();
                 }
-                return _instance;
+
+                return instance;
             }
         }
 
+        /// <summary>
+        /// Get all departments from the database.
+        /// </summary>
+        /// <returns>A lkist with departements.</returns>
+        /// <exception cref="Exception">throws an error.</exception>
         public List<Department> GetDepartments()
         {
             const string query = "SELECT * FROM departments;";
@@ -46,10 +62,10 @@ namespace Team3.DatabaseServices
                         {
                             departments.Add(new Department(
                                 reader.GetInt32(0),
-                                reader.GetString(1)
-                            ));
+                                reader.GetString(1)));
                         }
                     }
+
                     return departments;
                 }
             }

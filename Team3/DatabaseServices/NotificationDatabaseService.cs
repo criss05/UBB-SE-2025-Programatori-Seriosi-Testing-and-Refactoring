@@ -8,24 +8,24 @@ namespace Team3.DatabaseServices
 {
     public class NotificationDatabaseService : INotificationDatabaseService
     {
-        private static NotificationDatabaseService? _instance;
-        private readonly Config _config;
-        private static readonly object _lock = new object();
+        private static NotificationDatabaseService? instance;
+        private readonly Config config;
+        private static readonly object LockObject = new object();
         private NotificationDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
         public static NotificationDatabaseService Instance
         {
             get
             {
-                lock (_lock)
+                lock (LockObject)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = new NotificationDatabaseService();
+                        instance = new NotificationDatabaseService();
                     }
-                    return _instance;
+                    return instance;
                 }
             }
         }

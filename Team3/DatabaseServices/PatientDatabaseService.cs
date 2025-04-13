@@ -7,27 +7,27 @@ namespace Team3.DatabaseServices
 {
     public class PatientDatabaseService : IPatientDatabaseService
     {
-        private static PatientDatabaseService? _instance;
-        private static readonly object _lock = new object();
-        private readonly Config _config;
+        private static PatientDatabaseService? instance;
+        private static readonly object LockObject = new object();
+        private readonly Config config;
         private PatientDatabaseService() {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
         public static PatientDatabaseService Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    lock (_lock)
+                    lock (LockObject)
                     {
-                        if (_instance == null)
+                        if (instance == null)
                         {
-                            _instance = new PatientDatabaseService();
+                            instance = new PatientDatabaseService();
                         }
                     }
                 }
-                return _instance;
+                return instance;
             }
         }
 

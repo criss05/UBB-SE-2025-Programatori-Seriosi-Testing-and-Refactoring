@@ -1,29 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.DatabaseServices;
-using Team3.Models;
-using System.Diagnostics;
-using System.Collections;
+﻿// <copyright file="TreatmentModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.ModelViews
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Team3.DatabaseServices;
+    using Team3.Models;
+
+    /// <summary>
+    /// Model view for Treatment.
+    /// </summary>
     public class TreatmentModelView : ITreatmentModelView
     {
+        private readonly ITreatmentDatabaseService treatmentModel;
 
-        private readonly ITreatmentDatabaseService _treatmentModel;
-
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TreatmentModelView"/> class.
+        /// </summary>
         public TreatmentModelView()
         {
-            _treatmentModel = TreatmentDatabaseService.Instance;
-        }
-        public Treatment GetTreatmentByMedicalRecordId(int mrId)
-        {
-            return this._treatmentModel.GetTreatmentByMedicalRecordId(mrId);
+            this.treatmentModel = TreatmentDatabaseService.Instance;
         }
 
+        /// <summary>
+        /// Get the treatment by medical record id.
+        /// </summary>
+        /// <param name="treatemtnId">The id of the treatment.</param>
+        /// <returns>The treatment.</returns>
+        public Treatment GetTreatmentByMedicalRecordId(int treatemtnId)
+        {
+            return this.treatmentModel.GetTreatmentByMedicalRecordId(treatemtnId);
+        }
     }
 }

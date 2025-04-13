@@ -1,51 +1,67 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Team3.ModelViews;
-using System.Diagnostics;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+// <copyright file="MessageView.xaml.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Views
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.InteropServices.WindowsRuntime;
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Controls.Primitives;
+    using Microsoft.UI.Xaml.Data;
+    using Microsoft.UI.Xaml.Input;
+    using Microsoft.UI.Xaml.Media;
+    using Microsoft.UI.Xaml.Navigation;
+    using Team3.ModelViews;
+    using Windows.Foundation;
+    using Windows.Foundation.Collections;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MessageView : Page
     {
-        public IMessageModelView ViewModel { get; } = new MessageModelView();
-        public int UserId { get; set; }
-        public int ChatId { get; set; }
-
-
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageView"/> class.
+        /// </summary>
         public MessageView()
         {
             this.InitializeComponent();
-            this.chatMessages.DataContext = ViewModel;
+            this.chatMessages.DataContext = this.ViewModel;
         }
 
+        /// <summary>
+        /// Gets the ViewModel for the message view.
+        /// </summary>
+        public IMessageModelView ViewModel { get; } = new MessageModelView();
+
+        /// <summary>
+        /// Gets or Sets user ID of the current user.
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the chat ID of the current chat.
+        /// </summary>
+        public int ChatId { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageView"/> class.
+        /// </summary>
+        /// <param name="e">The event ot the navigation.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.Parameter is (int userId, int chatId))
+            if (e.Parameter is(int userId, int chatId))
             {
-                UserId = userId;
-                ChatId = chatId;
-                ViewModel.LoadAllMessages(userId);
-                // In a real app, you might filter notifications by user
+                this.UserId = userId;
+                this.ChatId = chatId;
+                this.ViewModel.LoadAllMessages(userId);
                 Debug.WriteLine($"Loading notifications for user: ID={userId}");
             }
         }
@@ -53,15 +69,14 @@ namespace Team3.Views
         private
         void BackClicked(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ChatView));
+            this.Frame.Navigate(typeof(ChatView));
         }
 
-        private void sendButtonClicked(object sender, RoutedEventArgs e)
+        private void SendButtonClicked(object sender, RoutedEventArgs e)
         {
-            string message = messageBar.Text;
-            ViewModel.SendButtonHandler(UserId, ChatId, message);
-            messageBar.PlaceholderText = "Type a message...";
+            string message = this.messageBar.Text;
+            this.ViewModel.SendButtonHandler(this.UserId, this.ChatId, message);
+            this.messageBar.PlaceholderText = "Type a message...";
         }
-
     }
 }

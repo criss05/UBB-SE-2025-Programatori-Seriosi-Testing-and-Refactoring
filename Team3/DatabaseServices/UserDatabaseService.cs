@@ -9,25 +9,25 @@ namespace Team3.DatabaseServices
     public class UserDatabaseService : IUserDatabaseService
     {
 
-        private static UserDatabaseService? _instance;
-        private readonly Config _config;
-        private static readonly object _lock = new object();
+        private static UserDatabaseService? instance;
+        private readonly Config config;
+        private static readonly object LockObject = new object();
         private UserDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
         public static UserDatabaseService Instance
         {
             get
             {
-                lock (_lock)
+                lock (LockObject)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = new UserDatabaseService();
+                        instance = new UserDatabaseService();
                     }   
                 }
-                return _instance;
+                return instance;
             }   
         }
         public List<User> GetAllUsers()

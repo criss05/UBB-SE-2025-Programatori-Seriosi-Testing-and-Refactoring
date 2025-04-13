@@ -12,25 +12,25 @@ namespace Team3.DatabaseServices
 {
     public class ReviewService : IReviewService
     {
-        private static ReviewService? _instance;
-        private static readonly object _lock = new object();
-        private readonly Config _config;
+        private static ReviewService? instance;
+        private static readonly object LockObject = new object();
+        private readonly Config config;
         private ReviewService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
         public static ReviewService Instance
         {
             get
             {
-                lock (_lock)
+                lock (LockObject)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = new ReviewService();
+                        instance = new ReviewService();
                     }
                 }
-                return _instance;
+                return instance;
             }
         }
         

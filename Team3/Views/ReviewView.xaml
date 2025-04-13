@@ -18,16 +18,16 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="ID:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtId" Grid.Row="0" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="textId" Grid.Row="0" Grid.Column="1" Margin="5"/>
 
         <TextBlock Text="Medical Record ID:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtMedicalrecordId" Grid.Row="1" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="textMedicalrecordId" Grid.Row="1" Grid.Column="1" Margin="5"/>
 
         <TextBlock Text="Review Message:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtMessage" Grid.Row="2" Grid.Column="1" Margin="5" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+        <TextBox x:Name="textMessage" Grid.Row="2" Grid.Column="1" Margin="5" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
 
         <TextBlock Text="Stars (1-5):" Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-        <ComboBox x:Name="cmbStars" Grid.Row="3" Grid.Column="1" Margin="5">
+        <ComboBox x:Name="comboBoxStars" Grid.Row="3" Grid.Column="1" Margin="5">
             <ComboBoxItem Content="1"/>
             <ComboBoxItem Content="2"/>
             <ComboBoxItem Content="3"/>

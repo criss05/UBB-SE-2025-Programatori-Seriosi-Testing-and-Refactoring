@@ -1,46 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
-
+﻿// <copyright file="ChatDatabaseService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Team3.Models;
+
+    /// <summary>
+    /// This class is responsible for managing chat-related database operations.
+    /// </summary>
     public class ChatDatabaseService : IChatDatabaseService
     {
-        /// <summary>
-        ///  Singleton instance of the ChatDatabase class.
-        /// </summary>
-        private static ChatDatabaseService? _instance;
-        
-        private readonly Config _config;
-        private Task<List<Chat>> _chats;
-        /// <summary>
-        /// Lock object used to ensure thread safety when accessing the singleton instance.
-        /// </summary>
-        private static readonly object _lock = new object();
+        private static readonly object LockObject = new object();
+        private static ChatDatabaseService? instance;
+        private readonly Config config;
+        private Task<List<Chat>> chats;
 
         private ChatDatabaseService()
         {
-            _config = Config.Instance;
+            this.config = Config.Instance;
         }
 
+        /// <summary>
+        /// Gets the singleton instance of the ChatDatabaseService class.
+        /// </summary>
         public static ChatDatabaseService Instance
         {
             get
             {
-                lock (_lock)
+                lock (LockObject)
                 {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = new ChatDatabaseService();
+                        instance = new ChatDatabaseService();
                     }
                 }
-                return _instance;
+
+                return instance;
             }
         }
 
@@ -74,18 +77,17 @@ namespace Team3.DatabaseServices
 
                 return chats;
             }
-
             catch (Exception e)
             {
                 throw new Exception("Error getting chats", e);
             }
         }
+
         /// <summary>
         /// Adds a new chat between two users to the database.
         /// </summary>
         /// <param name="user1">The ID of the first user.</param>
         /// <param name="user2">The ID of the second user.</param>
-
         public void AddNewChat(int user1, int user2)
         {
             const string query = "INSERT INTO chats (user1, user2) VALUES (@user1, @user2)";

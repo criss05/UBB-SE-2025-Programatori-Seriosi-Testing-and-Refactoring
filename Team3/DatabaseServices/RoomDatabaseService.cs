@@ -8,23 +8,23 @@ namespace Team3.DatabaseServices
 {
     public class RoomDatabaseService : IRoomDatabaseService
     {
-        private static RoomDatabaseService? _instance;
-        private readonly Config _config;
+        private static RoomDatabaseService? instance;
+        private readonly Config config;
 
         private RoomDatabaseService()
         {
-            _config = Config.Instance;
+            config = Config.Instance;
         }
 
         public static RoomDatabaseService Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new RoomDatabaseService();
+                    instance = new RoomDatabaseService();
                 }
-                return _instance;
+                return instance;
             }
         }
 

@@ -1,59 +1,61 @@
-
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.DatabaseServices;
-using Team3.Models;
+// <copyright file="DoctorDatabaseService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Team3.DatabaseServices;
+    using Team3.Models;
+
+    /// <summary>
+    /// Service for interacting with the doctor database.
+    /// </summary>
     public class DoctorDatabaseService : IDoctorDatabaseService
     {
-        /// <summary>
-        /// Singleton instance of the ChatDatabaseService class.
-        /// </summary>
+        private static readonly object LockObject = new object();
+        private static DoctorDatabaseService? instance;
+        private readonly Config config;
 
-        private static DoctorDatabaseService? _instance;
-        /// <summary>
-        /// Lock object used to ensure thread safety when accessing the singleton instance.
-        /// </summary>
-
-        private static readonly object _lock = new object();
-        private readonly Config _config;
-
-        private DoctorDatabaseService() {
-            _config = Config.Instance;
+        private DoctorDatabaseService()
+        {
+            this.config = Config.Instance;
         }
 
-
+        /// <summary>
+        /// Gets the singleton instance of the DoctorDatabaseService class.
+        /// </summary>
         public static DoctorDatabaseService Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-
-                    lock (_lock)
+                    lock (LockObject)
                     {
-                        if (_instance == null)
+                        if (instance == null)
                         {
-                            _instance = new DoctorDatabaseService();
+                            instance = new DoctorDatabaseService();
                         }
                     }
                 }
-                return _instance;
+
+                return instance;
             }
         }
+
         /// <summary>
-        /// Get all doctors from the database
+        /// Get all doctors from the database.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <param name="id">Id of doctor.</param>
+        /// <returns>The doctor.</returns>
+        /// <exception cref="Exception">Throws an error.</exception>
         public Doctor GetDoctorById(int id)
         {
             const string query = "SELECT * FROM doctors WHERE id = @id";
@@ -76,6 +78,7 @@ namespace Team3.DatabaseServices
                         }
                     }
                 }
+
                 throw new Exception("Doctor not found");
             }
             catch (Exception e)
