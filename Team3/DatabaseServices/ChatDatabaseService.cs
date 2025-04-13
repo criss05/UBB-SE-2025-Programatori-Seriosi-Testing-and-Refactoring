@@ -20,12 +20,11 @@ namespace Team3.DatabaseServices
     {
         private static readonly object LockObject = new object();
         private static ChatDatabaseService? instance;
-        private readonly Config config;
         private Task<List<Chat>> chats;
 
         private ChatDatabaseService()
         {
-            this.config = Config.Instance;
+
         }
 
         /// <summary>
@@ -58,7 +57,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
 
                 connection.Open();
 
@@ -93,7 +92,7 @@ namespace Team3.DatabaseServices
             const string query = "INSERT INTO chats (user1, user2) VALUES (@user1, @user2)";
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
+                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@user1", user1);

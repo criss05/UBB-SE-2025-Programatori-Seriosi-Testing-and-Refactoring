@@ -30,7 +30,7 @@ namespace Team3.Tests.ModelViewsTests
         public void AddNewAppointment_WhenCalled_ShouldCallDatabaseServiceWithSameAppointment()
         {
             // Arrange
-            var viewModel = new AppointmentModelView();
+            var viewModel = new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString));
             var appointment = new Appointment(
                 id: 1,
                 doctorId: 101,
@@ -50,7 +50,7 @@ namespace Team3.Tests.ModelViewsTests
         public void GetAppointmentById_WhenCalledWithValidId_ShouldReturnAppointmentFromDatabase()
         {
             // Arrange
-            var viewModel = new AppointmentModelView();
+            var viewModel = new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString));
             var expectedAppointment = new Appointment(
                 id: 42,
                 doctorId: 999,

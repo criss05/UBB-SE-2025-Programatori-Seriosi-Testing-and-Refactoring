@@ -43,10 +43,10 @@ namespace Team3.ModelViews
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationModelView"/> class.
         /// </summary>
-        public NotificationModelView()
+        public NotificationModelView(AppointmentModelView _appointmentModelView)
         {
             this.notificationModel = NotificationDatabaseService.Instance;
-            this.appointmentModelView = new AppointmentModelView();
+            this.appointmentModelView = _appointmentModelView;
             this.doctorModelView = new DoctorModelView();
             this.patientModelView = new PatientModelView();
             this.userModelView = new UserModelView();
@@ -69,7 +69,7 @@ namespace Team3.ModelViews
         /// <param name="userId">User id.</param>
         public void LoadNotifications(int userId)
         {
-            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Config.ROMANIA_TIMEZONE);
+            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
             List<Notification> notifications = this.notificationModel.GetUserNotifications(userId);
             Debug.WriteLine(notifications.ToString());
             notifications = notifications
@@ -97,7 +97,7 @@ namespace Team3.ModelViews
         /// </summary>
         public void AddNewAppointment()
         {
-            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Config.ROMANIA_TIMEZONE);
+            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
             Appointment appointment = new Appointment(HARDCODED_APPOINTMENT_ID, HARDCODED_DOCTOR_ID, HARDCODED_PATIENT_ID, currentDateTime.AddDays(1), "FSEGA");
             this.appointmentModelView.AddNewAppointment(appointment);
             this.AddUpcomingAppointmentNotification(HARDCODED_APPOINTMENT_ID);
@@ -147,7 +147,7 @@ namespace Team3.ModelViews
             Debug.WriteLine(doctor.ToString());
             Debug.WriteLine(user.ToString());
 
-            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Config.ROMANIA_TIMEZONE);
+            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
 
             string appointmentCalcelNotificationMessage = this.GetAppointmentCancelNotificationMessage(user.Name, appointment.AppointmentDateTime.ToString(), appointment.Location);
             int notificationId = this.notificationModel.AddNotification(new Notification(doctor.UserId, currentDateTime, appointmentCalcelNotificationMessage));
@@ -242,7 +242,7 @@ namespace Team3.ModelViews
             List<User> users = this.userModelView.GetAllUsers();
 
             Debug.WriteLine("Am reusit sa ajung aici");
-            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Config.ROMANIA_TIMEZONE);
+            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
 
             string notificationMessage = this.GetReviewNotificationMessage(user.Name, review.Message, review.NrStars);
             foreach (User searchedUser in users)

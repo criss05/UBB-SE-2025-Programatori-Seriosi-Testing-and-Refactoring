@@ -9,6 +9,7 @@ namespace Team3.Views
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
+    using Team3.DatabaseServices;
     using Team3.Models;
     using Team3.ModelViews;
 
@@ -33,7 +34,7 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the notification detail view.
         /// </summary>
-        private INotificationModelView ViewModel { get; } = new NotificationModelView();
+        private INotificationModelView ViewModel { get; } = new NotificationModelView(new AppointmentModelView(new AppointmentDatabaseService("Server=localhost\\SQLEXPRESS;Database=Team3;Trusted_Connection=True;TrustServerCertificate=True;")));
 
         /// <summary>
         /// Handles the navigation to this page.

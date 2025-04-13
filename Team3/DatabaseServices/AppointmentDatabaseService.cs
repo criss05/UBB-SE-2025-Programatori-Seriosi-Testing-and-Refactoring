@@ -1,61 +1,28 @@
-﻿// <copyright file="AppointmentDatabaseService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.DatabaseServices
+﻿namespace Team3.DatabaseServices
 {
     using System;
     using Microsoft.Data.SqlClient;
     using Team3.Models;
 
     /// <summary>
-    /// this class takes data from the database.
+    /// Provides database operations for appointments.
     /// </summary>
     public class AppointmentDatabaseService : IAppointmentDatabaseService
     {
-        private static readonly object LockObject = new object();
-        private static AppointmentDatabaseService? instance;
-        private readonly Config config;
+        private readonly string dbConnString;
 
-        private AppointmentDatabaseService()
+        public AppointmentDatabaseService(string _dbConnString)
         {
-            this.config = Config.Instance;
+            this.dbConnString = _dbConnString;
         }
 
-        /// <summary>
-        /// Gets singleton instance of the AppointmentDatabaseService class.
-        /// </summary>
-        public static AppointmentDatabaseService Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (LockObject)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new AppointmentDatabaseService();
-                        }
-                    }
-                }
-
-                return instance;
-            }
-        }
-
-        /// <summary>
-        /// Adds a new appointment to the database.
-        /// </summary>
-        /// <param name="appointment">The appointment object containing details to be added.</param>
-        /// <exception cref="Exception">Thrown when an error occurs while adding the appointment.</exception>
         public void AddNewAppointment(Appointment appointment)
         {
             const string query = "INSERT INTO appointments (id, doctor_id, patient_id, appointment_datetime, location) " +
                                  "VALUES (@id, @doctor_id, @patient_id, @appointment_datetime, @location)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -76,19 +43,12 @@ namespace Team3.DatabaseServices
             }
         }
 
-        /// <summary>
-        /// Retrieves an appointment from the database by its ID.
-        /// </summary>
-        /// <param name="id">The ID of the appointment to retrieve.</param>
-        /// <returns>The appointment object corresponding to the specified ID.</returns>
-        /// <exception cref="Exception">Thrown when an error occurs while retrieving the appointment or if the appointment is not found.</exception>        [Obsolete]
         public Appointment GetAppointmentById(int id)
         {
             const string query = "SELECT id, doctor_id, patient_id, appointment_datetime, location FROM Appointments WHERE id = @id";
             try
             {
-                using (
-                   SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Team3;Trusted_Connection=True;TrustServerCertificate=True;"))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -97,7 +57,9 @@ namespace Team3.DatabaseServices
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            reader.Read();
+                            if (!reader.Read())
+                                throw new Exception("Appointment not found");
+
                             return new Appointment(
                                 (int)reader[0],
                                 (int)reader[1],
@@ -107,8 +69,6 @@ namespace Team3.DatabaseServices
                         }
                     }
                 }
-
-                throw new Exception("Appointment not found");
             }
             catch (Exception exception)
             {
