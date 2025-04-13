@@ -5,7 +5,7 @@
 namespace Team3.DatabaseServices
 {
     using System;
-    using System.Data.SqlClient;
+    using Microsoft.Data.SqlClient;
     using Team3.Models;
 
     /// <summary>

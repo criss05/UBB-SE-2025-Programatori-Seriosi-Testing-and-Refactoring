@@ -178,7 +178,7 @@ namespace Team3.ModelViews
             Patient patient = this.patientModelView.GetPatientById(medicalRecord.PatientId);
 
             Treatment treatment = this.treatmentModelView.GetTreatmentByMedicalRecordId(medicalRecordId);
-            List<TreatmentDrug> treatmentDrugs = this.treatmentDrugModelView.getTreatmentDrugsByTreatmentId(treatment.Id);
+            List<TreatmentDrug> treatmentDrugs = this.treatmentDrugModelView.GetTreatmentDrugsById(treatment.Id);
 
             foreach (TreatmentDrug treatmentDrug in treatmentDrugs)
             {
