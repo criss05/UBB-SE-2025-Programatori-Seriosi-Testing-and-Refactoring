@@ -20,42 +20,34 @@ namespace Team3.ModelViews
         private static readonly string APPOINTMENT_CANCEL_NOTIFICATION_TEMPLATE = "Patient: @patient has canceled their upcoming appointment, scheduled for @datetime at @location.";
         private static readonly string REVIEW_NOTIFICATION_TEMPLATE = "A review for doctor @doctor was added: @message; number of starts: @nrStarts";
         private static readonly string MEDICATION_REMINDER_NOTIFICATION_TEMPLATE = "It's time to take @drug, Quantity: @quantity, @administration";
-        private static readonly string REVIEW_REMINDER_NOTIFICATION_TEMPLATE = "Reminder: Please leave a review for your last appointment.";
-        private static readonly int HARDCODED_DOCTOR_ID = 1;
-        private static readonly int HARDCODED_PATIENT_ID = 1;
-        private static readonly int HARDCODED_APPOINTMENT_ID = 4;
-        private static readonly int HARDCODED_MEDICALRECORD_ID = 1;
-        private static readonly int HARDCODED_REVIEW_ID = 1;
 
-        private readonly INotificationDatabaseService notificationModel;
+        private readonly INotificationDatabaseService notificationDatabaseService;
+
         private readonly IAppointmentModelView appointmentModelView;
         private readonly IDoctorModelView doctorModelView;
         private readonly IUserModelView userModelView;
         private readonly IPatientModelView patientModelView;
         private readonly IMedicalRecordModelView medicalRecordModelView;
-        private readonly ITreatmentModelView treatmentModelView;
-        private readonly ITreatmentDrugModelView treatmentDrugModelView;
         private readonly IDrugModelView drugModelView;
+        private readonly ITreatmentDrugModelView treatmentDrugModelView;
+        private readonly ITreatmentModelView treatmentModelView;
         private readonly IReviewModelView reviewModelView;
-
-       
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationModelView"/> class.
         /// </summary>
-        public NotificationModelView(AppointmentModelView _appointmentModelView)
+        public NotificationModelView(IAppointmentModelView _appointmentModelView, IDoctorModelView doctorModelView, IUserModelView userModelView, IPatientModelView patientModelView, IMedicalRecordModelView medicalRecordModelView, IDrugModelView drugModelView, ITreatmentDrugModelView treatmentDrugModelView, ITreatmentModelView treatmentModelView, IReviewModelView reviewModelView)
         {
-            this.notificationModel = NotificationDatabaseService.Instance;
+            this.notificationDatabaseService = new NotificationDatabaseService(Config.DbConnectionString);
             this.appointmentModelView = _appointmentModelView;
-            this.doctorModelView = new DoctorModelView();
-            this.patientModelView = new PatientModelView();
-            this.userModelView = new UserModelView();
-            this.Notifications = new List<Notification>();
-            this.medicalRecordModelView = new MedicalRecordModelView();
-            this.treatmentModelView = new TreatmentModelView();
-            this.treatmentDrugModelView = new TreatmentDrugModelView();
-            this.drugModelView = new DrugModelView();
-            this.reviewModelView = new ReviewModelView();
+            this.doctorModelView = doctorModelView;
+            this.userModelView = userModelView;
+            this.patientModelView = patientModelView;
+            this.medicalRecordModelView = medicalRecordModelView;
+            this.drugModelView = drugModelView;
+            this.treatmentDrugModelView = treatmentDrugModelView;
+            this.treatmentModelView = treatmentModelView;
+            this.reviewModelView = reviewModelView;
         }
 
         /// <summary>
@@ -70,8 +62,7 @@ namespace Team3.ModelViews
         public void LoadNotifications(int userId)
         {
             DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
-            List<Notification> notifications = this.notificationModel.GetUserNotifications(userId);
-            Debug.WriteLine(notifications.ToString());
+            List<Notification> notifications = this.notificationDatabaseService.GetUserNotifications(userId);
             notifications = notifications
                 .Where(n => n.DeliveryDateTime < currentDateTime)
                 .OrderByDescending(n => n.DeliveryDateTime)
@@ -79,7 +70,6 @@ namespace Team3.ModelViews
             foreach (Notification notification in notifications)
             {
                 this.Notifications.Add(notification);
-                Debug.WriteLine(notification.ToString());
             }
         }
 
@@ -89,18 +79,7 @@ namespace Team3.ModelViews
         /// <param name="userId">the id of the user.</param>
         public void DeleteNotification(int userId)
         {
-            this.notificationModel.deleteNotification(userId);
-        }
-
-        /// <summary>
-        /// / Adds a new appointment.
-        /// </summary>
-        public void AddNewAppointment()
-        {
-            DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
-            Appointment appointment = new Appointment(HARDCODED_APPOINTMENT_ID, HARDCODED_DOCTOR_ID, HARDCODED_PATIENT_ID, currentDateTime.AddDays(1), "FSEGA");
-            this.appointmentModelView.AddNewAppointment(appointment);
-            this.AddUpcomingAppointmentNotification(HARDCODED_APPOINTMENT_ID);
+            this.notificationDatabaseService.DeleteNotification(userId);
         }
 
         /// <summary>
@@ -115,19 +94,10 @@ namespace Team3.ModelViews
 
             Patient patient = this.patientModelView.GetPatientById(appointment.PatientId);
 
-            Debug.WriteLine(appointment.ToString());
-            Debug.WriteLine(doctor.ToString());
-            Debug.WriteLine(user.ToString());
-
             string upcomingAppointmentNotificationMessage = this.GetUpcomingAppointmentNotificationMessage(appointment.AppointmentDateTime.ToString(), user.Name, appointment.Location);
-            int notificationId = this.notificationModel.AddNotification(new Notification(patient.UserId, appointment.AppointmentDateTime.AddDays(-1), upcomingAppointmentNotificationMessage));
+            int notificationId = this.notificationDatabaseService.AddNotification(new Notification(patient.UserId, appointment.AppointmentDateTime.AddDays(-1), upcomingAppointmentNotificationMessage));
 
-            Debug.WriteLine(appointment.ToString());
-            Debug.WriteLine(doctor.ToString());
-            Debug.WriteLine(user.ToString());
-            Debug.WriteLine(notificationId.ToString());
-
-            this.notificationModel.AddAppointmentNotification(notificationId, appointmentId);
+            this.notificationDatabaseService.AddAppointmentNotification(notificationId, appointmentId);
         }
 
         /// <summary>
@@ -143,14 +113,10 @@ namespace Team3.ModelViews
             Patient patient = this.patientModelView.GetPatientById(appointment.PatientId);
             User user = this.userModelView.GetUserById(patient.UserId);
 
-            Debug.WriteLine(appointment.ToString());
-            Debug.WriteLine(doctor.ToString());
-            Debug.WriteLine(user.ToString());
-
             DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
 
             string appointmentCalcelNotificationMessage = this.GetAppointmentCancelNotificationMessage(user.Name, appointment.AppointmentDateTime.ToString(), appointment.Location);
-            int notificationId = this.notificationModel.AddNotification(new Notification(doctor.UserId, currentDateTime, appointmentCalcelNotificationMessage));
+            int notificationId = this.notificationDatabaseService.AddNotification(new Notification(doctor.UserId, currentDateTime, appointmentCalcelNotificationMessage));
         }
 
         /// <summary>
@@ -161,8 +127,8 @@ namespace Team3.ModelViews
         {
             Appointment appointment = this.appointmentModelView.GetAppointmentById(appointmentId);
 
-            AppointmentNotification appointmentNotification = this.notificationModel.GetNotificationAppointmentByAppointmentId(appointmentId);
-            this.notificationModel.deleteNotification(appointmentNotification.NotificationId);
+            AppointmentNotification appointmentNotification = this.notificationDatabaseService.GetNotificationAppointmentByAppointmentId(appointmentId);
+            this.notificationDatabaseService.DeleteNotification(appointmentNotification.NotificationId);
         }
 
         /// <summary>
@@ -172,8 +138,6 @@ namespace Team3.ModelViews
         public void AddMedicationReminderNotifications(int medicalRecordId)
         {
             MedicalRecord medicalRecord = this.medicalRecordModelView.GetMedicalRecordById(medicalRecordId);
-
-            Debug.WriteLine(medicalRecord.ToString());
 
             Patient patient = this.patientModelView.GetPatientById(medicalRecord.PatientId);
 
@@ -193,8 +157,6 @@ namespace Team3.ModelViews
                     interval = (treatmentDrug.EndTime - treatmentDrug.StartTime) / (treatmentDrug.Quantity - 1);
                 }
 
-                Console.WriteLine($"Take the drug at the following times:");
-
                 for (int i = 0; i < treatmentDrug.Quantity; i++)
                 {
                     TimeSpan doseTime = treatmentDrug.StartTime.ToTimeSpan() + (interval * i);
@@ -205,28 +167,12 @@ namespace Team3.ModelViews
                         DateOnly newDate = medicalRecordDate.AddDays(j);
                         DateTime dateTimeOfMedication = newDate.ToDateTime(TimeOnly.FromTimeSpan(doseTime));
                         Notification notification = new Notification(patient.UserId, dateTimeOfMedication, notificationMessage);
-                        this.notificationModel.AddNotification(notification);
+                        this.notificationDatabaseService.AddNotification(notification);
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// Deletes the appointment.
-        /// </summary>
-        public void DeleteAppointment()
-        {
-            this.AddCancelAppointmentNotification(HARDCODED_APPOINTMENT_ID);
-            this.DeleteUpcomingAppointmentNotification(HARDCODED_APPOINTMENT_ID);
-        }
-
-        /// <summary>
-        /// Adds a new treatment.
-        /// </summary>
-        public void AddNewTreatment()
-        {
-            this.AddMedicationReminderNotifications(HARDCODED_MEDICALRECORD_ID);
-        }
 
         /// <summary>
         /// / Adds a new review.
@@ -241,7 +187,6 @@ namespace Team3.ModelViews
 
             List<User> users = this.userModelView.GetAllUsers();
 
-            Debug.WriteLine("Am reusit sa ajung aici");
             DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
 
             string notificationMessage = this.GetReviewNotificationMessage(user.Name, review.Message, review.NrStars);
@@ -250,18 +195,9 @@ namespace Team3.ModelViews
                 if (searchedUser.Role.Equals("admin"))
                 {
                     Notification notification = new Notification(searchedUser.Id, currentDateTime, notificationMessage);
-                    Debug.WriteLine(notification.ToString());
-                    this.notificationModel.AddNotification(notification);
+                    this.notificationDatabaseService.AddNotification(notification);
                 }
             }
-        }
-
-        /// <summary>
-        /// / Adds a new review.
-        /// </summary>
-        public void AddNewReview()
-        {
-            this.AddReviewResultsNotification(HARDCODED_REVIEW_ID);
         }
 
         private string GetUpcomingAppointmentNotificationMessage(string datetime, string doctorName, string location)
@@ -318,12 +254,6 @@ namespace Team3.ModelViews
             notificationMessage = notificationMessage.Replace("@drug", drugName);
             notificationMessage = notificationMessage.Replace("@quantity", quantity.ToString());
             notificationMessage = notificationMessage.Replace("@administration", administration);
-            return notificationMessage;
-        }
-
-        private string GetReviewReminderNotificationMessage(string drugName, double quantity, string administration)
-        {
-            string notificationMessage = REVIEW_REMINDER_NOTIFICATION_TEMPLATE;
             return notificationMessage;
         }
     }

@@ -30,11 +30,12 @@ namespace Team3.Tests.ModelViewsTests
         public void AddNewAppointment_WhenCalled_ShouldCallDatabaseServiceWithSameAppointment()
         {
             // Arrange
-            var viewModel = new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString));
+            var mockDatabaseService = new Mock<IAppointmentDatabaseService>();
+            var viewModel = new AppointmentModelView(mockDatabaseService.Object);
+
             var appointment = new Appointment(
-                id: 1,
-                doctorId: 101,
-                patientId: 202,
+                doctorId: 1,
+                patientId: 2,
                 appointmentDateTime: new DateTime(2025, 5, 1, 14, 30, 0),
                 location: "Room A"
             );
@@ -43,31 +44,33 @@ namespace Team3.Tests.ModelViewsTests
             viewModel.AddNewAppointment(appointment);
 
             // Assert
-            this.mockDatabaseService.Verify(s => s.AddNewAppointment(appointment), Times.Once);
+            mockDatabaseService.Verify(s => s.AddNewAppointment(appointment), Times.Once);
         }
 
         [Fact]
         public void GetAppointmentById_WhenCalledWithValidId_ShouldReturnAppointmentFromDatabase()
         {
             // Arrange
-            var viewModel = new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString));
             var expectedAppointment = new Appointment(
-                id: 42,
-                doctorId: 999,
-                patientId: 888,
-                appointmentDateTime: new DateTime(2025, 6, 10, 10, 0, 0),
-                location: "Clinic B"
+                doctorId: 1,
+                patientId: 2,
+                appointmentDateTime: new DateTime(2025, 5, 1, 14, 30, 0),
+                location: "Room A"
             );
 
-            this.mockDatabaseService
-                .Setup(s => s.GetAppointmentById(42))
+            var mockDatabaseService = new Mock<IAppointmentDatabaseService>();
+            mockDatabaseService
+                .Setup(s => s.GetAppointmentById(1))
                 .Returns(expectedAppointment);
 
+            var viewModel = new AppointmentModelView(mockDatabaseService.Object);
+
             // Act
-            var result = viewModel.GetAppointmentById(42);
+            var result = viewModel.GetAppointmentById(1);
 
             // Assert
-            Xunit.Assert.Equal(expectedAppointment, result);
+            Assert.Equal(expectedAppointment, result);
         }
+
     }
 }

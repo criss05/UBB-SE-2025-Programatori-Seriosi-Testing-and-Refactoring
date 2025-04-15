@@ -18,8 +18,8 @@
 
         public void AddNewAppointment(Appointment appointment)
         {
-            const string query = "INSERT INTO appointments (id, doctor_id, patient_id, appointment_datetime, location) " +
-                                 "VALUES (@id, @doctor_id, @patient_id, @appointment_datetime, @location)";
+            const string query = "INSERT INTO appointments (doctor_id, patient_id, appointment_datetime, location) " +
+                                 "VALUES (@doctor_id, @patient_id, @appointment_datetime, @location)";
             try
             {
                 using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
@@ -27,7 +27,6 @@
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@id", appointment.Id);
                         command.Parameters.AddWithValue("@doctor_id", appointment.DoctorId);
                         command.Parameters.AddWithValue("@patient_id", appointment.PatientId);
                         command.Parameters.AddWithValue("@appointment_datetime", appointment.AppointmentDateTime);
@@ -48,7 +47,7 @@
             const string query = "SELECT id, doctor_id, patient_id, appointment_datetime, location FROM Appointments WHERE id = @id";
             try
             {
-                using (SqlConnection connection = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Team3;Trusted_Connection=True;TrustServerCertificate=True;"))
+                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -61,7 +60,6 @@
                                 throw new Exception("Appointment not found");
 
                             return new Appointment(
-                                (int)reader[0],
                                 (int)reader[1],
                                 (int)reader[2],
                                 (DateTime)reader[3],

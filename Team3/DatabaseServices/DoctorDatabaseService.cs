@@ -5,13 +5,8 @@
 namespace Team3.DatabaseServices
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using Microsoft.Data.SqlClient;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Team3.DatabaseServices;
     using Team3.Models;
 
     /// <summary>
@@ -19,48 +14,24 @@ namespace Team3.DatabaseServices
     /// </summary>
     public class DoctorDatabaseService : IDoctorDatabaseService
     {
-        private static readonly object LockObject = new object();
-        private static DoctorDatabaseService? instance;
-
-        private DoctorDatabaseService()
-        {
-
-        }
+        private readonly string dbConnString;
 
         /// <summary>
-        /// Gets the singleton instance of the DoctorDatabaseService class.
+        /// Initializes a new instance of the <see cref="DoctorDatabaseService"/> class.
         /// </summary>
-        public static DoctorDatabaseService Instance
+        /// <param name="dbConnString">The database connection string.</param>
+        public DoctorDatabaseService(string _dbConnString)
         {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (LockObject)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new DoctorDatabaseService();
-                        }
-                    }
-                }
-
-                return instance;
-            }
+            dbConnString = _dbConnString;
         }
 
-        /// <summary>
-        /// Get all doctors from the database.
-        /// </summary>
-        /// <param name="id">Id of doctor.</param>
-        /// <returns>The doctor.</returns>
-        /// <exception cref="Exception">Throws an error.</exception>
+        /// <inheritdoc/>
         public Doctor GetDoctorById(int id)
         {
             const string query = "SELECT * FROM doctors WHERE id = @id";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(dbConnString))
                 {
                     connection.Open();
 
@@ -80,9 +51,9 @@ namespace Team3.DatabaseServices
 
                 throw new Exception("Doctor not found");
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error retrieving doctor", e);
+                throw new Exception("Error retrieving doctor", exception);
             }
         }
     }

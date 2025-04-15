@@ -1,8 +1,4 @@
-﻿// <copyright file="UserModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews
+﻿namespace Team3.ModelViews
 {
     using System;
     using System.Collections.Generic;
@@ -17,14 +13,15 @@ namespace Team3.ModelViews
     /// </summary>
     public class UserModelView : IUserModelView
     {
-        private readonly IUserDatabaseService userModel;
+        private readonly IUserDatabaseService userDatabaseService;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="UserModelView"/> class.
+        /// Initializes a new instance of the <see cref="UserModelView"/> class.
         /// </summary>
-        public UserModelView()
+        /// <param name="userModel">The user database service.</param>
+        public UserModelView(IUserDatabaseService _userDatabaseService)
         {
-            this.userModel = UserDatabaseService.Instance;
+            this.userDatabaseService = _userDatabaseService;
             this.Users = new ObservableCollection<User>();
             this.LoadAllUsers();
         }
@@ -40,7 +37,7 @@ namespace Team3.ModelViews
         /// <returns>A list with all users.</returns>
         public List<User> GetAllUsers()
         {
-            return this.userModel.GetAllUsers();
+            return this.userDatabaseService.GetAllUsers();
         }
 
         /// <summary>
@@ -50,7 +47,7 @@ namespace Team3.ModelViews
         /// <returns>The user with the specified id.</returns>
         public User GetUserById(int id)
         {
-            return this.userModel.GetUserById(id);
+            return this.userDatabaseService.GetUserById(id);
         }
 
         /// <summary>
@@ -60,23 +57,22 @@ namespace Team3.ModelViews
         {
             try
             {
-                var userList = this.userModel.GetAllUsers();
+                var userList = this.userDatabaseService.GetAllUsers();
                 if (userList != null && userList.Any())
                 {
                     foreach (var user in userList)
                     {
-                        Debug.WriteLine(user.ToString());
                         this.Users.Add(user);
                     }
                 }
                 else
                 {
-                    Debug.WriteLine("No users returned.");
+                    throw new Exception("User not found");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(exception.Message);
             }
         }
     }
