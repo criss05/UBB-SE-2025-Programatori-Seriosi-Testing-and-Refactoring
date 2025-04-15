@@ -37,6 +37,7 @@ namespace Team3.Views
         /// Gets the view model for the notification detail view.
         /// </summary>
         private INotificationModelView ViewModel { get; } = new NotificationModelView(
+        new NotificationDatabaseService(Config.DbConnectionString),
         new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString)),
         new DoctorModelView(
             new DoctorDatabaseService(Config.DbConnectionString),

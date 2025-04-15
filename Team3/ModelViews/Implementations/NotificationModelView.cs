@@ -38,18 +38,18 @@ namespace Team3.ModelViews.Implementations
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationModelView"/> class.
         /// </summary>
-        public NotificationModelView(IAppointmentModelView _appointmentModelView, IDoctorModelView doctorModelView, IUserModelView userModelView, IPatientModelView patientModelView, IMedicalRecordModelView medicalRecordModelView, IDrugModelView drugModelView, ITreatmentDrugModelView treatmentDrugModelView, ITreatmentModelView treatmentModelView, IReviewModelView reviewModelView)
+        public NotificationModelView(INotificationDatabaseService _notificationDatabaseService,IAppointmentModelView _appointmentModelView, IDoctorModelView _doctorModelView, IUserModelView _userModelView, IPatientModelView _patientModelView, IMedicalRecordModelView _medicalRecordModelView, IDrugModelView _drugModelView, ITreatmentDrugModelView _treatmentDrugModelView, ITreatmentModelView _treatmentModelView, IReviewModelView _reviewModelView)
         {
-            notificationDatabaseService = new NotificationDatabaseService(Config.DbConnectionString);
-            appointmentModelView = _appointmentModelView;
-            this.doctorModelView = doctorModelView;
-            this.userModelView = userModelView;
-            this.patientModelView = patientModelView;
-            this.medicalRecordModelView = medicalRecordModelView;
-            this.drugModelView = drugModelView;
-            this.treatmentDrugModelView = treatmentDrugModelView;
-            this.treatmentModelView = treatmentModelView;
-            this.reviewModelView = reviewModelView;
+            this.notificationDatabaseService = _notificationDatabaseService;
+            this.appointmentModelView = _appointmentModelView;
+            this.doctorModelView = _doctorModelView;
+            this.userModelView = _userModelView;
+            this.patientModelView = _patientModelView;
+            this.medicalRecordModelView = _medicalRecordModelView;
+            this.drugModelView = _drugModelView;
+            this.treatmentDrugModelView = _treatmentDrugModelView;
+            this.treatmentModelView = _treatmentModelView;
+            this.reviewModelView = _reviewModelView;
         }
 
         /// <summary>
