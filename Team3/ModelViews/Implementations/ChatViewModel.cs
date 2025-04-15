@@ -43,7 +43,7 @@
         {
             try
             {
-                var chatList = chatDatabaseService.getChatsByUserId(UserID);
+                var chatList = chatDatabaseService.GetChatsByUserId(UserID);
 
                 if (chatList != null && chatList.Any())
                 {
@@ -71,7 +71,7 @@
         /// <returns>List of all chats for the user and the messages from the chat.</returns>
         public Dictionary<Chat, string> GetChatsByUserId(int id)
         {
-            List<Chat> chats = chatDatabaseService.getChatsByUserId(id);
+            List<Chat> chats = chatDatabaseService.GetChatsByUserId(id);
 
             Dictionary<Chat, string> chatDict = new Dictionary<Chat, string>();
             foreach (Chat chat in chats)
@@ -108,7 +108,7 @@
         /// <returns>The chats with the specific name.</returns>
         public List<Chat> GetChatsByName(string name)
         {
-            List<Chat> chats = chatDatabaseService.getChatsByUserId(UserID);
+            List<Chat> chats = chatDatabaseService.GetChatsByUserId(UserID);
             return chats.Where(chat => chat.User1.ToString().Contains(name) || chat.User2.ToString().Contains(name)).ToList();
         }
 

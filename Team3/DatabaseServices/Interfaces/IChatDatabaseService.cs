@@ -14,7 +14,7 @@ namespace Team3.DatabaseServices.Interfaces
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public List<Chat> getChatsByUserId(int user);
+        public List<Chat> GetChatsByUserId(int user);
 
         /// <summary>
         /// Add a chat between user 1 and user 2

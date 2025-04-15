@@ -23,7 +23,7 @@ namespace Team3.DatabaseServices.Implementations
         /// </summary>
         /// <param name="user">The ID of the user whose chats are to be retrieved.</param>
         /// <returns>A list of Chat objects associated with the user.</returns>
-        public List<Chat> getChatsByUserId(int user)
+        public List<Chat> GetChatsByUserId(int user)
         {
             const string query = "SELECT * FROM chats WHERE user1 = @user OR user2 = @user";
 
