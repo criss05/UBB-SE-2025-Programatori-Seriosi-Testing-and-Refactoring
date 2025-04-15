@@ -21,7 +21,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -40,9 +40,9 @@ namespace Team3.DatabaseServices
                     }
                 }
             }
-            catch (Exception exceptionxception)
+            catch (Exception e)
             {
-                throw new Exception("Error retrieving notifications", exceptionxception);
+                throw new Exception("Error retrieving notifications", e);
             }
 
             return notifications;
@@ -55,7 +55,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -75,9 +75,9 @@ namespace Team3.DatabaseServices
                     }
                 }
             }
-            catch (Exception exceptionxception)
+            catch (Exception e)
             {
-                throw new Exception("Error retrieving notifications", exceptionxception);
+                throw new Exception("Error retrieving notifications", e);
             }
 
             return notifications;
@@ -89,7 +89,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -108,9 +108,9 @@ namespace Team3.DatabaseServices
 
                 throw new Exception("Doctor not found");
             }
-            catch (Exception exceptionxception)
+            catch (Exception e)
             {
-                throw new Exception("Error retrieving notification appointment", exceptionxception);
+                throw new Exception("Error retrieving notification appointment", e);
             }
         }
 
@@ -120,7 +120,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -131,9 +131,9 @@ namespace Team3.DatabaseServices
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
-            catch (Exception exceptionxception)
+            catch (Exception e)
             {
-                throw new Exception("Error adding notification", exceptionxception);
+                throw new Exception("Error adding notification", e);
             }
         }
 
@@ -143,7 +143,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -153,9 +153,9 @@ namespace Team3.DatabaseServices
                     command.ExecuteNonQuery();
                 }
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                throw new Exception("Error adding appointment notification", exception);
+                throw new Exception("Error adding appointment notification", e);
             }
         }
 
@@ -165,7 +165,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -173,9 +173,9 @@ namespace Team3.DatabaseServices
                     command.ExecuteNonQuery();
                 }
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                throw new Exception("Error deleting notification", exception);
+                throw new Exception("Error deleting notification", e);
             }
         }
 
@@ -185,16 +185,16 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
                     command.ExecuteNonQuery();
                 }
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                throw new Exception("Error deleting all notifications", exception);
+                throw new Exception("Error deleting all notifications", e);
             }
         }
     }

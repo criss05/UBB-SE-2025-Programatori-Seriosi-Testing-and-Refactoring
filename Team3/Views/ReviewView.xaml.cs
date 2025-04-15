@@ -18,6 +18,7 @@ namespace Team3.Views
     using Microsoft.UI.Xaml.Input;
     using Microsoft.UI.Xaml.Media;
     using Microsoft.UI.Xaml.Navigation;
+    using Team3.DatabaseServices;
     using Team3.Models;
     using Team3.ModelViews;
     using Windows.Foundation;
@@ -36,7 +37,7 @@ namespace Team3.Views
         public ReviewView()
         {
             this.InitializeComponent();
-            this.reviewModelView = new ReviewModelView();
+            this.reviewModelView = new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString));
         }
 
         private async void AddReviewButton_Click(object sender, RoutedEventArgs e)

@@ -74,7 +74,22 @@ namespace Team3.Views
             }
         }
 
-        private void AddAppointmentButton_Click(object sender, ItemClickEventArgs e)
+        private void AddAppointmentButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddReviewButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -11,6 +11,7 @@ namespace Team3.Views
     using System.Threading.Tasks;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
+    using Team3.DatabaseServices;
     using Team3.ModelViews;
 
     /// <summary>
@@ -27,7 +28,7 @@ namespace Team3.Views
         public TreatmentView()
         {
             this.InitializeComponent();
-            this.treatmentModelView = new TreatmentModelView();
+            this.treatmentModelView = new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString));
         }
 
         private async void AddTreatmentButton_Click(object sender, RoutedEventArgs e)

@@ -51,9 +51,9 @@
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error getting drug", e);
+                throw new Exception("Error getting drug", exception);
             }
         }
     }

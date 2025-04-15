@@ -44,9 +44,9 @@
                     command.ExecuteNonQuery();
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error adding treatment drug", e);
+                throw new Exception("Error adding treatment drug", exception);
             }
         }
 
@@ -87,9 +87,9 @@
                     return treatmentDrugList;
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error retrieving treatment drugs", e);
+                throw new Exception("Error retrieving treatment drugs", exception);
             }
         }
     }
