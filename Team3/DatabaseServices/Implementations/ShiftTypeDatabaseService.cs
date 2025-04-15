@@ -8,37 +8,25 @@ namespace Team3.DatabaseServices.Implementations
 {
     public class ShiftTypeDatabaseService : IShiftTypeDatabaseService
     {
-        private static ShiftTypeDatabaseService? instance;
+        private readonly string dbConnString;
 
-        private ShiftTypeDatabaseService()
+        public ShiftTypeDatabaseService(string _dbConnString)
         {
-
-        }
-
-        public static ShiftTypeDatabaseService Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new ShiftTypeDatabaseService();
-                }
-                return instance;
-            }
+            this.dbConnString = _dbConnString;
         }
 
         // Get all shift types
         public List<ShiftType> GetAllShiftTypes()
         {
             const string query = "SELECT ShiftTypeId, ShiftTypeStartTime, ShiftTypeEndTime FROM ShiftType;";
+            List<ShiftType> shiftTypes = new List<ShiftType>();
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
-                    List<ShiftType> shiftTypes = new List<ShiftType>();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -51,12 +39,13 @@ namespace Team3.DatabaseServices.Implementations
                             ));
                         }
                     }
-                    return shiftTypes;
                 }
+
+                return shiftTypes;
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error getting shift types", e);
+                throw new Exception("Error getting shift types", exception);
             }
         }
 
@@ -67,7 +56,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -76,7 +65,7 @@ namespace Team3.DatabaseServices.Implementations
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read()) // If a result is found
+                            if (reader.Read())
                             {
                                 return new ShiftType(
                                     reader.GetInt32(0), // ShiftTypeId
@@ -93,7 +82,7 @@ namespace Team3.DatabaseServices.Implementations
                 throw new Exception($"Error retrieving shift type with ID {shiftTypeId}", e);
             }
 
-            return null; // Return null if no shift type is found
+            return null;
         }
     }
 }

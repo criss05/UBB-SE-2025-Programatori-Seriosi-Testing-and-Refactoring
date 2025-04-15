@@ -11,7 +11,7 @@ namespace Team3.DatabaseServices.Implementations
         private readonly string dbConnString;
         public NotificationDatabaseService(string _dbConnString)
         {
-            dbConnString = _dbConnString;
+            this.dbConnString = _dbConnString;
         }
 
         public List<Notification> GetNotifications()
@@ -21,7 +21,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -55,7 +55,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -89,7 +89,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -120,7 +120,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -143,7 +143,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -165,7 +165,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -185,7 +185,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

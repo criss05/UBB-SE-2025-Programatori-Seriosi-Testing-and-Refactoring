@@ -16,7 +16,7 @@
         /// <param name="_dbConnString">The connection string for the database.</param>
         public TreatmentDrugDatabaseService(string _dbConnString)
         {
-            dbConnString = _dbConnString;
+            this.dbConnString = _dbConnString;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -62,7 +62,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

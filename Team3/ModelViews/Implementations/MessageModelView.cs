@@ -1,8 +1,4 @@
-﻿// <copyright file="MessageModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews.Implementations
+﻿namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
@@ -13,31 +9,29 @@ namespace Team3.ModelViews.Implementations
     using System.Threading.Tasks;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Team3.DatabaseServices;
-    using Team3.DatabaseServices.Implementations;
     using Team3.DatabaseServices.Interfaces;
     using Team3.DTOs;
     using Team3.Models;
-    using Team3.ModelViews;
     using Team3.ModelViews.Interfaces;
-    using Windows.Services.Maps;
 
     /// <summary>
     /// Interface for the message model view.
     /// </summary>
     public class MessageModelView : IMessageModelView
     {
-        private readonly IMessageDatabaseService messageModel;
+        private readonly IMessageDatabaseService messageDatabaseService;
         private readonly IUserModelView userModelView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageModelView"/> class.
         /// </summary>
-        public MessageModelView()
+        /// <param name="messageDatabaseService">The message database service.</param>
+        /// <param name="userModelView">The user model view.</param>
+        public MessageModelView(IMessageDatabaseService messageDatabaseService, IUserModelView userModelView)
         {
             Debug.WriteLine("MessageModelView created");
-            messageModel = MessageDatabaseService.Instance;
-            userModelView = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
+            this.messageDatabaseService = messageDatabaseService;
+            this.userModelView = userModelView;
             Messages = new ObservableCollection<MessageChatDTO>();
         }
 
@@ -49,13 +43,15 @@ namespace Team3.ModelViews.Implementations
         /// <summary>
         /// Loads all messages for a given chat ID.
         /// </summary>
-        /// <param name="chatId">The id of the chats.</param>
+        /// <param name="chatId">The id of the chat.</param>
         public void LoadAllMessages(int chatId)
         {
-            List<Message> messages = messageModel.GetMessagesByChatId(chatId);
-            Debug.WriteLine(messages.Count + "Messages loaded");
+            List<Message> messages = messageDatabaseService.GetMessagesByChatId(chatId);
+            Debug.WriteLine(messages.Count + " Messages loaded");
+
             Messages.Clear();
             messages.Sort((x, y) => x.SentDateTime.CompareTo(y.SentDateTime));
+
             foreach (Message message in messages)
             {
                 User user = userModelView.GetUserById(message.UserId);
@@ -75,7 +71,9 @@ namespace Team3.ModelViews.Implementations
             DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
 
             // Message newMessage = new Message(message, userId, chatId, currentDateTime);
-            // MessageChatDTO messageChatDTO = new MessageChatDTO(newMessage.Id ,message, userId, chatId, currentDateTime, userModelView.GetUser(userId).ToString());
+            // MessageChatDTO messageChatDTO = new MessageChatDTO(newMessage.Id, message, userId, chatId, currentDateTime, userModelView.GetUser(userId).ToString());
+
+            // Here you could add a method to actually send the message to the database.
             LoadAllMessages(chatId);
         }
     }

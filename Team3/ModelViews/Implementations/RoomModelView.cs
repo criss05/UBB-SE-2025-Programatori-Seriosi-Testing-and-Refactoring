@@ -1,15 +1,10 @@
-﻿// <copyright file="RoomModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews.Implementations
+﻿namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
-    using Team3.DatabaseServices.Implementations;
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
@@ -19,14 +14,15 @@ namespace Team3.ModelViews.Implementations
     /// </summary>
     public class RoomModelView : IRoomModelView
     {
-        private readonly IRoomDatabaseService roomModel;
+        private readonly IRoomDatabaseService roomDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomModelView"/> class.
         /// </summary>
-        public RoomModelView()
+        /// <param name="roomDatabaseService">The database service for rooms.</param>
+        public RoomModelView(IRoomDatabaseService roomDatabaseService)
         {
-            roomModel = RoomDatabaseService.Instance;
+            this.roomDatabaseService = roomDatabaseService ?? throw new ArgumentNullException(nameof(roomDatabaseService));
             Rooms = new ObservableCollection<Room>();
             RoomsInfo = new ObservableCollection<Room>();
             LoadAllRooms();
@@ -38,7 +34,7 @@ namespace Team3.ModelViews.Implementations
         public ObservableCollection<Room> Rooms { get; private set; }
 
         /// <summary>
-        /// Gets attributes for the roms info.
+        /// Gets attributes for the rooms info.
         /// </summary>
         public ObservableCollection<Room> RoomsInfo { get; private set; }
 
@@ -46,13 +42,13 @@ namespace Team3.ModelViews.Implementations
         /// Filter rooms by department ID.
         /// </summary>
         /// <param name="departmentId">The id of the department.</param>
-        /// <returns>A list with all the departments.</returns>
+        /// <returns>A list with all the rooms.</returns>
         public ObservableCollection<Room> GetRoomsByDepartmentId(int departmentId)
         {
             try
             {
                 var filteredRooms = new ObservableCollection<Room>(
-                    roomModel.GetRooms().Where(r => r.DepartmentId == departmentId));
+                    roomDatabaseService.GetRooms().Where(r => r.DepartmentId == departmentId));
 
                 if (!filteredRooms.Any())
                 {
@@ -75,7 +71,7 @@ namespace Team3.ModelViews.Implementations
         {
             try
             {
-                var roomList = roomModel.GetRooms();
+                var roomList = roomDatabaseService.GetRooms();
                 if (roomList != null && roomList.Count > 0)
                 {
                     foreach (var room in roomList)
@@ -95,66 +91,5 @@ namespace Team3.ModelViews.Implementations
                 Debug.WriteLine($"Error loading rooms: {exception.Message}");
             }
         }
-
-        // Get equipment by Department ID and date range
-
-        // Eu n am avut de facut Equipment dar cand vei da merge ar trebui sa mearga
-        // public List<Equipment> GetEquipmentsByDepartmentId(int departmentId, DateTime startDate, DateTime endDate)
-        // {
-        //    try
-        //    {
-        //        // Get all rooms for the given department
-        //        var departmentRooms = _roomModel.GetRooms().Where(r => r.DepartmentId == departmentId).ToList();
-        //        if (!departmentRooms.Any())
-        //        {
-        //            Debug.WriteLine($"No rooms found for Department ID: {departmentId}");
-        //            return new List<Equipment>();  //Eu n am avut de facut Equipment dar cand vei da merge ar trebui sa mearga
-        //        }
-        //        // Get equipment used in these rooms within the date range
-        //        var roomIds = departmentRooms.Select(r => r.Id).ToList();
-        //        var equipmentList = _equipmentModel.GetEquipmentsByRoomsAndDate(roomIds, startDate, endDate);  //Eu n am avut de facut Equipment dar cand vei da merge ar trebui sa mearg;
-        //        if (!equipmentList.Any())
-        //        {
-        //            Debug.WriteLine($"No equipment found for Department ID: {departmentId} between {startDate} and {endDate}");
-        //        }
-        //        return equipmentList;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        Debug.WriteLine($"Error retrieving equipment: {exception.Message}");
-        //        throw;
-        //    }
-        // }
-        // same here eu n am Hospitalization in taksurile mele si deaia exiosta erorile
-        // public List<Hospitalization> GetHospitalizationByDepartmentID(int departmentId, DateTime startDate, DateTime endDate)
-        // {
-        //    try
-        //    {
-        //        // get the room assosicated with the departments
-        //        var roomList = _roomModel.GetRooms();
-        //        var departmentRooms = roomList.Where(r => r.DepartmentId == departmentId).Select(r => r.Id).ToList();
-        //        if (!departmentRooms.Any())
-        //        {
-        //            Debug.WriteLine($"Nu există camere pentru departamentul ID: {departmentId}");
-        //            return new List<Hospitalization>();  //same here eu n am Hospitalization in taksurile mele si deaia exiosta erorile
-        //        }
-        //        // get the specializations based on department id
-        //        var hospitalizations = _hospitalizationModel.GetHospitalizations()  //same here eu n am Hospitalization in taksurile mele si deaia exiosta erorile
-        //            .Where(h => departmentRooms.Contains(h.RoomId) &&
-        //                        h.StartDate >= startDate &&
-        //                        h.EndDate <= endDate)
-        //            .ToList();
-        //        if (!hospitalizations.Any())
-        //        {
-        //            Debug.WriteLine($"Nu s-au găsit spitalizări pentru departamentul {departmentId} în intervalul {startDate} - {endDate}");
-        //        }
-        //        return hospitalizations;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        Debug.WriteLine($"Eroare la obținerea spitalizărilor: {exception.Message}");
-        //        throw;
-        //    }
-        // }
     }
 }

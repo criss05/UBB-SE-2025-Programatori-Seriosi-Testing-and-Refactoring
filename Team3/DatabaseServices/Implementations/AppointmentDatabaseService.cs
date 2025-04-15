@@ -14,7 +14,7 @@
 
         public AppointmentDatabaseService(string _dbConnString)
         {
-            dbConnString = _dbConnString;
+            this.dbConnString = _dbConnString;
         }
 
         public void AddNewAppointment(Appointment appointment)
@@ -23,7 +23,7 @@
                                  "VALUES (@doctor_id, @patient_id, @appointment_datetime, @location)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -37,9 +37,9 @@
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error adding appointment", e);
+                throw new Exception("Error adding appointment", exception);
             }
         }
 
@@ -48,7 +48,7 @@
             const string query = "SELECT id, doctor_id, patient_id, appointment_datetime, location FROM Appointments WHERE id = @id";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))

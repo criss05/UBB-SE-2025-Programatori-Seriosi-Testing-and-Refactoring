@@ -1,50 +1,21 @@
-﻿// <copyright file="ChatDatabaseService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
+using Team3.Models;
+using Team3.DatabaseServices.Interfaces;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using Microsoft.Data.SqlClient;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Team3.Models;
-    using Team3.DatabaseServices.Interfaces;
-
     /// <summary>
     /// This class is responsible for managing chat-related database operations.
     /// </summary>
     public class ChatDatabaseService : IChatDatabaseService
     {
-        private static readonly object LockObject = new object();
-        private static ChatDatabaseService? instance;
-        private Task<List<Chat>> chats;
+        private readonly string dbConnString;
 
-        private ChatDatabaseService()
+        public ChatDatabaseService(string _dbConnString)
         {
-
-        }
-
-        /// <summary>
-        /// Gets the singleton instance of the ChatDatabaseService class.
-        /// </summary>
-        public static ChatDatabaseService Instance
-        {
-            get
-            {
-                lock (LockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new ChatDatabaseService();
-                    }
-                }
-
-                return instance;
-            }
+            this.dbConnString = _dbConnString;
         }
 
         /// <summary>
@@ -58,24 +29,24 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
-
-                connection.Open();
-
-                SqlCommand command = new SqlCommand(query, connection);
-                List<Chat> chats = new List<Chat>();
-
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
-                    while (reader.Read())
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@user", user);
+                    List<Chat> chats = new List<Chat>();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        chats.Add(new Chat((int)reader[0], (int)reader[1], (int)reader[2]));
+                        while (reader.Read())
+                        {
+                            chats.Add(new Chat((int)reader[0], (int)reader[1], (int)reader[2]));
+                        }
                     }
+
+                    return chats;
                 }
-
-                connection.Close();
-
-                return chats;
             }
             catch (Exception e)
             {
@@ -91,15 +62,17 @@ namespace Team3.DatabaseServices.Implementations
         public void AddNewChat(int user1, int user2)
         {
             const string query = "INSERT INTO chats (user1, user2) VALUES (@user1, @user2)";
+
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DbConnectionString);
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@user1", user1);
-                command.Parameters.AddWithValue("@user2", user2);
-                command.ExecuteNonQuery();
-                connection.Close();
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@user1", user1);
+                    command.Parameters.AddWithValue("@user2", user2);
+                    command.ExecuteNonQuery();
+                }
             }
             catch (Exception e)
             {

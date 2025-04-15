@@ -8,22 +8,11 @@ namespace Team3.DatabaseServices.Implementations
 {
     public class RoomDatabaseService : IRoomDatabaseService
     {
-        private static RoomDatabaseService? instance;
+        private readonly string dbConnString;
 
-        private RoomDatabaseService()
+        public RoomDatabaseService(string _dbConnString)
         {
-        }
-
-        public static RoomDatabaseService Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new RoomDatabaseService();
-                }
-                return instance;
-            }
+            this.dbConnString = _dbConnString;
         }
 
         public List<Room> GetRooms()
@@ -33,7 +22,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -50,9 +39,9 @@ namespace Team3.DatabaseServices.Implementations
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error getting rooms", e);
+                throw new Exception("Error getting rooms", exception);
             }
 
             return rooms;

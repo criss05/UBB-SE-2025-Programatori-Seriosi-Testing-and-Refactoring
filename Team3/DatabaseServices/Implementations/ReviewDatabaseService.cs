@@ -18,7 +18,7 @@
         /// <param name="_dbConnString">The connection string for the database.</param>
         public ReviewDatabaseService(string _dbConnString)
         {
-            dbConnString = _dbConnString;
+            this.dbConnString = _dbConnString;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@
             const string query = "INSERT INTO Reviews (id, medicalrecord_id, message, nr_stars) VALUES (@id, @medicalrecord_id, @message, @nr_stars)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -58,7 +58,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

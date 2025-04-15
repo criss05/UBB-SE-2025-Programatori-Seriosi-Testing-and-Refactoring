@@ -12,7 +12,7 @@
     /// <summary>
     /// ViewModel for managing schedules.
     /// </summary>
-    public class ScheduleModelView : IScheduleViewModel
+    public class ScheduleModelView : IScheduleModelView
     {
         private readonly IScheduleDatabaseService scheduleDatabaseService;
 

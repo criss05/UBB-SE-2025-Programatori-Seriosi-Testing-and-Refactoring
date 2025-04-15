@@ -13,7 +13,7 @@ namespace Team3.DatabaseServices.Implementations
         /// </summary>
         public UserDatabaseService(string _dbConnString)
         {
-            dbConnString = _dbConnString;
+            this.dbConnString = _dbConnString;
         }
 
         private string dbConnString { get; }
@@ -25,7 +25,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -57,7 +57,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))

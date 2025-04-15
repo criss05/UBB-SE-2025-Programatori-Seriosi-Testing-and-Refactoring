@@ -18,7 +18,7 @@
         /// <param name="appointmentModel">The appointment database service to use.</param>
         public AppointmentModelView(IAppointmentDatabaseService _appointmentModelDatabaseService)
         {
-            appointmentDatabaseService = _appointmentModelDatabaseService ?? throw new ArgumentNullException(nameof(_appointmentModelDatabaseService));
+            appointmentDatabaseService = _appointmentModelDatabaseService;
         }
 
         /// <inheritdoc/>

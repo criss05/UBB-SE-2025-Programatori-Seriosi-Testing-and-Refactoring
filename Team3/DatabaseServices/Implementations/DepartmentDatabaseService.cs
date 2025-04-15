@@ -1,55 +1,39 @@
-﻿// <copyright file="DepartmentDatabaseService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
+using Team3.DatabaseServices.Interfaces;
+using Team3.Models;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    using System;
-    using System.Collections.Generic;
-    using Microsoft.Data.SqlClient;
-    using Team3.DatabaseServices.Interfaces;
-    using Team3.Models;
-
     /// <summary>
     /// Service for interacting with the department database.
     /// </summary>
     public class DepartmentDatabaseService : IDepartmentDatabaseService
     {
-        private static DepartmentDatabaseService? instance;
-
-        private DepartmentDatabaseService()
-        {
-
-        }
+        private readonly string dbConnString;
 
         /// <summary>
-        /// Gets singleton instance of the DepartmentDatabaseService.
+        /// Initializes a new instance of the <see cref="DepartmentDatabaseService"/> class.
         /// </summary>
-        public static DepartmentDatabaseService Instance
+        /// <param name="dbConnString">The database connection string.</param>
+        public DepartmentDatabaseService(string _dbConnString)
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DepartmentDatabaseService();
-                }
-
-                return instance;
-            }
+            this.dbConnString = _dbConnString;
         }
 
         /// <summary>
         /// Get all departments from the database.
         /// </summary>
-        /// <returns>A lkist with departements.</returns>
-        /// <exception cref="Exception">throws an error.</exception>
+        /// <returns>A list of departments.</returns>
+        /// <exception cref="Exception">Throws if the operation fails.</exception>
         public List<Department> GetDepartments()
         {
             const string query = "SELECT * FROM departments;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

@@ -1,14 +1,9 @@
-﻿// <copyright file="DepartmentModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews.Implementations
+﻿namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Team3.DatabaseServices.Implementations;
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
@@ -23,9 +18,10 @@ namespace Team3.ModelViews.Implementations
         /// <summary>
         /// Initializes a new instance of the <see cref="DepartmentModelView"/> class.
         /// </summary>
-        public DepartmentModelView()
+        /// <param name="departmentDatabaseService">The department database service.</param>
+        public DepartmentModelView(IDepartmentDatabaseService departmentDatabaseService)
         {
-            departmentDatabaseService = DepartmentDatabaseService.Instance;
+            this.departmentDatabaseService = departmentDatabaseService;
             DepartmentsInfo = new ObservableCollection<Department>();
             LoadDepartmentsInfo();
         }
@@ -51,16 +47,15 @@ namespace Team3.ModelViews.Implementations
 
                 if (departmentList != null && departmentList.Count > 0)
                 {
-                   DepartmentsInfo.Clear(); // Clear old data
-                   foreach (var department in departmentList)
+                    DepartmentsInfo.Clear(); // Clear old data
+                    foreach (var department in departmentList)
                     {
                         DepartmentsInfo.Add(department);
-                        Debug.WriteLine($"Loaded Department: ID = {department.DepartmentId}, Name = {department.DepartmentName}");
                     }
                 }
                 else
                 {
-                    Debug.WriteLine("No departments found in the database.");
+                    throw new Exception("No departments found in the database.");
                 }
             }
             catch (Exception exception)
@@ -77,9 +72,6 @@ namespace Team3.ModelViews.Implementations
         {
             try
             {
-                Debug.WriteLine($"Date selected: {selectedDate}");
-
-                // Refresh department information based on the selected date
                 LoadDepartmentsInfo();
             }
             catch (Exception exception)
@@ -92,13 +84,14 @@ namespace Team3.ModelViews.Implementations
         /// Gets a list of departments by name.
         /// </summary>
         /// <param name="name">The name of the department.</param>
-        /// <returns>The list of departemts with the given name.</returns>
+        /// <returns>The list of departments with the given name.</returns>
         public List<Department> GetDepartmentsByName(string name)
         {
             try
             {
                 var departmentList = departmentDatabaseService.GetDepartments();
-                var filteredDepartments = departmentList.FindAll(d => d.DepartmentName.Contains(name, StringComparison.OrdinalIgnoreCase));
+                var filteredDepartments = departmentList.FindAll(d =>
+                    d.DepartmentName.Contains(name, StringComparison.OrdinalIgnoreCase));
 
                 if (filteredDepartments.Count == 0)
                 {
@@ -115,14 +108,13 @@ namespace Team3.ModelViews.Implementations
         }
 
         /// <summary>
-        /// handles the back button.
+        /// Handles the back button.
         /// </summary>
         public void BackButtonHandler()
         {
             try
             {
-                Debug.WriteLine("Back button pressed. Navigating to the previous screen...");
-                OnBackNavigation?.Invoke(); // Calls the delegate if assigned
+                OnBackNavigation?.Invoke();
             }
             catch (Exception exception)
             {

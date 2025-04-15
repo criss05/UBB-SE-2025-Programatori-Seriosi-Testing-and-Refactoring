@@ -8,7 +8,6 @@ namespace Team3.ModelViews.Implementations
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Team3.DatabaseServices.Implementations;
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
@@ -18,14 +17,15 @@ namespace Team3.ModelViews.Implementations
     /// </summary>
     public class ShiftTypeModelView : IShiftTypeModelView
     {
-        private readonly IShiftTypeDatabaseService shiftTypeModel;
+        private readonly IShiftTypeDatabaseService shiftTypeDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShiftTypeModelView"/> class.
         /// </summary>
-        public ShiftTypeModelView()
+        /// <param name="shiftTypeDatabaseService">Service used to interact with the shift type database.</param>
+        public ShiftTypeModelView(IShiftTypeDatabaseService shiftTypeDatabaseService)
         {
-            shiftTypeModel = (IShiftTypeDatabaseService?)ShiftTypeDatabaseService.Instance;
+            this.shiftTypeDatabaseService = shiftTypeDatabaseService ?? throw new ArgumentNullException(nameof(shiftTypeDatabaseService));
             ShiftTypes = new ObservableCollection<ShiftType>();
             LoadShiftTypes();
         }
@@ -45,7 +45,7 @@ namespace Team3.ModelViews.Implementations
         {
             try
             {
-                var shiftTypeList = shiftTypeModel.GetAllShiftTypes();
+                var shiftTypeList = shiftTypeDatabaseService.GetAllShiftTypes();
                 var filteredShiftTypes = new List<ShiftType>();
 
                 foreach (var shiftType in shiftTypeList)
@@ -80,7 +80,7 @@ namespace Team3.ModelViews.Implementations
         {
             try
             {
-                return shiftTypeModel.GetShiftType(shiftTypeID);
+                return shiftTypeDatabaseService.GetShiftType(shiftTypeID);
             }
             catch (Exception exception)
             {
@@ -96,7 +96,7 @@ namespace Team3.ModelViews.Implementations
         {
             try
             {
-                var shiftTypeList = shiftTypeModel.GetAllShiftTypes();
+                var shiftTypeList = shiftTypeDatabaseService.GetAllShiftTypes();
                 if (shiftTypeList != null && shiftTypeList.Count > 0)
                 {
                     foreach (var shiftType in shiftTypeList)

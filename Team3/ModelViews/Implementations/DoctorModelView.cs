@@ -15,6 +15,9 @@ namespace Team3.ModelViews.Implementations
     public class DoctorModelView : IDoctorModelView
     {
         private readonly IDoctorDatabaseService doctorDatabaseService;
+        private readonly IMedicalRecordModelView medicalRecordModelView;
+        private readonly IScheduleModelView scheduleModelView;
+        private readonly IUserModelView userModelView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DoctorModelView"/> class.
@@ -24,15 +27,15 @@ namespace Team3.ModelViews.Implementations
         /// <param name="scheduleModelView">The schedule model view.</param>
         /// <param name="userModelView">The user model view.</param>
         public DoctorModelView(
-            IDoctorDatabaseService doctorDatabaseService,
-            IMedicalRecordModelView medicalRecordModelView,
-            IScheduleViewModel scheduleModelView,
-            IUserModelView userModelView)
+            IDoctorDatabaseService _doctorDatabaseService,
+            IMedicalRecordModelView _medicalRecordModelView,
+            IScheduleModelView _scheduleModelView,
+            IUserModelView _userModelView)
         {
-            this.doctorDatabaseService = doctorDatabaseService;
-            MedicalRecordModelView = medicalRecordModelView;
-            ScheduleModelView = scheduleModelView;
-            UserModelView = userModelView;
+            this.doctorDatabaseService = _doctorDatabaseService;
+            this.medicalRecordModelView = _medicalRecordModelView;
+            this.scheduleModelView = _scheduleModelView;
+            this.userModelView = _userModelView;
 
             DoctorsInfo = new ObservableCollection<Doctor>();
         }
@@ -50,7 +53,7 @@ namespace Team3.ModelViews.Implementations
         /// <summary>
         /// Gets or sets the schedule model view.
         /// </summary>
-        public IScheduleViewModel ScheduleModelView { get; set; }
+        public IScheduleModelView ScheduleModelView { get; set; }
 
         /// <summary>
         /// Gets or sets the user model view.

@@ -1,49 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
-using Microsoft.Data.SqlClient;
-using System.Threading.Tasks;
-using Team3.Models;
 using System.Diagnostics;
+using Microsoft.Data.SqlClient;
+using Team3.Models;
 using Team3.DatabaseServices.Interfaces;
 
 namespace Team3.DatabaseServices.Implementations
 {
     public class MessageDatabaseService : IMessageDatabaseService
     {
-        private static MessageDatabaseService? instance;
-        private static readonly object LockObject = new object();
-        private MessageDatabaseService()
-        {
+        private readonly string dbConnString;
 
-        }
-        public static MessageDatabaseService Instance
+        public MessageDatabaseService(string _dbConnString)
         {
-            get
-            {
-                lock (LockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new MessageDatabaseService();
-                    }   
-                }
-                return instance;
-            }
+            this.dbConnString = _dbConnString;
         }
+
         public List<Message> GetMessagesByChatId(int chatId)
         {
-            Console.WriteLine($"Attempting to connect to: {Config.DbConnectionString}");
             const string query = "SELECT id, content, user_id, chat_id, sent_datetime FROM messages WHERE chat_id = @chat_id";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@chat_id", chatId);
-                    Debug.WriteLine("the chat it is:" +  chatId);
+                    Debug.WriteLine("The chat ID is: " + chatId);
 
                     connection.Open();
 
@@ -58,25 +41,26 @@ namespace Team3.DatabaseServices.Implementations
                                 content: reader.GetString(1),
                                 userId: reader.GetInt32(2),
                                 chatId: reader.GetInt32(3),
-                                sentDateTime: (DateTime)reader[4]
+                                sentDateTime: reader.GetDateTime(4)
                             ));
                         }
                     }
+
                     return messages;
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error while loading messages: " + e.Message);
+                throw new Exception("Error while loading messages: " + exception.Message, exception);
             }
         }
 
         public int addMessage(Message message)
         {
-            const string query = "INSERT INTO messages (content, use_iId, chat_id, sent_datetime) VALUES (@content, @user_id, @chat_id, @sent_datetime)";
+            const string query = "INSERT INTO messages (content, user_id, chat_id, sent_datetime) VALUES (@content, @user_id, @chat_id, @sent_datetime)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@content", message.Content);
@@ -84,14 +68,14 @@ namespace Team3.DatabaseServices.Implementations
                     command.Parameters.AddWithValue("@chat_id", message.ChatId);
                     command.Parameters.AddWithValue("@sent_datetime", message.SentDateTime);
                     connection.Open();
-                    return Convert.ToInt32(command.ExecuteScalar());
+                    command.ExecuteNonQuery();
+                    return 1; // Indicates success
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error while adding message: " + e.Message);
+                throw new Exception("Error while adding message: " + exception.Message, exception);
             }
         }
-
     }
 }

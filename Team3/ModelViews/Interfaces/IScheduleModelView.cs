@@ -14,7 +14,7 @@ namespace Team3.ModelViews.Interfaces
     /// <summary>
     /// Interface for Schedule ViewModel.
     /// </summary>
-    public interface IScheduleViewModel
+    public interface IScheduleModelView
     {
         /// <summary>
         /// Get schedules by doctor ID and date range.

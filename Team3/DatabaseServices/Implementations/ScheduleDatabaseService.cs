@@ -13,7 +13,7 @@
         // Constructor that accepts the connection string
         public ScheduleDatabaseService(string _dbConnString)
         {
-            dbConnString = _dbConnString;
+            this.dbConnString = _dbConnString;
         }
 
         public List<Schedule> GetAllSchedules()
@@ -22,7 +22,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);

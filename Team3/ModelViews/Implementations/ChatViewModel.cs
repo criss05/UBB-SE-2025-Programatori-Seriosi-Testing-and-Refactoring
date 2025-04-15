@@ -1,8 +1,4 @@
-﻿// <copyright file="ChatViewModel.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews.Implementations
+﻿namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
@@ -23,11 +19,11 @@ namespace Team3.ModelViews.Implementations
         /// <summary>
         /// Initializes a new instance of the <see cref="ChatViewModel"/> class and loads all chats.
         /// </summary>
-        public ChatViewModel()
+        /// <param name="chatDatabaseService">An instance of the ChatDatabaseService.</param>
+        public ChatViewModel(ChatDatabaseService chatDatabaseService)
         {
+            this.chatDatabaseService = chatDatabaseService;
             Chats = new ObservableCollection<Chat>();
-            LoadAllChats();
-            chatDatabaseService = ChatDatabaseService.Instance;
         }
 
         /// <summary>
@@ -59,7 +55,7 @@ namespace Team3.ModelViews.Implementations
                 }
                 else
                 {
-                    Debug.WriteLine("No chats returned.");
+                    throw new Exception("No chats found");
                 }
             }
             catch (Exception exception)
