@@ -1,40 +1,28 @@
-﻿// <copyright file="AppointmentModelViewTests.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-using System;
+﻿using System;
 using Moq;
 using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Team3.DatabaseServices.Interfaces;
-using Team3.DatabaseServices.Implementations;
 using Team3.Models;
 using Xunit;
-using System.Reflection;
 
 namespace Team3.Tests.ModelViewsTests
 {
     public class AppointmentModelViewTests
     {
         private readonly Mock<IAppointmentDatabaseService> mockDatabaseService;
+        private readonly IAppointmentModelView appointmentModelView;
 
         public AppointmentModelViewTests()
         {
             this.mockDatabaseService = new Mock<IAppointmentDatabaseService>();
-
-            // Replace the singleton instance with our mock using reflection
-            typeof(AppointmentDatabaseService)
-                .GetField("instance", BindingFlags.Static | BindingFlags.NonPublic)
-                ?.SetValue(null, this.mockDatabaseService.Object);
+            this.appointmentModelView = new AppointmentModelView(this.mockDatabaseService.Object);
         }
 
         [Fact]
         public void AddNewAppointment_WhenCalled_ShouldCallDatabaseServiceWithSameAppointment()
         {
             // Arrange
-            var mockDatabaseService = new Mock<IAppointmentDatabaseService>();
-            var viewModel = new AppointmentModelView(mockDatabaseService.Object);
-
             var appointment = new Appointment(
                 doctorId: 1,
                 patientId: 2,
@@ -43,10 +31,10 @@ namespace Team3.Tests.ModelViewsTests
             );
 
             // Act
-            viewModel.AddNewAppointment(appointment);
+            this.appointmentModelView.AddNewAppointment(appointment);
 
             // Assert
-            mockDatabaseService.Verify(s => s.AddNewAppointment(appointment), Times.Once);
+            this.mockDatabaseService.Verify(s => s.AddNewAppointment(appointment), Times.Once);
         }
 
         [Fact]
@@ -60,19 +48,15 @@ namespace Team3.Tests.ModelViewsTests
                 location: "Room A"
             );
 
-            var mockDatabaseService = new Mock<IAppointmentDatabaseService>();
-            mockDatabaseService
+            this.mockDatabaseService
                 .Setup(s => s.GetAppointmentById(1))
                 .Returns(expectedAppointment);
 
-            var viewModel = new AppointmentModelView(mockDatabaseService.Object);
-
             // Act
-            var result = viewModel.GetAppointmentById(1);
+            var result = this.appointmentModelView.GetAppointmentById(1);
 
             // Assert
             Assert.Equal(expectedAppointment, result);
         }
-
     }
 }
