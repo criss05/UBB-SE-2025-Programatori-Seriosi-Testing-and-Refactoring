@@ -1,17 +1,7 @@
-﻿// <copyright file="ReviewModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews
+﻿namespace Team3.ModelViews
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.DatabaseServices;
     using Team3.Models;
 
@@ -20,14 +10,15 @@ namespace Team3.ModelViews
     /// </summary>
     public class ReviewModelView : IReviewModelView
     {
-        private readonly IReviewService reviewModel;
+        private readonly IReviewDatabaseService reviewDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReviewModelView"/> class.
         /// </summary>
-        public ReviewModelView()
+        /// <param name="reviewDatabaseService">The review database service.</param>
+        public ReviewModelView(IReviewDatabaseService reviewDatabaseService)
         {
-            this.reviewModel = ReviewService.Instance;
+            this.reviewDatabaseService = reviewDatabaseService;
         }
 
         /// <summary>
@@ -36,7 +27,7 @@ namespace Team3.ModelViews
         /// <param name="review">The review to be added.</param>
         public void AddReview(Review review)
         {
-            this.reviewModel.addNewReview(review);
+            this.reviewDatabaseService.AddNewReview(review);
         }
 
         /// <summary>
@@ -46,13 +37,13 @@ namespace Team3.ModelViews
         /// <returns>The review.</returns>
         public Review GetReviewByMedicalRecordId(int reviewId)
         {
-            return this.reviewModel.GetReviewByMedicalRecordId(reviewId);
+            return this.reviewDatabaseService.GetReviewByMedicalRecordId(reviewId);
         }
 
         /// <summary>
         /// Handles the add review button click event.
         /// </summary>
-        /// <param name="id">The review name.</param>
+        /// <param name="id">The review id.</param>
         /// <param name="medicalrecordId">The medical record id.</param>
         /// <param name="message">The message.</param>
         /// <param name="stars">The number of stars.</param>

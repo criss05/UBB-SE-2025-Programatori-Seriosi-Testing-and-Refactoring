@@ -7,13 +7,13 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface IReviewService
+    public interface IReviewDatabaseService
     {
         /// <summary>
         /// add a review 
         /// </summary>
         /// <param name="review"></param>
-        public void addNewReview(Review review);
+        public void AddNewReview(Review review);
 
         /// <summary>
         /// get a review for a specific medical record

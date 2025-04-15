@@ -43,7 +43,7 @@ namespace Team3.Views
         private readonly ITreatmentDrugModelView treatmentDrugModelView = new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString));
         private readonly ITreatmentModelView treatmentModelView = new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString));
         private readonly IReviewModelView reviewModelView = new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString));
-        private readonly IDoctorModelView doctorModelView = new DoctorModelView(new DoctorDatabaseService(Config.DbConnectionString), new MedicalRecordModelView(Config.DbConnectionString), new ScheduleModelView(Config.DbConnectionString), new UserModelView(Config.DbConnectionString));
+        private readonly IDoctorModelView doctorModelView = new DoctorModelView(new DoctorDatabaseService(Config.DbConnectionString), new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)), new ScheduleModelView(Config.DbConnectionString), new UserModelView(Config.DbConnectionString));
 
         // Now pass all of them to the NotificationModelView
         public INotificationModelView NotificationModelView { get; }
