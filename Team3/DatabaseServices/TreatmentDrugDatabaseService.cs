@@ -1,101 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.DatabaseServices;
-using Team3.Models;
-
-namespace Team3.DatabaseServices
+﻿namespace Team3.DatabaseServices
 {
-    public class TreatmentDrugDatabaseService : ITreatmentDrugService
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Data.SqlClient;
+    using Team3.Models;
+
+    public class TreatmentDrugDatabaseService : ITreatmentDrugDatabaseService
     {
-        private static TreatmentDrugDatabaseService? instance;
-        private static readonly object LockObject = new object();
-        private readonly Config config;
+        private readonly string dbConnString;
 
-        private TreatmentDrugDatabaseService()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TreatmentDrugDatabaseService"/> class.
+        /// </summary>
+        /// <param name="_dbConnString">The connection string for the database.</param>
+        public TreatmentDrugDatabaseService(string _dbConnString)
         {
-            config = Config.Instance;
+            this.dbConnString = _dbConnString;
         }
 
-        public static TreatmentDrugDatabaseService Instance
-        {
-            get
-            {
-                lock (LockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new TreatmentDrugDatabaseService();
-                    }
-                }
-                return instance;
-            }
-        }
+        /// <summary>
+        /// Adds a new treatment drug record to the database.
+        /// </summary>
+        /// <param name="treatmentDrug">The treatment drug to be added.</param>
         public void AddNewTreatmentDrug(TreatmentDrug treatmentDrug)
         {
-            const string query = "INSERT INTO treatments_drugs(id,treatment_id,drug_id,quantity,starttime,endtime,startdate,nrdays) VALUES (@id,@treatment_id,@drug_id,@quantity,@starttime,@endtime,@startdate,@nrdays)";
+            const string query = "INSERT INTO treatments_drugs(id, treatment_id, drug_id, quantity, starttime, endtime, startdate, nrdays) " +
+                                 "VALUES (@id, @treatment_id, @drug_id, @quantity, @starttime, @endtime, @startdate, @nrdays)";
+
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@id", treatmentDrug.Id);
-                command.Parameters.AddWithValue("@treatment_id", treatmentDrug.TreatmentId);
-                command.Parameters.AddWithValue("@drug_id", treatmentDrug.DrugId);
-                command.Parameters.AddWithValue("@quantity", treatmentDrug.Quantity);
-                command.Parameters.AddWithValue("@starttime", treatmentDrug.StartTime);
-                command.Parameters.AddWithValue("@endtime", treatmentDrug.EndTime);
-                command.Parameters.AddWithValue("@startdate", treatmentDrug.StartDate);
-                command.Parameters.AddWithValue("@nrdays", treatmentDrug.NrDays);
-                command.ExecuteNonQuery();
-                connection.Close();
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@id", treatmentDrug.Id);
+                    command.Parameters.AddWithValue("@treatment_id", treatmentDrug.TreatmentId);
+                    command.Parameters.AddWithValue("@drug_id", treatmentDrug.DrugId);
+                    command.Parameters.AddWithValue("@quantity", treatmentDrug.Quantity);
+                    command.Parameters.AddWithValue("@starttime", treatmentDrug.StartTime);
+                    command.Parameters.AddWithValue("@endtime", treatmentDrug.EndTime);
+                    command.Parameters.AddWithValue("@startdate", treatmentDrug.StartDate);
+                    command.Parameters.AddWithValue("@nrdays", treatmentDrug.NrDays);
+                    command.ExecuteNonQuery();
+                }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error adding treatmentdrug", e);
+                throw new Exception("Error adding treatment drug", exception);
             }
         }
-        public List<TreatmentDrug> getTreatmentDrugsById(int treatmentId)
+
+        /// <summary>
+        /// Retrieves the list of treatment drugs by treatment ID.
+        /// </summary>
+        /// <param name="treatmentId">The ID of the treatment.</param>
+        /// <returns>A list of treatment drugs.</returns>
+        public List<TreatmentDrug> GetTreatmentDrugsById(int treatmentId)
         {
             const string query = "SELECT * FROM treatments_drugs WHERE treatment_id = @treatment_id";
+
             try
             {
-                SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING);
-
-                connection.Open();
-
-                SqlCommand command = new SqlCommand(query, connection);
-
-                command.Parameters.AddWithValue("@treatment_id", treatmentId);
-
-                List<TreatmentDrug> TreatmentDrugList = new List<TreatmentDrug>();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
-                    TreatmentDrugList.Add(new TreatmentDrug(reader.GetInt32(0), reader.GetInt32(1),
-                        reader.GetInt32(2), Convert.ToDouble((decimal)reader[3]), 
-                        TimeOnly.FromTimeSpan(reader.GetFieldValue<TimeSpan>(4)),
-                        TimeOnly.FromTimeSpan(reader.GetFieldValue<TimeSpan>(5)),
-                        DateOnly.FromDateTime(reader.GetFieldValue<DateTime>(6)),
-                        reader.GetInt32(7)));
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@treatment_id", treatmentId);
+
+                    List<TreatmentDrug> treatmentDrugList = new List<TreatmentDrug>();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        treatmentDrugList.Add(new TreatmentDrug(
+                            reader.GetInt32(0),
+                            reader.GetInt32(1),
+                            reader.GetInt32(2),
+                            Convert.ToDouble((decimal)reader[3]),
+                            TimeOnly.FromTimeSpan(reader.GetFieldValue<TimeSpan>(4)),
+                            TimeOnly.FromTimeSpan(reader.GetFieldValue<TimeSpan>(5)),
+                            DateOnly.FromDateTime(reader.GetFieldValue<DateTime>(6)),
+                            reader.GetInt32(7)
+                        ));
+                    }
+
+                    return treatmentDrugList;
                 }
-
-                connection.Close();
-                return TreatmentDrugList;
-
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error getting treatmentdrugs", e);
+                throw new Exception("Error retrieving treatment drugs", exception);
             }
-
         }
-
-
     }
 }

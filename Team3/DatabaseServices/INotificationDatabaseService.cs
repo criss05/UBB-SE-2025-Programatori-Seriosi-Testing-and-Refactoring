@@ -47,11 +47,11 @@ namespace Team3.DatabaseServices
         /// delete a notificatioon using it's is
         /// </summary>
         /// <param name="id"></param>
-        public void deleteNotification(int id);
+        public void DeleteNotification(int id);
 
         /// <summary>
         /// detele all notifications
         /// </summary>
-        public void deleteAllNotifications();
+        public void DeleteAllNotifications();
     }
 }

@@ -72,7 +72,7 @@ namespace Team3.Views
             this.Frame.Navigate(typeof(ChatView));
         }
 
-        private void SendButtonClicked(object sender, RoutedEventArgs e)
+        private void sendButtonClicked(object sender, RoutedEventArgs e)
         {
             string message = this.messageBar.Text;
             this.ViewModel.SendButtonHandler(this.UserId, this.ChatId, message);

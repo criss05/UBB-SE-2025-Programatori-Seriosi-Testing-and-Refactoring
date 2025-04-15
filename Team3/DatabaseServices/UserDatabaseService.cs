@@ -1,42 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using Team3.DatabaseServices;
 using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
     public class UserDatabaseService : IUserDatabaseService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserDatabaseService"/> class.
+        /// </summary>
+        public UserDatabaseService(string _dbConnString)
+        {
+            this.dbConnString = _dbConnString;
+        }
 
-        private static UserDatabaseService? instance;
-        private readonly Config config;
-        private static readonly object LockObject = new object();
-        private UserDatabaseService()
-        {
-            config = Config.Instance;
-        }
-        public static UserDatabaseService Instance
-        {
-            get
-            {
-                lock (LockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new UserDatabaseService();
-                    }   
-                }
-                return instance;
-            }   
-        }
+        private string dbConnString { get; }
+
         public List<User> GetAllUsers()
         {
             const string query = "SELECT * FROM users;";
-            List<User> notifications = new List<User>();
+            List<User> users = new List<User>();
+
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -45,7 +33,7 @@ namespace Team3.DatabaseServices
                     {
                         while (reader.Read())
                         {
-                            notifications.Add(new User(
+                            users.Add(new User(
                                 (int)reader[0],
                                 reader[1].ToString(),
                                 reader[2].ToString()
@@ -56,25 +44,19 @@ namespace Team3.DatabaseServices
             }
             catch (Exception e)
             {
-                throw new Exception("Error retrieving notifications", e);
+                throw new Exception("Error retrieving users", e);
             }
 
-            return notifications;
+            return users;
         }
 
-        /// <summary>
-        /// gets the user by the id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         public User GetUserById(int id)
         {
             const string query = "SELECT * FROM users WHERE id = @id";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -95,10 +77,8 @@ namespace Team3.DatabaseServices
             }
             catch (Exception e)
             {
-                throw new Exception("Error retrieving doctor", e);
+                throw new Exception("Error retrieving user", e);
             }
         }
     }
-
-
 }

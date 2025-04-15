@@ -28,11 +28,6 @@ namespace Team3.ModelViews
         public void DeleteNotification(int userId);
 
         /// <summary>
-        /// add an appointment.
-        /// </summary>
-        public void AddNewAppointment();
-
-        /// <summary>
         /// add an upcoming appointment.
         /// </summary>
         /// <param name="appointmentId">The id of the appointment.</param>
@@ -57,24 +52,9 @@ namespace Team3.ModelViews
         public void AddMedicationReminderNotifications(int medicalRecordId);
 
         /// <summary>
-        /// delete an appointment.
-        /// </summary>
-        public void DeleteAppointment();
-
-        /// <summary>
-        /// add a treatment.
-        /// </summary>
-        public void AddNewTreatment();
-
-        /// <summary>
         /// add a review results notification.
         /// </summary>
         /// <param name="reviewId">The id of the review.</param>
         public void AddReviewResultsNotification(int reviewId);
-
-        /// <summary>
-        /// add a review.
-        /// </summary>
-        public void AddNewReview();
     }
 }

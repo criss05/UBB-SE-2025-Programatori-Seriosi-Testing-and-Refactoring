@@ -16,14 +16,15 @@ namespace Team3.ModelViews
     /// </summary>
     public class MedicalRecordModelView : IMedicalRecordModelView
     {
-        private readonly MedicalRecordDatabaseService medicalRecordModel;
+        private readonly MedicalRecordDatabaseService medicalRecordDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MedicalRecordModelView"/> class.
         /// </summary>
-        public MedicalRecordModelView()
+        public MedicalRecordModelView(MedicalRecordDatabaseService _medicalRecordDatabaseService)
         {
-            this.medicalRecordModel = MedicalRecordDatabaseService.Instance;
+            // Pass dbConnString to the MedicalRecordDatabaseService constructor
+            this.medicalRecordDatabaseService = _medicalRecordDatabaseService;
         }
 
         /// <summary>
@@ -33,33 +34,7 @@ namespace Team3.ModelViews
         /// <returns>The Medical record based on the given id.</returns>
         public MedicalRecord GetMedicalRecordById(int id)
         {
-            return this.medicalRecordModel.GetMedicalRecordById(id);
+            return this.medicalRecordDatabaseService.GetMedicalRecordById(id);
         }
-
-        // Metodă pentru obținerea fișelor medicale pe baza doctorului și intervalului de timp
-        // public List<MedicalRecord> GetMedicalRecordsByDoctorID(int doctorId, DateOnly startDate, DateOnly endDate)
-        // {
-        //    try
-        //    {
-        //        Get all medical records from the database
-        //        var allRecords = _medicalRecordModel.GetMedicalRecords();
-        //        Filter records by doctorId and date range
-        //        var filteredRecords = allRecords.FindAll(record =>
-        //            record.DoctorId == doctorId &&
-        //            record.recordDate >= startDate &&
-        //            record.recordDate <= endDate
-        //        );
-        //        if (filteredRecords.Count == 0)
-        //        {
-        //            Debug.WriteLine($"No medical records found for Doctor ID: {doctorId} between {startDate} and {endDate}.");
-        //        }
-        //        return filteredRecords;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine($"Error filtering medical records by Doctor ID: {ex.Message}");
-        //        throw;
-        //    }
-        // }
     }
 }

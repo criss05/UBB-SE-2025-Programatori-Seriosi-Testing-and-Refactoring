@@ -1,14 +1,6 @@
-﻿// <copyright file="DrugModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews
+﻿namespace Team3.ModelViews
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.DatabaseServices;
     using Team3.Models;
 
@@ -17,15 +9,16 @@ namespace Team3.ModelViews
     /// </summary>
     public class DrugModelView : IDrugModelView
     {
-        private readonly IDrugDatabaseService drugModel;
+        private readonly IDrugDatabaseService drugDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DrugModelView"/> class.
         /// Constructor for DrugModelView.
         /// </summary>
-        public DrugModelView()
+        /// <param name="dbConnString">The database connection string.</param>
+        public DrugModelView(IDrugDatabaseService _drugDatabaseService)
         {
-            this.drugModel = DrugDatabaseService.Instance;
+            this.drugDatabaseService = _drugDatabaseService;
         }
 
         /// <summary>
@@ -35,7 +28,7 @@ namespace Team3.ModelViews
         /// <returns>The drug.</returns>
         public Drug GetDrugById(int drugId)
         {
-            return this.drugModel.getDrugById(drugId);
+            return this.drugDatabaseService.GetDrugById(drugId);
         }
     }
 }

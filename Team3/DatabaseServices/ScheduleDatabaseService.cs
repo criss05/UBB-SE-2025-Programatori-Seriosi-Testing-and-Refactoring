@@ -1,31 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using Team3.DatabaseServices;
-using Team3.Models;
-
-namespace Team3.DatabaseServices
+﻿namespace Team3.DatabaseServices
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Data.SqlClient;
+    using Team3.Models;
+
     public class ScheduleDatabaseService : IScheduleDatabaseService
     {
-        private static ScheduleDatabaseService? instance;
-        private readonly Config config;
+        private readonly string dbConnString;
 
-        private ScheduleDatabaseService()
+        // Constructor that accepts the connection string
+        public ScheduleDatabaseService(string _dbConnString)
         {
-            config = Config.Instance;
-        }
-
-        public static ScheduleDatabaseService Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new ScheduleDatabaseService();
-                }
-                return instance;
-            }
+            dbConnString = _dbConnString;
         }
 
         public List<Schedule> GetAllSchedules()
@@ -34,7 +21,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -55,9 +42,9 @@ namespace Team3.DatabaseServices
                     return schedules;
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error getting schedules", e);
+                throw new Exception("Error getting schedules", exception);
             }
         }
     }

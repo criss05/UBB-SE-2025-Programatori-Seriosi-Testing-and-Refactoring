@@ -16,14 +16,14 @@ namespace Team3.ModelViews
     /// </summary>
     public class DepartmentModelView : IDepartmentModelView
     {
-        private readonly IDepartmentDatabaseService departmentModel;
+        private readonly IDepartmentDatabaseService departmentDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DepartmentModelView"/> class.
         /// </summary>
         public DepartmentModelView()
         {
-            this.departmentModel = DepartmentDatabaseService.Instance;
+            this.departmentDatabaseService = DepartmentDatabaseService.Instance;
             this.DepartmentsInfo = new ObservableCollection<Department>();
             this.LoadDepartmentsInfo();
         }
@@ -45,7 +45,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var departmentList = this.departmentModel.GetDepartments();
+                var departmentList = this.departmentDatabaseService.GetDepartments();
 
                 if (departmentList != null && departmentList.Count > 0)
                 {
@@ -95,7 +95,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var departmentList = this.departmentModel.GetDepartments();
+                var departmentList = this.departmentDatabaseService.GetDepartments();
                 var filteredDepartments = departmentList.FindAll(d => d.DepartmentName.Contains(name, StringComparison.OrdinalIgnoreCase));
 
                 if (filteredDepartments.Count == 0)

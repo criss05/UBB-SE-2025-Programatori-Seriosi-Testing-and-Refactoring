@@ -18,24 +18,17 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Appointment"/> class.
         /// </summary>
-        /// <param name="id">The id of the appointment.</param>
         /// <param name="doctorId">The doctor Id.</param>
         /// <param name="patientId">The pacient Id.</param>
         /// <param name="appointmentDateTime">The appointment date and time.</param>
         /// <param name="location">The appointment location.</param>
-        public Appointment(int id, int doctorId, int patientId, DateTime appointmentDateTime, string location)
+        public Appointment(int doctorId, int patientId, DateTime appointmentDateTime, string location)
         {
-            this.Id = id;
             this.DoctorId = doctorId;
             this.PatientId = patientId;
             this.AppointmentDateTime = appointmentDateTime;
             this.Location = location;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the appointment.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier for the doctor associated with the appointment.
@@ -63,7 +56,7 @@ namespace Team3.Models
         /// <returns>String representation of the appointment.</returns>
         public override string ToString()
         {
-            return $"Appointment(Id: {this.Id}, DoctorId: {this.DoctorId}, PatientId: {this.PatientId}, AppointmentDate: {this.AppointmentDateTime}, Location: {this.Location})";
+            return $"Appointment(DoctorId: {this.DoctorId}, PatientId: {this.PatientId}, AppointmentDate: {this.AppointmentDateTime}, Location: {this.Location})";
         }
     }
 }

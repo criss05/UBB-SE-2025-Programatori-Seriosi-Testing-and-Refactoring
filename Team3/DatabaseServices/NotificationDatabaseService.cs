@@ -8,26 +8,10 @@ namespace Team3.DatabaseServices
 {
     public class NotificationDatabaseService : INotificationDatabaseService
     {
-        private static NotificationDatabaseService? instance;
-        private readonly Config config;
-        private static readonly object LockObject = new object();
-        private NotificationDatabaseService()
+        private readonly string dbConnString;
+        public NotificationDatabaseService(string _dbConnString)
         {
-            config = Config.Instance;
-        }
-        public static NotificationDatabaseService Instance
-        {
-            get
-            {
-                lock (LockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new NotificationDatabaseService();
-                    }
-                    return instance;
-                }
-            }
+            this.dbConnString = _dbConnString;
         }
 
         public List<Notification> GetNotifications()
@@ -37,7 +21,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -63,8 +47,6 @@ namespace Team3.DatabaseServices
 
             return notifications;
         }
-
-
 
         public List<Notification> GetUserNotifications(int userId)
         {
@@ -73,12 +55,11 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@user_id", userId);
-
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -102,15 +83,13 @@ namespace Team3.DatabaseServices
             return notifications;
         }
 
-
-
         public AppointmentNotification GetNotificationAppointmentByAppointmentId(int appointmentId)
         {
             const string query = "SELECT * FROM appointment_notifications WHERE appointment_id = @appointment_id";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -141,7 +120,7 @@ namespace Team3.DatabaseServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -158,14 +137,13 @@ namespace Team3.DatabaseServices
             }
         }
 
-
         public void AddAppointmentNotification(int notificationId, int appointmentId)
         {
             const string query = "INSERT INTO appointment_notifications (notification_id, appointment_id) VALUES (@notification_id, @appointment_id);";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -181,15 +159,13 @@ namespace Team3.DatabaseServices
             }
         }
 
-
-
-        public void deleteNotification(int id)
+        public void DeleteNotification(int id)
         {
             const string query = "DELETE FROM notifications WHERE id = @id;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -199,18 +175,17 @@ namespace Team3.DatabaseServices
             }
             catch (Exception e)
             {
-                throw new Exception("Error adding appointment notification", e);
+                throw new Exception("Error deleting notification", e);
             }
         }
 
-
-        public void deleteAllNotifications()
+        public void DeleteAllNotifications()
         {
             const string query = "DELETE FROM notifications";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DATABASE_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -219,10 +194,8 @@ namespace Team3.DatabaseServices
             }
             catch (Exception e)
             {
-                throw new Exception("Error adding appointment notification", e);
+                throw new Exception("Error deleting all notifications", e);
             }
         }
-
-
     }
 }

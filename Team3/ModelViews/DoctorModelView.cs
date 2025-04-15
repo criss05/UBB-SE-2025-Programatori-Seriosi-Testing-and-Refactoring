@@ -4,7 +4,6 @@
 
 namespace Team3.ModelViews
 {
-    using System;
     using System.Collections.ObjectModel;
     using Team3.DatabaseServices;
     using Team3.Models;
@@ -14,24 +13,27 @@ namespace Team3.ModelViews
     /// </summary>
     public class DoctorModelView : IDoctorModelView
     {
-        private readonly IDoctorDatabaseService doctorModel;
+        private readonly IDoctorDatabaseService doctorDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DoctorModelView"/> class.
         /// </summary>
-        public DoctorModelView()
+        /// <param name="doctorDatabaseService">The doctor database service.</param>
+        /// <param name="medicalRecordModelView">The medical record model view.</param>
+        /// <param name="scheduleModelView">The schedule model view.</param>
+        /// <param name="userModelView">The user model view.</param>
+        public DoctorModelView(
+            IDoctorDatabaseService doctorDatabaseService,
+            IMedicalRecordModelView medicalRecordModelView,
+            IScheduleViewModel scheduleModelView,
+            IUserModelView userModelView)
         {
-            // Initialize the DoctorModel instance
-            this.doctorModel = DoctorDatabaseService.Instance;
+            this.doctorDatabaseService = doctorDatabaseService;
+            this.MedicalRecordModelView = medicalRecordModelView;
+            this.ScheduleModelView = scheduleModelView;
+            this.UserModelView = userModelView;
 
-            // Initialize collections
             this.DoctorsInfo = new ObservableCollection<Doctor>();
-            this.MedicalRecordModelView = new MedicalRecordModelView();
-            this.ScheduleModelView = new ScheduleModelView();
-            this.UserModelView = new UserModelView();
-
-            // Load doctors from database
-            // LoadDoctors();
         }
 
         /// <summary>
@@ -40,17 +42,17 @@ namespace Team3.ModelViews
         public ObservableCollection<Doctor> DoctorsInfo { get; set; }
 
         /// <summary>
-        /// Gets or sets the action to be executed when the back button is pressed.
+        /// Gets or sets the medical record model view.
         /// </summary>
         public IMedicalRecordModelView MedicalRecordModelView { get; set; }
 
         /// <summary>
-        /// Gets or sets the action to be executed when the back button is pressed.
+        /// Gets or sets the schedule model view.
         /// </summary>
         public IScheduleViewModel ScheduleModelView { get; set; }
 
         /// <summary>
-        /// Gets or sets the action to be executed when the back button is pressed.
+        /// Gets or sets the user model view.
         /// </summary>
         public IUserModelView UserModelView { get; set; }
 
@@ -58,10 +60,10 @@ namespace Team3.ModelViews
         /// Loads detailed doctor information from the database.
         /// </summary>
         /// <param name="doctorId">The doctor id.</param>
-        /// <returns>The doctor fro the given id.</returns>
+        /// <returns>The doctor for the given id.</returns>
         public Doctor GetDoctorById(int doctorId)
         {
-            return this.doctorModel.GetDoctorById(doctorId);
+            return this.doctorDatabaseService.GetDoctorById(doctorId);
         }
     }
 }

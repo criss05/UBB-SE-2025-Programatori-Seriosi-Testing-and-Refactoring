@@ -7,7 +7,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public interface ITreatmentDrugService
+    public interface ITreatmentDrugDatabaseService
     {
         /// <summary>
         /// add a treatment drug
@@ -21,6 +21,6 @@ namespace Team3.DatabaseServices
         /// </summary>
         /// <param name="treatmentId"></param>
         /// <returns></returns>
-        public List<TreatmentDrug> getTreatmentDrugsById(int treatmentId);
+        public List<TreatmentDrug> GetTreatmentDrugsById(int treatmentId);
     }
 }
