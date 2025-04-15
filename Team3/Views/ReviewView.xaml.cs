@@ -51,7 +51,7 @@ namespace Team3.Views
                 string message = this.textMessage.Text;
                 int stars = int.Parse(((ComboBoxItem)this.comboBoxStars.SelectedItem).Content.ToString());
 
-                this.reviewModelView.AddReviewButtonHandler(id, medicarecordId, message, stars);
+                this.reviewModelView.AddReviewButtonHandler(medicarecordId, message, stars);
 
                 await this.ShowDialog("Review added successfully!", "Success");
             }

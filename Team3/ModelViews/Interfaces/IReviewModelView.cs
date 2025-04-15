@@ -15,7 +15,7 @@ namespace Team3.ModelViews.Interfaces
         /// add a review.
         /// </summary>
         /// <param name="review">The review to be added.</param>
-        public void AddReview(Review review);
+        public void AddNewReview(Review review);
 
         /// <summary>
         /// get a review by id.
@@ -27,10 +27,9 @@ namespace Team3.ModelViews.Interfaces
         /// <summary>
         /// handle the add review button click event.
         /// </summary>
-        /// <param name="id">The id of the review.</param>
         /// <param name="medicalrecordId">The medical report id.</param>
         /// <param name="message">The message.</param>
         /// <param name="stars">The stars.</param>
-        public void AddReviewButtonHandler(int id, int medicalrecordId, string message, int stars);
+        public void AddReviewButtonHandler(int medicalrecordId, string message, int stars);
     }
 }

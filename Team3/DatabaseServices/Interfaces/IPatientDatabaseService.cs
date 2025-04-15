@@ -15,5 +15,12 @@ namespace Team3.DatabaseServices.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         public Patient GetPatientById(int id);
+
+        /// <summary>
+        /// add a patient
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
+        public void AddPatient(Patient patient);
     }
 }

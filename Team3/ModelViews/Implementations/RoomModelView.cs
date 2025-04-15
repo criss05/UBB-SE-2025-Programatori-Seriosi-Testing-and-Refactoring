@@ -76,7 +76,7 @@
                 {
                     foreach (var room in roomList)
                     {
-                        Debug.WriteLine($"Room: {room.Id}, Department ID: {room.DepartmentId}");
+                        Debug.WriteLine($"Department ID: {room.DepartmentId}");
                         Rooms.Add(room);
                         RoomsInfo.Add(room);
                     }
@@ -90,6 +90,21 @@
             {
                 Debug.WriteLine($"Error loading rooms: {exception.Message}");
             }
+        }
+
+        /// <summary>
+        /// Add a room.
+        /// </summary>
+        /// <param name="room">The room to be added.</param>
+        /// <returns></returns>
+        public void AddRoom(Room room)
+        {
+            this.roomDatabaseService.AddRoom(room);
+        }
+
+        public Room GetRoom(int departmentId)
+        {
+            return this.roomDatabaseService.GetRoom(departmentId);
         }
     }
 }

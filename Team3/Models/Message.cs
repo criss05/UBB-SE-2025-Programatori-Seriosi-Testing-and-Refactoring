@@ -18,23 +18,6 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Message"/> class.
         /// </summary>
-        /// <param name="id">The id of the message.</param>
-        /// <param name="content">The content of the message.</param>
-        /// <param name="userId">The user Id.</param>
-        /// <param name="chatId">The chat Id.</param>
-        /// <param name="sentDateTime">The send date.</param>
-        public Message(int id, string content, int userId, int chatId, DateTime sentDateTime)
-        {
-            this.Id = id;
-            this.Content = content;
-            this.UserId = userId;
-            this.ChatId = chatId;
-            this.SentDateTime = sentDateTime;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Message"/> class.
-        /// </summary>
         /// <param name="content">The content of the message.</param>
         /// <param name="userId">The user Id.</param>
         /// <param name="chatId">The chat Id.</param>
@@ -46,11 +29,6 @@ namespace Team3.Models
             this.ChatId = chatId;
             this.SentDateTime = sentDateTime;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the message.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the content of the message.

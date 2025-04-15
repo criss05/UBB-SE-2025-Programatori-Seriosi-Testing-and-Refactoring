@@ -19,7 +19,7 @@ namespace Team3.DatabaseServices.Implementations
 
         public List<Message> GetMessagesByChatId(int chatId)
         {
-            const string query = "SELECT id, content, user_id, chat_id, sent_datetime FROM messages WHERE chat_id = @chat_id";
+            const string query = "SELECT content, user_id, chat_id, sent_datetime FROM messages WHERE chat_id = @chat_id";
             try
             {
                 using (SqlConnection connection = new SqlConnection(this.dbConnString))
@@ -37,7 +37,6 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             messages.Add(new Message(
-                                id: reader.GetInt32(0),
                                 content: reader.GetString(1),
                                 userId: reader.GetInt32(2),
                                 chatId: reader.GetInt32(3),
@@ -75,6 +74,38 @@ namespace Team3.DatabaseServices.Implementations
             catch (Exception exception)
             {
                 throw new Exception("Error while adding message: " + exception.Message, exception);
+            }
+        }
+
+        public Message GetMessageById(int id)
+        {
+            const string query = "SELECT message_id, content, userId, chatId, sentDateTie FROM messages WHERE message_id = @id";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.Read())
+                                throw new Exception("Message not found");
+
+                            return new Message(
+                                reader[1].ToString(),
+                                (int)reader[2],
+                                (int)reader[3],
+                                (DateTime)reader[4]);
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Error retrieving message", exception);
             }
         }
     }

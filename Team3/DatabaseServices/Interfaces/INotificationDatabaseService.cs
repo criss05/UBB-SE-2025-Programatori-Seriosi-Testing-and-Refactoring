@@ -37,6 +37,13 @@ namespace Team3.DatabaseServices.Interfaces
         public int AddNotification(Notification notification);
 
         /// <summary>
+        /// get a notification
+        /// </summary>
+        /// <param name="notificationId"></param>
+        /// <returns></returns>
+        public Notification GetNotificationById(int notificationId);
+
+        /// <summary>
         /// add a notification for a specific appointment
         /// </summary>
         /// <param name="notificationId"></param>

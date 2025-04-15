@@ -27,14 +27,13 @@
         /// <param name="review">The review object to add.</param>
         public void AddNewReview(Review review)
         {
-            const string query = "INSERT INTO Reviews (id, medicalrecord_id, message, nr_stars) VALUES (@id, @medicalrecord_id, @message, @nr_stars)";
+            const string query = "INSERT INTO Reviews (medicalrecord_id, message, nr_stars) VALUES (@medicalrecord_id, @message, @nr_stars)";
             try
             {
                 using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@id", review.Id);
                     command.Parameters.AddWithValue("@medicalrecord_id", review.MedicalRecordId);
                     command.Parameters.AddWithValue("@message", review.Message);
                     command.Parameters.AddWithValue("@nr_stars", review.NrStars);
@@ -67,7 +66,7 @@
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        return new Review(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3));
+                        return new Review(reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3));
                     }
                     else
                     {

@@ -18,26 +18,19 @@ namespace Team3.DTOs
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageChatDTO"/> class.
         /// </summary>
-        /// <param name="id">The ID of the message.</param>
         /// <param name="message">The content of the message.</param>
         /// <param name="userId">The ID of the user who sent the message.</param>
         /// <param name="chatId">The ID of the chat to which the message belongs.</param>
         /// <param name="sentDateTime">The date and time when the message was sent.</param>
         /// <param name="userName">The name of the user who sent the message.</param>
-        public MessageChatDTO(int id, string message, int userId, int chatId, DateTime sentDateTime, string userName)
+        public MessageChatDTO(string message, int userId, int chatId, DateTime sentDateTime, string userName)
         {
-            this.Id = id;
             this.Message = message;
             this.UserId = userId;
             this.ChatId = chatId;
             this.SentDateTime = sentDateTime;
             this.UserName = userName;
         }
-
-        /// <summary>
-        /// Gets or sets the Id of the message.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the message content.

@@ -76,6 +76,26 @@ namespace Team3.ModelViews.Implementations
         }
 
         /// <summary>
+        /// add a notification
+        /// </summary>
+        /// <param name="notification"></param>
+        /// <returns></returns>
+        public int AddNotification(Notification notification)
+        {
+            return this.notificationDatabaseService.AddNotification(notification);
+        }
+
+        /// <summary>
+        /// get a notification
+        /// </summary>
+        /// <param name="notificationId"></param>
+        /// <returns></returns>
+        public Notification GetNotificationById(int notificationId)
+        {
+            return this.notificationDatabaseService.GetNotificationById(notificationId);
+        }
+
+        /// <summary>
         /// / Gets the notification by id.
         /// </summary>
         /// <param name="userId">the id of the user.</param>

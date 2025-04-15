@@ -55,5 +55,31 @@ namespace Team3.DatabaseServices.Implementations
                 throw new Exception("Error retrieving patient", e);
             }
         }
+
+        /// <summary>
+        /// add a patient
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
+        public void AddPatient(Patient patient)
+        {
+            const string query = "INSERT INTO Patients userId) VALUES (@userId)";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@userId", patient.UserId);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error adding patient", e);
+            }
+        }
     }
 }
