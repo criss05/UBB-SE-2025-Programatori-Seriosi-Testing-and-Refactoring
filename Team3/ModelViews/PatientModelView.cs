@@ -4,11 +4,6 @@
 
 namespace Team3.ModelViews
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.DatabaseServices;
     using Team3.Models;
 
@@ -22,16 +17,17 @@ namespace Team3.ModelViews
         /// <summary>
         /// Initializes a new instance of the <see cref="PatientModelView"/> class.
         /// </summary>
-        public PatientModelView()
+        /// <param name="patientDatabaseService">Injected patient database service.</param>
+        public PatientModelView(IPatientDatabaseService patientDatabaseService)
         {
-            this.patientModel = PatientDatabaseService.Instance;
+            this.patientModel = patientDatabaseService;
         }
 
         /// <summary>
         /// Get a patient by id.
         /// </summary>
-        /// <param name="id">Th id of the patient.</param>
-        /// <returns>The patient with the speficied id.</returns>
+        /// <param name="id">The id of the patient.</param>
+        /// <returns>The patient with the specified id.</returns>
         public Patient GetPatientById(int id)
         {
             return this.patientModel.GetPatientById(id);

@@ -21,9 +21,10 @@ namespace Team3.ModelViews
         /// <summary>
         /// Initializes a new instance of the <see cref="MedicalRecordModelView"/> class.
         /// </summary>
-        public MedicalRecordModelView()
+        public MedicalRecordModelView(string dbConnString)
         {
-            this.medicalRecordModel = MedicalRecordDatabaseService.Instance;
+            // Pass dbConnString to the MedicalRecordDatabaseService constructor
+            this.medicalRecordModel = new MedicalRecordDatabaseService(dbConnString);
         }
 
         /// <summary>
@@ -35,31 +36,5 @@ namespace Team3.ModelViews
         {
             return this.medicalRecordModel.GetMedicalRecordById(id);
         }
-
-        // Metodă pentru obținerea fișelor medicale pe baza doctorului și intervalului de timp
-        // public List<MedicalRecord> GetMedicalRecordsByDoctorID(int doctorId, DateOnly startDate, DateOnly endDate)
-        // {
-        //    try
-        //    {
-        //        Get all medical records from the database
-        //        var allRecords = _medicalRecordModel.GetMedicalRecords();
-        //        Filter records by doctorId and date range
-        //        var filteredRecords = allRecords.FindAll(record =>
-        //            record.DoctorId == doctorId &&
-        //            record.recordDate >= startDate &&
-        //            record.recordDate <= endDate
-        //        );
-        //        if (filteredRecords.Count == 0)
-        //        {
-        //            Debug.WriteLine($"No medical records found for Doctor ID: {doctorId} between {startDate} and {endDate}.");
-        //        }
-        //        return filteredRecords;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine($"Error filtering medical records by Doctor ID: {ex.Message}");
-        //        throw;
-        //    }
-        // }
     }
 }

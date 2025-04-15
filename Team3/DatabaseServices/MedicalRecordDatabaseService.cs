@@ -8,35 +8,24 @@ namespace Team3.DatabaseServices
 {
     public class MedicalRecordDatabaseService : IMedicalRecordDatabaseService
     {
-        private static MedicalRecordDatabaseService? instance;
-        private static readonly object LockObject = new object();
-        private MedicalRecordDatabaseService()
-        {
+        private readonly string dbConnString;
 
-        }
-        public static MedicalRecordDatabaseService Instance
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MedicalRecordDatabaseService"/> class.
+        /// </summary>
+        /// <param name="dbConnString">The database connection string.</param>
+        public MedicalRecordDatabaseService(string _dbConnString)
         {
-            get
-            {
-
-                lock (LockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new MedicalRecordDatabaseService();
-                    }
-                    return instance;
-                }
-            }
+            this.dbConnString = _dbConnString;
         }
-        // maybe we don't need this   
+
         public MedicalRecord GetMedicalRecordById(int id)
         {
             const string query = "SELECT * FROM medicalrecords WHERE id = @id;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(Config.DbConnectionString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -46,7 +35,12 @@ namespace Team3.DatabaseServices
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         reader.Read();
-                        return new MedicalRecord((int)reader[0], (int)reader[1], (int)reader[2], (DateTime)reader[3]); 
+                        return new MedicalRecord(
+                            (int)reader[0],
+                            (int)reader[1],
+                            (int)reader[2],
+                            (DateTime)reader[3]
+                        );
                     }
                 }
             }

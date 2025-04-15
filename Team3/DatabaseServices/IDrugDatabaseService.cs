@@ -14,6 +14,6 @@ namespace Team3.DatabaseServices
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public Drug getDrugById(int Id);
+        public Drug GetDrugById(int Id);
     }
 }
