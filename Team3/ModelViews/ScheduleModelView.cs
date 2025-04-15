@@ -1,8 +1,4 @@
-﻿// <copyright file="ScheduleModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews
+﻿namespace Team3.ModelViews
 {
     using System;
     using System.Collections.Generic;
@@ -17,14 +13,15 @@ namespace Team3.ModelViews
     /// </summary>
     public class ScheduleModelView : IScheduleViewModel
     {
-        private readonly IScheduleDatabaseService scheduleModel;
+        private readonly IScheduleDatabaseService scheduleDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleModelView"/> class.
         /// </summary>
-        public ScheduleModelView()
+        /// <param name="scheduleDatabaseService">The service responsible for schedule data access.</param>
+        public ScheduleModelView(IScheduleDatabaseService scheduleDatabaseService)
         {
-            this.scheduleModel = ScheduleDatabaseService.Instance;
+            this.scheduleDatabaseService = scheduleDatabaseService;
             this.Schedules = new ObservableCollection<Schedule>();
         }
 
@@ -44,7 +41,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var schedules = this.scheduleModel.GetAllSchedules();
+                var schedules = this.scheduleDatabaseService.GetAllSchedules();
                 var filteredSchedules = new List<Schedule>();
 
                 foreach (var schedule in schedules)

@@ -34,7 +34,22 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the notification detail view.
         /// </summary>
-        private INotificationModelView ViewModel { get; } = new NotificationModelView(new AppointmentModelView(new AppointmentDatabaseService("Server=localhost\\SQLEXPRESS;Database=Team3;Trusted_Connection=True;TrustServerCertificate=True;")));
+        private INotificationModelView ViewModel { get; } = new NotificationModelView(
+        new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString)),
+        new DoctorModelView(
+            new DoctorDatabaseService(Config.DbConnectionString),
+            new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
+            new ScheduleModelView(new ScheduleDatabaseService(Config.DbConnectionString)),
+            new UserModelView(new UserDatabaseService(Config.DbConnectionString))
+        ),
+        new UserModelView(new UserDatabaseService(Config.DbConnectionString)),
+        new PatientModelView(new PatientDatabaseService(Config.DbConnectionString)),
+        new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
+        new DrugModelView(new DrugDatabaseService(Config.DbConnectionString)),
+        new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString)),
+        new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString)),
+        new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString))
+        );
 
         /// <summary>
         /// Handles the navigation to this page.

@@ -33,7 +33,7 @@ namespace Team3.ModelViews
         {
             Debug.WriteLine("MessageModelView created");
             this.messageModel = MessageDatabaseService.Instance;
-            this.userModelView = new UserModelView();
+            this.userModelView = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
             this.Messages = new ObservableCollection<MessageChatDTO>();
         }
 
