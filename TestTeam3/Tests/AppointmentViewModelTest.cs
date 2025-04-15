@@ -4,9 +4,11 @@
 
 using System;
 using Moq;
-using Team3.ModelViews;
+using Team3.ModelViews.Implementations;
+using Team3.ModelViews.Interfaces;
+using Team3.DatabaseServices.Interfaces;
+using Team3.DatabaseServices.Implementations;
 using Team3.Models;
-using Team3.DatabaseServices;
 using Xunit;
 using System.Reflection;
 

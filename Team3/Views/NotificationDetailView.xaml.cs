@@ -9,9 +9,11 @@ namespace Team3.Views
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
-    using Team3.DatabaseServices;
+    using Team3.DatabaseServices.Implementations;
+    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
-    using Team3.ModelViews;
+    using Team3.ModelViews.Implementations;
+    using Team3.ModelViews.Interfaces;
 
     /// <summary>
     /// Interaction logic for NotificationDetailView.xaml.

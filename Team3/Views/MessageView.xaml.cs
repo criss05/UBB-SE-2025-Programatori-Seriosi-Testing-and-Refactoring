@@ -17,7 +17,8 @@ namespace Team3.Views
     using Microsoft.UI.Xaml.Input;
     using Microsoft.UI.Xaml.Media;
     using Microsoft.UI.Xaml.Navigation;
-    using Team3.ModelViews;
+    using Team3.ModelViews.Implementations;
+    using Team3.ModelViews.Interfaces;
     using Windows.Foundation;
     using Windows.Foundation.Collections;
 

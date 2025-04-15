@@ -18,9 +18,11 @@ namespace Team3.Views
     using Microsoft.UI.Xaml.Input;
     using Microsoft.UI.Xaml.Media;
     using Microsoft.UI.Xaml.Navigation;
-    using Team3.DatabaseServices;
+    using Team3.DatabaseServices.Implementations;
+    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
-    using Team3.ModelViews;
+    using Team3.ModelViews.Implementations;
+    using Team3.ModelViews.Interfaces;
     using Windows.Foundation;
     using Windows.Foundation.Collections;
 
@@ -53,9 +55,9 @@ namespace Team3.Views
 
                 await this.ShowDialog("Review added successfully!", "Success");
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Debug.WriteLine($"Error adding review: {ex.Message}");
+                Debug.WriteLine($"Error adding review: {exception.Message}");
                 await this.ShowDialog("Invalid input. Please check your entries.", "Error");
             }
         }
