@@ -12,7 +12,7 @@ namespace Team3.ModelViews
     /// </summary>
     public class PatientModelView : IPatientModelView
     {
-        private readonly IPatientDatabaseService patientModel;
+        private readonly IPatientDatabaseService patientDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PatientModelView"/> class.
@@ -20,7 +20,7 @@ namespace Team3.ModelViews
         /// <param name="patientDatabaseService">Injected patient database service.</param>
         public PatientModelView(IPatientDatabaseService patientDatabaseService)
         {
-            this.patientModel = patientDatabaseService;
+            this.patientDatabaseService = patientDatabaseService;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Team3.ModelViews
         /// <returns>The patient with the specified id.</returns>
         public Patient GetPatientById(int id)
         {
-            return this.patientModel.GetPatientById(id);
+            return this.patientDatabaseService.GetPatientById(id);
         }
     }
 }

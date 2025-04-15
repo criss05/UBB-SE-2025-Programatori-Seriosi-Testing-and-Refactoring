@@ -9,7 +9,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices
 {
-    public class TreatmentDrugDatabaseService : ITreatmentDrugService
+    public class TreatmentDrugDatabaseService : ITreatmentDrugDatabaseService
     {
         private static TreatmentDrugDatabaseService? instance;
         private static readonly object LockObject = new object();
@@ -57,7 +57,7 @@ namespace Team3.DatabaseServices
                 throw new Exception("Error adding treatmentdrug", e);
             }
         }
-        public List<TreatmentDrug> getTreatmentDrugsById(int treatmentId)
+        public List<TreatmentDrug> GetTreatmentDrugsById(int treatmentId)
         {
             const string query = "SELECT * FROM treatments_drugs WHERE treatment_id = @treatment_id";
             try

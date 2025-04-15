@@ -16,15 +16,15 @@ namespace Team3.ModelViews
     /// </summary>
     public class MedicalRecordModelView : IMedicalRecordModelView
     {
-        private readonly MedicalRecordDatabaseService medicalRecordModel;
+        private readonly MedicalRecordDatabaseService medicalRecordDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MedicalRecordModelView"/> class.
         /// </summary>
-        public MedicalRecordModelView(string dbConnString)
+        public MedicalRecordModelView(MedicalRecordDatabaseService _medicalRecordDatabaseService)
         {
             // Pass dbConnString to the MedicalRecordDatabaseService constructor
-            this.medicalRecordModel = new MedicalRecordDatabaseService(dbConnString);
+            this.medicalRecordDatabaseService = _medicalRecordDatabaseService;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Team3.ModelViews
         /// <returns>The Medical record based on the given id.</returns>
         public MedicalRecord GetMedicalRecordById(int id)
         {
-            return this.medicalRecordModel.GetMedicalRecordById(id);
+            return this.medicalRecordDatabaseService.GetMedicalRecordById(id);
         }
     }
 }

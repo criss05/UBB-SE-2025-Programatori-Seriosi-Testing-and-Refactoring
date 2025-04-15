@@ -17,7 +17,7 @@ namespace Team3.ModelViews
     /// </summary>
     internal class ChatViewModel : IChatModelView
     {
-        private readonly ChatDatabaseService chatModel;
+        private readonly ChatDatabaseService chatDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChatViewModel"/> class and loads all chats.
@@ -26,7 +26,7 @@ namespace Team3.ModelViews
         {
             this.Chats = new ObservableCollection<Chat>();
             this.LoadAllChats();
-            this.chatModel = ChatDatabaseService.Instance;
+            this.chatDatabaseService = ChatDatabaseService.Instance;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Team3.ModelViews
         {
             try
             {
-                var chatList = this.chatModel.getChatsByUserId(this.UserID);
+                var chatList = this.chatDatabaseService.getChatsByUserId(this.UserID);
 
                 if (chatList != null && chatList.Any())
                 {
@@ -74,7 +74,7 @@ namespace Team3.ModelViews
         /// <returns>List of all chats for the user and the messages from the chat.</returns>
         public Dictionary<Chat, string> GetChatsByUserId(int id)
         {
-            List<Chat> chats = this.chatModel.getChatsByUserId(id);
+            List<Chat> chats = this.chatDatabaseService.getChatsByUserId(id);
 
             Dictionary<Chat, string> chatDict = new Dictionary<Chat, string>();
             foreach (Chat chat in chats)
@@ -91,7 +91,7 @@ namespace Team3.ModelViews
         /// <param name="chat">The chat.</param>
         public void AddNewChat(Chat chat)
         {
-            this.chatModel.AddNewChat(chat.User1, chat.User2);
+            this.chatDatabaseService.AddNewChat(chat.User1, chat.User2);
             this.Chats.Add(chat);
         }
 
@@ -111,7 +111,7 @@ namespace Team3.ModelViews
         /// <returns>The chats with the specific name.</returns>
         public List<Chat> GetChatsByName(string name)
         {
-            List<Chat> chats = this.chatModel.getChatsByUserId(this.UserID);
+            List<Chat> chats = this.chatDatabaseService.getChatsByUserId(this.UserID);
             return chats.Where(chat => chat.User1.ToString().Contains(name) || chat.User2.ToString().Contains(name)).ToList();
         }
 

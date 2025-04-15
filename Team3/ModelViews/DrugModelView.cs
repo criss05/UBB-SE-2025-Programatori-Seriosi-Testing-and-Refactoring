@@ -16,9 +16,9 @@
         /// Constructor for DrugModelView.
         /// </summary>
         /// <param name="dbConnString">The database connection string.</param>
-        public DrugModelView(string dbConnString)
+        public DrugModelView(IDrugDatabaseService _drugDatabaseService)
         {
-            this.drugDatabaseService = new DrugDatabaseService(dbConnString);
+            this.drugDatabaseService = _drugDatabaseService;
         }
 
         /// <summary>
