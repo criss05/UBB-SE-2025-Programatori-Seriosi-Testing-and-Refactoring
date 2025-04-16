@@ -37,7 +37,6 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             messages.Add(new Message(
-                                id: reader.GetInt32(0),
                                 content: reader.GetString(1),
                                 userId: reader.GetInt32(2),
                                 chatId: reader.GetInt32(3),

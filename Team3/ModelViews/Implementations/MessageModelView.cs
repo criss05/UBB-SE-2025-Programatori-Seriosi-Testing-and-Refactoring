@@ -55,7 +55,7 @@
             foreach (Message message in messages)
             {
                 User user = userModelView.GetUserById(message.UserId);
-                Messages.Add(new MessageChatDTO(message.Id, message.Content, message.UserId, message.ChatId, message.SentDateTime, user.Name));
+                Messages.Add(new MessageChatDTO(message.Content, message.UserId, message.ChatId, message.SentDateTime, user.Name));
             }
         }
 
