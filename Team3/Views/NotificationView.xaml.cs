@@ -21,7 +21,7 @@ namespace Team3.Views
     public sealed partial class NotificationView : Page
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationView"/> class.
+        /// Initializes a new instance of the <see cref="NotificationView"/> class..
         /// </summary>
         public NotificationView()
         {
