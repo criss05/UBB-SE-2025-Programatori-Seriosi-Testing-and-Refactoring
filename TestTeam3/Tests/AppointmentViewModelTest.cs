@@ -1,46 +1,39 @@
-﻿// <copyright file="AppointmentModelViewTests.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-using System;
+﻿using System;
 using Moq;
-using Team3.ModelViews;
+using Team3.ModelViews.Implementations;
+using Team3.ModelViews.Interfaces;
+using Team3.DatabaseServices.Interfaces;
 using Team3.Models;
-using Team3.DatabaseServices;
 using Xunit;
-using System.Reflection;
 
 namespace Team3.Tests.ModelViewsTests
 {
     public class AppointmentModelViewTests
     {
         private readonly Mock<IAppointmentDatabaseService> mockDatabaseService;
+        private readonly IAppointmentModelView appointmentModelView;
+        private readonly static int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
 
         public AppointmentModelViewTests()
         {
             this.mockDatabaseService = new Mock<IAppointmentDatabaseService>();
-
-            // Replace the singleton instance with our mock using reflection
-            typeof(AppointmentDatabaseService)
-                .GetField("instance", BindingFlags.Static | BindingFlags.NonPublic)
-                ?.SetValue(null, this.mockDatabaseService.Object);
+            this.appointmentModelView = new AppointmentModelView(this.mockDatabaseService.Object);
         }
 
         [Fact]
         public void AddNewAppointment_WhenCalled_ShouldCallDatabaseServiceWithSameAppointment()
         {
             // Arrange
-            var viewModel = new AppointmentModelView();
             var appointment = new Appointment(
-                id: 1,
-                doctorId: 101,
-                patientId: 202,
+                id: DUMMY_ID_BECAUSE_IT_IS_NOT_USED,
+                doctorId: 1,
+                patientId: 2,
                 appointmentDateTime: new DateTime(2025, 5, 1, 14, 30, 0),
                 location: "Room A"
             );
 
             // Act
-            viewModel.AddNewAppointment(appointment);
+            this.appointmentModelView.AddNewAppointment(appointment);
 
             // Assert
             this.mockDatabaseService.Verify(s => s.AddNewAppointment(appointment), Times.Once);
@@ -50,24 +43,23 @@ namespace Team3.Tests.ModelViewsTests
         public void GetAppointmentById_WhenCalledWithValidId_ShouldReturnAppointmentFromDatabase()
         {
             // Arrange
-            var viewModel = new AppointmentModelView();
             var expectedAppointment = new Appointment(
-                id: 42,
-                doctorId: 999,
-                patientId: 888,
-                appointmentDateTime: new DateTime(2025, 6, 10, 10, 0, 0),
-                location: "Clinic B"
+                id: DUMMY_ID_BECAUSE_IT_IS_NOT_USED,
+                doctorId: 1,
+                patientId: 2,
+                appointmentDateTime: new DateTime(2025, 5, 1, 14, 30, 0),
+                location: "Room A"
             );
 
             this.mockDatabaseService
-                .Setup(s => s.GetAppointmentById(42))
+                .Setup(s => s.GetAppointmentById(1))
                 .Returns(expectedAppointment);
 
             // Act
-            var result = viewModel.GetAppointmentById(42);
+            var result = this.appointmentModelView.GetAppointmentById(1);
 
             // Assert
-            Xunit.Assert.Equal(expectedAppointment, result);
+            Assert.Equal(expectedAppointment, result);
         }
     }
 }

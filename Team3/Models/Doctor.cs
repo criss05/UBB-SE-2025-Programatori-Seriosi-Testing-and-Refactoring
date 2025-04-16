@@ -5,10 +5,6 @@
 namespace Team3.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Represents a doctor in the system.
@@ -18,22 +14,20 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Doctor"/> class.
         /// </summary>
-        /// <param name="id">The id of the doctor.</param>
         /// <param name="userId">The id of the user.</param>
-        public Doctor(int id, int userId)
+        public Doctor(int userId)
         {
-            this.Id = id;
             this.UserId = userId;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the doctor.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier for the user associated with the doctor.
         /// </summary>
         public int UserId { get; set; }
+
+        public override string ToString()
+        {
+            return $"Doctor(UserId: {this.UserId})";
+        }
     }
 }

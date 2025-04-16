@@ -1,22 +1,15 @@
-﻿// <copyright file="MedicalRecord.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-using System;
-using System.Collections.Generic;
-using Microsoft.UI.Xaml.Controls;
-
-/// <summary>
+﻿/// <summary>
 /// This class represents a medical record.
 /// </summary>
+using System;
 public class MedicalRecord
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MedicalRecord"/> class.
     /// </summary>
-    /// <param name="id">The Id of the record.</param>
-    /// <param name="doctorId">The doctor Id.</param>
-    /// <param name="patientId">The patient Id.</param>
+    /// <param name="id">The medical record ID.</param>
+    /// <param name="doctorId">The doctor ID.</param>
+    /// <param name="patientId">The patient ID.</param>
     /// <param name="medicalRecordDateTime">The record date and time.</param>
     public MedicalRecord(int id, int doctorId, int patientId, DateTime medicalRecordDateTime)
     {
@@ -27,7 +20,7 @@ public class MedicalRecord
     }
 
     /// <summary>
-    /// Gets or sets the ID of the medical record.
+    /// Gets or sets the unique identifier for the medical record.
     /// </summary>
     public int Id { get; set; }
 
@@ -52,6 +45,6 @@ public class MedicalRecord
     /// <returns>A string representation of the medical record.</returns>
     public override string ToString()
     {
-        return $"[MedicalRecord] ID: {this.Id},Doctor ID : {this.DoctorId}, Patient ID: {this.PatientId}, ";
+        return $"MedicalRecord(Id: {this.Id}, DoctorId: {this.DoctorId}, PatientId: {this.PatientId}, MedicalRecordDateTime: {this.MedicalRecordDateTime})";
     }
 }

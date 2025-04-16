@@ -10,7 +10,10 @@ namespace Team3.Views
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
     using Team3.Models;
-    using Team3.ModelViews;
+    using Team3.ModelViews.Implementations;
+    using Team3.ModelViews.Interfaces;
+    using Team3.DatabaseServices.Interfaces;
+    using Team3.DatabaseServices.Implementations;
 
     /// <summary>
     /// Interaction logic for NotificationView.xaml.
@@ -23,7 +26,7 @@ namespace Team3.Views
         public NotificationView()
         {
             this.InitializeComponent();
-            this.NotificationsListView.DataContext = this.ModelView;
+            this.NotificationsListView.DataContext = this.NotificationModelView;
         }
 
         /// <summary>
@@ -34,8 +37,18 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the notification view.
         /// </summary>
-        public INotificationModelView ModelView { get; } = new NotificationModelView();
+        private readonly IAppointmentModelView appointmentModelView = new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString));
+        private readonly IUserModelView userModelView = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
+        private readonly IPatientModelView patientModelView = new PatientModelView(new PatientDatabaseService(Config.DbConnectionString));
+        private readonly IMedicalRecordModelView medicalRecordModelView = new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString));
+        private readonly IDrugModelView drugModelView = new DrugModelView(new DrugDatabaseService(Config.DbConnectionString));
+        private readonly ITreatmentDrugModelView treatmentDrugModelView = new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString));
+        private readonly ITreatmentModelView treatmentModelView = new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString));
+        private readonly IReviewModelView reviewModelView = new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString));
+        private readonly IDoctorModelView doctorModelView = new DoctorModelView(new DoctorDatabaseService(Config.DbConnectionString), new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)), new ScheduleModelView(new ScheduleDatabaseService(Config.DbConnectionString)), new UserModelView(new UserDatabaseService(Config.DbConnectionString)));
 
+        // Now pass all of them to the NotificationModelView
+        public INotificationModelView NotificationModelView { get; }
         /// <summary>
         /// Handles the navigation to this page.
         /// </summary>
@@ -46,10 +59,7 @@ namespace Team3.Views
             if (e.Parameter is int userId)
             {
                 this.UserId = userId;
-                this.ModelView.LoadNotifications(userId);
-
-                // In a real app, you might filter notifications by user
-                Debug.WriteLine($"Loading notifications for user: ID={userId}");
+                this.NotificationModelView.LoadNotifications(userId);
             }
         }
 
@@ -62,31 +72,28 @@ namespace Team3.Views
         {
             if (e.ClickedItem is Notification selectedNotification)
             {
-                Debug.WriteLine($"Selected Notification: ID={selectedNotification.Id}, Date={selectedNotification.DeliveryDateTime}");
-
-                // Navigate to the notification detail page passing the notification
                 this.Frame.Navigate(typeof(NotificationDetailView), selectedNotification);
             }
         }
 
         private void AddAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-            this.ModelView.AddNewAppointment();
-        }
 
-        private void DeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.ModelView.DeleteAppointment();
         }
 
         private void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
         {
-            this.ModelView.AddNewTreatment();
+
         }
 
         private void AddReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            this.ModelView.AddNewReview();
+
+        }
+
+        private void DeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

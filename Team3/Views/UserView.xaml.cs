@@ -7,8 +7,11 @@ namespace Team3.Views
     using System.Diagnostics;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
+    using Team3.DatabaseServices.Interfaces;
+    using Team3.DatabaseServices.Implementations;
     using Team3.Models;
-    using Team3.ModelViews;
+    using Team3.ModelViews.Implementations;
+    using Team3.ModelViews.Interfaces;
 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -27,7 +30,7 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the user view.
         /// </summary>
-        public IUserModelView ViewModel { get; } = new UserModelView();
+        public IUserModelView ViewModel { get; } = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
 
         /// <summary>
         /// Handles the item click event for the users list view.

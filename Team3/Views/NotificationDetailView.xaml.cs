@@ -9,8 +9,11 @@ namespace Team3.Views
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
+    using Team3.DatabaseServices.Implementations;
+    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
-    using Team3.ModelViews;
+    using Team3.ModelViews.Implementations;
+    using Team3.ModelViews.Interfaces;
 
     /// <summary>
     /// Interaction logic for NotificationDetailView.xaml.
@@ -33,7 +36,23 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the notification detail view.
         /// </summary>
-        private INotificationModelView ViewModel { get; } = new NotificationModelView();
+        private INotificationModelView ViewModel { get; } = new NotificationModelView(
+        new NotificationDatabaseService(Config.DbConnectionString),
+        new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString)),
+        new DoctorModelView(
+            new DoctorDatabaseService(Config.DbConnectionString),
+            new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
+            new ScheduleModelView(new ScheduleDatabaseService(Config.DbConnectionString)),
+            new UserModelView(new UserDatabaseService(Config.DbConnectionString))
+        ),
+        new UserModelView(new UserDatabaseService(Config.DbConnectionString)),
+        new PatientModelView(new PatientDatabaseService(Config.DbConnectionString)),
+        new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
+        new DrugModelView(new DrugDatabaseService(Config.DbConnectionString)),
+        new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString)),
+        new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString)),
+        new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString))
+        );
 
         /// <summary>
         /// Handles the navigation to this page.
@@ -45,7 +64,7 @@ namespace Team3.Views
             if (e.Parameter is Notification notification)
             {
                 this.SelectedNotification = notification;
-                Debug.WriteLine($"Viewing notification detail: ID={this.SelectedNotification.Id}, Message={this.SelectedNotification.Message}");
+                Debug.WriteLine($"Viewing notification detail:Message={this.SelectedNotification.Message}");
             }
         }
 
@@ -56,7 +75,7 @@ namespace Team3.Views
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            this.ViewModel.DeleteNotification(this.SelectedNotification.Id);
+            this.ViewModel.DeleteNotification(this.SelectedNotification.UserId);
 
             // if (deleted)
             // {

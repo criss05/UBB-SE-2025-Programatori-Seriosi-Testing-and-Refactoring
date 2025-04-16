@@ -11,7 +11,10 @@ namespace Team3.Views
     using System.Threading.Tasks;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Team3.ModelViews;
+    using Team3.DatabaseServices.Implementations;
+    using Team3.DatabaseServices.Interfaces;
+    using Team3.ModelViews.Implementations;
+    using Team3.ModelViews.Interfaces;
 
     /// <summary>
     /// Interaction logic for TreatmentView.xaml.
@@ -27,7 +30,7 @@ namespace Team3.Views
         public TreatmentView()
         {
             this.InitializeComponent();
-            this.treatmentModelView = new TreatmentModelView();
+            this.treatmentModelView = new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString));
         }
 
         private async void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
@@ -40,9 +43,9 @@ namespace Team3.Views
                 // treatmentModelView.addTreatmentButtonHandler(id, medicarecordId);
                 await this.ShowDialog("Treatment added successfully!", "Success");
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Debug.WriteLine($"Error adding review: {ex.Message}");
+                Debug.WriteLine($"Error adding review: {exception.Message}");
                 await this.ShowDialog("Invalid input. Please check your entries.", "Error");
             }
         }
