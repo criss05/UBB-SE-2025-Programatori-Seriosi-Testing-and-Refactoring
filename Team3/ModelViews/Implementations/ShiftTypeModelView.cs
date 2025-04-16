@@ -53,13 +53,12 @@ namespace Team3.ModelViews.Implementations
                     if (shiftType.ShiftTypeStartTime >= startTime && shiftType.ShiftTypeEndTime <= endTime)
                     {
                         filteredShiftTypes.Add(shiftType);
-                        Debug.WriteLine(shiftType.ToString());
                     }
                 }
 
                 if (filteredShiftTypes.Count == 0)
                 {
-                    Debug.WriteLine($"No shift types found in the time range {startTime} - {endTime}");
+                   throw new Exception($"No shift types found in the time range {startTime} - {endTime}");
                 }
 
                 return filteredShiftTypes;
@@ -101,13 +100,12 @@ namespace Team3.ModelViews.Implementations
                 {
                     foreach (var shiftType in shiftTypeList)
                     {
-                        Debug.WriteLine(shiftType.ToString());
                         ShiftTypes.Add(shiftType);
                     }
                 }
                 else
                 {
-                    Debug.WriteLine("No shift types available.");
+                    throw new Exception("No shift types available.");
                 }
             }
             catch (Exception exception)

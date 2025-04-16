@@ -22,7 +22,7 @@
         /// <param name="roomDatabaseService">The database service for rooms.</param>
         public RoomModelView(IRoomDatabaseService roomDatabaseService)
         {
-            this.roomDatabaseService = roomDatabaseService ?? throw new ArgumentNullException(nameof(roomDatabaseService));
+            this.roomDatabaseService = roomDatabaseService;
             Rooms = new ObservableCollection<Room>();
             RoomsInfo = new ObservableCollection<Room>();
             LoadAllRooms();
@@ -52,7 +52,7 @@
 
                 if (!filteredRooms.Any())
                 {
-                    Debug.WriteLine($"No rooms found for Department ID: {departmentId}");
+                    throw new Exception($"No rooms found for Department ID: {departmentId}");
                 }
 
                 return filteredRooms;
@@ -76,7 +76,6 @@
                 {
                     foreach (var room in roomList)
                     {
-                        Debug.WriteLine($"Department ID: {room.DepartmentId}");
                         Rooms.Add(room);
                         RoomsInfo.Add(room);
                     }

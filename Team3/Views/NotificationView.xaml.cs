@@ -21,11 +21,23 @@ namespace Team3.Views
     public sealed partial class NotificationView : Page
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationView"/> class.
+        /// Initializes a new instance of the <see cref="NotificationView"/> class..
         /// </summary>
         public NotificationView()
         {
             this.InitializeComponent();
+            this.NotificationModelView = new NotificationModelView(
+                new NotificationDatabaseService(Config.DbConnectionString),
+                this.appointmentModelView,
+                this.doctorModelView,
+                this.userModelView,
+                this.patientModelView,
+                this.medicalRecordModelView,
+                this.drugModelView,
+                this.treatmentDrugModelView,
+                this.treatmentModelView,
+                this.reviewModelView
+            );
             this.NotificationsListView.DataContext = this.NotificationModelView;
         }
 

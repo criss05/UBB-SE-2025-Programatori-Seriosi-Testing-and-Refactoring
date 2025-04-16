@@ -1,39 +1,30 @@
-﻿// <copyright file="Schedule.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
+﻿/// <summary>
+/// Represents a schedule for a doctor.
+/// </summary>
+using System;
 namespace Team3.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Represents a schedule for a doctor.
-    /// </summary>
     public class Schedule
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Schedule"/> class.
         /// </summary>
-        /// <param name="scheduleId">The id of the schedule.</param>
+        /// <param name="id">The schedule ID.</param>
         /// <param name="scheduleWorkDay">The schedule work day.</param>
-        /// <param name="doctorId">The doctor id.</param>
-        /// <param name="shifTypeId">The shift id.</param>
-        public Schedule(int scheduleId, DateOnly scheduleWorkDay, int doctorId, int shifTypeId)
+        /// <param name="doctorId">The doctor ID.</param>
+        /// <param name="shiftTypeId">The shift type ID.</param>
+        public Schedule(int id, DateOnly scheduleWorkDay, int doctorId, int shiftTypeId)
         {
-            this.ScheduleId = scheduleId;
+            this.Id = id;
             this.ScheduleWorkDay = scheduleWorkDay;
             this.DoctorId = doctorId;
-            this.ShiftTypeId = shifTypeId;
+            this.ShiftTypeId = shiftTypeId;
         }
 
         /// <summary>
-        /// Gets or sets the unique identifier for the schedule.
+        /// Gets or sets the unique ID of the schedule.
         /// </summary>
-        public int ScheduleId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the date of the scheduled work day.
@@ -49,5 +40,11 @@ namespace Team3.Models
         /// Gets or sets the unique identifier for the shift type.
         /// </summary>
         public int ShiftTypeId { get; set; }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return $"Schedule(Id: {this.Id}, ScheduleWorkDay: {this.ScheduleWorkDay}, DoctorId: {this.DoctorId}, ShiftTypeId: {this.ShiftTypeId})";
+        }
     }
 }

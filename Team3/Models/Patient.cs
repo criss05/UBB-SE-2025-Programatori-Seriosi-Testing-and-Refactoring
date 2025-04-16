@@ -1,25 +1,15 @@
-// <copyright file="Patient.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
+/// <summary>
+/// Represents a patient in the system.
+/// </summary>
 namespace Team3.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Represents a patient in the system.
-    /// </summary>
     public class Patient
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Patient"/> class.
         /// </summary>
-        /// <param name="id">The id of the patient.</param>
-        /// <param name="userId">The is of the user.</param>
+        /// <param name="id">The patient ID.</param>
+        /// <param name="userId">The ID of the user associated with the patient.</param>
         public Patient(int id, int userId)
         {
             this.Id = id;
@@ -35,5 +25,10 @@ namespace Team3.Models
         /// Gets or sets the unique identifier for the user associated with the patient.
         /// </summary>
         public int UserId { get; set; }
+
+        public override string ToString()
+        {
+            return $"Patient(Id: {this.Id}, UserId: {this.UserId})";
+        }
     }
 }

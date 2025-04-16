@@ -25,8 +25,8 @@
         /// <param name="treatmentDrug">The treatment drug to be added.</param>
         public void AddNewTreatmentDrug(TreatmentDrug treatmentDrug)
         {
-            const string query = "INSERT INTO treatments_drugs(id, treatment_id, drug_id, quantity, starttime, endtime, startdate, nrdays) " +
-                                 "VALUES (@id, @treatment_id, @drug_id, @quantity, @starttime, @endtime, @startdate, @nrdays)";
+            const string query = "INSERT INTO treatments_drugs(treatment_id, drug_id, quantity, starttime, endtime, startdate, nrdays) " +
+                                 "VALUES (@treatment_id, @drug_id, @quantity, @starttime, @endtime, @startdate, @nrdays)";
 
             try
             {
@@ -34,7 +34,6 @@
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@id", treatmentDrug.Id);
                     command.Parameters.AddWithValue("@treatment_id", treatmentDrug.TreatmentId);
                     command.Parameters.AddWithValue("@drug_id", treatmentDrug.DrugId);
                     command.Parameters.AddWithValue("@quantity", treatmentDrug.Quantity);

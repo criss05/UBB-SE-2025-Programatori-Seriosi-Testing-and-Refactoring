@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using Team3.DatabaseServices.Interfaces;
-using Team3.Models;
 
 namespace Team3.DatabaseServices.Implementations
 {
+    using Team3.Models;
     public class MedicalRecordDatabaseService : IMedicalRecordDatabaseService
     {
         private readonly string dbConnString;

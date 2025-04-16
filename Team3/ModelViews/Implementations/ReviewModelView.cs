@@ -12,6 +12,7 @@
     public class ReviewModelView : IReviewModelView
     {
         private readonly IReviewDatabaseService reviewDatabaseService;
+        private readonly static int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReviewModelView"/> class.
@@ -52,7 +53,7 @@
         {
             Debug.WriteLine("Add button clicked");
 
-            Review newReview = new Review(medicalrecordId, message, stars);
+            Review newReview = new Review(DUMMY_ID_BECAUSE_IT_IS_NOT_USED, medicalrecordId, message, stars);
 
             this.AddNewReview(newReview);
 

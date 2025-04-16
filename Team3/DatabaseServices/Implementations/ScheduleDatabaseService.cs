@@ -33,7 +33,7 @@
                         while (reader.Read())
                         {
                             schedules.Add(new Schedule(
-                               reader.GetInt32(0),  // ScheduleId
+                               reader.GetInt32(0), // Id
                                DateOnly.FromDateTime(reader.GetDateTime(1)),  // Fixed: Convert to DateOnly
                                reader.GetInt32(2),  // DoctorId
                                reader.GetInt32(3)   // ShiftTypeId
