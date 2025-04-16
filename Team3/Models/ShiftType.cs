@@ -1,37 +1,29 @@
-﻿// <copyright file="ShiftType.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿using System;
 
+/// <summary>
+/// Represents a shift type with a start and end time.
+/// </summary>
 namespace Team3.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Represents a shift type with a start and end time.
-    /// </summary>
     public class ShiftType
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShiftType"/> class.
         /// </summary>
-        /// <param name="shiftTypeId">The id of the shift.</param>
+        /// <param name="id">The ID of the shift type.</param>
         /// <param name="shiftTypeStartTime">The start time of the shift.</param>
         /// <param name="shiftTypeEndTime">The end time of the shift.</param>
-        public ShiftType(int shiftTypeId, TimeOnly shiftTypeStartTime, TimeOnly shiftTypeEndTime)
+        public ShiftType(int id, TimeOnly shiftTypeStartTime, TimeOnly shiftTypeEndTime)
         {
-            this.ShiftTypeId = shiftTypeId;
+            this.Id = id;
             this.ShiftTypeStartTime = shiftTypeStartTime;
             this.ShiftTypeEndTime = shiftTypeEndTime;
         }
 
         /// <summary>
-        /// Gets or sets the unique identifier for the shift type.
+        /// Gets or sets the ID of the shift type.
         /// </summary>
-        public int ShiftTypeId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the start time of the shift type.
@@ -42,5 +34,10 @@ namespace Team3.Models
         /// Gets or sets the end time of the shift type.
         /// </summary>
         public TimeOnly ShiftTypeEndTime { get; set; }
+
+        public override string ToString()
+        {
+            return $"ShiftType(Id: {this.Id}, StartTime: {this.ShiftTypeStartTime}, EndTime: {this.ShiftTypeEndTime})";
+        }
     }
 }

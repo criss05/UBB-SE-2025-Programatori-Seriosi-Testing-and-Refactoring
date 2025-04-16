@@ -61,6 +61,7 @@
                                 throw new Exception("Appointment not found");
 
                             return new Appointment(
+                                (int)reader[0],
                                 (int)reader[1],
                                 (int)reader[2],
                                 (DateTime)reader[3],

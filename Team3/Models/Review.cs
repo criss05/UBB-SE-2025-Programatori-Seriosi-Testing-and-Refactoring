@@ -1,27 +1,17 @@
-﻿// <copyright file="Review.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
+﻿/// <summary>
+/// Class representing a review.
+/// </summary>
 namespace Team3.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
-
-    /// <summary>
-    /// Class representing a review.
-    /// </summary>
     public class Review
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Review"/> class.
         /// </summary>
-        /// <param name="medicalRecordId">The medical record id.</param>
-        /// <param name="message">The message.</param>
+      
+        /// <param name="id">The unique review ID.</param>
+        /// <param name="medicalRecordId">The medical record ID.</param>
+        /// <param name="message">The review message.</param>
         /// <param name="nrStars">The number of stars.</param>
         public Review(int medicalRecordId, string message, int nrStars)
         {
@@ -29,6 +19,11 @@ namespace Team3.Models
             this.Message = message;
             this.NrStars = nrStars;
         }
+
+        /// <summary>
+        /// Gets or sets the unique identifier for the review.
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the medical record ID associated with the review.
@@ -48,10 +43,10 @@ namespace Team3.Models
         /// <summary>
         /// Returns a string representation of the review.
         /// </summary>
-        /// <returns>string representation of the review.</returns>
+        /// <returns>String representation of the review.</returns>
         public override string ToString()
         {
-            return $"MedicalRecordId: {this.MedicalRecordId}, Message: {this.Message}, Stars: {this.NrStars}";
+            return $"Review(Id: {this.Id}, MedicalRecordId: {this.MedicalRecordId}, Message: \"{this.Message}\", Stars: {this.NrStars})";
         }
     }
 }

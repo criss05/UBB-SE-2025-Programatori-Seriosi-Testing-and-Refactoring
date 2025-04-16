@@ -42,7 +42,7 @@ namespace Team3.Models
         /// <returns>string representation of the treatment.</returns>
         public override string ToString()
         {
-            return $"Id: {this.Id}, MedicalRecordId: {this.MedicalRecordId}";
+            return $"Treatment(Id: {this.Id}, MedicalRecordId: {this.MedicalRecordId})";
         }
     }
 }

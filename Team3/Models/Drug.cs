@@ -1,26 +1,17 @@
-﻿// <copyright file="Drug.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿/// <summary>
+/// Represents a drug with its properties.
+/// </summary>
 
 namespace Team3.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Represents a drug with its properties.
-    /// </summary>
     public class Drug
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Drug"/> class.
         /// </summary>
-        /// <param name="id">The id of the drug.</param>
+        /// <param name="id">The unique identifier of the drug.</param>
         /// <param name="name">The name of the drug.</param>
-        /// <param name="administration">The way o administration.</param>
+        /// <param name="administration">The method of administration.</param>
         public Drug(int id, string name, string administration)
         {
             this.Id = id;
@@ -49,7 +40,7 @@ namespace Team3.Models
         /// <returns>string representation of the drug.</returns>
         public override string ToString()
         {
-            return $"Id: {this.Id}, Name: {this.Name}, Administration: {this.Administration}";
+            return $"Drug(Id: {this.Id}, Name: \"{this.Name}\", Administration: \"{this.Administration}\")";
         }
     }
 }

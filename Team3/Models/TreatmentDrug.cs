@@ -84,7 +84,7 @@ namespace Team3.Models
         /// <returns>a string representation of the treatment drug.</returns>
         public override string ToString()
         {
-            return $"Id: {this.Id}, TreatmentId:{this.TreatmentId}, DrugId: {this.DrugId}, Quantity: {this.Quantity}, StartTime: {this.StartTime},EndTime: {this.EndTime}, StartDate: {this.StartDate}, Days: {this.NrDays}";
+            return $"TreatmentDrug(Id: {this.Id}, TreatmentId:{this.TreatmentId}, DrugId: {this.DrugId}, Quantity: {this.Quantity}, StartTime: {this.StartTime},EndTime: {this.EndTime}, StartDate: {this.StartDate}, Days: {this.NrDays})";
         }
     }
 }

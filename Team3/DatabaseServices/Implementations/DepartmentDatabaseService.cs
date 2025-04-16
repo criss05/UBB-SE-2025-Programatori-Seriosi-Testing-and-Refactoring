@@ -52,9 +52,9 @@ namespace Team3.DatabaseServices.Implementations
                     return departments;
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error getting departments", e);
+                throw new Exception("Error getting departments", exception);
             }
         }
     }

@@ -22,6 +22,7 @@ namespace Team3.ModelViews.Implementations
         private static readonly string APPOINTMENT_CANCEL_NOTIFICATION_TEMPLATE = "Patient: @patient has canceled their upcoming appointment, scheduled for @datetime at @location.";
         private static readonly string REVIEW_NOTIFICATION_TEMPLATE = "A review for doctor @doctor was added: @message; number of starts: @nrStarts";
         private static readonly string MEDICATION_REMINDER_NOTIFICATION_TEMPLATE = "It's time to take @drug, Quantity: @quantity, @administration";
+        private static readonly int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
 
         private readonly INotificationDatabaseService notificationDatabaseService;
 
@@ -117,7 +118,7 @@ namespace Team3.ModelViews.Implementations
             Patient patient = patientModelView.GetPatientById(appointment.PatientId);
 
             string upcomingAppointmentNotificationMessage = GetUpcomingAppointmentNotificationMessage(appointment.AppointmentDateTime.ToString(), user.Name, appointment.Location);
-            int notificationId = notificationDatabaseService.AddNotification(new Notification(patient.UserId, appointment.AppointmentDateTime.AddDays(-1), upcomingAppointmentNotificationMessage));
+            int notificationId = notificationDatabaseService.AddNotification(new Notification(DUMMY_ID_BECAUSE_IT_IS_NOT_USED, patient.UserId, appointment.AppointmentDateTime.AddDays(-1), upcomingAppointmentNotificationMessage));
 
             notificationDatabaseService.AddAppointmentNotification(notificationId, appointmentId);
         }
@@ -138,7 +139,7 @@ namespace Team3.ModelViews.Implementations
             DateTime currentDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Utc);
 
             string appointmentCalcelNotificationMessage = GetAppointmentCancelNotificationMessage(user.Name, appointment.AppointmentDateTime.ToString(), appointment.Location);
-            int notificationId = notificationDatabaseService.AddNotification(new Notification(doctor.UserId, currentDateTime, appointmentCalcelNotificationMessage));
+            int notificationId = notificationDatabaseService.AddNotification(new Notification(DUMMY_ID_BECAUSE_IT_IS_NOT_USED, doctor.UserId, currentDateTime, appointmentCalcelNotificationMessage));
         }
 
         /// <summary>
@@ -188,7 +189,7 @@ namespace Team3.ModelViews.Implementations
                     {
                         DateOnly newDate = medicalRecordDate.AddDays(j);
                         DateTime dateTimeOfMedication = newDate.ToDateTime(TimeOnly.FromTimeSpan(doseTime));
-                        Notification notification = new Notification(patient.UserId, dateTimeOfMedication, notificationMessage);
+                        Notification notification = new Notification(DUMMY_ID_BECAUSE_IT_IS_NOT_USED, patient.UserId, dateTimeOfMedication, notificationMessage);
                         notificationDatabaseService.AddNotification(notification);
                     }
                 }
@@ -216,7 +217,7 @@ namespace Team3.ModelViews.Implementations
             {
                 if (searchedUser.Role.Equals("admin"))
                 {
-                    Notification notification = new Notification(searchedUser.Id, currentDateTime, notificationMessage);
+                    Notification notification = new Notification(DUMMY_ID_BECAUSE_IT_IS_NOT_USED, searchedUser.Id, currentDateTime, notificationMessage);
                     notificationDatabaseService.AddNotification(notification);
                 }
             }

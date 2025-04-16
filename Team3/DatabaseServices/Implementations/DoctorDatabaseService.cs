@@ -23,7 +23,7 @@ namespace Team3.DatabaseServices.Implementations
         /// <param name="dbConnString">The database connection string.</param>
         public DoctorDatabaseService(string _dbConnString)
         {
-            dbConnString = _dbConnString;
+           this. dbConnString = _dbConnString;
         }
 
         /// <inheritdoc/>
@@ -32,7 +32,7 @@ namespace Team3.DatabaseServices.Implementations
             const string query = "SELECT * FROM doctors WHERE id = @id";
             try
             {
-                using (SqlConnection connection = new SqlConnection(dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
                 {
                     connection.Open();
 
@@ -44,7 +44,7 @@ namespace Team3.DatabaseServices.Implementations
                         {
                             if (reader.Read())
                             {
-                                return new Doctor((int)reader[0], (int)reader[1]);
+                                return new Doctor((int)reader[1]);
                             }
                         }
                     }
