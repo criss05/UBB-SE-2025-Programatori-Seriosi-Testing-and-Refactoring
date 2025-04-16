@@ -49,7 +49,7 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the notification view.
         /// </summary>
-        private readonly IAppointmentModelView appointmentModelView = new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString));
+        private readonly IAppointmentModelView appointmentModelView = new AppointmentModelView(new AppointmentRepository(Config.DbConnectionString));
         private readonly IUserModelView userModelView = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
         private readonly IPatientModelView patientModelView = new PatientModelView(new PatientDatabaseService(Config.DbConnectionString));
         private readonly IMedicalRecordModelView medicalRecordModelView = new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString));

@@ -10,27 +10,27 @@
     /// </summary>
     public class AppointmentModelView : IAppointmentModelView
     {
-        private readonly IAppointmentDatabaseService appointmentDatabaseService;
+        private readonly IAppointmentRepository appointmentRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentModelView"/> class.
         /// </summary>
         /// <param name="appointmentModel">The appointment database service to use.</param>
-        public AppointmentModelView(IAppointmentDatabaseService _appointmentModelDatabaseService)
+        public AppointmentModelView(IAppointmentRepository _appointmentRepository)
         {
-            appointmentDatabaseService = _appointmentModelDatabaseService;
+            this.appointmentRepository = _appointmentRepository; ;
         }
 
         /// <inheritdoc/>
         public void AddNewAppointment(Appointment appointment)
         {
-            appointmentDatabaseService.AddNewAppointment(appointment);
+            this.appointmentRepository.AddNewAppointment(appointment);
         }
 
         /// <inheritdoc/>
         public Appointment GetAppointmentById(int id)
         {
-            return appointmentDatabaseService.GetAppointmentById(id);
+            return this.appointmentRepository.GetAppointmentById(id);
         }
     }
 }

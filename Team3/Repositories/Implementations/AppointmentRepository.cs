@@ -8,11 +8,11 @@
     /// <summary>
     /// Provides database operations for appointments.
     /// </summary>
-    public class AppointmentDatabaseService : IAppointmentDatabaseService
+    public class AppointmentRepository : IAppointmentRepository
     {
         private readonly string dbConnString;
 
-        public AppointmentDatabaseService(string _dbConnString)
+        public AppointmentRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

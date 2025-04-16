@@ -8,7 +8,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Interfaces
 {
-    public interface IAppointmentDatabaseService
+    public interface IAppointmentRepository
     {
         /// <summary>
         /// Add an appointment to the database

@@ -38,7 +38,7 @@ namespace Team3.Views
         /// </summary>
         private INotificationModelView ViewModel { get; } = new NotificationModelView(
         new NotificationDatabaseService(Config.DbConnectionString),
-        new AppointmentModelView(new AppointmentDatabaseService(Config.DbConnectionString)),
+        new AppointmentModelView(new AppointmentRepository(Config.DbConnectionString)),
         new DoctorModelView(
             new DoctorDatabaseService(Config.DbConnectionString),
             new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),

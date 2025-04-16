@@ -10,13 +10,13 @@ namespace Team3.Tests.ModelViewsTests
 {
     public class AppointmentModelViewTests
     {
-        private readonly Mock<IAppointmentDatabaseService> mockDatabaseService;
+        private readonly Mock<IAppointmentRepository> mockDatabaseService;
         private readonly IAppointmentModelView appointmentModelView;
         private readonly static int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
 
         public AppointmentModelViewTests()
         {
-            this.mockDatabaseService = new Mock<IAppointmentDatabaseService>();
+            this.mockDatabaseService = new Mock<IAppointmentRepository>();
             this.appointmentModelView = new AppointmentModelView(this.mockDatabaseService.Object);
         }
 
