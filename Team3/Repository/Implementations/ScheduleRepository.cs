@@ -6,12 +6,12 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
 
-    public class ScheduleDatabaseService : IScheduleDatabaseService
+    public class ScheduleRepository : IScheduleRepository
     {
         private readonly string dbConnString;
 
         // Constructor that accepts the connection string
-        public ScheduleDatabaseService(string _dbConnString)
+        public ScheduleRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

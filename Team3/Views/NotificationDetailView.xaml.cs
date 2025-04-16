@@ -43,7 +43,7 @@ namespace Team3.Views
         new DoctorModelView(
             new DoctorDatabaseService(Config.DbConnectionString),
             new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
-            new ScheduleModelView(new ScheduleDatabaseService(Config.DbConnectionString)),
+            new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))),
             new UserModelView(new UserDatabaseService(Config.DbConnectionString))
         ),
         new UserModelView(new UserDatabaseService(Config.DbConnectionString)),
