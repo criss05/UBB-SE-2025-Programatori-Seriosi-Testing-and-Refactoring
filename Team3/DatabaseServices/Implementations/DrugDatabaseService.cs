@@ -43,7 +43,7 @@
                     {
                         if (reader.Read())
                         {
-                            return new Drug(reader.GetString(1), reader.GetString(2));
+                            return new Drug(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
                         }
                         else
                         {

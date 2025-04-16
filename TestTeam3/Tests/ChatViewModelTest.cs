@@ -26,8 +26,8 @@ namespace Team3.Tests.ModelViewsTests
             int userId = 1;
             var expectedChats = new List<Chat>
         {
-            new Chat(userId, 2),
-            new Chat(userId, 3)
+            new Chat(1, userId, 2),
+            new Chat(2, userId, 3)
         };
             mockDbService.Setup(s => s.GetChatsByUserId(userId)).Returns(expectedChats);
             viewModel.SetUserId(userId);
@@ -43,7 +43,7 @@ namespace Team3.Tests.ModelViewsTests
         public void AddNewChat_ShouldCallDatabaseAndAddToList()
         {
             // Arrange
-            var chat = new Chat(1, 2);
+            var chat = new Chat(1, 1, 2);
 
             // Act
             viewModel.AddNewChat(chat);
@@ -60,8 +60,8 @@ namespace Team3.Tests.ModelViewsTests
             int userId = 1;
             var chats = new List<Chat>
             {
-                new Chat(userId, 2),
-                new Chat(userId, 3)
+                new Chat(1, userId, 2),
+                new Chat(2, userId, 3)
             };
 
             mockDbService.Setup(s => s.GetChatsByUserId(userId)).Returns(chats);
@@ -81,8 +81,8 @@ namespace Team3.Tests.ModelViewsTests
             viewModel.SetUserId(userId);
             var chats = new List<Chat>
         {
-            new Chat(userId, 2024),
-            new Chat(userId, 3033)
+            new Chat(1, userId, 2024),
+            new Chat(2, userId, 3033)
         };
 
             mockDbService.Setup(s => s.GetChatsByUserId(userId)).Returns(chats);

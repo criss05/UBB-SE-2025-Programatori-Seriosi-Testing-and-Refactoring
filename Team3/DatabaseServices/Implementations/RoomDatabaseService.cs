@@ -32,6 +32,7 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             rooms.Add(new Room(
+                                reader.GetInt32(0), // Id
                                 reader.GetInt32(1)  // DepartmentId
                             ));
                         }

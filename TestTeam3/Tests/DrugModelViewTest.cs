@@ -22,7 +22,7 @@ namespace Team3.Tests.ModelViewsTests
         public void GetDrugById_WithValidId_ShouldReturnDrug()
         {
             // Arrange
-            var expectedDrug = new Drug("Paracetamol", "Oral");
+            var expectedDrug = new Drug(1, "Paracetamol", "Oral");
             mockDrugDatabaseService
                 .Setup(s => s.GetDrugById(1))
                 .Returns(expectedDrug);
@@ -42,7 +42,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var drugId = 5;
-            var expectedDrug = new Drug("Ibuprofen", "Oral");
+            var expectedDrug = new Drug(5, "Ibuprofen", "Oral");
 
             mockDrugDatabaseService
                 .Setup(s => s.GetDrugById(drugId))

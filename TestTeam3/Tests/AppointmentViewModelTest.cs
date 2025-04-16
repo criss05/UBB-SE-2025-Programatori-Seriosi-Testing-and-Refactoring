@@ -12,6 +12,7 @@ namespace Team3.Tests.ModelViewsTests
     {
         private readonly Mock<IAppointmentDatabaseService> mockDatabaseService;
         private readonly IAppointmentModelView appointmentModelView;
+        private readonly static int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
 
         public AppointmentModelViewTests()
         {
@@ -24,6 +25,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var appointment = new Appointment(
+                id: DUMMY_ID_BECAUSE_IT_IS_NOT_USED,
                 doctorId: 1,
                 patientId: 2,
                 appointmentDateTime: new DateTime(2025, 5, 1, 14, 30, 0),
@@ -42,6 +44,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var expectedAppointment = new Appointment(
+                id: DUMMY_ID_BECAUSE_IT_IS_NOT_USED,
                 doctorId: 1,
                 patientId: 2,
                 appointmentDateTime: new DateTime(2025, 5, 1, 14, 30, 0),

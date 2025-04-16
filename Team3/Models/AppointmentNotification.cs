@@ -1,45 +1,45 @@
-﻿// <copyright file="AppointmentNotification.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/// <summary>
+﻿/// <summary>
 /// Represents a notification for an appointment.
 /// </summary>
-public class AppointmentNotification
+namespace Team3.Models
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AppointmentNotification"/> class.
-    /// </summary>
-    /// <param name="notificationId">The id of the notification.</param>
-    /// <param name="appointmentId">The id of the appointment.</param>
-    public AppointmentNotification(int notificationId, int appointmentId)
+    public class AppointmentNotification
     {
-        this.NotificationId = notificationId;
-        this.AppointmentId = appointmentId;
-    }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppointmentNotification"/> class.
+        /// </summary>
+        /// <param name="id">The unique identifier for the appointment notification.</param>
+        /// <param name="notificationId">The id of the notification.</param>
+        /// <param name="appointmentId">The id of the appointment.</param>
+        public AppointmentNotification(int id, int notificationId, int appointmentId)
+        {
+            this.Id = id;
+            this.NotificationId = notificationId;
+            this.AppointmentId = appointmentId;
+        }
 
-    /// <summary>
-    /// Gets or sets the unique identifier for the notification.
-    /// </summary>
-    public int NotificationId { get; set; }
+        /// <summary>
+        /// Gets or sets the unique identifier for the appointment notification.
+        /// </summary>
+        public int Id { get; set; }
 
-    /// <summary>
-    /// Gets or sets the unique identifier for the appointment.
-    /// </summary>
-    public int AppointmentId { get; set; }
+        /// <summary>
+        /// Gets or sets the unique identifier for the notification.
+        /// </summary>
+        public int NotificationId { get; set; }
 
-    /// <summary>
-    /// Returns a string representation of the appointment notification.
-    /// </summary>
-    /// <returns>String representation of the appointment notification.</returns>
-    public override string ToString()
-    {
-        return $"AppointmentNotification(Notification ID: {this.NotificationId}, Appointment ID: {this.AppointmentId}";
+        /// <summary>
+        /// Gets or sets the unique identifier for the appointment.
+        /// </summary>
+        public int AppointmentId { get; set; }
+
+        /// <summary>
+        /// Returns a string representation of the appointment notification.
+        /// </summary>
+        /// <returns>String representation of the appointment notification.</returns>
+        public override string ToString()
+        {
+            return $"AppointmentNotification(Id: {this.Id}, NotificationId: {this.NotificationId}, AppointmentId: {this.AppointmentId})";
+        }
     }
 }

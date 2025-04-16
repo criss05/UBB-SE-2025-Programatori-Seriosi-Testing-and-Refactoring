@@ -1,14 +1,6 @@
-﻿// <copyright file="Hospitalization.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.Models
+﻿namespace Team3.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Represents a hospitalization record for a patient.
@@ -18,17 +10,24 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Hospitalization"/> class.
         /// </summary>
+        /// <param name="id">The hospitalization ID.</param>
         /// <param name="roomId">The room id.</param>
         /// <param name="patientId">The patient id.</param>
         /// <param name="startDateTime">The start date.</param>
         /// <param name="endDateTime">The end date.</param>
-        public Hospitalization(int roomId, int patientId, DateTime startDateTime, DateTime endDateTime)
+        public Hospitalization(int id, int roomId, int patientId, DateTime startDateTime, DateTime endDateTime)
         {
+            this.Id = id;
             this.RoomId = roomId;
             this.PatientId = patientId;
             this.StartDateTime = startDateTime;
             this.EndDateTime = endDateTime;
         }
+
+        /// <summary>
+        /// Gets or sets the unique identifier for the hospitalization record.
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier for the room where the patient is hospitalized.
@@ -50,9 +49,13 @@ namespace Team3.Models
         /// </summary>
         public DateTime EndDateTime { get; set; }
 
+        /// <summary>
+        /// Returns a string representation of the hospitalization.
+        /// </summary>
+        /// <returns>A string representation of the hospitalization record.</returns>
         public override string ToString()
         {
-            return $"Hospitalization(RoomId: {this.RoomId}, PatientId: {this.PatientId}, StartDateTime: {this.StartDateTime}, EndDateTime: {this.EndDateTime})";
+            return $"Hospitalization(Id: {this.Id}, RoomId: {this.RoomId}, PatientId: {this.PatientId}, StartDateTime: {this.StartDateTime}, EndDateTime: {this.EndDateTime})";
         }
     }
 }

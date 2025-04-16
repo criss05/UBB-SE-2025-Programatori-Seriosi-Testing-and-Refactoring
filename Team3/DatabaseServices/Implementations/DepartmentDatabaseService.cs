@@ -44,6 +44,7 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             departments.Add(new Department(
+                                reader.GetInt32(0),
                                 reader.GetString(1)));
                         }
                     }

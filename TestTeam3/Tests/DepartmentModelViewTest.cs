@@ -26,9 +26,9 @@ namespace Team3.Tests.ModelViewsTests
         {
             return new List<Department>
             {
-                new Department("Cardiology"),
-                new Department("Neurology"),
-                new Department("Pediatrics")
+                new Department(1, "Cardiology"),
+                new Department(2, "Neurology"),
+                new Department(3, "Pediatrics")
             };
         }
 

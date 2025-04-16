@@ -9,6 +9,7 @@ namespace Team3.ModelViews.Interfaces
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Team3.Models;
 
     /// <summary>
     ///     This interface defines the contract for a medical record model view.
