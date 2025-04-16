@@ -9,11 +9,11 @@ namespace Team3.DatabaseServices.Implementations
     /// <summary>
     /// This class is responsible for managing chat-related database operations.
     /// </summary>
-    public class ChatDatabaseService : IChatDatabaseService
+    public class ChatRepository : IChatRepository
     {
         private readonly string dbConnString;
 
-        public ChatDatabaseService(string _dbConnString)
+        public ChatRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

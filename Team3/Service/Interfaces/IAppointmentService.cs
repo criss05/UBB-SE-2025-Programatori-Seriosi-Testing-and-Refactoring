@@ -1,4 +1,4 @@
-﻿namespace Team3.Services.Interfaces
+﻿namespace Team3.Service.Interfaces
 {
     using Team3.Models;
 

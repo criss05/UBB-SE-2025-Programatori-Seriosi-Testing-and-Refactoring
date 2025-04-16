@@ -5,17 +5,17 @@ using Team3.ModelViews.Interfaces;
 using Team3.DatabaseServices.Interfaces;
 using Team3.Models;
 using Xunit;
-using Team3.Services.Implementations;
+using Team3.Service.Implementations;
 
-namespace Team3.Tests.ModelViewsTests
+namespace Team3.Tests
 {
-    public class AppointmentModelViewTests
+    public class AppointmentServiceTests
     {
         private readonly Mock<IAppointmentRepository> mockDatabaseService;
         private readonly IAppointmentModelView appointmentModelView;
         private readonly static int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
 
-        public AppointmentModelViewTests()
+        public AppointmentServiceTests()
         {
             this.mockDatabaseService = new Mock<IAppointmentRepository>();
             this.appointmentModelView = new AppointmentModelView(new AppointmentService(this.mockDatabaseService.Object));

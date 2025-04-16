@@ -14,7 +14,7 @@ namespace Team3.Views
     using Team3.Models;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
-    using Team3.Services.Implementations;
+    using Team3.Service.Implementations;
 
     /// <summary>
     /// Interaction logic for NotificationDetailView.xaml.
@@ -52,7 +52,7 @@ namespace Team3.Views
         new DrugModelView(new DrugDatabaseService(Config.DbConnectionString)),
         new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString)),
         new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString)),
-        new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString))
+        new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)))
         ));
 
         /// <summary>

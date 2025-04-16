@@ -5,22 +5,25 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Service.Implementations;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// Class representing the ReviewModelView.
     /// </summary>
     public class ReviewModelView : IReviewModelView
     {
-        private readonly IReviewDatabaseService reviewDatabaseService;
-        private readonly static int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
+        private static readonly int DUMMY_ID_BECAUSE_IT_IS_NOT_USED = 0;
+
+        private readonly IReviewService reviewService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReviewModelView"/> class.
         /// </summary>
         /// <param name="reviewDatabaseService">The review database service.</param>
-        public ReviewModelView(IReviewDatabaseService reviewDatabaseService)
+        public ReviewModelView(IReviewService _reviewService)
         {
-            this.reviewDatabaseService = reviewDatabaseService;
+            this.reviewService = _reviewService;
         }
 
         /// <summary>
@@ -29,7 +32,7 @@
         /// <param name="review">The review to be added.</param>
         public void AddNewReview(Review review)
         {
-            this.reviewDatabaseService.AddNewReview(review);
+            this.reviewService.AddNewReview(review);
         }
 
         /// <summary>
@@ -39,7 +42,7 @@
         /// <returns>The review.</returns>
         public Review GetReviewByMedicalRecordId(int reviewId)
         {
-            return reviewDatabaseService.GetReviewByMedicalRecordId(reviewId);
+            return this.reviewService.GetReviewByMedicalRecordId(reviewId);
         }
 
         /// <summary>
@@ -55,7 +58,7 @@
 
             Review newReview = new Review(DUMMY_ID_BECAUSE_IT_IS_NOT_USED, medicalrecordId, message, stars);
 
-            this.AddNewReview(newReview);
+            this.reviewService.AddNewReview(newReview);
 
             Debug.WriteLine("Review added successfully!");
         }

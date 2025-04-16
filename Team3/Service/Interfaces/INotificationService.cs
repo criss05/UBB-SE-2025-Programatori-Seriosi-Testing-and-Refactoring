@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Team3.Models;
 
-namespace Team3.ModelViews.Interfaces
+namespace Team3.Service.Interfaces
 {
     public interface INotificationService
     {

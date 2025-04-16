@@ -9,18 +9,19 @@ using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Xunit;
 using Team3.Models;
+using Team3.Service.Implementations;
 
 namespace Team3.Tests.ModelViewsTests
 {
-    public class ReviewModelViewTest
+    public class ReviewServiceTest
     {
-        private readonly Mock<IReviewDatabaseService> mockDatabaseService;
+        private readonly Mock<IReviewRepository> mockDatabaseService;
         private readonly IReviewModelView reviewModelView;
 
-        public ReviewModelViewTest()
+        public ReviewServiceTest()
         {
-            this.mockDatabaseService = new Mock<IReviewDatabaseService>();
-            this.reviewModelView = new ReviewModelView(this.mockDatabaseService.Object);
+            this.mockDatabaseService = new Mock<IReviewRepository>();
+            this.reviewModelView = new ReviewModelView(new ReviewService(this.mockDatabaseService.Object));
         }
 
         [Fact]

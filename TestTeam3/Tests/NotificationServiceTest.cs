@@ -10,14 +10,15 @@ using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Xunit;
 using Team3.Models;
-using Team3.Services.Implementations;
+using Team3.Service.Implementations;
+using Team3.Service.Interfaces;
 
 namespace Team3.Tests.ModelViewsTests
 {
-    public class NotificationModelViewTest
+    public class NotificationServiceTest
     {
         private readonly Mock<INotificationRepository> mockDatabaseService;
-        private readonly INotificationModelView notificationModelView;
+        private readonly INotificationService notificationService;
 
         private readonly IAppointmentModelView appointmentModelView;
         private readonly IDoctorModelView doctorModelView;
@@ -30,7 +31,7 @@ namespace Team3.Tests.ModelViewsTests
         private readonly IReviewModelView reviewModelView;
 
 
-        public NotificationModelViewTest()
+        public NotificationServiceTest()
         {
             this.mockDatabaseService = new Mock<INotificationRepository>();
 
@@ -44,7 +45,7 @@ namespace Team3.Tests.ModelViewsTests
             this.treatmentModelView = new Mock<ITreatmentModelView>().Object;
             this.reviewModelView = new Mock<IReviewModelView>().Object;
 
-            this.notificationModelView = new NotificationModelView(new NotificationService(this.mockDatabaseService.Object, this.appointmentModelView, this.doctorModelView, this.userModelView, this.patientModelView, this.medicalRecordModelView, this.drugModelView, this.treatmentDrugModelView, this.treatmentModelView, this.reviewModelView));
+            this.notificationService = new NotificationService(this.mockDatabaseService.Object, this.appointmentModelView, this.doctorModelView, this.userModelView, this.patientModelView, this.medicalRecordModelView, this.drugModelView, this.treatmentDrugModelView, this.treatmentModelView, this.reviewModelView);
         }
 
         [Fact]
@@ -59,7 +60,7 @@ namespace Team3.Tests.ModelViewsTests
             );
 
             // Act
-            this.notificationModelView.AddNotification(notification);
+            this.notificationService.AddNotification(notification);
 
             // Assert
             this.mockDatabaseService.Verify(s => s.AddNotification(notification), Times.Once);
@@ -81,7 +82,7 @@ namespace Team3.Tests.ModelViewsTests
                 .Returns(expectedNotification);
 
             // Act
-            var result = this.notificationModelView.GetNotificationById(1);
+            var result = this.notificationService.GetNotificationById(1);
 
             // Assert
             Assert.Equal(expectedNotification, result);

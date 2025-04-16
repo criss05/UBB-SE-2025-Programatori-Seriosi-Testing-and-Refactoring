@@ -8,15 +8,15 @@
     /// <summary>
     /// Service for managing reviews in the database.
     /// </summary>
-    public class ReviewDatabaseService : IReviewDatabaseService
+    public class ReviewRepository : IReviewRepository
     {
         private readonly string dbConnString;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ReviewDatabaseService"/> class.
+        /// Initializes a new instance of the <see cref="ReviewRepository"/> class.
         /// </summary>
         /// <param name="_dbConnString">The connection string for the database.</param>
-        public ReviewDatabaseService(string _dbConnString)
+        public ReviewRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

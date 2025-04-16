@@ -1,10 +1,10 @@
-﻿namespace Team3.Services.Implementations
+﻿namespace Team3.Service.Implementations
 {
     using System;
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
-    using Team3.Services.Interfaces;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// This class is used to manage the appointment model view.

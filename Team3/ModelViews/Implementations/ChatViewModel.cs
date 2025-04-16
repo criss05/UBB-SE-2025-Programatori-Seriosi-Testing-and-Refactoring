@@ -9,17 +9,18 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// ViewModel for managing chat data and interactions.
     /// </summary>
     public class ChatViewModel : IChatModelView
     {
-        private readonly IChatDatabaseService chatDatabaseService;
+        private readonly IChatService chatService;
 
-        public ChatViewModel(IChatDatabaseService chatDatabaseService)
+        public ChatViewModel(IChatService _chatService)
         {
-            this.chatDatabaseService = chatDatabaseService;
+            this.chatService = _chatService;
             this.Chats = new ObservableCollection<Chat>();
         }
 
@@ -31,7 +32,7 @@
         {
             try
             {
-                var chatList = this.chatDatabaseService.GetChatsByUserId(this.UserID);
+                var chatList = this.chatService.GetChatsByUserId(this.UserID);
                 this.Chats.Clear();
 
                 if (chatList != null && chatList.Any())
@@ -50,12 +51,12 @@
 
         public List<Chat> GetChatsByUserId(int id)
         {
-            return this.chatDatabaseService.GetChatsByUserId(id);
+            return this.chatService.GetChatsByUserId(id);
         }
 
         public void AddNewChat(Chat chat)
         {
-            this.chatDatabaseService.AddNewChat(chat.User1, chat.User2);
+            this.chatService.AddNewChat(chat);
             this.Chats.Add(chat);
         }
 
@@ -66,10 +67,7 @@
 
         public List<Chat> GetChatsByName(string name)
         {
-            List<Chat> chats = this.chatDatabaseService.GetChatsByUserId(this.UserID);
-            return chats.Where(chat =>
-                chat.User1.ToString().Contains(name) ||
-                chat.User2.ToString().Contains(name)).ToList();
+            return this.chatService.GetChatsByName(name);
         }
 
         public void BackButtonHandler()

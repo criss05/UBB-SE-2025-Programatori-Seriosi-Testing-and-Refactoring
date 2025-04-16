@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.Services.Implementations
+namespace Team3.Service.Implementations
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +11,7 @@ namespace Team3.Services.Implementations
     using Team3.DatabaseServices.Implementations;
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
+    using Team3.Service.Interfaces;
     using Team3.ModelViews.Interfaces;
 
     /// <summary>
@@ -37,7 +38,7 @@ namespace Team3.Services.Implementations
         private readonly IReviewModelView reviewModelView;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationModelView"/> class.
+        /// Initializes a new instance of the <see cref="NotificationService"/> class.
         /// </summary>
         public NotificationService(INotificationRepository _notificationRepository, IAppointmentModelView _appointmentModelView, IDoctorModelView _doctorModelView, IUserModelView _userModelView, IPatientModelView _patientModelView, IMedicalRecordModelView _medicalRecordModelView, IDrugModelView _drugModelView, ITreatmentDrugModelView _treatmentDrugModelView, ITreatmentModelView _treatmentModelView, IReviewModelView _reviewModelView)
         {

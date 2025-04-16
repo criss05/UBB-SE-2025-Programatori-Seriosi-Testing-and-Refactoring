@@ -25,6 +25,7 @@ namespace Team3.Views
     using Team3.ModelViews.Interfaces;
     using Windows.Foundation;
     using Windows.Foundation.Collections;
+    using Team3.Service.Implementations;
 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -39,7 +40,7 @@ namespace Team3.Views
         public ReviewView()
         {
             this.InitializeComponent();
-            this.reviewModelView = new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString));
+            this.reviewModelView = new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)));
         }
 
         private async void AddReviewButton_Click(object sender, RoutedEventArgs e)
