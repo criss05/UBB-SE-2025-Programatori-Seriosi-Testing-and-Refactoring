@@ -14,7 +14,7 @@ namespace Team3.ModelViews.Interfaces
     public interface IChatModelView
     {
         void LoadAllChats();
-        Dictionary<Chat, string> GetChatsByUserId(int id);
+        List<Chat> GetChatsByUserId(int id);
         void AddNewChat(Chat chat);
         void SetUserId(int id);
         List<Chat> GetChatsByName(string name);

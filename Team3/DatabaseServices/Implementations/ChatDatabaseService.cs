@@ -41,7 +41,7 @@ namespace Team3.DatabaseServices.Implementations
                     {
                         while (reader.Read())
                         {
-                            chats.Add(new Chat((int)reader[0], (int)reader[1], (int)reader[2]));
+                            chats.Add(new Chat((int)reader[1], (int)reader[2]));
                         }
                     }
 

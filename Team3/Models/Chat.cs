@@ -21,17 +21,11 @@ namespace Team3.Models
         /// <param name="chatID">Id of the chat.</param>
         /// <param name="u1">Id of the forst useer.</param>
         /// <param name="u2">Id of the second user.</param>
-        public Chat(int chatID, int u1, int u2)
+        public Chat(int u1, int u2)
         {
-            this.ChatID = chatID;
             this.User1 = u1;
             this.User2 = u2;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the chat.
-        /// </summary>
-        public int ChatID { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier for the first user in the chat.
@@ -49,7 +43,7 @@ namespace Team3.Models
         /// <returns>string representation of the chat.</returns>
         public override string ToString()
         {
-            return $"ID: {this.ChatID}, User 1: {this.User1}, User 2: {this.User2}";
+            return $"Chat(User 1: {this.User1}, User 2: {this.User2})";
         }
     }
 }

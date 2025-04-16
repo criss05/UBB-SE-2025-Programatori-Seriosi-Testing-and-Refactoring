@@ -48,10 +48,9 @@
             }
         }
 
-        public Dictionary<Chat, string> GetChatsByUserId(int id)
+        public List<Chat> GetChatsByUserId(int id)
         {
-            List<Chat> chats = this.chatDatabaseService.GetChatsByUserId(id);
-            return chats.ToDictionary(chat => chat, chat => chat.ChatID.ToString());
+            return this.chatDatabaseService.GetChatsByUserId(id);
         }
 
         public void AddNewChat(Chat chat)
