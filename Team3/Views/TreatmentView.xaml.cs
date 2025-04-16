@@ -38,7 +38,7 @@ namespace Team3.Views
             try
             {
                 int id = int.Parse(this.textId.Text);
-                int medicarecordId = int.Parse(this.textMedicalrecordId.Text);
+                int medicalRecordId = int.Parse(this.textMedicalrecordId.Text);
 
                 // treatmentModelView.addTreatmentButtonHandler(id, medicarecordId);
                 await this.ShowDialog("Treatment added successfully!", "Success");
