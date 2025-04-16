@@ -100,7 +100,7 @@ namespace Team3.DatabaseServices.Implementations
                         {
                             if (reader.Read())
                             {
-                                return new AppointmentNotification((int)reader[0], (int)reader[1], (int)reader[2]);
+                                return new AppointmentNotification((int)reader[1], (int)reader[2]);
                             }
                         }
                     }

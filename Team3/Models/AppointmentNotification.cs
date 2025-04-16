@@ -19,17 +19,11 @@ public class AppointmentNotification
     /// <param name="id">The id of the relation between appoinment and notification.</param>
     /// <param name="notificationId">The id of the notification.</param>
     /// <param name="appointmentId">The id of the appointment.</param>
-    public AppointmentNotification(int id, int notificationId, int appointmentId)
+    public AppointmentNotification(int notificationId, int appointmentId)
     {
-        this.Id = id;
         this.NotificationId = notificationId;
         this.AppointmentId = appointmentId;
     }
-
-    /// <summary>
-    /// Gets or sets the unique identifier for the appointment notification.
-    /// </summary>
-    public int Id { get; set; }
 
     /// <summary>
     /// Gets or sets the unique identifier for the notification.
@@ -47,6 +41,6 @@ public class AppointmentNotification
     /// <returns>String representation of the appointment notification.</returns>
     public override string ToString()
     {
-        return $"[AppointmentNotification] ID: {this.Id}, Notification ID: {this.NotificationId}, Appointment ID: {this.AppointmentId}";
+        return $"AppointmentNotification(Notification ID: {this.NotificationId}, Appointment ID: {this.AppointmentId}";
     }
 }

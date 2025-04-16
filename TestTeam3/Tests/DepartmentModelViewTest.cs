@@ -7,7 +7,7 @@ using Team3.ModelViews.Implementations;
 using Team3.DatabaseServices.Interfaces;
 using Team3.Models;
 
-namespace Team3.Tests.ModelViews
+namespace Team3.Tests.ModelViewsTests
 {
     public class DepartmentModelViewTests
     {
