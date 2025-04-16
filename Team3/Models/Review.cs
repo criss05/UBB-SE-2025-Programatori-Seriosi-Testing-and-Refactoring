@@ -20,22 +20,15 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Review"/> class.
         /// </summary>
-        /// <param name="id">The id of the review.</param>
         /// <param name="medicalRecordId">The medical record id.</param>
         /// <param name="message">The message.</param>
         /// <param name="nrStars">The number of stars.</param>
-        public Review(int id, int medicalRecordId, string message, int nrStars)
+        public Review(int medicalRecordId, string message, int nrStars)
         {
-            this.Id = id;
             this.MedicalRecordId = medicalRecordId;
             this.Message = message;
             this.NrStars = nrStars;
         }
-
-        /// <summary>
-        /// Gets or sets the review ID.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the medical record ID associated with the review.
@@ -58,7 +51,7 @@ namespace Team3.Models
         /// <returns>string representation of the review.</returns>
         public override string ToString()
         {
-            return $"Id: {this.Id}, MedicalRecordId: {this.MedicalRecordId}, Message: {this.Message}, Stars: {this.NrStars}";
+            return $"Review(MedicalRecordId: {this.MedicalRecordId}, Message: {this.Message}, Stars: {this.NrStars})";
         }
     }
 }

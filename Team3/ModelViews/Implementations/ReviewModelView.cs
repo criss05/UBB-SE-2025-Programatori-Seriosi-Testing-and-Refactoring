@@ -52,7 +52,7 @@
         {
             Debug.WriteLine("Add button clicked");
 
-            Review newReview = new Review(id, medicalrecordId, message, stars);
+            Review newReview = new Review(medicalrecordId, message, stars);
 
             AddReview(newReview);
 
