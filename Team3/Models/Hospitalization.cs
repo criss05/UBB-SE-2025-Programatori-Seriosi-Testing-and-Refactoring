@@ -18,24 +18,17 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Hospitalization"/> class.
         /// </summary>
-        /// <param name="id">The id of the hospitalization.</param>
         /// <param name="roomId">The room id.</param>
         /// <param name="patientId">The patient id.</param>
         /// <param name="startDateTime">The start date.</param>
         /// <param name="endDateTime">The end date.</param>
-        public Hospitalization(int id, int roomId, int patientId, DateTime startDateTime, DateTime endDateTime)
+        public Hospitalization(int roomId, int patientId, DateTime startDateTime, DateTime endDateTime)
         {
-            this.Id = id;
             this.RoomId = roomId;
             this.PatientId = patientId;
-            this.StartDateTime = endDateTime;
+            this.StartDateTime = startDateTime;
             this.EndDateTime = endDateTime;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the hospitalization record.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier for the room where the patient is hospitalized.
@@ -56,5 +49,10 @@ namespace Team3.Models
         /// Gets or sets the date and time when the hospitalization ended.
         /// </summary>
         public DateTime EndDateTime { get; set; }
+
+        public override string ToString()
+        {
+            return $"Hospitalization(RoomId: {this.RoomId}, PatientId: {this.PatientId}, StartDateTime: {this.StartDateTime}, EndDateTime: {this.EndDateTime})";
+        }
     }
 }
