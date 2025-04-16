@@ -35,7 +35,7 @@ namespace Team3.Tests.ModelViewsTests
         public void GetDoctorById_WhenCalledWithValidId_ShouldReturnDoctor()
         {
             // Arrange
-            var expectedDoctor = new Doctor(id: 1, userId: 10);
+            var expectedDoctor = new Doctor(userId: 10);
 
             mockDoctorDatabaseService
                 .Setup(s => s.GetDoctorById(1))
@@ -46,16 +46,15 @@ namespace Team3.Tests.ModelViewsTests
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(expectedDoctor.Id, result.Id);
-            Assert.Equal(expectedDoctor.Id, result.Id);
+            Assert.Equal(expectedDoctor.UserId, result.UserId);
         }
 
         [Fact]
         public void GetDoctorById_WhenCalled_ShouldCallDatabaseServiceOnce()
         {
             // Arrange
-            var doctorId = 2;
-            var expectedDoctor = new Doctor(doctorId, 20);
+            var doctorId = 1;
+            var expectedDoctor = new Doctor(20);
 
             mockDoctorDatabaseService
                 .Setup(s => s.GetDoctorById(doctorId))
