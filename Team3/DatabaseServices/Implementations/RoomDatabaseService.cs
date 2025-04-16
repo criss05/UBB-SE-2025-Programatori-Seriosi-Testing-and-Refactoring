@@ -81,6 +81,7 @@ namespace Team3.DatabaseServices.Implementations
                         if (reader.Read())
                         {
                             return new Room(
+                                reader.GetInt32(0),
                                 reader.GetInt32(1)
                             );
                         }

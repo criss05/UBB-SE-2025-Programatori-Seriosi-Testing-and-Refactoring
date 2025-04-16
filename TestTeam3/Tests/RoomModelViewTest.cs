@@ -28,6 +28,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var room = new Room(
+                id: 1,
                 departmentId: 1
             );
 
@@ -43,6 +44,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var expectedRoom = new Room(
+                id: 1,
                 departmentId: 1
             );
 

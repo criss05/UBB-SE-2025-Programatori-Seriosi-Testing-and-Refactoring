@@ -13,8 +13,9 @@ namespace Team3.Models
         /// <param name="medicalRecordId">The medical record ID.</param>
         /// <param name="message">The review message.</param>
         /// <param name="nrStars">The number of stars.</param>
-        public Review(int medicalRecordId, string message, int nrStars)
+        public Review(int id, int medicalRecordId, string message, int nrStars)
         {
+            this.Id = id;
             this.MedicalRecordId = medicalRecordId;
             this.Message = message;
             this.NrStars = nrStars;

@@ -37,6 +37,7 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             messages.Add(new Message(
+                                id: reader.GetInt32(0),
                                 content: reader.GetString(1),
                                 userId: reader.GetInt32(2),
                                 chatId: reader.GetInt32(3),
@@ -95,6 +96,7 @@ namespace Team3.DatabaseServices.Implementations
                                 throw new Exception("Message not found");
 
                             return new Message(
+                                (int)reader[0],
                                 reader[1].ToString(),
                                 (int)reader[2],
                                 (int)reader[3],

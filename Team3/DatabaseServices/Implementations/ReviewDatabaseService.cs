@@ -66,7 +66,7 @@
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        return new Review(reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3));
+                        return new Review(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3));
                     }
                     else
                     {

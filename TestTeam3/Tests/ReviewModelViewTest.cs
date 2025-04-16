@@ -28,6 +28,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var review = new Review(
+                id: 1,
                 medicalRecordId: 1,
                 message: "Hello world!",
                 nrStars: 2
@@ -45,6 +46,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var expectedReview = new Review(
+                id: 1,
                 medicalRecordId: 1,
                 message: "Hello world!",
                 nrStars: 2

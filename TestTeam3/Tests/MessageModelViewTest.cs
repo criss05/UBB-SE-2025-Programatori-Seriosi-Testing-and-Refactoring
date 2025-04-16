@@ -32,6 +32,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var messagge = new Message(
+                id: 1,
                 content: "Hello, World!",
                 userId: 1,
                 chatId: 2,
@@ -50,6 +51,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var expectedMessage = new Message(
+                id: 1,
                 content: "Hello, World!",
                 userId: 1,
                 chatId: 2,
