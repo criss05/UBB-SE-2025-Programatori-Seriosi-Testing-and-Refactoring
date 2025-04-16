@@ -22,5 +22,12 @@ namespace Team3.ModelViews.Interfaces
         /// <param name="id">the id of the patient.</param>
         /// <returns>The patient.</returns>
         public Patient GetPatientById(int id);
+
+        /// <summary>
+        /// Add a patient.
+        /// </summary>
+        /// <param name="patient">The id of the patient.</param>
+        /// <returns>The patient with the specified id.</returns>
+        public void AddPatient(Patient patient);
     }
 }

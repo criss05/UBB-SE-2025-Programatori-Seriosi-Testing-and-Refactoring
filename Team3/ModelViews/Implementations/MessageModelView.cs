@@ -76,5 +76,24 @@
             // Here you could add a method to actually send the message to the database.
             LoadAllMessages(chatId);
         }
+
+        /// <summary>
+        /// Adds a message to the database through the messge database service.
+        /// </summary
+        /// <param name="message">The message.</param>
+        public void addMessage(Message message)
+        {
+            this.messageDatabaseService.addMessage(message);
+        }
+
+        /// <summary>
+        /// Get a message by id.
+        /// </summary>
+        /// <param name="id">The id of the message.</param>
+        /// <returns>The Message.</returns>
+        public Message GetMessageById(int id)
+        {
+            return this.messageDatabaseService.GetMessageById(id);
+        }
     }
 }

@@ -23,5 +23,12 @@ namespace Team3.DatabaseServices.Interfaces
         /// <param name="message"></param>
         /// <returns></returns>
         public int addMessage(Message message);
+
+        /// <summary>
+        /// Get message from the database based to id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Message GetMessageById(int id);
     }
 }

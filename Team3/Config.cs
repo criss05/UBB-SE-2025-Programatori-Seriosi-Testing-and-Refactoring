@@ -2,7 +2,7 @@
 
 public static class Config
 {
-    public static readonly string DbConnectionString = "Server=MIHAI;Database=Team3;Trusted_Connection=True;TrustServerCertificate=True;";
+    public static readonly string DbConnectionString = "Server=localhost\\SQLEXPRESS;Database=Team3;Trusted_Connection=True;TrustServerCertificate=True;";
 
     static Config()
     {

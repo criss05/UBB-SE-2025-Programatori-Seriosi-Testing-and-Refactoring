@@ -33,5 +33,15 @@ namespace Team3.ModelViews.Implementations
         {
             return patientDatabaseService.GetPatientById(id);
         }
+
+        /// <summary>
+        /// Add a patient.
+        /// </summary>
+        /// <param name="patient">The id of the patient.</param>
+        /// <returns>The patient with the specified id.</returns>
+        public void AddPatient(Patient patient)
+        {
+            this.patientDatabaseService.AddPatient(patient);
+        }
     }
 }
