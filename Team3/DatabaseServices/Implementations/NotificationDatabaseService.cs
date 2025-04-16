@@ -137,6 +137,39 @@ namespace Team3.DatabaseServices.Implementations
             }
         }
 
+        public Notification GetNotificationById(int notificationId)
+        {
+            const string query = "SELECT id, user_id, delivery_datetime, message FROM notidications WHERE id = @id";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", notificationId);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.Read())
+                                throw new Exception("Notification not found");
+
+                            return new Notification(
+                                (int)reader[0],
+                                (int)reader[1],
+                                (DateTime)reader[2],
+                                reader[3].ToString()
+                                );
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Error retrieving notification", exception);
+            }
+        }
+
         public void AddAppointmentNotification(int notificationId, int appointmentId)
         {
             const string query = "INSERT INTO appointment_notifications (notification_id, appointment_id) VALUES (@notification_id, @appointment_id);";

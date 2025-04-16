@@ -11,6 +11,7 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Message"/> class.
         /// </summary>
+
         /// <param name="id">The message ID.</param>
         /// <param name="content">The content of the message.</param>
         /// <param name="userId">The user ID.</param>
