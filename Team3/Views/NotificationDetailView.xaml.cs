@@ -37,8 +37,8 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the notification detail view.
         /// </summary>
-        private INotificationModelView ViewModel { get; } = new NotificationModelView(
-        new NotificationDatabaseService(Config.DbConnectionString),
+        private INotificationModelView ViewModel { get; } = new NotificationModelView(new NotificationService(
+        new NotificationRepository(Config.DbConnectionString),
         new AppointmentModelView(new AppointmentService(new AppointmentRepository(Config.DbConnectionString))),
         new DoctorModelView(
             new DoctorDatabaseService(Config.DbConnectionString),
@@ -53,7 +53,7 @@ namespace Team3.Views
         new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString)),
         new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString)),
         new ReviewModelView(new ReviewDatabaseService(Config.DbConnectionString))
-        );
+        ));
 
         /// <summary>
         /// Handles the navigation to this page.

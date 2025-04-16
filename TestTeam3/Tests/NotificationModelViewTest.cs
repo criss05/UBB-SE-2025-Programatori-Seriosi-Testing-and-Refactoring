@@ -10,12 +10,13 @@ using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Xunit;
 using Team3.Models;
+using Team3.Services.Implementations;
 
 namespace Team3.Tests.ModelViewsTests
 {
     public class NotificationModelViewTest
     {
-        private readonly Mock<INotificationDatabaseService> mockDatabaseService;
+        private readonly Mock<INotificationRepository> mockDatabaseService;
         private readonly INotificationModelView notificationModelView;
 
         private readonly IAppointmentModelView appointmentModelView;
@@ -31,7 +32,7 @@ namespace Team3.Tests.ModelViewsTests
 
         public NotificationModelViewTest()
         {
-            this.mockDatabaseService = new Mock<INotificationDatabaseService>();
+            this.mockDatabaseService = new Mock<INotificationRepository>();
 
             this.appointmentModelView = new Mock<IAppointmentModelView>().Object;
             this.doctorModelView = new Mock<IDoctorModelView>().Object;
@@ -43,7 +44,7 @@ namespace Team3.Tests.ModelViewsTests
             this.treatmentModelView = new Mock<ITreatmentModelView>().Object;
             this.reviewModelView = new Mock<IReviewModelView>().Object;
 
-            this.notificationModelView = new NotificationModelView(this.mockDatabaseService.Object, this.appointmentModelView, this.doctorModelView, this.userModelView, this.patientModelView, this.medicalRecordModelView, this.drugModelView, this.treatmentDrugModelView, this.treatmentModelView, this.reviewModelView);
+            this.notificationModelView = new NotificationModelView(new NotificationService(this.mockDatabaseService.Object, this.appointmentModelView, this.doctorModelView, this.userModelView, this.patientModelView, this.medicalRecordModelView, this.drugModelView, this.treatmentDrugModelView, this.treatmentModelView, this.reviewModelView));
         }
 
         [Fact]

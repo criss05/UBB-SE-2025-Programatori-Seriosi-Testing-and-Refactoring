@@ -6,10 +6,10 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    public class NotificationDatabaseService : INotificationDatabaseService
+    public class NotificationRepository : INotificationRepository
     {
         private readonly string dbConnString;
-        public NotificationDatabaseService(string _dbConnString)
+        public NotificationRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }
