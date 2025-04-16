@@ -44,7 +44,6 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             departments.Add(new Department(
-                                reader.GetInt32(0),
                                 reader.GetString(1)));
                         }
                     }
@@ -52,9 +51,9 @@ namespace Team3.DatabaseServices.Implementations
                     return departments;
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                throw new Exception("Error getting departments", e);
+                throw new Exception("Error getting departments", exception);
             }
         }
     }

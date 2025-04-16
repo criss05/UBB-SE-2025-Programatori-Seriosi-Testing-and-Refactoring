@@ -16,7 +16,6 @@ public class AppointmentNotification
     /// <summary>
     /// Initializes a new instance of the <see cref="AppointmentNotification"/> class.
     /// </summary>
-    /// <param name="id">The id of the relation between appoinment and notification.</param>
     /// <param name="notificationId">The id of the notification.</param>
     /// <param name="appointmentId">The id of the appointment.</param>
     public AppointmentNotification(int notificationId, int appointmentId)

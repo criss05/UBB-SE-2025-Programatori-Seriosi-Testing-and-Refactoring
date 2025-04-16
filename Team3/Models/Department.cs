@@ -18,22 +18,20 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Department"/> class.
         /// </summary>
-        /// <param name="departmentId">The id of the department.</param>
         /// <param name="departmentName">The name of the department.</param>
-        public Department(int departmentId, string departmentName)
+        public Department(string departmentName)
         {
-            this.DepartmentId = departmentId;
             this.DepartmentName = departmentName;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the department.
-        /// </summary>
-        public int DepartmentId { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the department.
         /// </summary>
         public string DepartmentName { get; set; }
+
+        public override string ToString()
+        {
+            return $"Department(Name: {this.DepartmentName})";
+        }
     }
 }

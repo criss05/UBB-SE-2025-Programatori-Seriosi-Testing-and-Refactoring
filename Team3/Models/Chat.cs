@@ -18,7 +18,6 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Chat"/> class.
         /// </summary>
-        /// <param name="chatID">Id of the chat.</param>
         /// <param name="u1">Id of the forst useer.</param>
         /// <param name="u2">Id of the second user.</param>
         public Chat(int u1, int u2)
