@@ -11,7 +11,7 @@ using Team3.ModelViews.Interfaces;
 using Xunit;
 using Team3.Models;
 
-namespace TestTeam3.Tests
+namespace Team3.Tests.ModelViewsTests
 {
     public class NotificationModelViewTest
     {

@@ -12,7 +12,7 @@ using Xunit;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Message = Team3.Models.Message;
 
-namespace TestTeam3.Tests
+namespace Team3.Tests.ModelViewsTests
 {
     public class MessageModelViewTest
     {
