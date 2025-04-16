@@ -36,7 +36,6 @@ namespace Team3.DatabaseServices.Implementations
                     {
                         reader.Read();
                         return new MedicalRecord(
-                            (int)reader[0],
                             (int)reader[1],
                             (int)reader[2],
                             (DateTime)reader[3]

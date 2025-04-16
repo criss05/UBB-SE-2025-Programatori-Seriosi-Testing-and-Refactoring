@@ -54,15 +54,15 @@ namespace Team3.Tests.ModelViewsTests
         }
 
         [Fact]
-        public void GetChatsByUserId_ShouldReturnDictionary()
+        public void GetChatsByUserId_ShouldReturnList()
         {
             // Arrange
             int userId = 1;
             var chats = new List<Chat>
-        {
-            new Chat(userId, 2),
-            new Chat(userId, 3)
-        };
+            {
+                new Chat(userId, 2),
+                new Chat(userId, 3)
+            };
 
             mockDbService.Setup(s => s.GetChatsByUserId(userId)).Returns(chats);
 

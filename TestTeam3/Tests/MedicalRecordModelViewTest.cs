@@ -21,7 +21,7 @@ namespace Team3.Tests.ModelViewsTests
         public void GetMedicalRecordById_WithValidId_ShouldReturnMedicalRecord()
         {
             // Arrange
-            var expected = new MedicalRecord(1, 101, 202, DateTime.Today);
+            var expected = new MedicalRecord(101, 202, DateTime.Today);
             mockMedicalRecordDatabaseService
                 .Setup(s => s.GetMedicalRecordById(1))
                 .Returns(expected);
@@ -31,7 +31,6 @@ namespace Team3.Tests.ModelViewsTests
 
             // Assert
             Assert.NotNull(result); 
-            Assert.Equal(expected.Id, result.Id);
             Assert.Equal(expected.DoctorId, result.DoctorId);
             Assert.Equal(expected.PatientId, result.PatientId);
             Assert.Equal(expected.MedicalRecordDateTime, result.MedicalRecordDateTime);
@@ -42,7 +41,7 @@ namespace Team3.Tests.ModelViewsTests
         {
             // Arrange
             var recordId = 5;
-            var dummy = new MedicalRecord(recordId, 102, 203, DateTime.Today);
+            var dummy = new MedicalRecord(102, 203, DateTime.Today);
             mockMedicalRecordDatabaseService
                 .Setup(s => s.GetMedicalRecordById(recordId))
                 .Returns(dummy);
