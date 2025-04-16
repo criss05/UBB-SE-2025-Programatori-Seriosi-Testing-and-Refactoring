@@ -27,9 +27,9 @@
         /// Adds a review.
         /// </summary>
         /// <param name="review">The review to be added.</param>
-        public void AddReview(Review review)
+        public void AddNewReview(Review review)
         {
-            reviewDatabaseService.AddNewReview(review);
+            this.reviewDatabaseService.AddNewReview(review);
         }
 
         /// <summary>
@@ -49,13 +49,13 @@
         /// <param name="medicalrecordId">The medical record id.</param>
         /// <param name="message">The message.</param>
         /// <param name="stars">The number of stars.</param>
-        public void AddReviewButtonHandler(int id, int medicalrecordId, string message, int stars)
+        public void AddReviewButtonHandler(int medicalrecordId, string message, int stars)
         {
             Debug.WriteLine("Add button clicked");
 
             Review newReview = new Review(DUMMY_ID_BECAUSE_IT_IS_NOT_USED, medicalrecordId, message, stars);
 
-            AddReview(newReview);
+            this.AddNewReview(newReview);
 
             Debug.WriteLine("Review added successfully!");
         }

@@ -8,6 +8,7 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Review"/> class.
         /// </summary>
+      
         /// <param name="id">The unique review ID.</param>
         /// <param name="medicalRecordId">The medical record ID.</param>
         /// <param name="message">The review message.</param>

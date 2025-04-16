@@ -9,6 +9,7 @@ namespace Team3.ModelViews.Interfaces
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Team3.Models;
 
     /// <summary>
     /// Interface for the NotificationModelView.
@@ -20,6 +21,20 @@ namespace Team3.ModelViews.Interfaces
         /// </summary>
         /// <param name="userId">The id of the user.</param>
         public void LoadNotifications(int userId);
+
+        /// <summary>
+        /// add a notification
+        /// </summary>
+        /// <param name="notification"></param>
+        /// <returns></returns>
+        public int AddNotification(Notification notification);
+
+        /// <summary>
+        /// get a notification
+        /// </summary>
+        /// <param name="notificationId"></param>
+        /// <returns></returns>
+        public Notification GetNotificationById(int notificationId);
 
         /// <summary>
         /// get all notifications fro a speficic user.

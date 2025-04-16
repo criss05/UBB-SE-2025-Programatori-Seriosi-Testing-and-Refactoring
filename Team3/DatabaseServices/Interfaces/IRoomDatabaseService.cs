@@ -14,5 +14,19 @@ namespace Team3.DatabaseServices.Interfaces
         /// </summary>
         /// <returns></returns>
         public List<Room> GetRooms();
+
+        /// <summary>
+        /// Add a room.
+        /// </summary>
+        /// <param name="room">The room to be added.</param>
+        /// <returns></returns>
+        public void AddRoom(Room room);
+
+        /// <summary>
+        /// Gets a room by their department ID.
+        /// </summary>
+        /// <param name="departmentId">The department ID.</param>
+        /// <returns>A <see cref="Room"/> object.</returns>
+        public Room GetRoom(int departmentId);
     }
 }
