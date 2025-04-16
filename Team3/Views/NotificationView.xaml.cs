@@ -51,14 +51,14 @@ namespace Team3.Views
         /// Gets the view model for the notification view.
         /// </summary>
         private readonly IAppointmentModelView appointmentModelView = new AppointmentModelView(new AppointmentService(new AppointmentRepository(Config.DbConnectionString)));
-        private readonly IUserModelView userModelView = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
+        private readonly IUserModelView userModelView = new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)));
         private readonly IPatientModelView patientModelView = new PatientModelView(new PatientDatabaseService(Config.DbConnectionString));
         private readonly IMedicalRecordModelView medicalRecordModelView = new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString));
         private readonly IDrugModelView drugModelView = new DrugModelView(new DrugDatabaseService(Config.DbConnectionString));
-        private readonly ITreatmentDrugModelView treatmentDrugModelView = new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString));
-        private readonly ITreatmentModelView treatmentModelView = new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString));
+        private readonly ITreatmentDrugModelView treatmentDrugModelView = new TreatmentDrugModelView(new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString)));
+        private readonly ITreatmentModelView treatmentModelView = new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString)));
         private readonly IReviewModelView reviewModelView = new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)));
-        private readonly IDoctorModelView doctorModelView = new DoctorModelView(new DoctorDatabaseService(Config.DbConnectionString), new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)), new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))), new UserModelView(new UserDatabaseService(Config.DbConnectionString)));
+        private readonly IDoctorModelView doctorModelView = new DoctorModelView(new DoctorDatabaseService(Config.DbConnectionString), new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)), new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))), new UserModelView(new UserService(new UserRepository(Config.DbConnectionString))));
 
         // Now pass all of them to the NotificationModelView
         public INotificationModelView NotificationModelView { get; }

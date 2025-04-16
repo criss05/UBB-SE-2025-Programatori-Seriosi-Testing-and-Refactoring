@@ -7,6 +7,8 @@ namespace Team3.Views
     using System.Diagnostics;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
+    using Team3.Service.Interfaces;
+    using Team3.Service.Implementations;
     using Team3.DatabaseServices.Interfaces;
     using Team3.DatabaseServices.Implementations;
     using Team3.Models;
@@ -30,7 +32,7 @@ namespace Team3.Views
         /// <summary>
         /// Gets the view model for the user view.
         /// </summary>
-        public IUserModelView ViewModel { get; } = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
+        public IUserModelView ViewModel { get; } = new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)));
 
         /// <summary>
         /// Handles the item click event for the users list view.

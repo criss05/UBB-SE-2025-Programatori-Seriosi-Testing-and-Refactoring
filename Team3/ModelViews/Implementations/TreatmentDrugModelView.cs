@@ -5,21 +5,22 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// Model view for TreatmentDrug.
     /// </summary>
     public class TreatmentDrugModelView : ITreatmentDrugModelView
     {
-        private readonly ITreatmentDrugDatabaseService treatmentDrugDatabaseService;
+        private readonly ITreatmentDrugService treatmentDrugService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TreatmentDrugModelView"/> class.
         /// </summary>
         /// <param name="treatmentDrugService">An instance of ITreatmentDrugService to interact with the treatment drug data.</param>
-        public TreatmentDrugModelView(ITreatmentDrugDatabaseService _treatmentDrugDatabaseService)
+        public TreatmentDrugModelView(ITreatmentDrugService _treatmentDrugService)
         {
-            treatmentDrugDatabaseService = _treatmentDrugDatabaseService;
+            treatmentDrugService = _treatmentDrugService;
         }
 
         /// <summary>
@@ -29,7 +30,7 @@
         /// <returns>A list with treatments.</returns>
         public List<TreatmentDrug> GetTreatmentDrugsById(int treatmentId)
         {
-            return treatmentDrugDatabaseService.GetTreatmentDrugsById(treatmentId);
+            return treatmentDrugService.GetTreatmentDrugsById(treatmentId);
         }
     }
 }

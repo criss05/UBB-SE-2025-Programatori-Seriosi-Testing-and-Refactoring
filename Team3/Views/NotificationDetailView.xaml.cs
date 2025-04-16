@@ -44,14 +44,14 @@ namespace Team3.Views
             new DoctorDatabaseService(Config.DbConnectionString),
             new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
             new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))),
-            new UserModelView(new UserDatabaseService(Config.DbConnectionString))
+            new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)))
         ),
-        new UserModelView(new UserDatabaseService(Config.DbConnectionString)),
+        new UserModelView(new UserService(new UserRepository(Config.DbConnectionString))),
         new PatientModelView(new PatientDatabaseService(Config.DbConnectionString)),
         new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
         new DrugModelView(new DrugDatabaseService(Config.DbConnectionString)),
-        new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString)),
-        new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString)),
+        new TreatmentDrugModelView(new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString))),
+        new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString))),
         new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)))
         ));
 

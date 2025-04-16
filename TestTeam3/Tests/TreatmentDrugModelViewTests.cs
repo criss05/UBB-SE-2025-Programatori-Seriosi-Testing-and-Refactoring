@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Moq;
 using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Service.Interfaces;
 using Team3.Models;
 using Xunit;
 
@@ -11,14 +11,14 @@ namespace Team3.Tests.ModelViewsTests
 {
     public class TreatmentDrugModelViewTests
     {
-        private readonly Mock<ITreatmentDrugDatabaseService> mockTreatmentDrugDbService;
+        private readonly Mock<ITreatmentDrugService> mockTreatmentDrugService;
         private readonly ITreatmentDrugModelView treatmentDrugModelView;
 
         public TreatmentDrugModelViewTests()
         {
-            this.mockTreatmentDrugDbService = new Mock<ITreatmentDrugDatabaseService>();
+            this.mockTreatmentDrugService = new Mock<ITreatmentDrugService>();
             this.treatmentDrugModelView = new TreatmentDrugModelView(
-                this.mockTreatmentDrugDbService.Object
+                this.mockTreatmentDrugService.Object
             );
         }
 
@@ -49,7 +49,7 @@ namespace Team3.Tests.ModelViewsTests
                 )
             };
 
-            this.mockTreatmentDrugDbService
+            this.mockTreatmentDrugService
                 .Setup(s => s.GetTreatmentDrugsById(100))
                 .Returns(expectedDrugs);
 
@@ -59,26 +59,26 @@ namespace Team3.Tests.ModelViewsTests
             Assert.All(result, td => Assert.Equal(100, td.TreatmentId));
             Assert.Contains(result, td => td.DrugId == 5 && td.Quantity == 2.5);
             Assert.Contains(result, td => td.DrugId == 8 && td.NrDays == 5);
-            this.mockTreatmentDrugDbService.Verify(s => s.GetTreatmentDrugsById(100), Times.Once);
+            this.mockTreatmentDrugService.Verify(s => s.GetTreatmentDrugsById(100), Times.Once);
         }
 
         [Fact]
         public void GetTreatmentDrugsById_InvalidTreatmentId_ReturnsEmptyList()
         {
-            this.mockTreatmentDrugDbService
+            this.mockTreatmentDrugService
                 .Setup(s => s.GetTreatmentDrugsById(999))
                 .Returns(new List<TreatmentDrug>());
 
             var result = this.treatmentDrugModelView.GetTreatmentDrugsById(999);
 
             Assert.Empty(result);
-            this.mockTreatmentDrugDbService.Verify(s => s.GetTreatmentDrugsById(999), Times.Once);
+            this.mockTreatmentDrugService.Verify(s => s.GetTreatmentDrugsById(999), Times.Once);
         }
 
         [Fact]
         public void GetTreatmentDrugsById_DatabaseError_PropagatesException()
         {
-            this.mockTreatmentDrugDbService
+            this.mockTreatmentDrugService
                 .Setup(s => s.GetTreatmentDrugsById(100))
                 .Throws(new Exception("Database connection failed"));
 
