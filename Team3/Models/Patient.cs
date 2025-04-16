@@ -18,22 +18,20 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Patient"/> class.
         /// </summary>
-        /// <param name="id">The id of the patient.</param>
         /// <param name="userId">The is of the user.</param>
-        public Patient(int id, int userId)
+        public Patient(int userId)
         {
-            this.Id = id;
             this.UserId = userId;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the patient.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the unique identifier for the user associated with the patient.
         /// </summary>
         public int UserId { get; set; }
+
+        public override string ToString()
+        {
+            return $"Patient(UserId: {this.UserId})";
+        }
     }
 }

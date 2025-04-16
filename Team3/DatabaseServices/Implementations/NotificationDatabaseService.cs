@@ -31,7 +31,6 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             notifications.Add(new Notification(
-                                (int)reader[0],
                                 (int)reader[1],
                                 (DateTime)reader[2],
                                 reader[3].ToString()
@@ -66,7 +65,6 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             notifications.Add(new Notification(
-                                (int)reader[0],
                                 (int)reader[1],
                                 (DateTime)reader[2],
                                 reader[3].ToString()

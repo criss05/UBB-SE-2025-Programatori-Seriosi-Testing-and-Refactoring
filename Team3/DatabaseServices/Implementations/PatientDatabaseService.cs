@@ -40,7 +40,6 @@ namespace Team3.DatabaseServices.Implementations
                             if (reader.Read())
                             {
                                 return new Patient(
-                                    (int)reader[0],
                                     (int)reader[1]
                                 );
                             }

@@ -64,7 +64,7 @@ namespace Team3.Views
             if (e.Parameter is Notification notification)
             {
                 this.SelectedNotification = notification;
-                Debug.WriteLine($"Viewing notification detail: ID={this.SelectedNotification.Id}, Message={this.SelectedNotification.Message}");
+                Debug.WriteLine($"Viewing notification detail:Message={this.SelectedNotification.Message}");
             }
         }
 
@@ -75,7 +75,7 @@ namespace Team3.Views
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            this.ViewModel.DeleteNotification(this.SelectedNotification.Id);
+            this.ViewModel.DeleteNotification(this.SelectedNotification.UserId);
 
             // if (deleted)
             // {
