@@ -5,6 +5,7 @@ using Team3.ModelViews.Interfaces;
 using Team3.DatabaseServices.Interfaces;
 using Team3.Models;
 using Xunit;
+using Team3.Services.Implementations;
 
 namespace Team3.Tests.ModelViewsTests
 {
@@ -17,7 +18,7 @@ namespace Team3.Tests.ModelViewsTests
         public AppointmentModelViewTests()
         {
             this.mockDatabaseService = new Mock<IAppointmentRepository>();
-            this.appointmentModelView = new AppointmentModelView(this.mockDatabaseService.Object);
+            this.appointmentModelView = new AppointmentModelView(new AppointmentService(this.mockDatabaseService.Object));
         }
 
         [Fact]

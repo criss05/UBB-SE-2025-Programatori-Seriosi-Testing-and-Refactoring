@@ -14,6 +14,7 @@ namespace Team3.Views
     using Team3.Models;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
+    using Team3.Services.Implementations;
 
     /// <summary>
     /// Interaction logic for NotificationDetailView.xaml.
@@ -38,7 +39,7 @@ namespace Team3.Views
         /// </summary>
         private INotificationModelView ViewModel { get; } = new NotificationModelView(
         new NotificationDatabaseService(Config.DbConnectionString),
-        new AppointmentModelView(new AppointmentRepository(Config.DbConnectionString)),
+        new AppointmentModelView(new AppointmentService(new AppointmentRepository(Config.DbConnectionString))),
         new DoctorModelView(
             new DoctorDatabaseService(Config.DbConnectionString),
             new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),

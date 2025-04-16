@@ -4,33 +4,34 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Services.Interfaces;
 
     /// <summary>
     /// This class is used to manage the appointment model view.
     /// </summary>
     public class AppointmentModelView : IAppointmentModelView
     {
-        private readonly IAppointmentRepository appointmentRepository;
+        private readonly IAppointmentService appointmentService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentModelView"/> class.
         /// </summary>
         /// <param name="appointmentModel">The appointment database service to use.</param>
-        public AppointmentModelView(IAppointmentRepository _appointmentRepository)
+        public AppointmentModelView(IAppointmentService _appointmentService)
         {
-            this.appointmentRepository = _appointmentRepository; ;
+            this.appointmentService = _appointmentService;
         }
 
         /// <inheritdoc/>
         public void AddNewAppointment(Appointment appointment)
         {
-            this.appointmentRepository.AddNewAppointment(appointment);
+            this.appointmentService.AddNewAppointment(appointment);
         }
 
         /// <inheritdoc/>
         public Appointment GetAppointmentById(int id)
         {
-            return this.appointmentRepository.GetAppointmentById(id);
+            return this.appointmentService.GetAppointmentById(id);
         }
     }
 }
