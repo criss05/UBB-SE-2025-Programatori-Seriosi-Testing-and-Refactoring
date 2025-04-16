@@ -33,7 +33,6 @@ namespace Team3.DatabaseServices.Implementations
                         while (reader.Read())
                         {
                             shiftTypes.Add(new ShiftType(
-                                reader.GetInt32(0), // ShiftTypeId
                                 TimeOnly.FromDateTime(reader.GetDateTime(1)), // StartTime
                                 TimeOnly.FromDateTime(reader.GetDateTime(2))  // EndTime
                             ));
@@ -68,7 +67,6 @@ namespace Team3.DatabaseServices.Implementations
                             if (reader.Read())
                             {
                                 return new ShiftType(
-                                    reader.GetInt32(0), // ShiftTypeId
                                     TimeOnly.FromDateTime(reader.GetDateTime(1)), // StartTime
                                     TimeOnly.FromDateTime(reader.GetDateTime(2))  // EndTime
                                 );
