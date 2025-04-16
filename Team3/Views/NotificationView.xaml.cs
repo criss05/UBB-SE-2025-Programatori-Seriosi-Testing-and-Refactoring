@@ -26,6 +26,18 @@ namespace Team3.Views
         public NotificationView()
         {
             this.InitializeComponent();
+            this.NotificationModelView = new NotificationModelView(
+                new NotificationDatabaseService(Config.DbConnectionString),
+                this.appointmentModelView,
+                this.doctorModelView,
+                this.userModelView,
+                this.patientModelView,
+                this.medicalRecordModelView,
+                this.drugModelView,
+                this.treatmentDrugModelView,
+                this.treatmentModelView,
+                this.reviewModelView
+            );
             this.NotificationsListView.DataContext = this.NotificationModelView;
         }
 
