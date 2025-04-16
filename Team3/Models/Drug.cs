@@ -18,20 +18,13 @@ namespace Team3.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Drug"/> class.
         /// </summary>
-        /// <param name="id">The id of the drug.</param>
         /// <param name="name">The name of the drug.</param>
         /// <param name="administration">The way o administration.</param>
-        public Drug(int id, string name, string administration)
+        public Drug(string name, string administration)
         {
-            this.Id = id;
             this.Name = name;
             this.Administration = administration;
         }
-
-        /// <summary>
-        /// Gets or sets the unique identifier for the drug.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the drug.
@@ -49,7 +42,7 @@ namespace Team3.Models
         /// <returns>string representation of the drug.</returns>
         public override string ToString()
         {
-            return $"Id: {this.Id}, Name: {this.Name}, Administration: {this.Administration}";
+            return $"Drug(Name: {this.Name}, Administration: {this.Administration})";
         }
     }
 }
