@@ -14,12 +14,12 @@ namespace Team3.Tests.ModelViewsTests
 {
     public class RoomModelViewTest
     {
-        private readonly Mock<IRoomDatabaseService> mockDatabaseService;
+        private readonly Mock<IRoomRepository> mockDatabaseService;
         private readonly IRoomModelView roomModelView;
 
         public RoomModelViewTest()
         {
-            this.mockDatabaseService = new Mock<IRoomDatabaseService>();
+            this.mockDatabaseService = new Mock<IRoomRepository>();
             this.roomModelView = new RoomModelView(this.mockDatabaseService.Object);
         }
 

@@ -24,7 +24,6 @@
         /// Add a room.
         /// </summary>
         /// <param name="room">The room to be added.</param>
-        /// <returns></returns>
         public void AddRoom(Room room);
 
         /// <summary>
