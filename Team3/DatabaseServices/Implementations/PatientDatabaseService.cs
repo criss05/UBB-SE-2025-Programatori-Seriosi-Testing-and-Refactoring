@@ -63,7 +63,7 @@ namespace Team3.DatabaseServices.Implementations
         /// <returns></returns>
         public void AddPatient(Patient patient)
         {
-            const string query = "INSERT INTO Patients userId) VALUES (@userId)";
+            const string query = "INSERT INTO Patients(userId) VALUES (@userId)";
             try
             {
                 using (SqlConnection connection = new SqlConnection(this.dbConnString))
