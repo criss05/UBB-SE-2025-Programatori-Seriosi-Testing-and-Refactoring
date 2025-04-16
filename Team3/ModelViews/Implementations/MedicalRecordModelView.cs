@@ -9,6 +9,7 @@ namespace Team3.ModelViews.Implementations
     using System.Diagnostics;
     using System.Linq;
     using Team3.DatabaseServices.Implementations;
+    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
 
@@ -17,12 +18,12 @@ namespace Team3.ModelViews.Implementations
     /// </summary>
     public class MedicalRecordModelView : IMedicalRecordModelView
     {
-        private readonly MedicalRecordDatabaseService medicalRecordDatabaseService;
+        private readonly IMedicalRecordDatabaseService medicalRecordDatabaseService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MedicalRecordModelView"/> class.
         /// </summary>
-        public MedicalRecordModelView(MedicalRecordDatabaseService _medicalRecordDatabaseService)
+        public MedicalRecordModelView(IMedicalRecordDatabaseService _medicalRecordDatabaseService)
         {
             // Pass dbConnString to the MedicalRecordDatabaseService constructor
             medicalRecordDatabaseService = _medicalRecordDatabaseService;
