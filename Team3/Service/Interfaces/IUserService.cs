@@ -1,11 +1,9 @@
-﻿// <copyright file="IUserModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews.Interfaces
+﻿
+namespace Team3.Service.Interfaces
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -14,8 +12,9 @@ namespace Team3.ModelViews.Interfaces
     /// <summary>
     /// Interface for the user model view.
     /// </summary>
-    public interface IUserModelView
+    public interface IUserService
     {
+
         /// <summary>
         /// Gets the user.
         /// </summary>
@@ -28,10 +27,5 @@ namespace Team3.ModelViews.Interfaces
         /// <param name="id">The id of the user.</param>
         /// <returns>The user for the specific id.</returns>
         public User GetUserById(int id);
-
-        /// <summary>
-        /// Loads all users from the database and adds them to the Users collection.
-        /// </summary>
-        public void LoadAllUsers();
     }
 }

@@ -7,7 +7,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Interfaces
 {
-    public interface ITreatmentDrugDatabaseService
+    public interface ITreatmentDrugRepository
     {
         /// <summary>
         /// add a treatment drug

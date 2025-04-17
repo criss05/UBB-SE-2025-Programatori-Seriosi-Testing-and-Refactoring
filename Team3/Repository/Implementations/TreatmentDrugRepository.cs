@@ -6,15 +6,15 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
 
-    public class TreatmentDrugDatabaseService : ITreatmentDrugDatabaseService
+    public class TreatmentDrugRepository : ITreatmentDrugRepository
     {
         private readonly string dbConnString;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TreatmentDrugDatabaseService"/> class.
+        /// Initializes a new instance of the <see cref="TreatmentDrugRepository"/> class.
         /// </summary>
         /// <param name="_dbConnString">The connection string for the database.</param>
-        public TreatmentDrugDatabaseService(string _dbConnString)
+        public TreatmentDrugRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }
