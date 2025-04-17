@@ -2,18 +2,18 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.DatabaseServices.Implementations
+namespace Team3.Repository.Implementations
 {
     using System;
     using System.Collections.Generic;
     using Microsoft.Data.SqlClient;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
+    using Team3.Repository.Interfaces;
 
     /// <summary>
     /// Repository for user data.
     /// </summary>
-    public class UserRepository : IUserService
+    public class UserRepository : IUserRepository
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserRepository"/> class.

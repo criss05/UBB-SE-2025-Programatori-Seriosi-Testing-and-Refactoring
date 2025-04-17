@@ -2,12 +2,12 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.DatabaseServices.Implementations
+namespace Team3.Repository.Implementations
 {
     using System;
     using Microsoft.Data.SqlClient;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
+    using Team3.Repository.Interfaces;
 
     /// <summary>
     /// Service for managing treatment database operations.

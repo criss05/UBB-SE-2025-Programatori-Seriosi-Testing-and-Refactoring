@@ -2,14 +2,14 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.DatabaseServices.Implementations
+namespace Team3.Repository.Implementations
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using Microsoft.Data.SqlClient;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
+    using Team3.Repository.Interfaces;
 
     /// <summary>
     /// Repository class for managing messages in the database.

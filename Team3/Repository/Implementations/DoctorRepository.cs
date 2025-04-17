@@ -2,25 +2,25 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.DatabaseServices.Implementations
+namespace Team3.Repository.Implementations
 {
     using System;
     using Microsoft.Data.SqlClient;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
+    using Team3.Repository.Interfaces;
 
     /// <summary>
     /// Service for interacting with the doctor database.
     /// </summary>
-    public class DoctorDatabaseService : IDoctorDatabaseService
+    public class DoctorRepository : IDoctorDatabaseService
     {
         private readonly string connectionString;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DoctorDatabaseService"/> class.
+        /// Initializes a new instance of the <see cref="DoctorRepository"/> class.
         /// </summary>
         /// <param name="connectionString">The database connection string.</param>
-        public DoctorDatabaseService(string connectionString)
+        public DoctorRepository(string connectionString)
         {
            this.connectionString = connectionString;
         }
