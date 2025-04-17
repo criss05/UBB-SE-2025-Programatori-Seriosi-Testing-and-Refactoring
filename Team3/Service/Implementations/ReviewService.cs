@@ -1,10 +1,11 @@
-﻿namespace Team3.Service.Implementations
+﻿// <copyright file="ReviewService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.Service.Implementations
 {
-    using System;
-    using System.Diagnostics;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
-    using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Interfaces;
     using Team3.Service.Interfaces;
 
     /// <summary>

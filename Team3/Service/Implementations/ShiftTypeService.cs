@@ -1,11 +1,15 @@
-﻿namespace Team3.Service.Implementations
+﻿// <copyright file="ShiftTypeService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.Service.Implementations
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Interfaces;
 
     /// <summary>
     /// Represents the view model for shift types.
@@ -23,11 +27,15 @@
             this.shiftTypeRepo = shiftTypeRepo ?? throw new ArgumentNullException(nameof(shiftTypeRepo));
         }
 
+        /// <summary>
+        /// Gets all shift types.
+        /// </summary>
+        /// <returns>A list of all shift types.</returns>
         public List<ShiftType> GetAllShiftTypes()
         {
             try
             {
-                return shiftTypeRepo.GetAllShiftTypes();
+                return this.shiftTypeRepo.GetAllShiftTypes();
             }
             catch (Exception exception)
             {
@@ -36,11 +44,17 @@
             }
         }
 
+        /// <summary>
+        /// Gets the shift types within a specific time range.
+        /// </summary>
+        /// <param name="startTime">The start time of the shift.</param>
+        /// <param name="endTime">The end time of the shift.</param>
+        /// <returns>The list of shift types within the given interval.</returns>
         public List<ShiftType> GetShiftTypesByTimeRange(TimeOnly startTime, TimeOnly endTime)
         {
             try
             {
-                var shiftTypeList = shiftTypeRepo.GetAllShiftTypes();
+                var shiftTypeList = this.shiftTypeRepo.GetAllShiftTypes();
                 var filteredShiftTypes = new List<ShiftType>();
 
                 foreach (var shiftType in shiftTypeList)
@@ -65,11 +79,16 @@
             }
         }
 
+        /// <summary>
+        /// Gets a specific shift type by its ID.
+        /// </summary>
+        /// <param name="shiftTypeID">The shift type id.</param>
+        /// <returns>The shift type with the given id.</returns>
         public ShiftType? GetShiftType(int shiftTypeID)
         {
             try
             {
-                return shiftTypeRepo.GetShiftType(shiftTypeID);
+                return this.shiftTypeRepo.GetShiftType(shiftTypeID);
             }
             catch (Exception exception)
             {
