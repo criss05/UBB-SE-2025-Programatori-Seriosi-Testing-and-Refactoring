@@ -20,8 +20,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomModelView"/> class.
         /// </summary>
-        /// <param name="roomDatabaseService">The database service for rooms.</param>
-        public RoomModelView(IRoomRepository roomDatabaseService)
+        /// <param name="roomService">The database service for rooms.</param>
+        public RoomModelView(IRoomService roomService)
         {
             this.roomService = roomService;
             Rooms = new ObservableCollection<Room>();

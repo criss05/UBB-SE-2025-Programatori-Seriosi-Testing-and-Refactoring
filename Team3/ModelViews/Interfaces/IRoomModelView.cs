@@ -9,7 +9,7 @@
     using Team3.Models;
 
     /// <summary>
-    /// Interface for Room Model View
+    /// Interface for Room Model View.
     /// </summary>
     public interface IRoomModelView
     {

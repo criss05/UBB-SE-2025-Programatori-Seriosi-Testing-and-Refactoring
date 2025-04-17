@@ -8,7 +8,7 @@ using Team3.Models;
 
 namespace Team3.Service.Interfaces
 {
-    interface IRoomService
+    public interface IRoomService
     {
         public List<Room> GetRoomsByDepartmentId(int departmentId);
 
