@@ -8,21 +8,22 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// Model view for Treatment.
     /// </summary>
     public class TreatmentModelView : ITreatmentModelView
     {
-        private readonly ITreatmentDatabaseService treatmentDatabaseService;
+        private readonly ITreatmentService treatmentService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TreatmentModelView"/> class.
         /// </summary>
         /// <param name="_treatmentDatabaseService">The database service for treatment operations.</param>
-        public TreatmentModelView(ITreatmentDatabaseService _treatmentDatabaseService)
+        public TreatmentModelView(ITreatmentService _treatmentService)
         {
-            treatmentDatabaseService = _treatmentDatabaseService;
+            treatmentService = _treatmentService;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@
         /// <returns>The treatment.</returns>
         public Treatment GetTreatmentByMedicalRecordId(int treatmentId)
         {
-            return treatmentDatabaseService.GetTreatmentByMedicalRecordId(treatmentId);
+            return treatmentService.GetTreatmentByMedicalRecordId(treatmentId);
         }
     }
 }

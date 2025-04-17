@@ -8,15 +8,15 @@
     /// <summary>
     /// Service for managing treatment database operations.
     /// </summary>
-    public class TreatmentDatabaseService : ITreatmentDatabaseService
+    public class TreatmentRepository : ITreatmentRepository
     {
         private readonly string dbConnString;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TreatmentDatabaseService"/> class.
+        /// Initializes a new instance of the <see cref="TreatmentRepository"/> class.
         /// </summary>
         /// <param name="_dbConnString">The database connection string.</param>
-        public TreatmentDatabaseService(string _dbConnString)
+        public TreatmentRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }
