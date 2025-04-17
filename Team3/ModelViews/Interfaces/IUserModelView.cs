@@ -28,5 +28,10 @@ namespace Team3.ModelViews.Interfaces
         /// <param name="id">The id of the user.</param>
         /// <returns>The user for the specific id.</returns>
         public User GetUserById(int id);
+
+        /// <summary>
+        /// Loads all users from the database and adds them to the Users collection.
+        /// </summary>
+        public void LoadAllUsers();
     }
 }

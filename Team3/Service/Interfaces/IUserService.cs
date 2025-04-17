@@ -14,7 +14,6 @@ namespace Team3.Service.Interfaces
     /// </summary>
     public interface IUserService
     {
-        ObservableCollection<User> Users { get; }
 
         /// <summary>
         /// Gets the user.

@@ -22,14 +22,7 @@ namespace Team3.Service.Implementations
         public UserService(DatabaseServices.Interfaces.IUserService _userRepository)
         {
             userRepository = _userRepository;
-            Users = new ObservableCollection<User>();
-            LoadAllUsers();
         }
-
-        /// <summary>
-        /// Gets the users.
-        /// </summary>
-        public ObservableCollection<User> Users { get; private set; }
 
         /// <summary>
         /// Gets all users from the database.
@@ -48,32 +41,6 @@ namespace Team3.Service.Implementations
         public User GetUserById(int id)
         {
             return userRepository.GetUserById(id);
-        }
-
-        /// <summary>
-        /// Loads all users from the database and adds them to the Users collection.
-        /// </summary>
-        private void LoadAllUsers()
-        {
-            try
-            {
-                var userList = userRepository.GetAllUsers();
-                if (userList != null && userList.Any())
-                {
-                    foreach (var user in userList)
-                    {
-                        Users.Add(user);
-                    }
-                }
-                else
-                {
-                    throw new Exception("User not found");
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception.Message);
-            }
         }
     }
 }

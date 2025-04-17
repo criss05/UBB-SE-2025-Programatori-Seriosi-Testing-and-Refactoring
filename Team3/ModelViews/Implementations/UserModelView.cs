@@ -9,6 +9,7 @@
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Interfaces;
+    using Team3.DatabaseServices.Implementations;
 
     /// <summary>
     /// Represents the user model view.
@@ -21,7 +22,6 @@
         {
             userService = _userService;
             Users = new ObservableCollection<User>();
-            Users = this.userService.Users;
         }
 
         /// <summary>
@@ -37,6 +37,32 @@
         public User GetUserById(int id)
         {
             return this.userService.GetUserById(id);
+        }
+
+        /// <summary>
+        /// Loads all users from the database and adds them to the Users collection.
+        /// </summary>
+        public void LoadAllUsers()
+        {
+            try
+            {
+                var userList = this.userService.GetAllUsers();
+                if (userList != null && userList.Any())
+                {
+                    foreach (var user in userList)
+                    {
+                        Users.Add(user);
+                    }
+                }
+                else
+                {
+                    throw new Exception("User not found");
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception.Message);
+            }
         }
     }
 }
