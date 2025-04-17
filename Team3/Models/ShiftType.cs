@@ -1,10 +1,14 @@
-﻿using System;
+﻿// <copyright file="ShiftType.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-/// <summary>
-/// Represents a shift type with a start and end time.
-/// </summary>
 namespace Team3.Models
 {
+    using System;
+
+    /// <summary>
+    /// Represents a shift type with a start and end time.
+    /// </summary>
     public class ShiftType
     {
         /// <summary>
@@ -35,6 +39,10 @@ namespace Team3.Models
         /// </summary>
         public TimeOnly ShiftTypeEndTime { get; set; }
 
+        /// <summary>
+        /// Returns a string representation of the shift type.
+        /// </summary>
+        /// <returns>The string with the shift type information.</returns>
         public override string ToString()
         {
             return $"ShiftType(Id: {this.Id}, StartTime: {this.ShiftTypeStartTime}, EndTime: {this.ShiftTypeEndTime})";

@@ -1,14 +1,17 @@
-﻿/// <summary>
-/// Class representing a review.
-/// </summary>
+﻿// <copyright file="Review.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Models
 {
+    /// <summary>
+    /// Represents a review for a medical record.
+    /// </summary>
     public class Review
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Review"/> class.
         /// </summary>
-      
         /// <param name="id">The unique review ID.</param>
         /// <param name="medicalRecordId">The medical record ID.</param>
         /// <param name="message">The review message.</param>

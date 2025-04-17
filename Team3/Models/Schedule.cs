@@ -1,9 +1,14 @@
-﻿/// <summary>
-/// Represents a schedule for a doctor.
-/// </summary>
-using System;
+﻿// <copyright file="Schedule.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Models
 {
+    using System;
+
+    /// <summary>
+    /// Represents a schedule for a doctor.
+    /// </summary>
     public class Schedule
     {
         /// <summary>

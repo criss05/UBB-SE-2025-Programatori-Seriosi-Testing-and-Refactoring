@@ -1,8 +1,12 @@
-﻿/// <summary>
-/// Represents a notification for an appointment.
-/// </summary>
+﻿// <copyright file="AppointmentNotification.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Models
 {
+    /// <summary>
+    /// Represents a notification for an appointment.
+    /// </summary>
     public class AppointmentNotification
     {
         /// <summary>

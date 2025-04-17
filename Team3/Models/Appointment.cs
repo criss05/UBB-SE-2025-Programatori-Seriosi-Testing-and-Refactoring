@@ -1,4 +1,8 @@
-﻿namespace Team3.Models
+﻿// <copyright file="Appointment.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.Models
 {
     using System;
 

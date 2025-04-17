@@ -1,17 +1,19 @@
-﻿using System;
-
-/// <summary>
-/// Represents a message in a chat application.
-/// </summary>
+﻿// <copyright file="Message.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Models
 {
+    using System;
+
+    /// <summary>
+    /// Represents a message in a chat application.
+    /// </summary>
     public class Message
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Message"/> class.
         /// </summary>
-
         /// <param name="id">The message ID.</param>
         /// <param name="content">The content of the message.</param>
         /// <param name="userId">The user ID.</param>
@@ -51,6 +53,10 @@ namespace Team3.Models
         /// </summary>
         public DateTime SentDateTime { get; set; }
 
+        /// <summary>
+        /// Returns a string representation of the message.
+        /// </summary>
+        /// <returns>The string containing the information of the message.</returns>
         public override string ToString()
         {
             return $"Message(Id: {this.Id}, Content: \"{this.Content}\", UserId: {this.UserId}, ChatId: {this.ChatId}, SentDateTime: {this.SentDateTime})";

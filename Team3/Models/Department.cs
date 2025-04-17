@@ -1,8 +1,12 @@
-﻿/// <summary>
-/// Represents a department in the organization.
-/// </summary>
+﻿// <copyright file="Department.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Models
 {
+    /// <summary>
+    /// Represents a department in the organization.
+    /// </summary>
     public class Department
     {
         /// <summary>

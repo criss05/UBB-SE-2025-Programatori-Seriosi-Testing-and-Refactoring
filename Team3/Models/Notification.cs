@@ -1,10 +1,14 @@
-﻿/// <summary>
-/// Represents a notification for a user.
-/// </summary>
-using System;
+﻿// <copyright file="Notification.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Models
 {
+    using System;
+
+    /// <summary>
+    /// Represents a notification for a user.
+    /// </summary>
     public class Notification
     {
         /// <summary>
@@ -52,4 +56,3 @@ namespace Team3.Models
         }
     }
 }
-
