@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Repository.Interfaces;
 using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Xunit;
@@ -15,12 +15,12 @@ namespace Team3.Tests.ModelViewsTests
 {
     public class ReviewServiceTest
     {
-        private readonly Mock<IReviewRepository> mockDatabaseService;
-        private readonly IReviewModelView reviewModelView;
+        private readonly Mock<Repository.Interfaces.IReviewRepository> mockDatabaseService;
+        private readonly ModelViews.Interfaces.IReviewModelView reviewModelView;
 
         public ReviewServiceTest()
         {
-            this.mockDatabaseService = new Mock<IReviewRepository>();
+            this.mockDatabaseService = new Mock<Repository.Interfaces.IReviewRepository>();
             this.reviewModelView = new ReviewModelView(new ReviewService(this.mockDatabaseService.Object));
         }
 

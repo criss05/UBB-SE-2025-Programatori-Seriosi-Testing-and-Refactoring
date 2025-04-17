@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="IAppointmentRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace Team3.DatabaseServices.Interfaces
+namespace Team3.Repository.Interfaces
 {
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for appointment repository.
+    /// </summary>
     public interface IAppointmentRepository
     {
         /// <summary>
-        /// Add an appointment to the database
+        /// Add an appointment to the database.
         /// </summary>
-        /// <param name="appointment"></param>
+        /// <param name="appointment">he appointment to be added.</param>
         public void AddNewAppointment(Appointment appointment);
 
         /// <summary>
-        /// Get an appointment from the database based to id
+        /// Get an appointment from the database based to id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Appointment GetAppointmentById(int id);
+        /// <param name="appointmentId">The id of the appointment.</param>
+        /// <returns>The appointment.</returns>
+        public Appointment GetAppointmentById(int appointmentId);
     }
 }

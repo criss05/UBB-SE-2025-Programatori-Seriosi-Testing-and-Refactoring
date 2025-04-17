@@ -1,11 +1,10 @@
-﻿namespace Team3.ModelViews.Implementations
+﻿// <copyright file="RoomModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Implementations
 {
-    using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Interfaces;
@@ -24,8 +23,8 @@
         public RoomModelView(IRoomService roomService)
         {
             this.roomService = roomService;
-            Rooms = new ObservableCollection<Room>();
-            RoomsInfo = new ObservableCollection<Room>();
+            this.Rooms = new ObservableCollection<Room>();
+            this.RoomsInfo = new ObservableCollection<Room>();
         }
 
         /// <summary>

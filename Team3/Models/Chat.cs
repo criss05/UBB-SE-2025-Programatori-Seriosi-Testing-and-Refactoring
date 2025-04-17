@@ -1,8 +1,12 @@
-﻿/// <summary>
-/// Represents a chat between two users.
-/// </summary>
+﻿// <copyright file="Chat.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Models
 {
+    /// <summary>
+    /// Represents a chat between two users.
+    /// </summary>
     public class Chat
     {
         /// <summary>

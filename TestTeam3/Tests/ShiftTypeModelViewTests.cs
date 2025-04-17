@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Moq;
 using Team3.ModelViews.Implementations;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Repository.Interfaces;
 using Team3.Models;
 using Xunit;
 using Team3.Service.Implementations;

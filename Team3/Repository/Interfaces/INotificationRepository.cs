@@ -1,63 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="INotificationRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace Team3.DatabaseServices.Interfaces
+namespace Team3.Repository.Interfaces
 {
+    using System.Collections.Generic;
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for Notification Repository.
+    /// </summary>
     public interface INotificationRepository
     {
         /// <summary>
-        /// get all notifications
+        /// Get all notifications.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The list of notifications.</returns>
         public List<Notification> GetNotifications();
 
         /// <summary>
-        /// get notifications from a specific user by userId
+        /// get notifications from a specific user by userId.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">The user id.</param>
+        /// <returns>The list of notifications for the given user.</returns>
         public List<Notification> GetUserNotifications(int userId);
 
         /// <summary>
-        /// get notification for  specific appointment by Id
+        /// get notification for  specific appointment by Id.
         /// </summary>
-        /// <param name="appointmentId"></param>
-        /// <returns></returns>
+        /// <param name="appointmentId">The appointment id.</param>
+        /// <returns>The appointment notifications.</returns>
         public AppointmentNotification GetNotificationAppointmentByAppointmentId(int appointmentId);
 
         /// <summary>
-        /// add a notification
+        /// Add a notification.
         /// </summary>
-        /// <param name="notification"></param>
-        /// <returns></returns>
+        /// <param name="notification">The notification to be added.</param>
+        /// <returns>the status code if succed.</returns>
         public int AddNotification(Notification notification);
 
         /// <summary>
-        /// get a notification
+        /// get a notification.
         /// </summary>
-        /// <param name="notificationId"></param>
-        /// <returns></returns>
+        /// <param name="notificationId">The notification id.</param>
+        /// <returns>The notification with the given id.</returns>
         public Notification GetNotificationById(int notificationId);
 
         /// <summary>
-        /// add a notification for a specific appointment
+        /// add a notification for a specific appointment.
         /// </summary>
-        /// <param name="notificationId"></param>
-        /// <param name="appointmentId"></param>
+        /// <param name="notificationId">The notification id.</param>
+        /// <param name="appointmentId">The appointment id.</param>
         public void AddAppointmentNotification(int notificationId, int appointmentId);
 
         /// <summary>
-        /// delete a notificatioon using it's is
+        /// delete a notificatioon using it's is.
         /// </summary>
-        /// <param name="id"></param>
-        public void DeleteNotification(int id);
+        /// <param name="notificationId">The notification id that is deleted.</param>
+        public void DeleteNotification(int notificationId);
 
         /// <summary>
-        /// detele all notifications
+        /// detele all notifications.
         /// </summary>
         public void DeleteAllNotifications();
     }

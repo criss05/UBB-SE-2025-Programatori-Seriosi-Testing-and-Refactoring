@@ -1,9 +1,11 @@
-﻿namespace Team3.Service.Implementations
+﻿// <copyright file="AppointmentService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.Service.Implementations
 {
-    using System;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
-    using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Interfaces;
     using Team3.Service.Interfaces;
 
     /// <summary>
@@ -13,9 +15,13 @@
     {
         private readonly IAppointmentRepository appointmentRepository;
 
-        public AppointmentService(IAppointmentRepository _appointmentRepository)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppointmentService"/> class.
+        /// </summary>
+        /// <param name="appointmentRepository">The appointment repository.</param>
+        public AppointmentService(IAppointmentRepository appointmentRepository)
         {
-            this.appointmentRepository = _appointmentRepository; ;
+            this.appointmentRepository = appointmentRepository;
         }
 
         /// <inheritdoc/>

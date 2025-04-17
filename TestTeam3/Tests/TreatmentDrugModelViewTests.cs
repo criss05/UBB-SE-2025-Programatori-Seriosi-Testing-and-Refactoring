@@ -11,12 +11,12 @@ namespace Team3.Tests.ModelViewsTests
 {
     public class TreatmentDrugModelViewTests
     {
-        private readonly Mock<ITreatmentDrugService> mockTreatmentDrugService;
-        private readonly ITreatmentDrugModelView treatmentDrugModelView;
+        private readonly Mock<Service.Interfaces.I> mockTreatmentDrugService;
+        private readonly ModelViews.Interfaces.ITreatmentDrugModelView treatmentDrugModelView;
 
         public TreatmentDrugModelViewTests()
         {
-            this.mockTreatmentDrugService = new Mock<ITreatmentDrugService>();
+            this.mockTreatmentDrugService = new Mock<Service.Interfaces.I>();
             this.treatmentDrugModelView = new TreatmentDrugModelView(
                 this.mockTreatmentDrugService.Object
             );

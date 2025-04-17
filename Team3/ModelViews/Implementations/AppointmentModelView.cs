@@ -1,7 +1,11 @@
-﻿namespace Team3.ModelViews.Implementations
+﻿// <copyright file="AppointmentModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Implementations
 {
     using System;
-    using Team3.DatabaseServices.Interfaces;
+    using Team3.Repository.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Interfaces;
@@ -16,10 +20,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentModelView"/> class.
         /// </summary>
-        /// <param name="appointmentModel">The appointment database service to use.</param>
-        public AppointmentModelView(IAppointmentService _appointmentService)
+        /// <param name="appointmentService">The appointment database service to use.</param>
+        public AppointmentModelView(IAppointmentService appointmentService)
         {
-            this.appointmentService = _appointmentService;
+            this.appointmentService = appointmentService;
         }
 
         /// <inheritdoc/>

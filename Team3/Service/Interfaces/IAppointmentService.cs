@@ -1,4 +1,8 @@
-﻿namespace Team3.Service.Interfaces
+﻿// <copyright file="IAppointmentService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.Service.Interfaces
 {
     using Team3.Models;
 

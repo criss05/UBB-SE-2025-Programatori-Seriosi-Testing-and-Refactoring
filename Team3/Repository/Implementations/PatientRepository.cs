@@ -1,39 +1,47 @@
-using System;
-using Microsoft.Data.SqlClient;
-using Team3.DatabaseServices.Interfaces;
-using Team3.Models;
+// <copyright file="PatientRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace Team3.DatabaseServices.Implementations
+namespace Team3.Repository.Implementations
 {
+    using System;
+    using Microsoft.Data.SqlClient;
+    using Team3.Models;
+    using Team3.Repository.Interfaces;
+
+    /// <summary>
+    /// Repository for managing patient data in the database.
+    /// </summary>
     public class PatientRepository : IPatientRepository
     {
-        private readonly string dbConnString;
+        private readonly string connectionString;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PatientRepository"/> class.
         /// </summary>
-        public PatientRepository(string _dbConnString)
+        /// <param name="connectionString">Connection string to the database.</param>
+        public PatientRepository(string connectionString)
         {
-            this.dbConnString = _dbConnString;
+            this.connectionString = connectionString;
         }
 
         /// <summary>
         /// Gets a patient by their ID.
         /// </summary>
-        /// <param name="id">The patient ID.</param>
+        /// <param name="patientId">The patient ID.</param>
         /// <returns>A <see cref="Patient"/> object.</returns>
-        public Patient GetPatientById(int id)
+        public Patient GetPatientById(int patientId)
         {
             const string query = "SELECT * FROM Patients WHERE id = @id";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@id", id);
+                        command.Parameters.AddWithValue("@id", patientId);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -41,8 +49,7 @@ namespace Team3.DatabaseServices.Implementations
                             {
                                 return new Patient(
                                     (int)reader[0],
-                                    (int)reader[1]
-                                );
+                                    (int)reader[1]);
                             }
                         }
                     }
@@ -50,23 +57,22 @@ namespace Team3.DatabaseServices.Implementations
 
                 throw new Exception("Patient not found");
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error retrieving patient", e);
+                throw new Exception("Error retrieving patient", error);
             }
         }
 
         /// <summary>
-        /// add a patient
+        /// add a patient.
         /// </summary>
-        /// <param name="patient"></param>
-        /// <returns></returns>
+        /// <param name="patient">The patient to be added.</param>
         public void AddPatient(Patient patient)
         {
             const string query = "INSERT INTO Patients(userId) VALUES (@userId)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
@@ -76,9 +82,9 @@ namespace Team3.DatabaseServices.Implementations
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error adding patient", e);
+                throw new Exception("Error adding patient", error);
             }
         }
     }

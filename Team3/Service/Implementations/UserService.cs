@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
-using Team3.DatabaseServices.Interfaces;
-using Team3.Service.Interfaces;
+﻿// <copyright file="UserService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Service.Implementations
 {
+    using System;
+    using System.Collections.Generic;
+    using Team3.Models;
+
+    /// <summary>
+    /// Service for user operations.
+    /// </summary>
     public class UserService : Interfaces.IUserService
     {
-        private readonly DatabaseServices.Interfaces.IUserService userRepository;
+        private readonly Repository.Interfaces.IUserRepository userRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserModelView"/> class.
+        /// Initializes a new instance of the <see cref="UserService"/> class.
         /// </summary>
-        /// <param name="userModel">The user database service.</param>
-        public UserService(DatabaseServices.Interfaces.IUserService _userRepository)
+        /// <param name="userRepository">The user database service.</param>
+        public UserService(Repository.Interfaces.IUserRepository userRepository)
         {
-            userRepository = _userRepository;
+            this.userRepository = userRepository;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Team3.Service.Implementations
         /// <returns>A list with all users.</returns>
         public List<User> GetAllUsers()
         {
-            return userRepository.GetAllUsers();
+            return this.userRepository.GetAllUsers();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Team3.Service.Implementations
         /// <returns>The user with the specified id.</returns>
         public User GetUserById(int id)
         {
-            return userRepository.GetUserById(id);
+            return this.userRepository.GetUserById(id);
         }
     }
 }

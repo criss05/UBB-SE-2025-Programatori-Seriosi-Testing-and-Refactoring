@@ -5,25 +5,15 @@
 namespace Team3.Views
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Runtime.InteropServices.WindowsRuntime;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Microsoft.UI.Xaml.Controls.Primitives;
-    using Microsoft.UI.Xaml.Data;
-    using Microsoft.UI.Xaml.Input;
-    using Microsoft.UI.Xaml.Media;
     using Microsoft.UI.Xaml.Navigation;
-    using Team3.DatabaseServices.Implementations;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Implementations;
     using Team3.Service.Implementations;
-    using Windows.Foundation;
-    using Windows.Foundation.Collections;
+    using Team3.Services.Implementations;
 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -42,9 +32,7 @@ namespace Team3.Views
         /// <summary>
         /// Gets the ViewModel for the message view.
         /// </summary>
-
-        public IMessageModelView ViewModel { get; } = new MessageModelView(new MessageService(new MessageRepository(Config.DbConnectionString)), new UserModelView(new UserDatabaseService(Config.DbConnectionString)));
-
+        public IMessageModelView ViewModel { get; } = new MessageModelView(new MessageService(new MessageRepository(Config.DbConnectionString)), new UserModelView(new UserService(new UserRepository(Config.DbConnectionString))));
 
         /// <summary>
         /// Gets or Sets user ID of the current user.
@@ -59,11 +47,11 @@ namespace Team3.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageView"/> class.
         /// </summary>
-        /// <param name="e">The event ot the navigation.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /// <param name="error">The event ot the navigation.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs error)
         {
-            base.OnNavigatedTo(e);
-            if (e.Parameter is(int userId, int chatId))
+            base.OnNavigatedTo(error);
+            if (error.Parameter is(int userId, int chatId))
             {
                 this.UserId = userId;
                 this.ChatId = chatId;
@@ -73,12 +61,12 @@ namespace Team3.Views
         }
 
         private
-        void BackClicked(object sender, RoutedEventArgs e)
+        void BackClicked(object sender, RoutedEventArgs error)
         {
             this.Frame.Navigate(typeof(ChatView));
         }
 
-        private void sendButtonClicked(object sender, RoutedEventArgs e)
+        private void SendButtonClicked(object sender, RoutedEventArgs error)
         {
             string message = this.messageBar.Text;
             this.ViewModel.SendButtonHandler(this.UserId, this.ChatId, message);

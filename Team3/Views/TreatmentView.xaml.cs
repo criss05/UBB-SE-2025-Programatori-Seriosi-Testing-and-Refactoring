@@ -5,18 +5,14 @@
 namespace Team3.Views
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
     using System.Threading.Tasks;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Team3.DatabaseServices.Implementations;
-    using Team3.DatabaseServices.Interfaces;
-    using Team3.Service.Implementations;
-    using Team3.Service.Interfaces;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Implementations;
+    using Team3.Service.Implementations;
 
     /// <summary>
     /// Interaction logic for TreatmentView.xaml.
@@ -35,7 +31,7 @@ namespace Team3.Views
             this.treatmentModelView = new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString)));
         }
 
-        private async void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
+        private async void AddTreatmentButton_Click(object sender, RoutedEventArgs error)
         {
             try
             {
@@ -65,7 +61,7 @@ namespace Team3.Views
             await dialog.ShowAsync();
         }
 
-        private void NavigateToMainPage_Click(object sender, RoutedEventArgs e)
+        private void NavigateToMainPage_Click(object sender, RoutedEventArgs error)
         {
             // this.Frame.Navigate(typeof(MainPage)); // Navigate to ReviewView
         }

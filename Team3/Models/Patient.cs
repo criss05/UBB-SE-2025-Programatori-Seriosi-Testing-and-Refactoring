@@ -1,8 +1,12 @@
-/// <summary>
-/// Represents a patient in the system.
-/// </summary>
+// <copyright file="Patient.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Models
 {
+    /// <summary>
+    /// Represents a patient in the system.
+    /// </summary>
     public class Patient
     {
         /// <summary>
@@ -26,6 +30,10 @@ namespace Team3.Models
         /// </summary>
         public int UserId { get; set; }
 
+        /// <summary>
+        /// Returns a string representation of the patient.
+        /// </summary>
+        /// <returns>The string with the patient information.</returns>
         public override string ToString()
         {
             return $"Patient(Id: {this.Id}, UserId: {this.UserId})";

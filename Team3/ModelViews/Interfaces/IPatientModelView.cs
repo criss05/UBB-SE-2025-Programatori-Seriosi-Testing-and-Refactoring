@@ -4,11 +4,6 @@
 
 namespace Team3.ModelViews.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.Models;
 
     /// <summary>
@@ -26,8 +21,7 @@ namespace Team3.ModelViews.Interfaces
         /// <summary>
         /// Add a patient.
         /// </summary>
-        /// <param name="patient">The id of the patient.</param>
-        /// <returns>The patient with the specified id.</returns>
+        /// <param name="patient">The id of the patient.</param>s
         public void AddPatient(Patient patient);
     }
 }

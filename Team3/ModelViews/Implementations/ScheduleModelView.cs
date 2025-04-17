@@ -1,11 +1,12 @@
-﻿namespace Team3.ModelViews.Implementations
+﻿// <copyright file="ScheduleModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Interfaces;
@@ -21,10 +22,10 @@
         /// Initializes a new instance of the <see cref="ScheduleModelView"/> class.
         /// </summary>
         /// <param name="scheduleService">The service responsible for schedule data access.</param>
-        public ScheduleModelView(IScheduleService _scheduleService)
+        public ScheduleModelView(IScheduleService scheduleService)
         {
-            this.scheduleService = _scheduleService;
-            Schedules = new ObservableCollection<Schedule>();
+            this.scheduleService = scheduleService;
+            this.Schedules = new ObservableCollection<Schedule>();
         }
 
         /// <summary>

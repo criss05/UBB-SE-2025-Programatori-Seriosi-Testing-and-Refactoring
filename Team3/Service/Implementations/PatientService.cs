@@ -1,11 +1,11 @@
-﻿// <copyright file="PatientModelView.cs" company="PlaceholderCompany">
+﻿// <copyright file="PatientService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace Team3.Service.Implementations
 {
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
+    using Team3.Repository.Interfaces;
     using Team3.Service.Interfaces;
 
     /// <summary>
@@ -31,14 +31,13 @@ namespace Team3.Service.Implementations
         /// <returns>The patient with the specified id.</returns>
         public Patient GetPatientById(int id)
         {
-            return patientRepo.GetPatientById(id);
+            return this.patientRepo.GetPatientById(id);
         }
 
         /// <summary>
         /// Add a patient.
         /// </summary>
         /// <param name="patient">The id of the patient.</param>
-        /// <returns>The patient with the specified id.</returns>
         public void AddPatient(Patient patient)
         {
             this.patientRepo.AddPatient(patient);

@@ -2,27 +2,27 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.Service.Interfaces
+namespace Team3.Repository.Interfaces
 {
     using System.Collections.Generic;
     using Team3.Models;
 
     /// <summary>
-    /// Interface for the user model view.
+    /// Interface for user service.
     /// </summary>
-    public interface IUserService
+    public interface IUserRepository
     {
         /// <summary>
-        /// Gets the user.
+        /// get all users.
         /// </summary>
-        /// <returns>A list with all users.</returns>
+        /// <returns>The list of users.</returns>
         public List<User> GetAllUsers();
 
         /// <summary>
-        /// Gets the user.
+        /// get user by id.
         /// </summary>
-        /// <param name="id">The id of the user.</param>
-        /// <returns>The user for the specific id.</returns>
-        public User GetUserById(int id);
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>The user with the given id.</returns>
+        public User GetUserById(int userId);
     }
 }

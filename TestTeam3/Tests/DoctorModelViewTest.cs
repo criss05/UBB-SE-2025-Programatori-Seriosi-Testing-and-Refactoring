@@ -2,7 +2,7 @@
 using Moq;
 using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Repository.Interfaces;
 using Team3.Models;
 using Xunit;
 
@@ -11,7 +11,7 @@ namespace Team3.Tests.ModelViewsTests
     public class DoctorModelViewTests
     {
         private readonly Mock<IDoctorDatabaseService> mockDoctorDatabaseService;
-        private readonly Mock<IMedicalRecordModelView> mockMedicalRecordModelView;
+        private readonly Mock<IMedicalRecordService> mockMedicalRecordModelView;
         private readonly Mock<IScheduleModelView> mockScheduleModelView;
         private readonly Mock<IUserModelView> mockUserModelView;
         private readonly IDoctorModelView doctorModelView;
@@ -19,7 +19,7 @@ namespace Team3.Tests.ModelViewsTests
         public DoctorModelViewTests()
         {
             mockDoctorDatabaseService = new Mock<IDoctorDatabaseService>();
-            mockMedicalRecordModelView = new Mock<IMedicalRecordModelView>();
+            mockMedicalRecordModelView = new Mock<IMedicalRecordService>();
             mockScheduleModelView = new Mock<IScheduleModelView>();
             mockUserModelView = new Mock<IUserModelView>();
 

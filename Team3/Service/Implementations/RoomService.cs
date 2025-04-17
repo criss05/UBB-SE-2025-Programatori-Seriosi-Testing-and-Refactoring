@@ -6,16 +6,16 @@ namespace Team3.Service.Implementations
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
+    using Team3.Repository.Interfaces;
     using Team3.Service.Interfaces;
 
-    class RoomService : IRoomService
+    /// <summary>
+    /// Service for managing rooms.
+    /// </summary>
+    public class RoomService : IRoomService
     {
         private readonly IRoomRepository roomRepository;
 
@@ -76,11 +76,12 @@ namespace Team3.Service.Implementations
         /// <summary>
         /// Load all the rooms.
         /// </summary>
+        /// <returns>A list with all the rooms.</returns>
         public List<Room> LoadAllRooms()
         {
             try
             {
-                var roomList = roomRepository.GetRooms();
+                var roomList = this.roomRepository.GetRooms();
                 if (roomList != null && roomList.Count > 0)
                 {
                     return roomList;

@@ -1,8 +1,12 @@
-﻿/// <summary>
-/// Represents a room in the hospital.
-/// </summary>
+﻿// <copyright file="Room.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Models
 {
+    /// <summary>
+    /// Represents a room in a department.
+    /// </summary>
     public class Room
     {
         /// <summary>
@@ -26,6 +30,10 @@ namespace Team3.Models
         /// </summary>
         public int DepartmentId { get; set; }
 
+        /// <summary>
+        /// Returns a string representation of the room object.
+        /// </summary>
+        /// <returns>The string with room information.</returns>
         public override string ToString()
         {
             return $"Room(Id: {this.Id}, DepartmentId: {this.DepartmentId})";

@@ -1,40 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using Team3.Models;
-using Team3.DatabaseServices.Interfaces;
+﻿// <copyright file="ChatRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace Team3.DatabaseServices.Implementations
+namespace Team3.Repository.Implementations
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Data.SqlClient;
+    using Team3.Models;
+    using Team3.Repository.Interfaces;
+
     /// <summary>
     /// This class is responsible for managing chat-related database operations.
     /// </summary>
     public class ChatRepository : IChatRepository
     {
-        private readonly string dbConnString;
+        private readonly string connectionString;
 
-        public ChatRepository(string _dbConnString)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChatRepository"/> class with the specified database connection string.
+        /// </summary>
+        /// <param name="connectionString">The connection string to the database.</param>
+        public ChatRepository(string connectionString)
         {
-            this.dbConnString = _dbConnString;
+            this.connectionString = connectionString;
         }
 
         /// <summary>
         /// Retrieves a list of chats for a specific user from the database.
         /// </summary>
-        /// <param name="user">The ID of the user whose chats are to be retrieved.</param>
+        /// <param name="userId">The ID of the user whose chats are to be retrieved.</param>
         /// <returns>A list of Chat objects associated with the user.</returns>
-        public List<Chat> GetChatsByUserId(int user)
+        public List<Chat> GetChatsByUserId(int userId)
         {
             const string query = "SELECT * FROM chats WHERE user1 = @user OR user2 = @user";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
 
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@user", user);
+                    command.Parameters.AddWithValue("@user", userId);
                     List<Chat> chats = new List<Chat>();
 
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -48,9 +56,9 @@ namespace Team3.DatabaseServices.Implementations
                     return chats;
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error getting chats", e);
+                throw new Exception("Error getting chats", error);
             }
         }
 
@@ -65,7 +73,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -74,9 +82,9 @@ namespace Team3.DatabaseServices.Implementations
                     command.ExecuteNonQuery();
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error adding chat", e);
+                throw new Exception("Error adding chat", error);
             }
         }
     }

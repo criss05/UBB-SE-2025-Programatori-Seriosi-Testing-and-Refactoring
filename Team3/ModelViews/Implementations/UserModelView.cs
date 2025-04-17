@@ -1,15 +1,17 @@
-﻿namespace Team3.ModelViews.Implementations
+﻿// <copyright file="UserModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
-    using Team3.Service.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Interfaces;
-    using Team3.DatabaseServices.Implementations;
 
     /// <summary>
     /// Represents the user model view.
@@ -18,10 +20,14 @@
     {
         private readonly IUserService userService;
 
-        public UserModelView(IUserService _userService)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserModelView"/> class.
+        /// </summary>
+        /// <param name="userService">The user service.</param>
+        public UserModelView(IUserService userService)
         {
-            userService = _userService;
-            Users = new ObservableCollection<User>();
+            this.userService = userService;
+            this.Users = new ObservableCollection<User>();
         }
 
         /// <summary>
@@ -29,11 +35,20 @@
         /// </summary>
         public ObservableCollection<User> Users { get; private set; }
 
+        /// <summary>
+        /// Gets the user by username and password.
+        /// </summary>
+        /// <returns>The list of all users.</returns>
         public List<User> GetAllUsers()
         {
             return this.userService.GetAllUsers();
         }
 
+        /// <summary>
+        /// Gets the user by id.
+        /// </summary>
+        /// <param name="id">The id of the user.</param>
+        /// <returns>The user with the given id.</returns>
         public User GetUserById(int id)
         {
             return this.userService.GetUserById(id);
@@ -51,7 +66,7 @@
                 {
                     foreach (var user in userList)
                     {
-                        Users.Add(user);
+                        this.Users.Add(user);
                     }
                 }
                 else

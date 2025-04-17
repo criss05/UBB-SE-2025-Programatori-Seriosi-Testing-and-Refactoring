@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="IDoctorDatabaseService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace Team3.DatabaseServices.Interfaces
+namespace Team3.Repository.Interface
 {
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for the doctor database service.
+    /// </summary>
     public interface IDoctorDatabaseService
     {
         /// <summary>
-        /// get the doctor by id
+        /// get the doctor by id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Doctor GetDoctorById(int id);
-
-
+        /// <param name="doctorId">The doctor id.</param>
+        /// <returns>The doctor with the given id.</returns>
+        public Doctor GetDoctorById(int doctorId);
     }
 }

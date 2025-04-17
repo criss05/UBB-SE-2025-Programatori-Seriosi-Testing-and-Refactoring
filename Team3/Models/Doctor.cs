@@ -25,6 +25,10 @@ namespace Team3.Models
         /// </summary>
         public int UserId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the unique identifier for the doctor.
+        /// </summary>
+        /// <returns>The string mwitht the id of the doctor.</returns>
         public override string ToString()
         {
             return $"Doctor(UserId: {this.UserId})";

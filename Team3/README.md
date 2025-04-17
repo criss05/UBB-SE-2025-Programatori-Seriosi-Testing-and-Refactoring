@@ -19,5 +19,5 @@ Team3Repo
 * mereu inainte de a incepe sa lucrati la cod folisiti comenzile urmatoare:
   1. git pull --rebase
   2. daca va zice ca nu se poate puneti doar: git pull
-  3. Asa va asigurati ca fisirele locale sunt la zi cu ce e pe github
+  3. Asa va asigurati ca fisirele locale sunt la zi cu ce error pe github
 

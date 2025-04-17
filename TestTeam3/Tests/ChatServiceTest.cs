@@ -3,7 +3,7 @@ using System.Linq;
 using Moq;
 using Team3.Models;
 using Team3.Service.Implementations;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Repository.Interfaces;
 using Xunit;
 
 namespace Team3.Tests

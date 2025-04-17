@@ -9,12 +9,11 @@ namespace Team3.Views
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
-    using Team3.DatabaseServices.Implementations;
-    using Team3.Service.Implementations;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Implementations;
+    using Team3.Repository.Interfaces;
     using Team3.Service.Implementations;
     using Team3.Service.Interfaces;
 
@@ -43,40 +42,39 @@ namespace Team3.Views
         new NotificationRepository(Config.DbConnectionString),
         new AppointmentModelView(new AppointmentService(new AppointmentRepository(Config.DbConnectionString))),
         new DoctorModelView(
-            new DoctorDatabaseService(Config.DbConnectionString),
-            new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
+            new DoctorService(
+            new DoctorRepository(Config.DbConnectionString)),
+            new MedicalRecordModelView(new MedicalRecordRepository(Config.DbConnectionString)),
             new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))),
-            new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)))
-        ),
+            new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)))),
         new PatientModelView(new PatientService(new PatientRepository(Config.DbConnectionString))),
         new UserModelView(new UserService(new UserRepository(Config.DbConnectionString))),
-        new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
+        new MedicalRecordModelView(new MedicalRecordRepository(Config.DbConnectionString)),
         new DrugModelView(new DrugDatabaseService(Config.DbConnectionString)),
         new TreatmentDrugModelView(new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString))),
         new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString))),
-        new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)))
-        ));
+        new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)))));
 
         /// <summary>
         /// Handles the navigation to this page.
         /// </summary>
-        /// <param name="e">The event.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /// <param name="error">The event.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs error)
         {
-            base.OnNavigatedTo(e);
-            if (e.Parameter is Notification notification)
+            base.OnNavigatedTo(error);
+            if (error.Parameter is Notification notification)
             {
                 this.SelectedNotification = notification;
                 Debug.WriteLine($"Viewing notification detail:Message={this.SelectedNotification.Message}");
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs error)
         {
             this.Frame.Navigate(typeof(NotificationView), this.SelectedNotification.UserId);
         }
 
-        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs error)
         {
             this.ViewModel.DeleteNotification(this.SelectedNotification.UserId);
 

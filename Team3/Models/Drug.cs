@@ -1,9 +1,12 @@
-﻿/// <summary>
-/// Represents a drug with its properties.
-/// </summary>
+﻿// <copyright file="Drug.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Models
 {
+    /// <summary>
+    /// Represents a drug with its properties.
+    /// </summary>
     public class Drug
     {
         /// <summary>

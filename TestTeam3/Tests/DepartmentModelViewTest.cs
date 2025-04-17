@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Team3.ModelViews.Implementations;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Repository.Interfaces;
 using Team3.Models;
 
 namespace Team3.Tests.ModelViewsTests

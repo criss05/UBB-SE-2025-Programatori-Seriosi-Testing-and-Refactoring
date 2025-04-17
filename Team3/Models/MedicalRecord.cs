@@ -1,7 +1,12 @@
-﻿/// <summary>
-/// This class represents a medical record.
-/// </summary>
+﻿// <copyright file="MedicalRecord.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System;
+
+/// <summary>
+/// Represents a medical record.
+/// </summary>
 public class MedicalRecord
 {
     /// <summary>

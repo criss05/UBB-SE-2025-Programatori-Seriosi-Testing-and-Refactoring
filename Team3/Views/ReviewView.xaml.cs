@@ -5,26 +5,13 @@
 namespace Team3.Views
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Threading.Tasks;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Microsoft.UI.Xaml.Controls.Primitives;
-    using Microsoft.UI.Xaml.Data;
-    using Microsoft.UI.Xaml.Input;
-    using Microsoft.UI.Xaml.Media;
-    using Microsoft.UI.Xaml.Navigation;
-    using Team3.DatabaseServices.Implementations;
-    using Team3.DatabaseServices.Interfaces;
-    using Team3.Models;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
-    using Windows.Foundation;
-    using Windows.Foundation.Collections;
+    using Team3.Repository.Implementations;
     using Team3.Service.Implementations;
 
     /// <summary>
@@ -43,7 +30,7 @@ namespace Team3.Views
             this.reviewModelView = new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)));
         }
 
-        private async void AddReviewButton_Click(object sender, RoutedEventArgs e)
+        private async void AddReviewButton_Click(object sender, RoutedEventArgs error)
         {
             try
             {
@@ -76,7 +63,7 @@ namespace Team3.Views
             await dialog.ShowAsync();
         }
 
-        private void NavigateToMainPage_Click(object sender, RoutedEventArgs e)
+        private void NavigateToMainPage_Click(object sender, RoutedEventArgs error)
         {
             // this.Frame.Navigate(typeof(MainPage)); // Navigate to ReviewView
         }
