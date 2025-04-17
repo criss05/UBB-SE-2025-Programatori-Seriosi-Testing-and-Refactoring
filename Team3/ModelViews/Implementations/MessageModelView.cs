@@ -72,7 +72,7 @@ namespace Team3.ModelViews.Implementations
         }
 
         /// <inheritdoc/>
-        public void addMessage(Message message)
+        public void AddMessage(Message message)
         {
             this.messageService.AddMessage(message);
         }

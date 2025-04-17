@@ -1,10 +1,9 @@
-﻿namespace Team3.ModelViews.Interfaces
+﻿// <copyright file="IMessageModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.Models;
 
     /// <summary>
@@ -23,14 +22,14 @@
         /// </summary>
         /// <param name="userId">The user id.</param>
         /// <param name="chatId">The user chat.</param>
-        /// <param name="message">The message</param>
+        /// <param name="message">The message.</param>
         public void SendButtonHandler(int userId, int chatId, string message);
 
         /// <summary>
         /// Adds a message to the database through the messge database service.
         /// </summary
         /// <param name="message">The message.</param>
-        public void addMessage(Message message);
+        public void AddMessage(Message message);
 
         /// <summary>
         /// Get a message by id.

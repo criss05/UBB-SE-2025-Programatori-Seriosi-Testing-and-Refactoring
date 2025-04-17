@@ -4,11 +4,6 @@
 
 namespace Team3.ModelViews.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.Models;
 
     /// <summary>
@@ -23,17 +18,17 @@ namespace Team3.ModelViews.Interfaces
         public void LoadNotifications(int userId);
 
         /// <summary>
-        /// add a notification
+        /// add a notification.
         /// </summary>
-        /// <param name="notification"></param>
-        /// <returns></returns>
+        /// <param name="notification">The notification to be added.</param>
+        /// <returns>Status code if added successfull.</returns>
         public int AddNotification(Notification notification);
 
         /// <summary>
-        /// get a notification
+        /// get a notification.
         /// </summary>
-        /// <param name="notificationId"></param>
-        /// <returns></returns>
+        /// <param name="notificationId">The notification Id.</param>
+        /// <returns>The notification with the id.</returns>
         public Notification GetNotificationById(int notificationId);
 
         /// <summary>

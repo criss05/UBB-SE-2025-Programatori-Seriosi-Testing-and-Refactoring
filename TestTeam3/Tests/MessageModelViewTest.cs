@@ -11,19 +11,18 @@ using Team3.Models;
 using Xunit;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Message = Team3.Models.Message;
-using Team3.Services.Interfaces;
 
 namespace Team3.Tests.ModelViewsTests
 {
     public class MessageModelViewTest
     {
-        private readonly Mock<IMessageService> mockDatabaseService;
+        private readonly Mock<IMessageDatabaseService> mockDatabaseService;
         private readonly IMessageModelView messageModelView;
         private readonly IUserModelView userModelView;
 
         public MessageModelViewTest()
         {
-            this.mockDatabaseService = new Mock<IMessageService>();
+            this.mockDatabaseService = new Mock<IMessageDatabaseService>();
             this.userModelView = new Mock<IUserModelView>().Object;
             this.messageModelView = new MessageModelView(this.mockDatabaseService.Object, this.userModelView);
         }
@@ -41,10 +40,10 @@ namespace Team3.Tests.ModelViewsTests
             );
 
             // Act
-            this.messageModelView.addMessage(messagge);
+            this.messageModelView.AddMessage(messagge);
 
             // Assert
-            this.mockDatabaseService.Verify(s => s.AddMessage(messagge), Times.Once);
+            this.mockDatabaseService.Verify(s => s.addMessage(messagge), Times.Once);
         }
 
         [Fact]
