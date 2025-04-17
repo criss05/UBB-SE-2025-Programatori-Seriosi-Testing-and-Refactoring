@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="IPatientRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices.Interfaces
 {
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for the Patient repository.
+    /// </summary>
     public interface IPatientRepository
     {
         /// <summary>
-        /// get a patient by id
+        /// get a patient by id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Patient GetPatientById(int id);
+        /// <param name="patientId">the id of the patient.</param>
+        /// <returns>The patient with the given id.</returns>
+        public Patient GetPatientById(int patientId);
 
         /// <summary>
-        /// add a patient
+        /// add a patient.
         /// </summary>
-        /// <param name="patient"></param>
-        /// <returns></returns>
+        /// <param name="patient">The patient to be added.</param>
         public void AddPatient(Patient patient);
     }
 }

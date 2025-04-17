@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="IDrugDatabaseService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices.Interfaces
 {
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for drug database service.
+    /// </summary>
     public interface IDrugDatabaseService
     {
         /// <summary>
-        /// get drug by id
+        /// Get drug by id.
         /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public Drug GetDrugById(int Id);
+        /// <param name="drugId">The drug id.</param>
+        /// <returns>The drug with the given Id.</returns>
+        public Drug GetDrugById(int drugId);
     }
 }

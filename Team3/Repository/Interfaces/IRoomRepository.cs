@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="IRoomRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices.Interfaces
 {
+    using System.Collections.Generic;
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for the Room repository.
+    /// </summary>
     public interface IRoomRepository
     {
         /// <summary>
-        /// get all rooms
+        /// get all rooms.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the list of all rooms.</returns>
         public List<Room> GetRooms();
 
         /// <summary>
         /// Add a room.
         /// </summary>
         /// <param name="room">The room to be added.</param>
-        /// <returns></returns>
         public void AddRoom(Room room);
 
         /// <summary>

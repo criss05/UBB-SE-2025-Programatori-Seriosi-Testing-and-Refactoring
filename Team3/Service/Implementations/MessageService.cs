@@ -26,7 +26,7 @@ namespace Team3.Services.Implementations
 
         public int AddMessage(Message message)
         {
-            return messageRepository.addMessage(message);
+            return messageRepository.AddMessage(message);
         }
 
         public Message GetMessageById(int id)

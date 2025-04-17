@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Team3.Models;
+﻿// <copyright file="ITreatmentRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices.Interfaces
 {
+    using Team3.Models;
+
+    /// <summary>
+    /// Interface for the treatment repository.
+    /// </summary>
     public interface ITreatmentRepository
     {
         /// <summary>
-        /// add a treatment 
+        /// add a treatment.
         /// </summary>
-        /// <param name="treatment"></param>
+        /// <param name="treatment">The treatment to be added.</param>
         public void AddNewTreatment(Treatment treatment);
 
         /// <summary>
-        /// get a treatment by medical record
+        /// get a treatment by medical record.
         /// </summary>
-        /// <param name="mrId"></param>
-        /// <returns></returns>
-        public Treatment GetTreatmentByMedicalRecordId(int mrId);
+        /// <param name="medicalRecordId">The medical record id.</param>
+        /// <returns>The treatment with the medical record.</returns>
+        public Treatment GetTreatmentByMedicalRecordId(int medicalRecordId);
     }
 }

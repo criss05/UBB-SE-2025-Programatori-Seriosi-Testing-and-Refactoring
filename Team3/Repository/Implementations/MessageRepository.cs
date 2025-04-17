@@ -76,7 +76,7 @@ namespace Team3.DatabaseServices.Implementations
         /// <param name="message">The message to be added.</param>
         /// <returns>The status code if succeed.</returns>
         /// <exception cref="Exception">Throws error if failed.</exception>
-        public int addMessage(Message message)
+        public int AddMessage(Message message)
         {
             const string query = "INSERT INTO messages (content, user_id, chat_id, sent_datetime) VALUES (@content, @user_id, @chat_id, @sent_datetime)";
             try
