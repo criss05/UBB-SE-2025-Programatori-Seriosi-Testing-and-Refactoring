@@ -8,7 +8,7 @@ namespace Team3.ModelViews.Implementations
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Team3.DatabaseServices.Interfaces;
+    using Team3.Repository.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
 

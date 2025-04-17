@@ -4,7 +4,6 @@
 
 namespace Team3.ModelViews.Implementations
 {
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Interfaces;
@@ -12,15 +11,15 @@ namespace Team3.ModelViews.Implementations
     /// <summary>
     /// Model view for the Patient.
     /// </summary>
-    public class PatientModelView : IPatientModelView
+    public class PatientModelView : Interfaces.IPatientModelView
     {
-        private readonly IPatientService patientService;
+        private readonly Service.Interfaces.IPatientService patientService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PatientModelView"/> class.
         /// </summary>
         /// <param name="patientService">Injected patient database service.</param>
-        public PatientModelView(IPatientService patientService)
+        public PatientModelView(Service.Interfaces.IPatientService patientService)
         {
             this.patientService = patientService;
         }

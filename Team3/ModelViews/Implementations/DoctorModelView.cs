@@ -5,7 +5,7 @@
 namespace Team3.ModelViews.Implementations
 {
     using System.Collections.ObjectModel;
-    using Team3.DatabaseServices.Interfaces;
+    using Team3.Repository.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
 
@@ -15,7 +15,7 @@ namespace Team3.ModelViews.Implementations
     public class DoctorModelView : IDoctorModelView
     {
         private readonly IDoctorDatabaseService doctorDatabaseService;
-        private readonly IMedicalRecordModelView medicalRecordModelView;
+        private readonly IMedicalRecordService medicalRecordModelView;
         private readonly IScheduleModelView scheduleModelView;
         private readonly IUserModelView userModelView;
 
@@ -28,7 +28,7 @@ namespace Team3.ModelViews.Implementations
         /// <param name="userModelView">The user model view.</param>
         public DoctorModelView(
             IDoctorDatabaseService doctorDatabaseService,
-            IMedicalRecordModelView medicalRecordModelView,
+            IMedicalRecordService medicalRecordModelView,
             IScheduleModelView scheduleModelView,
             IUserModelView userModelView)
         {
@@ -48,7 +48,7 @@ namespace Team3.ModelViews.Implementations
         /// <summary>
         /// Gets or sets the medical record model view.
         /// </summary>
-        public IMedicalRecordModelView MedicalRecordModelView { get; set; }
+        public IMedicalRecordService MedicalRecordModelView { get; set; }
 
         /// <summary>
         /// Gets or sets the schedule model view.

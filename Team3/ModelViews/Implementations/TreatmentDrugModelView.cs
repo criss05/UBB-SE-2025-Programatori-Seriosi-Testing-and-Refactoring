@@ -12,15 +12,15 @@ namespace Team3.ModelViews.Implementations
     /// <summary>
     /// Model view for TreatmentDrug.
     /// </summary>
-    public class TreatmentDrugModelView : ITreatmentDrugModelView
+    public class TreatmentDrugModelView : Interfaces.ITreatmentDrugModelView
     {
-        private readonly ITreatmentDrugService treatmentDrugService;
+        private readonly Service.Interfaces.ITreatmentDrugService treatmentDrugService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TreatmentDrugModelView"/> class.
         /// </summary>
         /// <param name="treatmentDrugService">An instance of ITreatmentDrugService to interact with the treatment drug data.</param>
-        public TreatmentDrugModelView(ITreatmentDrugService treatmentDrugService)
+        public TreatmentDrugModelView(Service.Interfaces.ITreatmentDrugService treatmentDrugService)
         {
             this.treatmentDrugService = treatmentDrugService;
         }

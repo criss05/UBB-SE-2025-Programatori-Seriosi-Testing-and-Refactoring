@@ -8,15 +8,15 @@ namespace Team3.ModelViews.Implementations
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using Team3.DatabaseServices.Implementations;
-    using Team3.DatabaseServices.Interfaces;
+    using Team3.Repository.Implementations;
+    using Team3.Repository.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
 
     /// <summary>
     /// This class represents the view model for medical records.
     /// </summary>
-    public class MedicalRecordModelView : IMedicalRecordModelView
+    public class MedicalRecordModelView : IMedicalRecordService
     {
         private readonly IMedicalRecordDatabaseService medicalRecordService;
 
