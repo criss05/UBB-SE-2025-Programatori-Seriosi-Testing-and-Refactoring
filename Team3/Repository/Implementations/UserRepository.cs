@@ -6,12 +6,12 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    public class UserDatabaseService : IUserDatabaseService
+    public class UserRepository : IUserService
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserDatabaseService"/> class.
+        /// Initializes a new instance of the <see cref="UserRepository"/> class.
         /// </summary>
-        public UserDatabaseService(string _dbConnString)
+        public UserRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

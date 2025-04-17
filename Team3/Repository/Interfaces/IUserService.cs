@@ -7,7 +7,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Interfaces
 {
-    public interface IUserDatabaseService
+    public interface IUserService
     {
         /// <summary>
         /// get all users

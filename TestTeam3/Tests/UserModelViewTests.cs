@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Moq;
 using Team3.ModelViews.Implementations;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Service.Interfaces;
 using Team3.Models;
 using Xunit;
 
@@ -11,14 +11,14 @@ namespace Team3.Tests.ModelViewsTests
 {
     public class UserModelViewTests
     {
-        private readonly Mock<IUserDatabaseService> mockUserDbService;
+        private readonly Mock<IUserService> mockUserService;
         private readonly UserModelView userModelView;
 
         public UserModelViewTests()
         {
-            mockUserDbService = new Mock<IUserDatabaseService>();
-            mockUserDbService.Setup(s => s.GetAllUsers()).Returns(new List<User>());
-            userModelView = new UserModelView(mockUserDbService.Object);
+            mockUserService = new Mock<IUserService>();
+            mockUserService.Setup(s => s.GetAllUsers()).Returns(new List<User>());
+            userModelView = new UserModelView(mockUserService.Object);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace Team3.Tests.ModelViewsTests
         new User(2, "Bob", "Doctor")
     };
 
-            var mock = new Mock<IUserDatabaseService>();
+            var mock = new Mock<IUserService>();
             mock.Setup(s => s.GetAllUsers()).Returns(users);
 
             var modelView = new UserModelView(mock.Object);
@@ -50,7 +50,7 @@ namespace Team3.Tests.ModelViewsTests
         public void GetUserById_ExistingId_ReturnsUser()
         {
             var user = new User(1, "Alice", "Admin");
-            mockUserDbService.Setup(s => s.GetUserById(1)).Returns(user);
+            mockUserService.Setup(s => s.GetUserById(1)).Returns(user);
 
             var result = userModelView.GetUserById(1);
 
@@ -58,18 +58,18 @@ namespace Team3.Tests.ModelViewsTests
             Assert.Equal(1, result.Id);
             Assert.Equal("Alice", result.Name);
             Assert.Equal("Admin", result.Role);
-            mockUserDbService.Verify(s => s.GetUserById(1), Times.Once);
+            mockUserService.Verify(s => s.GetUserById(1), Times.Once);
         }
 
         [Fact]
         public void GetUserById_NonExistingId_ReturnsNull()
         {
-            mockUserDbService.Setup(s => s.GetUserById(99)).Returns((User)null);
+            mockUserService.Setup(s => s.GetUserById(99)).Returns((User)null);
 
             var result = userModelView.GetUserById(99);
 
             Assert.Null(result);
-            mockUserDbService.Verify(s => s.GetUserById(99), Times.Once);
+            mockUserService.Verify(s => s.GetUserById(99), Times.Once);
         }
 
         [Fact]
@@ -80,9 +80,9 @@ namespace Team3.Tests.ModelViewsTests
                 new User(1, "Alice", "Admin"),
                 new User(2, "Bob", "Doctor")
             };
-            mockUserDbService.Setup(s => s.GetAllUsers()).Returns(users);
+            mockUserService.Setup(s => s.GetAllUsers()).Returns(users);
 
-            var modelView = new UserModelView(mockUserDbService.Object);
+            var modelView = new UserModelView(mockUserService.Object);
 
             Assert.Equal(2, modelView.Users.Count);
             Assert.Contains(modelView.Users, u => u.Name == "Alice");
@@ -92,9 +92,9 @@ namespace Team3.Tests.ModelViewsTests
         [Fact]
         public void Constructor_WhenDatabaseThrows_ExceptionIsHandledAndNoUsersAdded()
         {
-            mockUserDbService.Setup(s => s.GetAllUsers()).Throws(new Exception("Database error"));
+            mockUserService.Setup(s => s.GetAllUsers()).Throws(new Exception("Database error"));
 
-            var modelView = new UserModelView(mockUserDbService.Object);
+            var modelView = new UserModelView(mockUserService.Object);
 
             Assert.Empty(modelView.Users);
         }

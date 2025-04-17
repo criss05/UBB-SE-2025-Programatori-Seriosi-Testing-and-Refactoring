@@ -1,7 +1,7 @@
 ﻿using System;
 using Moq;
 using Team3.ModelViews.Implementations;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Service.Interfaces;
 using Team3.Models;
 using Xunit;
 
@@ -9,20 +9,20 @@ namespace Team3.Tests.ModelViewsTests
 {
     public class TreatmentModelViewTests
     {
-        private readonly Mock<ITreatmentDatabaseService> mockTreatmentDbService;
+        private readonly Mock<ITreatmentService> mockTreatmentService;
         private readonly TreatmentModelView treatmentModelView;
 
         public TreatmentModelViewTests()
         {
-            mockTreatmentDbService = new Mock<ITreatmentDatabaseService>();
-            treatmentModelView = new TreatmentModelView(mockTreatmentDbService.Object);
+            mockTreatmentService = new Mock<ITreatmentService>();
+            treatmentModelView = new TreatmentModelView(mockTreatmentService.Object);
         }
 
         [Fact]
         public void GetTreatmentByMedicalRecordId_ExistingTreatment_ReturnsTreatment()
         {
             var expectedTreatment = new Treatment(1, 42);
-            mockTreatmentDbService
+            mockTreatmentService
                 .Setup(s => s.GetTreatmentByMedicalRecordId(42))
                 .Returns(expectedTreatment);
 
@@ -31,26 +31,26 @@ namespace Team3.Tests.ModelViewsTests
             Assert.NotNull(result);
             Assert.Equal(1, result.Id);
             Assert.Equal(42, result.MedicalRecordId);
-            mockTreatmentDbService.Verify(s => s.GetTreatmentByMedicalRecordId(42), Times.Once);
+            mockTreatmentService.Verify(s => s.GetTreatmentByMedicalRecordId(42), Times.Once);
         }
 
         [Fact]
         public void GetTreatmentByMedicalRecordId_NonExistingTreatment_ReturnsNull()
         {
-            mockTreatmentDbService
+            mockTreatmentService
                 .Setup(s => s.GetTreatmentByMedicalRecordId(99))
                 .Returns((Treatment)null);
 
             var result = treatmentModelView.GetTreatmentByMedicalRecordId(99);
 
             Assert.Null(result);
-            mockTreatmentDbService.Verify(s => s.GetTreatmentByMedicalRecordId(99), Times.Once);
+            mockTreatmentService.Verify(s => s.GetTreatmentByMedicalRecordId(99), Times.Once);
         }
 
         [Fact]
         public void GetTreatmentByMedicalRecordId_ServiceThrows_PropagatesException()
         {
-            mockTreatmentDbService
+            mockTreatmentService
                 .Setup(s => s.GetTreatmentByMedicalRecordId(123))
                 .Throws(new Exception("Database failure"));
 

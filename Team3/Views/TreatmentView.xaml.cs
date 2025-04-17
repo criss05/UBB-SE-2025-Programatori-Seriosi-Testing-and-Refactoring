@@ -13,6 +13,8 @@ namespace Team3.Views
     using Microsoft.UI.Xaml.Controls;
     using Team3.DatabaseServices.Implementations;
     using Team3.DatabaseServices.Interfaces;
+    using Team3.Service.Implementations;
+    using Team3.Service.Interfaces;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
 
@@ -30,7 +32,7 @@ namespace Team3.Views
         public TreatmentView()
         {
             this.InitializeComponent();
-            this.treatmentModelView = new TreatmentModelView(new TreatmentDatabaseService(Config.DbConnectionString));
+            this.treatmentModelView = new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString)));
         }
 
         private async void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
