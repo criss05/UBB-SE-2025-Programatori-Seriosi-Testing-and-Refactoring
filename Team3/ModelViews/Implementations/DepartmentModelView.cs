@@ -1,4 +1,8 @@
-﻿namespace Team3.ModelViews.Implementations
+﻿// <copyright file="DepartmentModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +17,7 @@
     /// </summary>
     public class DepartmentModelView : IDepartmentModelView
     {
-        private readonly IDepartmentDatabaseService departmentDatabaseService;
+        private readonly IDepartmentDatabaseService departmentService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DepartmentModelView"/> class.
@@ -21,9 +25,9 @@
         /// <param name="departmentDatabaseService">The department database service.</param>
         public DepartmentModelView(IDepartmentDatabaseService departmentDatabaseService)
         {
-            this.departmentDatabaseService = departmentDatabaseService;
-            DepartmentsInfo = new ObservableCollection<Department>();
-            LoadDepartmentsInfo();
+            this.departmentService = departmentDatabaseService;
+            this.DepartmentsInfo = new ObservableCollection<Department>();
+            this.LoadDepartmentsInfo();
         }
 
         /// <summary>
@@ -43,14 +47,14 @@
         {
             try
             {
-                var departmentList = departmentDatabaseService.GetDepartments();
+                var departmentList = this.departmentService.GetDepartments();
 
                 if (departmentList != null && departmentList.Count > 0)
                 {
-                    DepartmentsInfo.Clear(); // Clear old data
+                    this.DepartmentsInfo.Clear(); // Clear old data
                     foreach (var department in departmentList)
                     {
-                        DepartmentsInfo.Add(department);
+                        this.DepartmentsInfo.Add(department);
                     }
                 }
                 else
@@ -72,7 +76,7 @@
         {
             try
             {
-                LoadDepartmentsInfo();
+                this.LoadDepartmentsInfo();
             }
             catch (Exception exception)
             {
@@ -89,7 +93,7 @@
         {
             try
             {
-                var departmentList = departmentDatabaseService.GetDepartments();
+                var departmentList = this.departmentService.GetDepartments();
                 var filteredDepartments = departmentList.FindAll(d =>
                     d.DepartmentName.Contains(name, StringComparison.OrdinalIgnoreCase));
 
@@ -114,7 +118,7 @@
         {
             try
             {
-                OnBackNavigation?.Invoke();
+                this.OnBackNavigation?.Invoke();
             }
             catch (Exception exception)
             {

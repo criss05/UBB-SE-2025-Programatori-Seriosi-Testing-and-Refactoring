@@ -4,30 +4,25 @@
 
 namespace Team3.ModelViews.Implementations
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using Team3.DatabaseServices.Implementations;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
-    using Team3.Service.Implementations;
     using Team3.Service.Interfaces;
 
     /// <summary>
     /// Insterface for the NotificationModelView.
     /// </summary>
     public class NotificationModelView : INotificationModelView
-    { 
+    {
         private readonly INotificationService notificationService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationModelView"/> class.
         /// </summary>
-        public NotificationModelView(INotificationService _notificationService)
+        /// <param name="notificationService">Notification service.</param>
+        public NotificationModelView(INotificationService notificationService)
         {
-            this.notificationService = _notificationService;
+            this.notificationService = notificationService;
         }
 
         /// <summary>
@@ -45,20 +40,20 @@ namespace Team3.ModelViews.Implementations
         }
 
         /// <summary>
-        /// add a notification
+        /// Add a notification.
         /// </summary>
-        /// <param name="notification"></param>
-        /// <returns></returns>
+        /// <param name="notification">The notification to be added.</param>
+        /// <returns>The status code of success.</returns>
         public int AddNotification(Notification notification)
         {
             return this.notificationService.AddNotification(notification);
         }
 
         /// <summary>
-        /// get a notification
+        /// Get a notification.
         /// </summary>
-        /// <param name="notificationId"></param>
-        /// <returns></returns>
+        /// <param name="notificationId">The notification id.</param>
+        /// <returns>The notification with the given Id.</returns>
         public Notification GetNotificationById(int notificationId)
         {
             return this.notificationService.GetNotificationById(notificationId);
@@ -88,7 +83,7 @@ namespace Team3.ModelViews.Implementations
         /// <param name="appointmentId">the id of the appointment.</param>
         public void AddCancelAppointmentNotification(int appointmentId)
         {
-            this.notificationService.AddCancelAppointmentNotification(appointmentId);    
+            this.notificationService.AddCancelAppointmentNotification(appointmentId);
         }
 
         /// <summary>
@@ -108,7 +103,6 @@ namespace Team3.ModelViews.Implementations
         {
             this.notificationService.AddMedicationReminderNotifications(medicalRecordId);
         }
-
 
         /// <summary>
         /// / Adds a new review.

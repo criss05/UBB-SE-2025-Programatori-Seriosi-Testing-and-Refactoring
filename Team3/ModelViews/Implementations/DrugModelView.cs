@@ -1,4 +1,8 @@
-﻿namespace Team3.ModelViews.Implementations
+﻿// <copyright file="DrugModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Implementations
 {
     using System;
     using Team3.DatabaseServices.Interfaces;
@@ -16,10 +20,10 @@
         /// Initializes a new instance of the <see cref="DrugModelView"/> class.
         /// Constructor for DrugModelView.
         /// </summary>
-        /// <param name="dbConnString">The database connection string.</param>
-        public DrugModelView(IDrugDatabaseService _drugDatabaseService)
+        /// <param name="drugDatabaseService">The database connection string.</param>
+        public DrugModelView(IDrugDatabaseService drugDatabaseService)
         {
-            drugDatabaseService = _drugDatabaseService;
+            this.drugDatabaseService = drugDatabaseService;
         }
 
         /// <summary>
@@ -29,7 +33,7 @@
         /// <returns>The drug.</returns>
         public Drug GetDrugById(int drugId)
         {
-            return drugDatabaseService.GetDrugById(drugId);
+            return this.drugDatabaseService.GetDrugById(drugId);
         }
     }
 }

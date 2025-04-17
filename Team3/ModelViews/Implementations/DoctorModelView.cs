@@ -27,17 +27,17 @@ namespace Team3.ModelViews.Implementations
         /// <param name="scheduleModelView">The schedule model view.</param>
         /// <param name="userModelView">The user model view.</param>
         public DoctorModelView(
-            IDoctorDatabaseService _doctorDatabaseService,
-            IMedicalRecordModelView _medicalRecordModelView,
-            IScheduleModelView _scheduleModelView,
-            IUserModelView _userModelView)
+            IDoctorDatabaseService doctorDatabaseService,
+            IMedicalRecordModelView medicalRecordModelView,
+            IScheduleModelView scheduleModelView,
+            IUserModelView userModelView)
         {
-            this.doctorDatabaseService = _doctorDatabaseService;
-            this.medicalRecordModelView = _medicalRecordModelView;
-            this.scheduleModelView = _scheduleModelView;
-            this.userModelView = _userModelView;
+            this.doctorDatabaseService = doctorDatabaseService;
+            this.medicalRecordModelView = medicalRecordModelView;
+            this.scheduleModelView = scheduleModelView;
+            this.userModelView = userModelView;
 
-            DoctorsInfo = new ObservableCollection<Doctor>();
+            this.DoctorsInfo = new ObservableCollection<Doctor>();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Team3.ModelViews.Implementations
         /// <returns>The doctor for the given id.</returns>
         public Doctor GetDoctorById(int doctorId)
         {
-            return doctorDatabaseService.GetDoctorById(doctorId);
+            return this.doctorDatabaseService.GetDoctorById(doctorId);
         }
     }
 }

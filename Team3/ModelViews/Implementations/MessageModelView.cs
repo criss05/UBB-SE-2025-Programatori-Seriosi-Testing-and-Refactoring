@@ -1,9 +1,12 @@
-﻿namespace Team3.ModelViews.Implementations
+﻿// <copyright file="MessageModelView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Team3.DatabaseServices.Interfaces;
     using Team3.DTOs;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
@@ -27,7 +30,7 @@
             Debug.WriteLine("MessageModelView created");
             this.messageService = messageService;
             this.userModelView = userModelView;
-            Messages = new ObservableCollection<MessageChatDTO>();
+            this.Messages = new ObservableCollection<MessageChatDTO>();
         }
 
         /// <summary>
@@ -38,18 +41,17 @@
         /// <inheritdoc/>
         public void LoadAllMessages(int chatId)
         {
-            var messages = messageService.GetMessagesByChatId(chatId);
+            var messages = this.messageService.GetMessagesByChatId(chatId);
             Debug.WriteLine(messages.Count + " Messages loaded");
 
-            Messages.Clear();
+            this.Messages.Clear();
 
             foreach (var message in messages)
             {
-                var user = userModelView.GetUserById(message.UserId);
-                Messages.Add(new MessageChatDTO(message.Content, message.UserId, message.ChatId, message.SentDateTime, user.Name));
+                var user = this.userModelView.GetUserById(message.UserId);
+                this.Messages.Add(new MessageChatDTO(message.Content, message.UserId, message.ChatId, message.SentDateTime, user.Name));
             }
         }
-
 
         /// <summary>
         /// Handles the send button click event.
@@ -66,19 +68,19 @@
             // MessageChatDTO messageChatDTO = new MessageChatDTO(newMessage.Id, message, userId, chatId, currentDateTime, userModelView.GetUser(userId).ToString());
 
             // Here you could add a method to actually send the message to the database.
-            LoadAllMessages(chatId);
+            this.LoadAllMessages(chatId);
         }
 
         /// <inheritdoc/>
         public void addMessage(Message message)
         {
-            messageService.AddMessage(message);
+            this.messageService.AddMessage(message);
         }
 
         /// <inheritdoc/>
         public Message GetMessageById(int id)
         {
-            return messageService.GetMessageById(id);
+            return this.messageService.GetMessageById(id);
         }
     }
 }
