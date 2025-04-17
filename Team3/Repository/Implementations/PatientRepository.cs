@@ -5,14 +5,14 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    public class PatientDatabaseService : IPatientDatabaseService
+    public class PatientRepository : IPatientRepository
     {
         private readonly string dbConnString;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PatientDatabaseService"/> class.
+        /// Initializes a new instance of the <see cref="PatientRepository"/> class.
         /// </summary>
-        public PatientDatabaseService(string _dbConnString)
+        public PatientRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

@@ -10,11 +10,13 @@ namespace Team3.Views
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
     using Team3.DatabaseServices.Implementations;
+    using Team3.Service.Implementations;
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Implementations;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// Interaction logic for NotificationDetailView.xaml.
@@ -46,8 +48,8 @@ namespace Team3.Views
             new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))),
             new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)))
         ),
+        new PatientModelView(new PatientService(new PatientRepository(Config.DbConnectionString))),
         new UserModelView(new UserService(new UserRepository(Config.DbConnectionString))),
-        new PatientModelView(new PatientDatabaseService(Config.DbConnectionString)),
         new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString)),
         new DrugModelView(new DrugDatabaseService(Config.DbConnectionString)),
         new TreatmentDrugModelView(new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString))),

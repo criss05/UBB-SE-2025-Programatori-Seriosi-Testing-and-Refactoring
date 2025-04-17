@@ -1,14 +1,10 @@
-﻿// <copyright file="ShiftTypeModelView.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Team3.ModelViews.Implementations
+﻿namespace Team3.ModelViews.Implementations
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using Team3.DatabaseServices.Interfaces;
+    using Team3.Service.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
 
@@ -17,69 +13,27 @@ namespace Team3.ModelViews.Implementations
     /// </summary>
     public class ShiftTypeModelView : IShiftTypeModelView
     {
-        private readonly IShiftTypeDatabaseService shiftTypeDatabaseService;
+        private readonly IShiftTypeService shiftTypeService;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ShiftTypeModelView"/> class.
-        /// </summary>
-        /// <param name="shiftTypeDatabaseService">Service used to interact with the shift type database.</param>
-        public ShiftTypeModelView(IShiftTypeDatabaseService shiftTypeDatabaseService)
+        public ShiftTypeModelView(IShiftTypeService shiftTypeDatabaseService)
         {
-            this.shiftTypeDatabaseService = shiftTypeDatabaseService ?? throw new ArgumentNullException(nameof(shiftTypeDatabaseService));
+            this.shiftTypeService = shiftTypeDatabaseService ?? throw new ArgumentNullException(nameof(shiftTypeDatabaseService));
             ShiftTypes = new ObservableCollection<ShiftType>();
             LoadShiftTypes();
         }
 
-        /// <summary>
-        /// Gets the collection of shift types.
-        /// </summary>
         public ObservableCollection<ShiftType> ShiftTypes { get; private set; }
 
-        /// <summary>
-        /// Gets the shift types that fall within a specific time range.
-        /// </summary>
-        /// <param name="startTime">The date of start.</param>
-        /// <param name="endTime">The end date.</param>
-        /// <returns>The list of shift type between the dates.</returns>
         public List<ShiftType> GetShiftTypesByTimeRange(TimeOnly startTime, TimeOnly endTime)
         {
-            try
-            {
-                var shiftTypeList = shiftTypeDatabaseService.GetAllShiftTypes();
-                var filteredShiftTypes = new List<ShiftType>();
-
-                foreach (var shiftType in shiftTypeList)
-                {
-                    if (shiftType.ShiftTypeStartTime >= startTime && shiftType.ShiftTypeEndTime <= endTime)
-                    {
-                        filteredShiftTypes.Add(shiftType);
-                    }
-                }
-
-                if (filteredShiftTypes.Count == 0)
-                {
-                   throw new Exception($"No shift types found in the time range {startTime} - {endTime}");
-                }
-
-                return filteredShiftTypes;
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine($"Error filtering shift types: {exception.Message}");
-                throw;
-            }
+            return this.shiftTypeService.GetShiftTypesByTimeRange(startTime, endTime);
         }
 
-        /// <summary>
-        /// Gets a specific shift type by its ID.
-        /// </summary>
-        /// <param name="shiftTypeID">Shift type id.</param>
-        /// <returns>The shift type.</returns>
         public ShiftType? GetShiftType(int shiftTypeID)
         {
             try
             {
-                return shiftTypeDatabaseService.GetShiftType(shiftTypeID);
+                return shiftTypeService.GetShiftType(shiftTypeID);
             }
             catch (Exception exception)
             {
@@ -88,24 +42,16 @@ namespace Team3.ModelViews.Implementations
             }
         }
 
-        /// <summary>
-        /// Loads the shift types from the database and adds them to the collection.
-        /// </summary>
         private void LoadShiftTypes()
         {
             try
             {
-                var shiftTypeList = shiftTypeDatabaseService.GetAllShiftTypes();
-                if (shiftTypeList != null && shiftTypeList.Count > 0)
+                var shiftTypeList = shiftTypeService.GetAllShiftTypes();
+                ShiftTypes.Clear();
+
+                foreach (var shiftType in shiftTypeList)
                 {
-                    foreach (var shiftType in shiftTypeList)
-                    {
-                        ShiftTypes.Add(shiftType);
-                    }
-                }
-                else
-                {
-                    throw new Exception("No shift types available.");
+                    ShiftTypes.Add(shiftType);
                 }
             }
             catch (Exception exception)

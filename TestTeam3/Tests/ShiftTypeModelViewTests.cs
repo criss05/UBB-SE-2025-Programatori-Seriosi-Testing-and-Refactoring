@@ -6,19 +6,20 @@ using Team3.ModelViews.Implementations;
 using Team3.DatabaseServices.Interfaces;
 using Team3.Models;
 using Xunit;
+using Team3.Service.Implementations;
 
 namespace Team3.Tests.ModelViewsTests
 {
     public class ShiftTypeModelViewTests
     {
-        private readonly Mock<IShiftTypeDatabaseService> mockShiftTypeDbService;
+        private readonly Mock<IShiftTypeRepo> mockShiftTypeDbService;
         private readonly ShiftTypeModelView shiftTypeModelView;
 
         public ShiftTypeModelViewTests()
         {
-            mockShiftTypeDbService = new Mock<IShiftTypeDatabaseService>();
+            mockShiftTypeDbService = new Mock<IShiftTypeRepo>();
             mockShiftTypeDbService.Setup(s => s.GetAllShiftTypes()).Returns(new List<ShiftType>());
-            shiftTypeModelView = new ShiftTypeModelView(mockShiftTypeDbService.Object);
+            shiftTypeModelView = new ShiftTypeModelView(new ShiftTypeService(mockShiftTypeDbService.Object)) ;
         }
 
         [Fact]
@@ -92,7 +93,7 @@ namespace Team3.Tests.ModelViewsTests
             };
             mockShiftTypeDbService.Setup(s => s.GetAllShiftTypes()).Returns(shiftTypes);
 
-            var modelView = new ShiftTypeModelView(mockShiftTypeDbService.Object);
+            var modelView = new ShiftTypeModelView(new ShiftTypeService(mockShiftTypeDbService.Object));
 
             Assert.Equal(2, modelView.ShiftTypes.Count);
             Assert.Contains(modelView.ShiftTypes, s => s.Id == 1);

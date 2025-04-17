@@ -6,11 +6,11 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    public class ShiftTypeDatabaseService : IShiftTypeDatabaseService
+    public class ShiftTypeRepository : IShiftTypeRepo
     {
         private readonly string dbConnString;
 
-        public ShiftTypeDatabaseService(string _dbConnString)
+        public ShiftTypeRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

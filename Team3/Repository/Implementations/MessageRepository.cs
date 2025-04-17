@@ -8,11 +8,11 @@ using Team3.DatabaseServices.Interfaces;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    public class MessageDatabaseService : IMessageDatabaseService
+    public class MessageRepository : IMessageRepository
     {
         private readonly string dbConnString;
 
-        public MessageDatabaseService(string _dbConnString)
+        public MessageRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

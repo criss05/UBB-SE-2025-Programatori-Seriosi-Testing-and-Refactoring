@@ -9,18 +9,20 @@ using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Xunit;
 using Team3.Models;
+using Team3.Service.Interfaces;
+using Team3.Service.Implementations;
 
 namespace Team3.Tests.ModelViewsTests
 {
     public class PatientModelViewTest
     {
-        private readonly Mock<IPatientDatabaseService> mockDatabaseService;
+        private readonly Mock<IPatientRepository> mockDatabaseService;
         private readonly IPatientModelView patientModelView;
 
         public PatientModelViewTest()
         {
-            this.mockDatabaseService = new Mock<IPatientDatabaseService>();
-            this.patientModelView = new PatientModelView(this.mockDatabaseService.Object);
+            this.mockDatabaseService = new Mock<IPatientRepository>();
+            this.patientModelView = new PatientModelView(new PatientService(this.mockDatabaseService.Object));
         }
 
         [Fact]
