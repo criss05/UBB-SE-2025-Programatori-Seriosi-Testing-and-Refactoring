@@ -1,4 +1,8 @@
-﻿namespace Team3.DatabaseServices.Implementations
+﻿// <copyright file="ReviewRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.DatabaseServices.Implementations
 {
     using System;
     using Microsoft.Data.SqlClient;
@@ -10,15 +14,15 @@
     /// </summary>
     public class ReviewRepository : IReviewRepository
     {
-        private readonly string dbConnString;
+        private readonly string connectionString;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReviewRepository"/> class.
         /// </summary>
-        /// <param name="_dbConnString">The connection string for the database.</param>
-        public ReviewRepository(string _dbConnString)
+        /// <param name="connectionString">The connection string for the database.</param>
+        public ReviewRepository(string connectionString)
         {
-            this.dbConnString = _dbConnString;
+            this.connectionString = connectionString;
         }
 
         /// <summary>
@@ -30,7 +34,7 @@
             const string query = "INSERT INTO Reviews (medicalrecord_id, message, nr_stars) VALUES (@medicalrecord_id, @message, @nr_stars)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -40,9 +44,9 @@
                     command.ExecuteNonQuery();
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error adding review", e);
+                throw new Exception("Error adding review", error);
             }
         }
 
@@ -57,7 +61,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -74,9 +78,9 @@
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error getting review", e);
+                throw new Exception("Error getting review", error);
             }
         }
     }

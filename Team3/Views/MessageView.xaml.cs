@@ -59,11 +59,11 @@ namespace Team3.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageView"/> class.
         /// </summary>
-        /// <param name="e">The event ot the navigation.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /// <param name="error">The event ot the navigation.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs error)
         {
-            base.OnNavigatedTo(e);
-            if (e.Parameter is(int userId, int chatId))
+            base.OnNavigatedTo(error);
+            if (error.Parameter is(int userId, int chatId))
             {
                 this.UserId = userId;
                 this.ChatId = chatId;
@@ -73,12 +73,12 @@ namespace Team3.Views
         }
 
         private
-        void BackClicked(object sender, RoutedEventArgs e)
+        void BackClicked(object sender, RoutedEventArgs error)
         {
             this.Frame.Navigate(typeof(ChatView));
         }
 
-        private void sendButtonClicked(object sender, RoutedEventArgs e)
+        private void sendButtonClicked(object sender, RoutedEventArgs error)
         {
             string message = this.messageBar.Text;
             this.ViewModel.SendButtonHandler(this.UserId, this.ChatId, message);

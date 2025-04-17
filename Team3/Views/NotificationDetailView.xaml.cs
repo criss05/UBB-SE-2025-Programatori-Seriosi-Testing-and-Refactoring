@@ -60,23 +60,23 @@ namespace Team3.Views
         /// <summary>
         /// Handles the navigation to this page.
         /// </summary>
-        /// <param name="e">The event.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /// <param name="error">The event.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs error)
         {
-            base.OnNavigatedTo(e);
-            if (e.Parameter is Notification notification)
+            base.OnNavigatedTo(error);
+            if (error.Parameter is Notification notification)
             {
                 this.SelectedNotification = notification;
                 Debug.WriteLine($"Viewing notification detail:Message={this.SelectedNotification.Message}");
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs error)
         {
             this.Frame.Navigate(typeof(NotificationView), this.SelectedNotification.UserId);
         }
 
-        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs error)
         {
             this.ViewModel.DeleteNotification(this.SelectedNotification.UserId);
 

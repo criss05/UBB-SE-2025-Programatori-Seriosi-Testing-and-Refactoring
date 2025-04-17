@@ -1,36 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using Team3.DatabaseServices.Interfaces;
+﻿// <copyright file="MedicalRecordDatabaseService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices.Implementations
 {
-    using Team3.Models;
+    using System;
+    using Microsoft.Data.SqlClient;
+    using Team3.DatabaseServices.Interfaces;
+
+    /// <summary>
+    /// Service for managing medical records in the database.
+    /// </summary>
     public class MedicalRecordDatabaseService : IMedicalRecordDatabaseService
     {
-        private readonly string dbConnString;
+        private readonly string connectionString;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MedicalRecordDatabaseService"/> class.
         /// </summary>
-        /// <param name="dbConnString">The database connection string.</param>
-        public MedicalRecordDatabaseService(string _dbConnString)
+        /// <param name="connectionString">The database connection string.</param>
+        public MedicalRecordDatabaseService(string connectionString)
         {
-            this.dbConnString = _dbConnString;
+            this.connectionString = connectionString;
         }
 
-        public MedicalRecord GetMedicalRecordById(int id)
+        /// <summary>
+        /// Inserts a new medical record into the database.
+        /// </summary>
+        /// <param name="medicalRecordId">The id of the medical record.</param>
+        /// <returns>The medical record with the given id.</returns>
+        /// <exception cref="Exception">Throws error if failed.</exception>
+        public MedicalRecord GetMedicalRecordById(int medicalRecordId)
         {
             const string query = "SELECT * FROM medicalrecords WHERE id = @id;";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
 
-                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@id", medicalRecordId);
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -39,14 +50,13 @@ namespace Team3.DatabaseServices.Implementations
                             (int)reader[0],
                             (int)reader[1],
                             (int)reader[2],
-                            (DateTime)reader[3]
-                        );
+                            (DateTime)reader[3]);
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error retrieving medical record", e);
+                throw new Exception("Error retrieving medical record", error);
             }
         }
     }

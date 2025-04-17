@@ -1,23 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using Team3.DatabaseServices.Interfaces;
-using Team3.Models;
+﻿// <copyright file="UserRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.DatabaseServices.Implementations
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Data.SqlClient;
+    using Team3.DatabaseServices.Interfaces;
+    using Team3.Models;
+
+    /// <summary>
+    /// Repository for user data.
+    /// </summary>
     public class UserRepository : IUserService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserRepository"/> class.
         /// </summary>
-        public UserRepository(string _dbConnString)
+        /// <param name="connectionString">The connection string to the database.</param>
+        public UserRepository(string connectionString)
         {
-            this.dbConnString = _dbConnString;
+            this.ConnectionString = connectionString;
         }
 
-        private string dbConnString { get; }
+        private string ConnectionString { get; }
 
+        /// <summary>
+        /// Get all users from the database.
+        /// </summary>
+        /// <returns>The list of all users.</returns>
+        /// <exception cref="Exception">Throws error if failed.</exception>
         public List<User> GetAllUsers()
         {
             const string query = "SELECT * FROM users;";
@@ -25,7 +38,7 @@ namespace Team3.DatabaseServices.Implementations
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.ConnectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -37,32 +50,37 @@ namespace Team3.DatabaseServices.Implementations
                             users.Add(new User(
                                 (int)reader[0],
                                 reader[1].ToString(),
-                                reader[2].ToString()
-                            ));
+                                reader[2].ToString()));
                         }
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error retrieving users", e);
+                throw new Exception("Error retrieving users", error);
             }
 
             return users;
         }
 
-        public User GetUserById(int id)
+        /// <summary>
+        /// Get a user by id from the database.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>The user with the given id.</returns>
+        /// <exception cref="Exception">Throws error if failed.</exception>
+        public User GetUserById(int userId)
         {
             const string query = "SELECT * FROM users WHERE id = @id";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.ConnectionString))
                 {
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@id", id);
+                        command.Parameters.AddWithValue("@id", userId);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -76,9 +94,9 @@ namespace Team3.DatabaseServices.Implementations
 
                 throw new Exception("User not found");
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                throw new Exception("Error retrieving user", e);
+                throw new Exception("Error retrieving user", error);
             }
         }
     }

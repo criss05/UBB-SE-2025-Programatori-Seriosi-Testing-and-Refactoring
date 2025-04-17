@@ -1,4 +1,8 @@
-﻿namespace Team3.DatabaseServices.Implementations
+﻿// <copyright file="TreatmentDrugRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.DatabaseServices.Implementations
 {
     using System;
     using System.Collections.Generic;
@@ -6,17 +10,20 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
 
+    /// <summary>
+    /// Repository for managing treatment drugs in the database.
+    /// </summary>
     public class TreatmentDrugRepository : ITreatmentDrugRepository
     {
-        private readonly string dbConnString;
+        private readonly string connectionString;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TreatmentDrugRepository"/> class.
         /// </summary>
-        /// <param name="_dbConnString">The connection string for the database.</param>
-        public TreatmentDrugRepository(string _dbConnString)
+        /// <param name="connectionString">The connection string for the database.</param>
+        public TreatmentDrugRepository(string connectionString)
         {
-            this.dbConnString = _dbConnString;
+            this.connectionString = connectionString;
         }
 
         /// <summary>
@@ -30,7 +37,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -61,7 +68,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -80,8 +87,7 @@
                             TimeOnly.FromTimeSpan(reader.GetFieldValue<TimeSpan>(4)),
                             TimeOnly.FromTimeSpan(reader.GetFieldValue<TimeSpan>(5)),
                             DateOnly.FromDateTime(reader.GetFieldValue<DateTime>(6)),
-                            reader.GetInt32(7)
-                        ));
+                            reader.GetInt32(7)));
                     }
 
                     return treatmentDrugList;

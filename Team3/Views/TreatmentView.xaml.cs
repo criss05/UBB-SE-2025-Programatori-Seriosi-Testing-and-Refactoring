@@ -35,7 +35,7 @@ namespace Team3.Views
             this.treatmentModelView = new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString)));
         }
 
-        private async void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
+        private async void AddTreatmentButton_Click(object sender, RoutedEventArgs error)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Team3.Views
             await dialog.ShowAsync();
         }
 
-        private void NavigateToMainPage_Click(object sender, RoutedEventArgs e)
+        private void NavigateToMainPage_Click(object sender, RoutedEventArgs error)
         {
             // this.Frame.Navigate(typeof(MainPage)); // Navigate to ReviewView
         }

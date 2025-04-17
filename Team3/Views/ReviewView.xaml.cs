@@ -43,7 +43,7 @@ namespace Team3.Views
             this.reviewModelView = new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)));
         }
 
-        private async void AddReviewButton_Click(object sender, RoutedEventArgs e)
+        private async void AddReviewButton_Click(object sender, RoutedEventArgs error)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace Team3.Views
             await dialog.ShowAsync();
         }
 
-        private void NavigateToMainPage_Click(object sender, RoutedEventArgs e)
+        private void NavigateToMainPage_Click(object sender, RoutedEventArgs error)
         {
             // this.Frame.Navigate(typeof(MainPage)); // Navigate to ReviewView
         }

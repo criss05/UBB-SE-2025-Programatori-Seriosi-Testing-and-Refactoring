@@ -66,46 +66,46 @@ namespace Team3.Views
         /// <summary>
         /// Handles the navigation to this page.
         /// </summary>
-        /// <param name="e">The event.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /// <param name="error">The event.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs error)
         {
-            base.OnNavigatedTo(e);
-            if (e.Parameter is int userId)
+            base.OnNavigatedTo(error);
+            if (error.Parameter is int userId)
             {
                 this.UserId = userId;
                 this.NotificationModelView.LoadNotifications(userId);
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs error)
         {
             this.Frame.Navigate(typeof(OptionsPage), this.UserId);
         }
 
-        private void NotificationsListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void NotificationsListView_ItemClick(object sender, ItemClickEventArgs error)
         {
-            if (e.ClickedItem is Notification selectedNotification)
+            if (error.ClickedItem is Notification selectedNotification)
             {
                 this.Frame.Navigate(typeof(NotificationDetailView), selectedNotification);
             }
         }
 
-        private void AddAppointmentButton_Click(object sender, RoutedEventArgs e)
+        private void AddAppointmentButton_Click(object sender, RoutedEventArgs error)
         {
 
         }
 
-        private void AddTreatmentButton_Click(object sender, RoutedEventArgs e)
+        private void AddTreatmentButton_Click(object sender, RoutedEventArgs error)
         {
 
         }
 
-        private void AddReviewButton_Click(object sender, RoutedEventArgs e)
+        private void AddReviewButton_Click(object sender, RoutedEventArgs error)
         {
 
         }
 
-        private void DeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteAppointmentButton_Click(object sender, RoutedEventArgs error)
         {
 
         }

@@ -1,4 +1,8 @@
-﻿namespace Team3.DatabaseServices.Implementations
+﻿// <copyright file="TreatmentRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Team3.DatabaseServices.Implementations
 {
     using System;
     using Microsoft.Data.SqlClient;
@@ -10,15 +14,15 @@
     /// </summary>
     public class TreatmentRepository : ITreatmentRepository
     {
-        private readonly string dbConnString;
+        private readonly string connectionString;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TreatmentRepository"/> class.
         /// </summary>
-        /// <param name="_dbConnString">The database connection string.</param>
-        public TreatmentRepository(string _dbConnString)
+        /// <param name="connectionString">The database connection string.</param>
+        public TreatmentRepository(string connectionString)
         {
-            this.dbConnString = _dbConnString;
+            this.connectionString = connectionString;
         }
 
         /// <summary>
@@ -30,7 +34,7 @@
             const string query = "INSERT INTO treatments(medicalrecord_id) values (@medicalrecord_id)";
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(query, connection);
@@ -57,7 +61,7 @@
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(this.dbConnString))
+                using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
 

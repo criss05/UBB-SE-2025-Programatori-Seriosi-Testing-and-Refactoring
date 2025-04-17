@@ -38,10 +38,10 @@ namespace Team3.Views
         /// Handles the item click event for the users list view.
         /// </summary>
         /// <param name="sender">The semder.</param>
-        /// <param name="e">The event.</param>
-        private void UsersListView_ItemClick(object sender, ItemClickEventArgs e)
+        /// <param name="error">The event.</param>
+        private void UsersListView_ItemClick(object sender, ItemClickEventArgs error)
         {
-            if (e.ClickedItem is User selectedUser)
+            if (error.ClickedItem is User selectedUser)
             {
                 Debug.WriteLine($"Selected User: ID={selectedUser.Id}, Name={selectedUser.Name}, Role={selectedUser.Role}");
 
@@ -51,7 +51,7 @@ namespace Team3.Views
             }
         }
 
-        private void AuditButton_Click(object sender, RoutedEventArgs e)
+        private void AuditButton_Click(object sender, RoutedEventArgs error)
         {
             // Navigate to AuditPage and pass the selected user
             // this.Frame.Navigate(typeof(AuditView), SelectedUser);
