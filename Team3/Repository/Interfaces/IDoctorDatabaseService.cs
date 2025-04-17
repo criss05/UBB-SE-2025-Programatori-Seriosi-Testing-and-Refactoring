@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.DatabaseServices.Interface
+namespace Team3.Repository.Interface
 {
     using Team3.Models;
 

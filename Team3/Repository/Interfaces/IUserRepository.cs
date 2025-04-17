@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.DatabaseServices.Interfaces
+namespace Team3.Repository.Interfaces
 {
     using System.Collections.Generic;
     using Team3.Models;
@@ -10,7 +10,7 @@ namespace Team3.DatabaseServices.Interfaces
     /// <summary>
     /// Interface for user service.
     /// </summary>
-    public interface IUserService
+    public interface IUserRepository
     {
         /// <summary>
         /// get all users.

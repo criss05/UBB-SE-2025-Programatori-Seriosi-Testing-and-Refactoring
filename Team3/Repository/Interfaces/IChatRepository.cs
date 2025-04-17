@@ -1,7 +1,7 @@
 ﻿// <copyright file="IChatRepository.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-namespace Team3.DatabaseServices.Interfaces
+namespace Team3.Repository.Interfaces
 {
     using System.Collections.Generic;
     using Team3.Models;
