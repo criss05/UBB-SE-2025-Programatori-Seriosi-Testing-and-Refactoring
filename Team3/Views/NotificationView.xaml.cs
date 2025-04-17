@@ -15,6 +15,7 @@ namespace Team3.Views
     using Team3.DatabaseServices.Interfaces;
     using Team3.DatabaseServices.Implementations;
     using Team3.Service.Implementations;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// Interaction logic for NotificationView.xaml.
@@ -52,7 +53,7 @@ namespace Team3.Views
         /// </summary>
         private readonly IAppointmentModelView appointmentModelView = new AppointmentModelView(new AppointmentService(new AppointmentRepository(Config.DbConnectionString)));
         private readonly IUserModelView userModelView = new UserModelView(new UserDatabaseService(Config.DbConnectionString));
-        private readonly IPatientModelView patientModelView = new PatientModelView(new PatientDatabaseService(Config.DbConnectionString));
+        private readonly IPatientModelView patientModelView = new PatientModelView(new PatientService(new PatientRepository(Config.DbConnectionString)));
         private readonly IMedicalRecordModelView medicalRecordModelView = new MedicalRecordModelView(new MedicalRecordDatabaseService(Config.DbConnectionString));
         private readonly IDrugModelView drugModelView = new DrugModelView(new DrugDatabaseService(Config.DbConnectionString));
         private readonly ITreatmentDrugModelView treatmentDrugModelView = new TreatmentDrugModelView(new TreatmentDrugDatabaseService(Config.DbConnectionString));

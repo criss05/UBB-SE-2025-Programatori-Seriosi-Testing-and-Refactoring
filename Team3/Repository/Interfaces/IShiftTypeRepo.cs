@@ -7,7 +7,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Interfaces
 {
-    public interface IShiftTypeDatabaseService
+    public interface IShiftTypeRepo
     {
         /// <summary>
         /// get all shift types
