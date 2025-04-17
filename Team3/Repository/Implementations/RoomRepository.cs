@@ -6,11 +6,11 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Implementations
 {
-    public class RoomDatabaseService : IRoomDatabaseService
+    public class RoomRepository : IRoomRepository
     {
         private readonly string dbConnString;
 
-        public RoomDatabaseService(string _dbConnString)
+        public RoomRepository(string _dbConnString)
         {
             this.dbConnString = _dbConnString;
         }

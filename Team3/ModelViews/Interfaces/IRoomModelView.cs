@@ -9,7 +9,7 @@
     using Team3.Models;
 
     /// <summary>
-    /// Interface for Room Model View
+    /// Interface for Room Model View.
     /// </summary>
     public interface IRoomModelView
     {
@@ -24,7 +24,6 @@
         /// Add a room.
         /// </summary>
         /// <param name="room">The room to be added.</param>
-        /// <returns></returns>
         public void AddRoom(Room room);
 
         /// <summary>

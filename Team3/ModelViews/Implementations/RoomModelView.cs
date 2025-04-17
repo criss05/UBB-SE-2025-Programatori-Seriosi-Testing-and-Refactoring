@@ -8,24 +8,24 @@
     using Team3.DatabaseServices.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Service.Interfaces;
 
     /// <summary>
     /// RoomModelView class that implements IRoomModelView.
     /// </summary>
     public class RoomModelView : IRoomModelView
     {
-        private readonly IRoomDatabaseService roomDatabaseService;
+        private readonly IRoomService roomService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomModelView"/> class.
         /// </summary>
-        /// <param name="roomDatabaseService">The database service for rooms.</param>
-        public RoomModelView(IRoomDatabaseService roomDatabaseService)
+        /// <param name="roomService">The database service for rooms.</param>
+        public RoomModelView(IRoomService roomService)
         {
-            this.roomDatabaseService = roomDatabaseService;
+            this.roomService = roomService;
             Rooms = new ObservableCollection<Room>();
             RoomsInfo = new ObservableCollection<Room>();
-            LoadAllRooms();
         }
 
         /// <summary>
@@ -45,23 +45,26 @@
         /// <returns>A list with all the rooms.</returns>
         public ObservableCollection<Room> GetRoomsByDepartmentId(int departmentId)
         {
-            try
-            {
-                var filteredRooms = new ObservableCollection<Room>(
-                    roomDatabaseService.GetRooms().Where(r => r.DepartmentId == departmentId));
+            return new ObservableCollection<Room>(this.roomService.GetRoomsByDepartmentId(departmentId));
+        }
 
-                if (!filteredRooms.Any())
-                {
-                    throw new Exception($"No rooms found for Department ID: {departmentId}");
-                }
+        /// <summary>
+        /// Add a room.
+        /// </summary>
+        /// <param name="room">The room to be added.</param>
+        public void AddRoom(Room room)
+        {
+            this.roomService.AddRoom(room);
+        }
 
-                return filteredRooms;
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine($"Error filtering rooms by Department ID: {exception.Message}");
-                throw;
-            }
+        /// <summary>
+        /// Gets a room by their department ID.
+        /// </summary>
+        /// <param name="departmentId">The id of the department.</param>
+        /// <returns>The room from the department.</returns>
+        public Room GetRoom(int departmentId)
+        {
+            return this.roomService.GetRoom(departmentId);
         }
 
         /// <summary>
@@ -69,41 +72,8 @@
         /// </summary>
         private void LoadAllRooms()
         {
-            try
-            {
-                var roomList = roomDatabaseService.GetRooms();
-                if (roomList != null && roomList.Count > 0)
-                {
-                    foreach (var room in roomList)
-                    {
-                        Rooms.Add(room);
-                        RoomsInfo.Add(room);
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine("No rooms found.");
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine($"Error loading rooms: {exception.Message}");
-            }
-        }
-
-        /// <summary>
-        /// Add a room.
-        /// </summary>
-        /// <param name="room">The room to be added.</param>
-        /// <returns></returns>
-        public void AddRoom(Room room)
-        {
-            this.roomDatabaseService.AddRoom(room);
-        }
-
-        public Room GetRoom(int departmentId)
-        {
-            return this.roomDatabaseService.GetRoom(departmentId);
+            this.Rooms = new ObservableCollection<Room>(this.roomService.LoadAllRooms());
+            this.RoomsInfo = new ObservableCollection<Room>(this.roomService.LoadAllRooms());
         }
     }
 }

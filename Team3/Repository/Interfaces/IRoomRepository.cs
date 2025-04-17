@@ -7,7 +7,7 @@ using Team3.Models;
 
 namespace Team3.DatabaseServices.Interfaces
 {
-    public interface IRoomDatabaseService
+    public interface IRoomRepository
     {
         /// <summary>
         /// get all rooms
