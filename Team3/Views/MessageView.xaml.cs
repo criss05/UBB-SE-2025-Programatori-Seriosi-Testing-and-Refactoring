@@ -18,8 +18,10 @@ namespace Team3.Views
     using Microsoft.UI.Xaml.Media;
     using Microsoft.UI.Xaml.Navigation;
     using Team3.DatabaseServices.Implementations;
+    using Team3.DatabaseServices.Interfaces;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
+    using Team3.Services.Implementations;
     using Windows.Foundation;
     using Windows.Foundation.Collections;
 
@@ -40,7 +42,7 @@ namespace Team3.Views
         /// <summary>
         /// Gets the ViewModel for the message view.
         /// </summary>
-        public IMessageModelView ViewModel { get; } = new MessageModelView(new MessageDatabaseService(Config.DbConnectionString), new UserModelView(new UserDatabaseService(Config.DbConnectionString)));
+        public IMessageModelView ViewModel { get; } = new MessageModelView(new MessageService(new MessageRepository(Config.DbConnectionString)), new UserModelView(new UserDatabaseService(Config.DbConnectionString)));
 
         /// <summary>
         /// Gets or Sets user ID of the current user.

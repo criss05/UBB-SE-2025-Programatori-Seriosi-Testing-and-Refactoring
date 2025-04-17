@@ -1,36 +1,31 @@
 ﻿namespace Team3.ModelViews.Implementations
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Microsoft.UI.Xaml;
-    using Microsoft.UI.Xaml.Controls;
     using Team3.DatabaseServices.Interfaces;
     using Team3.DTOs;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Services.Interfaces;
 
     /// <summary>
-    /// Interface for the message model view.
+    /// Implementation of the IMessageModelView interface.
     /// </summary>
     public class MessageModelView : IMessageModelView
     {
-        private readonly IMessageDatabaseService messageDatabaseService;
+        private readonly IMessageService messageService;
         private readonly IUserModelView userModelView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageModelView"/> class.
         /// </summary>
-        /// <param name="messageDatabaseService">The message database service.</param>
+        /// <param name="messageService">The message service.</param>
         /// <param name="userModelView">The user model view.</param>
-        public MessageModelView(IMessageDatabaseService messageDatabaseService, IUserModelView userModelView)
+        public MessageModelView(IMessageService messageService, IUserModelView userModelView)
         {
             Debug.WriteLine("MessageModelView created");
-            this.messageDatabaseService = messageDatabaseService;
+            this.messageService = messageService;
             this.userModelView = userModelView;
             Messages = new ObservableCollection<MessageChatDTO>();
         }
@@ -40,24 +35,21 @@
         /// </summary>
         public ObservableCollection<MessageChatDTO> Messages { get; set; }
 
-        /// <summary>
-        /// Loads all messages for a given chat ID.
-        /// </summary>
-        /// <param name="chatId">The id of the chat.</param>
+        /// <inheritdoc/>
         public void LoadAllMessages(int chatId)
         {
-            List<Message> messages = messageDatabaseService.GetMessagesByChatId(chatId);
+            var messages = messageService.GetMessagesByChatId(chatId);
             Debug.WriteLine(messages.Count + " Messages loaded");
 
             Messages.Clear();
-            messages.Sort((x, y) => x.SentDateTime.CompareTo(y.SentDateTime));
 
-            foreach (Message message in messages)
+            foreach (var message in messages)
             {
-                User user = userModelView.GetUserById(message.UserId);
+                var user = userModelView.GetUserById(message.UserId);
                 Messages.Add(new MessageChatDTO(message.Content, message.UserId, message.ChatId, message.SentDateTime, user.Name));
             }
         }
+
 
         /// <summary>
         /// Handles the send button click event.
@@ -77,23 +69,16 @@
             LoadAllMessages(chatId);
         }
 
-        /// <summary>
-        /// Adds a message to the database through the messge database service.
-        /// </summary
-        /// <param name="message">The message.</param>
+        /// <inheritdoc/>
         public void addMessage(Message message)
         {
-            this.messageDatabaseService.addMessage(message);
+            messageService.AddMessage(message);
         }
 
-        /// <summary>
-        /// Get a message by id.
-        /// </summary>
-        /// <param name="id">The id of the message.</param>
-        /// <returns>The Message.</returns>
+        /// <inheritdoc/>
         public Message GetMessageById(int id)
         {
-            return this.messageDatabaseService.GetMessageById(id);
+            return messageService.GetMessageById(id);
         }
     }
 }
