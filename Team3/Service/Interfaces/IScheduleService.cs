@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Team3.Models;
+﻿// <copyright file="IScheduleService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Team3.Service.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using Team3.Models;
+
     /// <summary>
     /// Interface for schedule-related services.
     /// </summary>
@@ -17,6 +21,5 @@ namespace Team3.Service.Interfaces
         /// <param name="endDate">The end date of the range.</param>
         /// <returns>List of schedules for the specified doctor and date range.</returns>
         List<Schedule> GetSchedulesByDoctorId(int doctorId, DateOnly startDate, DateOnly endDate);
-
     }
 }

@@ -1,14 +1,9 @@
-﻿// <copyright file="IPatientModelView.cs" company="PlaceholderCompany">
+﻿// <copyright file="IPatientService.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace Team3.Service.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.Models;
 
     /// <summary>
@@ -27,7 +22,6 @@ namespace Team3.Service.Interfaces
         /// Add a patient.
         /// </summary>
         /// <param name="patient">The id of the patient.</param>
-        /// <returns>The patient with the specified id.</returns>
         public void AddPatient(Patient patient);
     }
 }

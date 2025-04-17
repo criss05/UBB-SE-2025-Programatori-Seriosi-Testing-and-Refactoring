@@ -5,18 +5,14 @@
 namespace Team3.Views
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
     using System.Threading.Tasks;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Team3.DatabaseServices.Implementations;
-    using Team3.DatabaseServices.Interfaces;
-    using Team3.Service.Implementations;
-    using Team3.Service.Interfaces;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Implementations;
+    using Team3.Service.Implementations;
 
     /// <summary>
     /// Interaction logic for TreatmentView.xaml.

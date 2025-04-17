@@ -1,12 +1,10 @@
-﻿
+﻿// <copyright file="IUserService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Team3.Service.Interfaces
 {
-    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Team3.Models;
 
     /// <summary>
@@ -14,7 +12,6 @@ namespace Team3.Service.Interfaces
     /// </summary>
     public interface IUserService
     {
-
         /// <summary>
         /// Gets the user.
         /// </summary>

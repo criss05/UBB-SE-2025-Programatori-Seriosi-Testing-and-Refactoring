@@ -7,13 +7,11 @@ namespace Team3.Views
     using System.Diagnostics;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
-    using Team3.Service.Interfaces;
-    using Team3.Service.Implementations;
-    using Team3.DatabaseServices.Interfaces;
-    using Team3.DatabaseServices.Implementations;
     using Team3.Models;
     using Team3.ModelViews.Implementations;
     using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Implementations;
+    using Team3.Service.Implementations;
 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

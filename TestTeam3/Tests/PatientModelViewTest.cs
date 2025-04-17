@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Repository.Interfaces;
 using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Xunit;
@@ -17,7 +17,7 @@ namespace Team3.Tests.ModelViewsTests
     public class PatientModelViewTest
     {
         private readonly Mock<IPatientRepository> mockDatabaseService;
-        private readonly IPatientModelView patientModelView;
+        private readonly ModelViews.Interfaces.IPatientModelView patientModelView;
 
         public PatientModelViewTest()
         {

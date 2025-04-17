@@ -1,7 +1,7 @@
 ﻿using Moq;
 using Xunit;
 using Team3.ModelViews.Implementations;
-using Team3.DatabaseServices.Interfaces;
+using Team3.Repository.Interfaces;
 using System;
 
 namespace Team3.Tests.ModelViewsTests
