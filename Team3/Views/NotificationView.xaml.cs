@@ -16,21 +16,27 @@ namespace Team3.Views
     using Team3.Repository.Interfaces;
     using Team3.Service.Implementations;
     using Team3.Service.Interfaces;
+    using Team3.Services.Interfaces;
 
     /// <summary>
     /// Interaction logic for NotificationView.xaml.
     /// </summary>
     public sealed partial class NotificationView : Page
     {
-        private readonly IAppointmentModelView appointmentModelView = new AppointmentModelView(new AppointmentService(new AppointmentRepository(Config.DbConnectionString)));
-        private readonly ModelViews.Interfaces.IPatientModelView patientModelView = new PatientModelView(new PatientService(new PatientRepository(Config.DbConnectionString)));
-        private readonly IUserModelView userModelView = new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)));
-        private readonly IMedicalRecordService medicalRecordModelView = new MedicalRecordModelView(new MedicalRecordRepository(Config.DbConnectionString));
-        private readonly IDrugModelView drugModelView = new DrugModelView(new DrugDatabaseService(Config.DbConnectionString));
-        private readonly ModelViews.Interfaces.ITreatmentDrugModelView treatmentDrugModelView = new TreatmentDrugModelView(new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString)));
-        private readonly ModelViews.Interfaces.ITreatmentModelView treatmentModelView = new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString)));
-        private readonly ModelViews.Interfaces.IReviewModelView reviewModelView = new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)));
-        private readonly IDoctorModelView doctorModelView = new DoctorModelView(new DoctorRepository(Config.DbConnectionString), new MedicalRecordModelView(new MedicalRecordRepository(Config.DbConnectionString)), new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))), new UserModelView(new UserService(new UserRepository(Config.DbConnectionString))));
+        private readonly IAppointmentService appointmentService = new AppointmentService(new AppointmentRepository(Config.DbConnectionString));
+        private readonly IPatientService patientService = new PatientService(new PatientRepository(Config.DbConnectionString));
+        private readonly IUserService userService = new UserService(new UserRepository(Config.DbConnectionString));
+        private readonly IMedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordRepository(Config.DbConnectionString));
+        private readonly IDrugService drugService = new DrugService(new DrugRepository(Config.DbConnectionString));
+        private readonly ITreatmentDrugService treatmentDrugService = new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString));
+        private readonly ITreatmentService treatmentService = new TreatmentService(new TreatmentRepository(Config.DbConnectionString));
+        private readonly IReviewService reviewService = new ReviewService(new ReviewRepository(Config.DbConnectionString));
+        private readonly IDoctorService doctorService = new DoctorService(
+            new DoctorRepository(Config.DbConnectionString),
+            new MedicalRecordService(new MedicalRecordRepository(Config.DbConnectionString)),
+            new ScheduleService(new ScheduleRepository(Config.DbConnectionString)),
+            new UserService(new UserRepository(Config.DbConnectionString))
+        );
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationView"/> class.
@@ -40,15 +46,15 @@ namespace Team3.Views
             this.InitializeComponent();
             this.NotificationModelView = new NotificationModelView(new NotificationService(
                 new NotificationRepository(Config.DbConnectionString),
-                this.appointmentModelView,
-                this.doctorModelView,
-                this.userModelView,
-                this.patientModelView,
-                this.medicalRecordModelView,
-                this.drugModelView,
-                this.treatmentDrugModelView,
-                this.treatmentModelView,
-                this.reviewModelView));
+                this.appointmentService,
+                this.doctorService,
+                this.userService,
+                this.patientService,
+                this.medicalRecordService,
+                this.drugService,
+                this.treatmentDrugService,
+                this.treatmentService,
+                this.reviewService));
             this.NotificationsListView.DataContext = this.NotificationModelView;
         }
 

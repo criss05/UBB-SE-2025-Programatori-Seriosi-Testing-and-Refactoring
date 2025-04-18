@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Team3.ModelViews.Implementations
+namespace Team3.Service.Implementations
 {
     using System;
     using System.Collections.Generic;
@@ -16,18 +16,18 @@ namespace Team3.ModelViews.Implementations
     /// <summary>
     /// This class represents the view model for medical records.
     /// </summary>
-    public class MedicalRecordModelView : IMedicalRecordModelView
+    public class MedicalRecordService : IMedicalRecordService
     {
-        private readonly IMedicalRecordService medicalRecordService;
+        private readonly IMedicalRecordRepository medicalRecordRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MedicalRecordModelView"/> class.
+        /// Initializes a new instance of the <see cref="MedicalRecordService"/> class.
         /// </summary>
-        /// <param name="medicalRecordService">The medical record database service.</param>
-        public MedicalRecordModelView(IMedicalRecordService _medicalRecordService)
+        /// <param name="_medicalRecordRepository">The medical record database service.</param>
+        public MedicalRecordService(IMedicalRecordRepository _medicalRecordRepository)
         {
             // Pass dbConnString to the MedicalRecordDatabaseService constructor
-            this.medicalRecordService = _medicalRecordService;
+            this.medicalRecordRepository = _medicalRecordRepository;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Team3.ModelViews.Implementations
         /// <returns>The Medical record based on the given id.</returns>
         public MedicalRecord GetMedicalRecordById(int id)
         {
-            return this.medicalRecordService.GetMedicalRecordById(id);
+            return this.medicalRecordRepository.GetMedicalRecordById(id);
         }
     }
 }

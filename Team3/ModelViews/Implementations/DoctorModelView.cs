@@ -8,16 +8,16 @@ namespace Team3.ModelViews.Implementations
     using Team3.Repository.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Repository.Interface;
+    using Team3.Service.Interfaces;
+    using Team3.Service.Implementations;
 
     /// <summary>
     /// This class is responsible for managing the doctor information in the application.
     /// </summary>
     public class DoctorModelView : IDoctorModelView
     {
-        private readonly IDoctorDatabaseService doctorDatabaseService;
-        private readonly IMedicalRecordService medicalRecordModelView;
-        private readonly IScheduleModelView scheduleModelView;
-        private readonly IUserModelView userModelView;
+        private readonly IDoctorService doctorService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DoctorModelView"/> class.
@@ -26,16 +26,9 @@ namespace Team3.ModelViews.Implementations
         /// <param name="medicalRecordModelView">The medical record model view.</param>
         /// <param name="scheduleModelView">The schedule model view.</param>
         /// <param name="userModelView">The user model view.</param>
-        public DoctorModelView(
-            IDoctorDatabaseService doctorDatabaseService,
-            IMedicalRecordService medicalRecordModelView,
-            IScheduleModelView scheduleModelView,
-            IUserModelView userModelView)
+        public DoctorModelView(IDoctorService _doctorService)
         {
-            this.doctorDatabaseService = doctorDatabaseService;
-            this.medicalRecordModelView = medicalRecordModelView;
-            this.scheduleModelView = scheduleModelView;
-            this.userModelView = userModelView;
+            this.doctorService = _doctorService;
 
             this.DoctorsInfo = new ObservableCollection<Doctor>();
         }
@@ -48,17 +41,8 @@ namespace Team3.ModelViews.Implementations
         /// <summary>
         /// Gets or sets the medical record model view.
         /// </summary>
-        public IMedicalRecordService MedicalRecordModelView { get; set; }
+        public MedicalRecordService MedicalRecordService { get; set; }
 
-        /// <summary>
-        /// Gets or sets the schedule model view.
-        /// </summary>
-        public IScheduleModelView ScheduleModelView { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user model view.
-        /// </summary>
-        public IUserModelView UserModelView { get; set; }
 
         /// <summary>
         /// Loads detailed doctor information from the database.
@@ -67,7 +51,7 @@ namespace Team3.ModelViews.Implementations
         /// <returns>The doctor for the given id.</returns>
         public Doctor GetDoctorById(int doctorId)
         {
-            return this.doctorDatabaseService.GetDoctorById(doctorId);
+            return this.doctorService.GetDoctorById(doctorId);
         }
     }
 }

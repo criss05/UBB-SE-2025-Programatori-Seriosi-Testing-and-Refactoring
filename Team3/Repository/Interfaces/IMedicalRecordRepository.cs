@@ -7,7 +7,7 @@ namespace Team3.Repository.Interfaces
     /// <summary>
     /// Interface for the medical record database service.
     /// </summary>
-    public interface IMedicalRecordDatabaseService
+    public interface IMedicalRecordRepository
     {
         /// <summary>
         /// Gets the medical record by ID.

@@ -11,7 +11,7 @@ namespace Team3.Repository.Implementations
     /// <summary>
     /// Service for managing medical records in the database.
     /// </summary>
-    public class MedicalRecordRepository : IMedicalRecordDatabaseService
+    public class MedicalRecordRepository : IMedicalRecordRepository
     {
         private readonly string connectionString;
 

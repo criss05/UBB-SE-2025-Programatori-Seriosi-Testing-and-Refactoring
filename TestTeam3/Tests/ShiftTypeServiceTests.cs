@@ -8,14 +8,14 @@ using Team3.Models;
 using Xunit;
 using Team3.Service.Implementations;
 
-namespace Team3.Tests.ModelViewsTests
+namespace Team3.Tests
 {
-    public class ShiftTypeModelViewTests
+    public class ShiftTypeServiceTests
     {
         private readonly Mock<IShiftTypeRepo> mockShiftTypeDbService;
         private readonly ShiftTypeModelView shiftTypeModelView;
 
-        public ShiftTypeModelViewTests()
+        public ShiftTypeServiceTests()
         {
             mockShiftTypeDbService = new Mock<IShiftTypeRepo>();
             mockShiftTypeDbService.Setup(s => s.GetAllShiftTypes()).Returns(new List<ShiftType>());

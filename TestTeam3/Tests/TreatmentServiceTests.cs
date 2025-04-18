@@ -5,14 +5,14 @@ using Team3.Service.Interfaces;
 using Team3.Models;
 using Xunit;
 
-namespace Team3.Tests.ModelViewsTests
+namespace Team3.Tests
 {
-    public class TreatmentModelViewTests
+    public class TreatmentServiceTests
     {
         private readonly Mock<ITreatmentService> mockTreatmentService;
         private readonly TreatmentModelView treatmentModelView;
 
-        public TreatmentModelViewTests()
+        public TreatmentServiceTests()
         {
             mockTreatmentService = new Mock<ITreatmentService>();
             treatmentModelView = new TreatmentModelView(mockTreatmentService.Object);

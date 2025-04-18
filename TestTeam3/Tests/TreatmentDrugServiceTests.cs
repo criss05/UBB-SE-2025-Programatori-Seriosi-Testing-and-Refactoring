@@ -7,16 +7,16 @@ using Team3.Service.Interfaces;
 using Team3.Models;
 using Xunit;
 
-namespace Team3.Tests.ModelViewsTests
+namespace Team3.Tests
 {
-    public class TreatmentDrugModelViewTests
+    public class TreatmentDrugServiceTests
     {
-        private readonly Mock<Service.Interfaces.I> mockTreatmentDrugService;
+        private readonly Mock<ITreatmentDrugService> mockTreatmentDrugService;
         private readonly ModelViews.Interfaces.ITreatmentDrugModelView treatmentDrugModelView;
 
-        public TreatmentDrugModelViewTests()
+        public TreatmentDrugServiceTests()
         {
-            this.mockTreatmentDrugService = new Mock<Service.Interfaces.I>();
+            this.mockTreatmentDrugService = new Mock<ITreatmentDrugService>();
             this.treatmentDrugModelView = new TreatmentDrugModelView(
                 this.mockTreatmentDrugService.Object
             );

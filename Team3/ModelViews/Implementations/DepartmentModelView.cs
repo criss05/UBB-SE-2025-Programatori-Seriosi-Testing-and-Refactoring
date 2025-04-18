@@ -17,15 +17,15 @@ namespace Team3.ModelViews.Implementations
     /// </summary>
     public class DepartmentModelView : IDepartmentModelView
     {
-        private readonly IDepartmentDatabaseService departmentService;
+        private readonly IDepartmentService departmentService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DepartmentModelView"/> class.
         /// </summary>
-        /// <param name="departmentDatabaseService">The department database service.</param>
-        public DepartmentModelView(IDepartmentDatabaseService departmentDatabaseService)
+        /// <param name="_departmentService">The department service.</param>
+        public DepartmentModelView(IDepartmentService _departmentService)
         {
-            this.departmentService = departmentDatabaseService;
+            this.departmentService = _departmentService;
             this.DepartmentsInfo = new ObservableCollection<Department>();
             this.LoadDepartmentsInfo();
         }
@@ -91,24 +91,7 @@ namespace Team3.ModelViews.Implementations
         /// <returns>The list of departments with the given name.</returns>
         public List<Department> GetDepartmentsByName(string name)
         {
-            try
-            {
-                var departmentList = this.departmentService.GetDepartments();
-                var filteredDepartments = departmentList.FindAll(d =>
-                    d.DepartmentName.Contains(name, StringComparison.OrdinalIgnoreCase));
-
-                if (filteredDepartments.Count == 0)
-                {
-                    Debug.WriteLine($"No departments found with the name '{name}'.");
-                }
-
-                return filteredDepartments;
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine($"Error filtering departments: {exception.Message}");
-                throw;
-            }
+            return this.departmentService.GetDepartmentsByName(name);
         }
 
         /// <summary>

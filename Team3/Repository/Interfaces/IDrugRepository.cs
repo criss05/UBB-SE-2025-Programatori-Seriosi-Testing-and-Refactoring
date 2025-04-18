@@ -9,7 +9,7 @@ namespace Team3.Repository.Interfaces
     /// <summary>
     /// Interface for drug database service.
     /// </summary>
-    public interface IDrugDatabaseService
+    public interface IDrugRepository
     {
         /// <summary>
         /// Get drug by id.

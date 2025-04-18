@@ -10,7 +10,7 @@ namespace Team3.Repository.Interfaces
     /// <summary>
     /// Interface for department database service.
     /// </summary>
-    public interface IDepartmentDatabaseService
+    public interface IDepartmentRepository
     {
         /// <summary>
         /// Get all departements.

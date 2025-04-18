@@ -9,7 +9,7 @@ namespace Team3.Repository.Interface
     /// <summary>
     /// Interface for the doctor database service.
     /// </summary>
-    public interface IDoctorDatabaseService
+    public interface IDoctorRepository
     {
         /// <summary>
         /// get the doctor by id.

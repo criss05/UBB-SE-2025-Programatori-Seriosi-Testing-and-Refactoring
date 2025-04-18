@@ -12,6 +12,7 @@ namespace Team3.Service.Implementations
     using Team3.ModelViews.Interfaces;
     using Team3.Repository.Interfaces;
     using Team3.Service.Interfaces;
+    using Team3.Services.Interfaces;
 
     /// <summary>
     /// Insterface for the NotificationModelView.
@@ -27,11 +28,11 @@ namespace Team3.Service.Implementations
         private readonly INotificationRepository notificationRepository;
 
         private readonly IAppointmentService appointmentService;
-        private readonly IDoctorModelView doctorModelView;
+        private readonly IDoctorService doctorService;
         private readonly IUserService userService;
-        private readonly Interfaces.IPatientService patientService;
+        private readonly IPatientService patientService;
         private readonly IMedicalRecordService medicalReportService;
-        private readonly IDrugModelView drugModelView;
+        private readonly IDrugService drugService;
         private readonly ITreatmentDrugService treatmentDrugService;
         private readonly ITreatmentService treatmentService;
         private readonly IReviewService reviewService;
@@ -39,28 +40,28 @@ namespace Team3.Service.Implementations
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationService"/> class.
         /// </summary>
-        /// <param name="notificationRepository">the notification repository.</param>
-        /// <param name="appointmentService">the appointment service.</param>
-        /// <param name="doctorModelView">the doctor model view.</param>
-        /// <param name="drugService">the drug service.</param>
-        /// <param name="medicalReportService">the medical report service.</param>
-        /// <param name="patientService">the patient service.</param>
-        /// <param name="reviewService">the review service.</param>
-        /// <param name="treatmentDrugService">the treatment drug service.</param>
-        /// <param name="treatmentService">the treatment service.</param>
-        /// <param name="userService">the user service.</param>
-        public NotificationService(INotificationRepository notificationRepository, IAppointmentService appointmentService, IDoctorModelView doctorModelView, IUserService userService, IPatientService patientService, IMedicalRecordService medicalReportService, IDrugModelView drugService, ITreatmentDrugService treatmentDrugService, ITreatmentService treatmentService, IReviewService reviewService)
+        /// <param name="_notificationRepository">the notification repository.</param>
+        /// <param name="_appointmentService">the appointment service.</param>
+        /// <param name="_doctorService">the doctor model view.</param>
+        /// <param name="_drugService">the drug service.</param>
+        /// <param name="_medicalReportService">the medical report service.</param>
+        /// <param name="_patientService">the patient service.</param>
+        /// <param name="_reviewService">the review service.</param>
+        /// <param name="_treatmentDrugService">the treatment drug service.</param>
+        /// <param name="_treatmentService">the treatment service.</param>
+        /// <param name="_userService">the user service.</param>
+        public NotificationService(INotificationRepository _notificationRepository, IAppointmentService _appointmentService, IDoctorService _doctorService, IUserService _userService, IPatientService _patientService, IMedicalRecordService _medicalRecordService, IDrugService _drugService, ITreatmentDrugService _treatmentDrugService, ITreatmentService _treatmentService, IReviewService _reviewService)
         {
-            this.notificationRepository = notificationRepository;
-            this.appointmentService = appointmentService;
-            this.doctorModelView = doctorModelView;
-            this.userService = userService;
-            this.patientService = patientService;
-            this.medicalReportService = medicalReportService;
-            this.drugModelView = drugService;
-            this.treatmentDrugService = treatmentDrugService;
-            this.treatmentService = treatmentService;
-            this.reviewService = reviewService;
+            this.notificationRepository = _notificationRepository;
+            this.appointmentService = _appointmentService;
+            this.doctorService = _doctorService;
+            this.userService = _userService;
+            this.patientService = _patientService;
+            this.medicalReportService = _medicalRecordService;
+            this.drugService = _drugService;
+            this.treatmentDrugService = _treatmentDrugService;
+            this.treatmentService = _treatmentService;
+            this.reviewService = _reviewService;
         }
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace Team3.Service.Implementations
         public void AddUpcomingAppointmentNotification(int appointmentId)
         {
             Appointment appointment = this.appointmentService.GetAppointmentById(appointmentId);
-            Doctor doctor = this.doctorModelView.GetDoctorById(appointment.DoctorId);
+            Doctor doctor = this.doctorService.GetDoctorById(appointment.DoctorId);
             User user = this.userService.GetUserById(doctor.UserId);
 
             Patient patient = this.patientService.GetPatientById(appointment.PatientId);
@@ -141,7 +142,7 @@ namespace Team3.Service.Implementations
         {
             Appointment appointment = this.appointmentService.GetAppointmentById(appointmentId);
             Debug.WriteLine(appointment.ToString());
-            Doctor doctor = this.doctorModelView.GetDoctorById(appointment.DoctorId);
+            Doctor doctor = this.doctorService.GetDoctorById(appointment.DoctorId);
 
             Patient patient = this.patientService.GetPatientById(appointment.PatientId);
             User user = this.userService.GetUserById(patient.UserId);
@@ -179,7 +180,7 @@ namespace Team3.Service.Implementations
 
             foreach (TreatmentDrug treatmentDrug in treatmentDrugs)
             {
-                Drug drug = this.drugModelView.GetDrugById(treatmentDrug.DrugId);
+                Drug drug = this.drugService.GetDrugById(treatmentDrug.DrugId);
                 TimeSpan interval;
                 if (treatmentDrug.Quantity == 1)
                 {
@@ -214,7 +215,7 @@ namespace Team3.Service.Implementations
         {
             Review review = this.reviewService.GetReviewByMedicalRecordId(reviewId);
             MedicalRecord medicalRecord = this.medicalReportService.GetMedicalRecordById(review.MedicalRecordId);
-            Doctor doctor = this.doctorModelView.GetDoctorById(medicalRecord.DoctorId);
+            Doctor doctor = this.doctorService.GetDoctorById(medicalRecord.DoctorId);
             User user = this.userService.GetUserById(doctor.UserId);
 
             List<User> users = this.userService.GetAllUsers();

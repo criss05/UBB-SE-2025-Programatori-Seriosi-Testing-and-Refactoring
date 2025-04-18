@@ -7,7 +7,7 @@ namespace Team3.ModelViews.Interfaces
     /// <summary>
     ///     This interface defines the contract for a medical record model view.
     /// </summary>
-    public interface IMedicalRecordService
+    public interface IMedicalRecordModelView
     {
         /// <summary>
         /// Get medical record by ID.

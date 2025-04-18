@@ -40,20 +40,15 @@ namespace Team3.Views
         /// </summary>
         private INotificationModelView ViewModel { get; } = new NotificationModelView(new NotificationService(
         new NotificationRepository(Config.DbConnectionString),
-        new AppointmentModelView(new AppointmentService(new AppointmentRepository(Config.DbConnectionString))),
-        new DoctorModelView(
-            new DoctorService(
-            new DoctorRepository(Config.DbConnectionString)),
-            new MedicalRecordModelView(new MedicalRecordRepository(Config.DbConnectionString)),
-            new ScheduleModelView(new ScheduleService(new ScheduleRepository(Config.DbConnectionString))),
-            new UserModelView(new UserService(new UserRepository(Config.DbConnectionString)))),
-        new PatientModelView(new PatientService(new PatientRepository(Config.DbConnectionString))),
-        new UserModelView(new UserService(new UserRepository(Config.DbConnectionString))),
-        new MedicalRecordModelView(new MedicalRecordRepository(Config.DbConnectionString)),
-        new DrugModelView(new DrugDatabaseService(Config.DbConnectionString)),
-        new TreatmentDrugModelView(new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString))),
-        new TreatmentModelView(new TreatmentService(new TreatmentRepository(Config.DbConnectionString))),
-        new ReviewModelView(new ReviewService(new ReviewRepository(Config.DbConnectionString)))));
+        new AppointmentService(new AppointmentRepository(Config.DbConnectionString)),
+        new DoctorService(new DoctorRepository(Config.DbConnectionString), new MedicalRecordService(new MedicalRecordRepository(Config.DbConnectionString)), new ScheduleService(new ScheduleRepository(Config.DbConnectionString)), new UserService(new UserRepository(Config.DbConnectionString))),
+        new UserService(new UserRepository(Config.DbConnectionString)),
+        new PatientService(new PatientRepository(Config.DbConnectionString)),
+        new MedicalRecordService(new MedicalRecordRepository(Config.DbConnectionString)),
+        new DrugService(new DrugRepository(Config.DbConnectionString)),
+        new TreatmentDrugService(new TreatmentDrugRepository(Config.DbConnectionString)),
+        new TreatmentService(new TreatmentRepository(Config.DbConnectionString)),
+        new ReviewService(new ReviewRepository(Config.DbConnectionString))));
 
         /// <summary>
         /// Handles the navigation to this page.

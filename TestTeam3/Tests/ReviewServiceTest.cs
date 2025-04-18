@@ -11,7 +11,7 @@ using Xunit;
 using Team3.Models;
 using Team3.Service.Implementations;
 
-namespace Team3.Tests.ModelViewsTests
+namespace Team3.Tests
 {
     public class ReviewServiceTest
     {

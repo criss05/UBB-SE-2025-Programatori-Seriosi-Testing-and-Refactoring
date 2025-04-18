@@ -12,15 +12,15 @@ namespace Team3.Repository.Implementations
     /// <summary>
     /// Service for managing drug database operations.
     /// </summary>
-    public class DrugDatabaseService : IDrugDatabaseService
+    public class DrugRepository : IDrugRepository
     {
         private readonly string connectionString;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DrugDatabaseService"/> class.
+        /// Initializes a new instance of the <see cref="DrugRepository"/> class.
         /// </summary>
         /// <param name="connectionString">The database connection string.</param>
-        public DrugDatabaseService(string connectionString)
+        public DrugRepository(string connectionString)
         {
             this.connectionString = connectionString;
         }

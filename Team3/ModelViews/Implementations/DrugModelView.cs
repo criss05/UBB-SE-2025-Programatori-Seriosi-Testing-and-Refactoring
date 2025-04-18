@@ -8,22 +8,23 @@ namespace Team3.ModelViews.Implementations
     using Team3.Repository.Interfaces;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
+    using Team3.Services.Interfaces;
 
     /// <summary>
     /// DrugModelView is a class that implements the IDrugModelView interface.
     /// </summary>
     public class DrugModelView : IDrugModelView
     {
-        private readonly IDrugDatabaseService drugDatabaseService;
+        private readonly IDrugService drugService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DrugModelView"/> class.
         /// Constructor for DrugModelView.
         /// </summary>
-        /// <param name="drugDatabaseService">The database connection string.</param>
-        public DrugModelView(IDrugDatabaseService drugDatabaseService)
+        /// <param name="_drugService">The database connection string.</param>
+        public DrugModelView(IDrugService _drugService)
         {
-            this.drugDatabaseService = drugDatabaseService;
+            this.drugService = _drugService;
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace Team3.ModelViews.Implementations
         /// <returns>The drug.</returns>
         public Drug GetDrugById(int drugId)
         {
-            return this.drugDatabaseService.GetDrugById(drugId);
+            return this.drugService.GetDrugById(drugId);
         }
     }
 }

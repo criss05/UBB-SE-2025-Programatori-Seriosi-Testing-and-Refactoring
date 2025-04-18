@@ -9,18 +9,20 @@ using Team3.ModelViews.Implementations;
 using Team3.ModelViews.Interfaces;
 using Xunit;
 using Team3.Models;
+using Team3.Service.Implementations;
+using Team3.Service.Interfaces;
 
-namespace Team3.Tests.ModelViewsTests
+namespace Team3.Tests
 {
-    public class RoomModelViewTest
+    public class RoomServiceTest
     {
-        private readonly Mock<IRoomRepository> mockDatabaseService;
-        private readonly IRoomModelView roomModelView;
+        private readonly Mock<IRoomRepository> mockRepository;
+        private readonly IRoomService roomService;
 
-        public RoomModelViewTest()
+        public RoomServiceTest()
         {
-            this.mockDatabaseService = new Mock<IRoomRepository>();
-            this.roomModelView = new RoomModelView(this.mockDatabaseService.Object);
+            this.mockRepository = new Mock<IRoomRepository>();
+            this.roomService = new RoomService(this.mockRepository.Object);
         }
 
         [Fact]
@@ -33,10 +35,10 @@ namespace Team3.Tests.ModelViewsTests
             );
 
             // Act
-            this.roomModelView.AddRoom(room);
+            this.roomService.AddRoom(room);
 
             // Assert
-            this.mockDatabaseService.Verify(s => s.AddRoom(room), Times.Once);
+            this.mockRepository.Verify(s => s.AddRoom(room), Times.Once);
         }
 
         [Fact]
@@ -49,12 +51,12 @@ namespace Team3.Tests.ModelViewsTests
             );
 
 
-            this.mockDatabaseService
+            this.mockRepository
                 .Setup(s => s.GetRoom(1))
                 .Returns(expectedRoom);
 
             // Act
-            var result = this.roomModelView.GetRoom(1);
+            var result = this.roomService.GetRoom(1);
 
             // Assert
             Assert.Equal(expectedRoom, result);

@@ -12,17 +12,17 @@ using Team3.Models;
 using Team3.Service.Interfaces;
 using Team3.Service.Implementations;
 
-namespace Team3.Tests.ModelViewsTests
+namespace Team3.Tests
 {
-    public class PatientModelViewTest
+    public class PatientServiceTest
     {
-        private readonly Mock<IPatientRepository> mockDatabaseService;
-        private readonly ModelViews.Interfaces.IPatientModelView patientModelView;
+        private readonly Mock<IPatientRepository> mockRepository;
+        private readonly IPatientService patientService;
 
-        public PatientModelViewTest()
+        public PatientServiceTest()
         {
-            this.mockDatabaseService = new Mock<IPatientRepository>();
-            this.patientModelView = new PatientModelView(new PatientService(this.mockDatabaseService.Object));
+            this.mockRepository = new Mock<IPatientRepository>();
+            this.patientService = new PatientService(this.mockRepository.Object);
         }
 
         [Fact]
@@ -35,10 +35,10 @@ namespace Team3.Tests.ModelViewsTests
             );
 
             // Act
-            this.patientModelView.AddPatient(patient);
+            this.patientService.AddPatient(patient);
 
             // Assert
-            this.mockDatabaseService.Verify(s => s.AddPatient(patient), Times.Once);
+            this.mockRepository.Verify(s => s.AddPatient(patient), Times.Once);
         }
 
         [Fact]
@@ -50,12 +50,12 @@ namespace Team3.Tests.ModelViewsTests
                 userId: 1
             );
 
-            this.mockDatabaseService
+            this.mockRepository
                 .Setup(s => s.GetPatientById(1))
                 .Returns(expectedPatient);
 
             // Act
-            var result = this.patientModelView.GetPatientById(1);
+            var result = this.patientService.GetPatientById(1);
 
             // Assert
             Assert.Equal(expectedPatient, result);

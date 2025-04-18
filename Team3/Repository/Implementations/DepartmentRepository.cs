@@ -13,7 +13,7 @@ namespace Team3.Repository.Implementations
     /// <summary>
     /// Service for interacting with the department database.
     /// </summary>
-    public class DepartmentRepository : IDepartmentDatabaseService
+    public class DepartmentRepository : IDepartmentRepository
     {
         private readonly string connectionString;
 
