@@ -56,9 +56,9 @@
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(exception.Message);
             }
         }
 
