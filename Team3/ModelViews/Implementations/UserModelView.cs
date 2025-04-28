@@ -76,7 +76,7 @@ namespace Team3.ModelViews.Implementations
             }
             catch (Exception exception)
             {
-                Debug.WriteLine(exception.Message);
+                throw new Exception("Error loading users: " + exception.Message);
             }
         }
     }

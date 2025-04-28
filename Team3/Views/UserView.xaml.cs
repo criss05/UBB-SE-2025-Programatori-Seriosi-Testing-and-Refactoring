@@ -25,6 +25,7 @@ namespace Team3.Views
         {
             this.InitializeComponent();
             this.UsersListView.DataContext = this.ViewModel;
+            this.ViewModel.LoadAllUsers();
         }
 
         /// <summary>
