@@ -62,6 +62,7 @@ namespace Team3.Service.Implementations
             this.treatmentDrugService = _treatmentDrugService;
             this.treatmentService = _treatmentService;
             this.reviewService = _reviewService;
+            this.Notifications = new List<Notification>();
         }
 
         /// <summary>

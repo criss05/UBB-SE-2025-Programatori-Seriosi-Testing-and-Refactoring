@@ -22,7 +22,7 @@
         <!-- Notifications List -->
         <ListView x:Name="NotificationsListView" 
                   Grid.Row="2"
-                  ItemsSource="{Binding Notifications}" 
+                  ItemsSource="{Binding NotificationCollection}" 
                   SelectionMode="Single"
                   IsItemClickEnabled="True"
                   ItemClick="NotificationsListView_ItemClick">

@@ -5,6 +5,7 @@
 namespace Team3.ModelViews.Implementations
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using Team3.Models;
     using Team3.ModelViews.Interfaces;
     using Team3.Service.Interfaces;
@@ -23,12 +24,14 @@ namespace Team3.ModelViews.Implementations
         public NotificationModelView(INotificationService notificationService)
         {
             this.notificationService = notificationService;
+            NotificationCollection = new ObservableCollection<Notification>();
         }
 
         /// <summary>
         ///     Gets the list of notifications.
         /// </summary>
         public List<Notification> Notifications { get; private set; }
+        public ObservableCollection<Notification> NotificationCollection { get; private set; }
 
         /// <summary>
         /// Loads the notifications for a specific user.
@@ -37,6 +40,10 @@ namespace Team3.ModelViews.Implementations
         public void LoadNotifications(int userId)
         {
             this.notificationService.LoadNotifications(userId);
+            foreach (var notification in this.notificationService.Notifications)
+            {
+                this.NotificationCollection.Add(notification);
+            }
         }
 
         /// <summary>
